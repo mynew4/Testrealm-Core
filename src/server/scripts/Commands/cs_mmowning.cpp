@@ -52,7 +52,9 @@ public:
 			//Buffer
 			{ "buffs",			SEC_PLAYER,			false, &HandleBuffsCommand,				"", NULL }, 
 			//GuildHouse Tele
-			{ "gh",             SEC_PLAYER,      	false, &HandleGHCommand,				"", NULL },		
+			{ "gh",             SEC_PLAYER,      	false, &HandleGHCommand,				"", NULL },	
+			//insel
+			{ "insel",			SEC_PLAYER,			false, &HandleInselCommand,				"", NULL },
 			//{ "tcrecon",        SEC_MODERATOR,      false, &HandleIRCRelogCommand,            "", NULL },	
 			{ NULL,             0,                  false,  NULL,                            "", NULL }
         };
@@ -295,6 +297,16 @@ static bool HandleGHCommand(ChatHandler* handler, const char* args)
         chr->TeleportTo(map, x, y, z, 0);
         chr->SaveToDB();
         return true;
+}
+
+//GuildHouse Tele
+static bool HandleInselCommand(ChatHandler* handler, const char* args)
+{
+	Player *chr = handler->GetSession()->GetPlayer();
+
+	chr->TeleportTo(1, 16226.20, 16257.00, 13.20, 1.65);
+	return true;
+
 }
 
 
