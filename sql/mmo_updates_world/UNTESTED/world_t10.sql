@@ -1,5 +1,5 @@
 -- Players Start With, Heroic Tier 10
-REPLACE INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES
+INSERT INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES
 (0, 1, 51225, 1),
 (0, 1, 51226, 1),
 (0, 1, 51227, 1),
@@ -97,8 +97,8 @@ REPLACE INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUE
 (0, 1024, 51294, 1); 
 
 -- Players Start With, 4 Portable Hole's
-REPLACE INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES (0, 0, 51809, 4); 
+INSERT INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES (0, 0, 51809, 4); 
 
 -- Shamans Start with, Totem of the Earthern Ring
-REPLACE INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES (0, 64, 46978, 1); 
+INSERT INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES (0, 64, 46978, 1); 
 
