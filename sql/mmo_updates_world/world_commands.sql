@@ -31,13 +31,13 @@ REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite map', 195, 'S
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite bank', 195, 'Syntax: .elite bank - Show your bank inventory.');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite repair', 194, 'Syntax: .elite repair - repair all your items.');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite resettalents', 195, 'Syntax: .elite resettalents - reset talents to your character.');
-REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite whispers', 195, 'Syntax: .elite whispers - Enable/disable accepting whispers by elite accounts from players.');
+REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite whispers', 194, 'Syntax: .elite whispers - Enable/disable accepting whispers by elite accounts from players.');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite taxi', 195, 'Syntax: .elite taxi - reveals all taxipaths to owner');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite home', 195, 'Syntax: .elite home - teleport owner to home(ignoring CD on Hearthstone)');
-REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite capital', 194, 'Syntax: .elite capital - teleport owner to capital(Orgrimmar/Stormwind) depending on faction of player');
+REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite capital', 195, 'Syntax: .elite capital - teleport owner to capital(Orgrimmar/Stormwind) depending on faction of player');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite status', 193, 'Syntax: .elite  status $account - Elite Status eines Accounts anzeigen');
 REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite add', 193, 'Syntax: .elite add $account $days - Set or update a VIP account.');
-REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite insel', 195, 'Syntax: .elite insel  Teleportiert dich zur "Insel".');
+REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite insel', 193, 'Syntax: .elite insel  Teleportiert dich zur "Insel".');
 
 -- REPLACE INTO `command` (`name`,`permission`,`help`) VALUES ('elite', 195, 'Elite Status.');
 
