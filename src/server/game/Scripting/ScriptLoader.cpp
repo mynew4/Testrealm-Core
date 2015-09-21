@@ -124,6 +124,9 @@ void AddSC_light();
 void AddSC_lighthardmode();
 //dark2
 void AddSC_dark2();
+//playerhello
+void AddSC_Announce_NewPlayer();
+
 
 #ifdef SCRIPTS
 //world
@@ -863,6 +866,8 @@ void AddCommandScripts()
 	AddSC_lighthardmode();
 	//dark2
 	AddSC_dark2();
+	//helloplayer
+	AddSC_Announce_NewPlayer();
 }
 
 void AddWorldScripts()

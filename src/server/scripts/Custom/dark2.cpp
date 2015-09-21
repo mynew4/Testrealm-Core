@@ -20,6 +20,13 @@ public: dark2() : CreatureScript("dark2"){ }
 			return true;
 		}
 
+		bool OnQuestAccept(Player* player, Creature* creature, const Quest* quest){
+			if (quest->GetQuestId() != 800000){
+				return false;
+			}
+			return true;
+		}
+
 		bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 /*uiSender*/, uint32 uiAction)
 		{
 			switch (uiAction)

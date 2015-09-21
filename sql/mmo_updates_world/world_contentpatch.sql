@@ -23816,7 +23816,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  OfferRewardText  */  'Seid ihr fertig?',
  /*  RequestItemsText  */ 'Folgt der Spur die Exitares Frau hinterlassen hat.',
  /*  QuestCompletionLog  */ 'Es ist Eure Sache was ihr tut.',
- /*  RequiredNpcOrGo1  */ 24667,
+ /*  RequiredNpcOrGo1  */ 26447,
  /*  RequiredNpcOrGo2  */ 26425,
  /*  RequiredNpcOrGo3  */ 26446,
  /*  RequiredNpcOrGo4  */ 0,

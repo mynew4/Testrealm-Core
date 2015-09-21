@@ -21,6 +21,7 @@
 #include <sstream>
 #include <string>
 
+
 class supportnpc : public CreatureScript
 {
 public:

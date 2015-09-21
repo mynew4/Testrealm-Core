@@ -33,6 +33,7 @@ set(scripts_STAT_SRCS
   Custom/boss_light.cpp
   Custom/light_hardmode.cpp
   Custom/dark2.cpp
+  Custom/ex_playerhello.cpp
   ${scripts_STAT_SRCS}
 #  ${sources_Custom}
   Custom/Transmog/Transmogrification.h

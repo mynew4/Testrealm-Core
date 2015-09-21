@@ -12,8 +12,8 @@ public: seruc() : CreatureScript("seruc"){ }
 
 		bool OnGossipHello(Player *pPlayer, Creature* _creature)
 		{
-			pPlayer->ADD_GOSSIP_ITEM(7, "Raid [Gesperrt]", GOSSIP_SENDER_MAIN, 0);
-			pPlayer->ADD_GOSSIP_ITEM(7, "Instanz [Gesperrt]", GOSSIP_SENDER_MAIN, 13);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Raid [Gesperrt] 20.000 Goldkosten", GOSSIP_SENDER_MAIN, 0);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Instanz [Gesperrt] 20.000 Goldkosten", GOSSIP_SENDER_MAIN, 13);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zum PVP Areal [500 Wertung]", GOSSIP_SENDER_MAIN, 1);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zur Insel ", GOSSIP_SENDER_MAIN, 2);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zu Yasio ", GOSSIP_SENDER_MAIN, 3);
@@ -29,9 +29,12 @@ public: seruc() : CreatureScript("seruc"){ }
 			{
 				/*RAID*/
 			case 0: {
+				std::ostringstream ss;
 				pPlayer->GetGUID();
 				pPlayer->TeleportTo(169, -393.26, 2972.93, 92.85, 5.94);
-				pPlayer->ModifyMoney(-200000);
+				pPlayer->ModifyMoney(-200000000);
+				ss << "|cff54b5ff|r " << ChatHandler(pPlayer->GetSession()).GetNameLink() << "|cff54b5ff hat sich in den gesperrten Raid geportet. Dir wurden 20.000 Gold abgezogen, welche nicht erstattet werden|r |cff54b5ff!|r";
+				sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 				return true;
 			}break;
 
@@ -186,11 +189,14 @@ public: seruc() : CreatureScript("seruc"){ }
 					return true;
 				}break;
 
-					/*RAID*/
+					/*INSTANZ*/
 				case 13: {
+					std::ostringstream ss;
 					pPlayer->GetGUID();
 					pPlayer->TeleportTo(169, -393.26, 2972.93, 92.85, 5.94);
-					pPlayer->ModifyMoney(-200000);
+					pPlayer->ModifyMoney(-20000000);
+					ss << "|cff54b5ff|r " << ChatHandler(pPlayer->GetSession()).GetNameLink() << "|cff54b5ff hat sich in die gesperrte Instanz geportet. Dir wurden 20.000 Gold abgezogen, welche nicht erstattet werden|r |cff54b5ff!|r";
+					sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 					return true;
 				}break;
 
