@@ -147,12 +147,12 @@ public:
 					DoCast(SPELL_ENRAGE);
 					break;
 				case EVENT_BLIZZARD:
-					DoCastToAllHostilePlayers(SPELL_BLIZZARD);
+					DoCastVictim(SPELL_BLIZZARD);
 					_events.ScheduleEvent(EVENT_BLIZZARD, 15000);
 					break;
 				case EVENT_POISON_SHOCK:
 					Talk(SAY_BERSERK);
-					DoCast(me, SPELL_POISON_SHOCK);
+					DoCastVictim(SPELL_POISON_SHOCK);
 					_events.ScheduleEvent(EVENT_POISON_SHOCK, 12000);
 					break;
 				case EVENT_ARCANE_BOMB:

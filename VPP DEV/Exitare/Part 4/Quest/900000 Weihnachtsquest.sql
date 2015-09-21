@@ -157,8 +157,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 (800066, 900000);
 
-REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
-(800065, 900000);
+
 
 DELETE FROM `game_event_creature_quest` WHERE `eventEntry` = 70;
 INSERT INTO `game_event_creature_quest` (`eventEntry`, `id`, `quest`) VALUES ('70', '800065', '900000');

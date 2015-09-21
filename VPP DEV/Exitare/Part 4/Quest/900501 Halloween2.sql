@@ -1,17 +1,17 @@
-DELETE FROM `quest_template` WHERE  `id` = 900800;
-DELETE FROM `quest_template_addon` WHERE `id` = 900800;
-DELETE FROM `creature_questender` WHERE `id` = 800027 AND `quest` = 900800;
-DELETE FROM `creature_queststarter` WHERE `id` = 800015   AND `quest` = 900800;
+DELETE FROM `quest_template` WHERE  `id` = 900501;
+DELETE FROM `quest_template_addon` WHERE `id` = 900501;
+DELETE FROM `creature_questender` WHERE `id` = 800067 AND `quest` = 900501;
+DELETE FROM `creature_queststarter` WHERE `id` = 800067   AND `quest` = 900501;
 
 
 
 REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestType`, `SuggestedGroupNum`, `LimitTime`, `RequiredRaces`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `NextQuestIdChain`, `RewardXPId`, `RewardOrRequiredMoney`, `RewardMoneyMaxLevel`, `RewardSpell`, `RewardSpellCast`, `RewardHonor`, `RewardHonorMultiplier`, `SourceItemId`, `Flags`, `RewardTitle`, `RequiredPlayerKills`, `RewardTalents`, `RewardArenaPoints`, `RewardItem1`, `RewardItem2`, `RewardItem3`, `RewardItem4`, `RewardAmount1`, `RewardAmount2`, `RewardAmount3`, `RewardAmount4`, `RewardChoiceItemID1`, `RewardChoiceItemID2`, `RewardChoiceItemID3`, `RewardChoiceItemID4`, `RewardChoiceItemID5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity1`, `RewardChoiceItemQuantity2`, `RewardChoiceItemQuantity3`, `RewardChoiceItemQuantity4`, `RewardChoiceItemQuantity5`, `RewardChoiceItemQuantity6`, `RewardFactionID1`, `RewardFactionID2`, `RewardFactionID3`, `RewardFactionID4`, `RewardFactionID5`, `RewardFactionValue1`, `RewardFactionValue2`, `RewardFactionValue3`, `RewardFactionValue4`, `RewardFactionValue5`, `RewardFactionOverride1`, `RewardFactionOverride2`, `RewardFactionOverride3`, `RewardFactionOverride4`, `RewardFactionOverride5`, `PointMapId`, `PointX`, `PointY`, `PointOption`, `LogTitle`, `LogDescription`, `QuestDescription`, `EndText`, `OfferRewardText`, `RequestItemsText`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, `RequiredSourceItemId1`, `RequiredSourceItemId2`, `RequiredSourceItemId3`, `RequiredSourceItemId4`, `RequiredSourceItemCount1`, `RequiredSourceItemCount2`, `RequiredSourceItemCount3`, `RequiredSourceItemCount4`, `RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `DetailsEmote1`, `DetailsEmote2`, `DetailsEmote3`, `DetailsEmote4`, `DetailsEmoteDelay1`, `DetailsEmoteDelay2`, `DetailsEmoteDelay3`, `DetailsEmoteDelay4`, `EmoteOnIncomplete`, `EmoteOnComplete`, `OfferRewardEmote1`, `OfferRewardEmote2`, `OfferRewardEmote3`, `OfferRewardEmote4`, `OfferRewardEmoteDelay1`, `OfferRewardEmoteDelay2`, `OfferRewardEmoteDelay3`, `OfferRewardEmoteDelay4`, `VerifiedBuild`) VALUES
-(/*  ID    */900800,
+(/*  ID    */900501,
  /*  Method  */ 2,
  /*  QuestLevel  */ 80,
  /*  MinLevel   */80,
  /*  QuestSortID  */ -22,
- /*  QuestType*/ 82,
+ /*  QuestType*/ 62,
  /*  SuggestedGroupNum  */ 0,
  /*  LimitTime  */ 0,
  /*  RequiredRaces   */1791,
@@ -21,23 +21,23 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredFactionValue2   */ 0,
  /*  NextQuestIdChain  */ 0,
  /*  RewardXPId   */72,
- /*  RewardOrRequiredMoney  */ 4000000,
- /*  RewardMoneyMaxLevel  */ 4000000,
+ /*  RewardOrRequiredMoney  */ 2000000,
+ /*  RewardMoneyMaxLevel  */ 2000000,
  /*  RewardSpell   */ 0,
  /*  RewardSpellCast  */ 0,
  /*  RewardHonor  */ 0,
  /*  RewardHonorMultiplier  */ 0,
  /*  SourceItemId  */ 0,
- /*  Flags  */ 0,
+ /*  Flags  */ 4096,
  /*  RewardTitle  */ 0,
  /*  RequiredPlayerKills  */ 0,
  /*  RewardTalents  */ 0,
  /*  RewardArenaPoints  */ 0,
- /*  RewardIten    */ 0,
+ /*  RewardIten    */ 34068,
  /*  RewardItem2   */ 0,
  /*  RewardItem3   */ 0,
  /*  RewardItem4   */ 0,
- /*  RewardAmount1 */ 0,
+ /*  RewardAmount1 */ 1,
  /*  RewardAmount2 */ 0,
  /*  RewardAmount3 */ 0,
  /*  RewardAmount4 */ 0,
@@ -72,18 +72,18 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
- /*  LogTitle  */ 'Exitares Event',
- /*  LogDescription  */  'Hey du. Wir kennen uns ja bereits. Na dann wollen wir mal starten.',
- /*  QuestDescription   */ 'Hallo $N, na wir sehen uns aber oft. Na dann schicke ich Euch zu eurem ersten Autraggeber. Geht zu Eowyn und gebt die Quest ab.',
+ /*  LogTitle  */ 'Und weiter gehts mit dem Halloweenspass',
+ /*  LogDescription  */  'Hey $N, heute veranstalten wir unser erstes Blutbad. Toetet die Kürbissoldaten die auf einer Insel an der Kueste von Westfall stehen.',
+ /*  QuestDescription   */ 'Hallo $N, die Kuerbissoldaten gehen mir betraechtlich auf die Nerven. Toetet sie und veranstaltet ein wundervolles Kuerbiskratzfest!',
  /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
  /*  RequestItemsText  */ 'Habt ihr alles?',
  /*  QuestCompletionLog  */ 'Erfolg!',
- /*  RequiredNpcOrGo1  */ 0,
+ /*  RequiredNpcOrGo1  */ 27936,
  /*  RequiredNpcOrGo2  */ 0,
  /*  RequiredNpcOrGo3  */ 0,
  /*  RequiredNpcOrGo4  */ 0,
- /*  RequiredNpcOrGoCount1  */ 0,
+ /*  RequiredNpcOrGoCount1  */ 50,
  /*  RequiredNpcOrGoCount2  */ 0,
  /*  RequiredNpcOrGoCount3  */ 0,
  /*  RequiredNpcOrGoCount4  */ 0,
@@ -135,28 +135,29 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
 
 
 REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES
-( /*  ID  */900800,
+( /*  ID  */900501,
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
-  /*   PrevQuestID */ 0,
-  /*  NextQuestID  */900801,
+  /*  PrevQuestID */ 900500,
+  /*  NextQuestID  */900502,
   /*  ExclusiveGroup  */ 0,
-  /*   RewardMailTemplateID */ 0,
+  /*  RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
   /*  RequiredSkillID  */ 0,
   /*  RequiredSkillPoints  */ 0,
   /*  RequiredMinRepFaction  */ 0,
   /*  RequiredMaxRepFaction  */ 0,
-  /*   RequiredMinRepValue */ 0,
+  /*  RequiredMinRepValue */ 0,
   /*  RequiredMaxRepValue  */ 0,
   /*  ProvidedItemCount  */ 0,
-  /*   SpecialFlags */ 0);
+  /*  SpecialFlags */ 0);
 
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800027, 900800);
+(800067, 900501);
 
-
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
+(800067, 900501);
 
 

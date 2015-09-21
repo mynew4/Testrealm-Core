@@ -247,6 +247,7 @@ DELETE FROM `creature_questender` WHERE `id` = 800034;
 
 
 
+
 DELETE FROM  `creature_loot_template`  WHERE `Entry`='36502' and`Item`='700498';
 DELETE FROM  `creature_loot_template`  WHERE `Entry`='36658' and`Item`='700498';
 DELETE FROM  `creature_loot_template`  WHERE `Entry`='29120' and`Item`='700498';
@@ -931,7 +932,7 @@ REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_ent
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
 ('800002','800002','1','1','1','3597','0','1361.20','-4352.91','26.84','4.633','25','0','0','1000000','250000','0');
 
-REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`,`faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) VALUES (800002, 0, 0, 0, 0, 0, 3597, 0, 0, 0, 'Johann Orrig ', 'Der Zwerg', '', 0, 80, 80, 0,35, 2, 0, 1.14286, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 3, 1, 0, 0, 1, 0, 0, '');REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
+REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`,`faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) VALUES (800002, 0, 0, 0, 0, 0, 3597, 0, 0, 0, 'Johann Orrig ', 'Der Zwerg', '', 0, 80, 80, 0,35, 3, 0, 1.14286, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 3, 1, 0, 0, 1, 0, 0, '');REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
 ('800003','800003','0','1','1','29866','0','-8609.43','749.03','96.96','1.61','25','0','0','1000000','250000','0');
 
 REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction`,`npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) 
@@ -1009,7 +1010,7 @@ REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`eq
 ('800004','800004','0','1','1','26790','0','-9791.30','2106.30','12.43','4.08','25','0','0','1000000','250000','0');
 DELETE FROM `creature_template` WHERE `Entry` = 800004;
 
-REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) VALUES (800004, 0, 0, 0, 0, 0, 26790, 0, 0, 0, 'Destro MMOwning', 'Der Erwaehlte', '', 0, 80, 80, 0,35, 2, 0, 1.14286, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 3, 1, 1, 0, 1, 0, 0, '');
+REPLACE INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction`, `npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) VALUES (800004, 0, 0, 0, 0, 0, 26790, 0, 0, 0, 'Destro MMOwning', 'Der Erwaehlte', '', 0, 80, 80, 0,35, 3, 0, 1.14286, 1, 1, 1, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 100, 100, 100, 100, 100, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 3, 1, 1, 0, 1, 0, 0, '');
 /* Sophie Mondhain */
 DELETE FROM `creature_text` WHERE `entry`=800005;
 
@@ -1415,7 +1416,7 @@ VALUES ( /*  ID */ 800016,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
- /* Name  */'Tempus Irael',
+ /* Name  */'Therakin Irael',
   /*  Subname */'',
   /*  Iconname */'',
   /* gossip_menu_id`  */0,
@@ -1949,7 +1950,7 @@ VALUES ( /*  ID */ 800022,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
- /* Name  */'Tempus Irael',
+ /* Name  */'Therakin Irael',
   /*  Subname */'Der oberste Kriegsfürst',
   /*  Iconname */'',
   /* gossip_menu_id`  */0,
@@ -2400,7 +2401,7 @@ VALUES ( /*  ID */ 800027,
   /* Max Level  */80,
   /*  Exp */0,
   35,
-  /*  npcflag Was ist er Questgeber oder weiteres? */4227,
+  /*  npcflag Was ist er Questgeber oder weiteres? */4225,
   /*  Speedwalk */0,
  /*  speedrun */ 1.14286,
   /*  scale */1,
@@ -11961,7 +11962,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointOption  */ 0,
 /*  LogTitle  */ 'Der Novize',
 /*  LogDescription  */  'Bringt 1500 Ehrenpunkte zum Goldenen Schwein Yasio im Kreis der Mächte in Dalaran.',
- /* QuestDescription   */ '$N, Sei gegrüsst. Ich bin Tempus. Ich möchte dich einladen bei unseren blutigen Wettkämpfen teilzunehmen. Wenn du das möchtest bringe, als Zeichen deines Willens, 1500 Ehrenpunkte zu Yasio. Yasio ist ein goldenes Schwein , welches sich im Kreis der Mächte in Dalaran befindet.',
+ /* QuestDescription   */ '$N, Sei gegrüsst. Ich bin Therakin. Ich möchte dich einladen bei unseren blutigen Wettkämpfen teilzunehmen. Wenn du das möchtest bringe, als Zeichen deines Willens, 1500 Ehrenpunkte zu Yasio. Yasio ist ein goldenes Schwein , welches sich im Kreis der Mächte in Dalaran befindet.',
 /* EndText   */  '',
 /*  OfferRewardText  */  'Habt Ihr Yasio nicht gefunden?',
  /*  RequestItemsText  */ 'Bringt 1500 Ehrenpunkte zum Goldenen Schwein Yasio im Kreis der Mächte in Dalaran.',
@@ -12275,7 +12276,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointOption  */ 0,
 /*  LogTitle  */ 'Der zweite Tag',
 /*  LogDescription  */  'Sammelt die benötigten Materialien damit wir unsere Kräfte wieder finden können um uns ins nächste Gemetzel stürzen zu können.',
- /* QuestDescription   */ '$N,bringt mir 10 Äonenwasser,10 Äonenerde,10 Äonenfeuer,10 Äonenleben, 10 Äonenluft, 300 Altersgraue Kristalle. Bringt diese anschliessend zur Insel zu Tempus. Dieser wird Euch weitere Instruktionen geben.',
+ /* QuestDescription   */ '$N,bringt mir 10 Äonenwasser,10 Äonenerde,10 Äonenfeuer,10 Äonenleben, 10 Äonenluft, 300 Altersgraue Kristalle. Bringt diese anschliessend zur Insel zu Therakin. Dieser wird Euch weitere Instruktionen geben.',
 /* EndText   */  '',
 /*  OfferRewardText  */  'Ich habe keine Meldungen über Tote gehört. Kommt ihr noch einmal ohne Fortschritte werdet ihr getötet.',
  /*  RequestItemsText  */ 'Sammelt die benötigten Materialien damit wir unsere Kräfte wieder finden können um uns ins nächste Gemetzel stürzen zu können.',
@@ -12744,12 +12745,12 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
-/*  LogTitle  */ 'Meldung beim Obersten Kriegsfürst Tempus Irael',
-/*  LogDescription  */  'Meldet Euch beim Obersten Kriegsfürst Tempus Irael im PVP Areal.',
- /* QuestDescription   */ '$N, Ich möchte das ihr Euch bei Tempus Irael dem obersten Kriegsfürsten meldet. Geht zu Seruc von Lantus um Euch zum PVP-Areal bringen zu lassen.',
+/*  LogTitle  */ 'Meldung beim Obersten Kriegsfürst Therakin Irael',
+/*  LogDescription  */  'Meldet Euch beim Obersten Kriegsfürst Therakin Irael im PVP Areal.',
+ /* QuestDescription   */ '$N, Ich möchte das ihr Euch bei Therakin Irael dem obersten Kriegsfürsten meldet. Geht zu Seruc von Lantus um Euch zum PVP-Areal bringen zu lassen.',
 /* EndText   */  '',
 /*  OfferRewardText  */  'Findet Ihr ihn nicht?',
- /*  RequestItemsText  */ 'Meldet Euch beim Obersten Kriegsfürst Tempus Irael im PVP Areal.',
+ /*  RequestItemsText  */ 'Meldet Euch beim Obersten Kriegsfürst Therakin Irael im PVP Areal.',
  /*  QuestCompletionLog  */ 'Ihr seid wohl nicht so einfach gestrickt wie ich dachte.',
  /*  RequiredNpcOrGo1  */ 0,
  /*  RequiredNpcOrGo2  */ 0,
@@ -18552,7 +18553,7 @@ VALUES ( /*  ID */ 800038,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
-  /* Name  */'Tempus Schatten',
+  /* Name  */'Therakin Schatten',
   /* Subname */'',
   /* Iconname */'',
   /* gossip_menu_id`  */800038,
@@ -21899,12 +21900,12 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
- /*  LogTitle  */ 'Weekly: Tempus',
- /*  LogDescription  */  'Toetet Tempus.',
- /*  QuestDescription   */ 'Hallo $N, Toetet Tempus den Verraetern. Er ist ueber den Porter zu erreichen. Er muss vernichtet werden.',
+ /*  LogTitle  */ 'Weekly: Therakin',
+ /*  LogDescription  */  'Toetet Therakin.',
+ /*  QuestDescription   */ 'Hallo $N, Toetet Therakin den Verraetern. Er ist ueber den Porter zu erreichen. Er muss vernichtet werden.',
  /*  EndText   */  '',
  /*  OfferRewardText  */  'Ist er zu schwer fuer Euch?',
- /*  RequestItemsText  */ 'Toetet Tempus.',
+ /*  RequestItemsText  */ 'Toetet Therakin.',
  /*  QuestCompletionLog  */ 'Es ist Eure Sache was ihr tut.',
  /*  RequiredNpcOrGo1  */ 800038,
  /*  RequiredNpcOrGo2  */ 0,
