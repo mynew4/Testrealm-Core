@@ -36,17 +36,13 @@ public:
 		std::ostringstream ss;
 		uint32 guid = player->GetGUID();
 		
-		QueryResult accountres = CharacterDatabase.PQuery("SELECT account FROM characters WHERE guid = %u", guid);
-		uint32 accountresint = (*accountres)[0].GetUInt32();
-		QueryResult charresult = CharacterDatabase.PQuery("Select count(guid) From characters where account = '%u'", accountresint);
-		uint32 charresultint = (*charresult)[0].GetUInt32();
+	
 
-		if (player->GetTotalPlayedTime() < 5 && charresultint == 1)
+		if (player->GetTotalPlayedTime() < 5)
 		{
 
 			ss << "|cff54b5ffWir heißen unseren neuen Mitspieler|r " << ChatHandler(player->GetSession()).GetNameLink() << " |cff54b5ff willkommen!|r";
 			sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-			player->CastSpell(player, 55420);
 			return;
 		}
 		else
