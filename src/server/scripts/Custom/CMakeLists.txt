@@ -34,7 +34,9 @@ set(scripts_STAT_SRCS
   Custom/light_hardmode.cpp
   Custom/dark2.cpp
   Custom/ex_playerhello.cpp
-  Custom/halloween.cpp
+  Custom/halloween.cpp 
+  Custom/wandervolk.cpp
+  Custom/teleportitem.cpp
   ${scripts_STAT_SRCS}
 #  ${sources_Custom}
   Custom/Transmog/Transmogrification.h

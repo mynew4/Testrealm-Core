@@ -2665,7 +2665,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
- /*  LogTitle  */ 'Ich bin Halloweeny',
+ /*  LogTitle  */ 'Halloweeny hat Aufgaben',
  /*  LogDescription  */  'Hey $N, meine erste Aufgabe an Euch wird etwas schwierigier dafuer hat sie einen tollen Nebeneffekt. Bringt mir 20 Halloweenabzeichen.',
  /*  QuestDescription   */ 'Hallo $N, ich bin scharf auf diese Abzeichen. Bringt mir daher 20 Stueck. Wenn ihr mir diese gebracht habt, werden eure taeglichen Quests wieder auf 25 aufgefuellt, daher entscheidet euch gut wann ihr diese Quest abgebt. Sie kann ein maechtiges Werkzeug beim Questen sein.',
  /*  EndText   */  '',
