@@ -53,7 +53,7 @@
 using namespace boost::program_options;
 
 #ifndef _TRINITY_CORE_CONFIG
-    #define _TRINITY_CORE_CONFIG  "worldserver2.conf"
+    #define _TRINITY_CORE_CONFIG  "worldserver.conf"
 #endif
 
 #define WORLD_SLEEP_CONST 50
@@ -424,7 +424,7 @@ void FreezeDetectorHandler(const boost::system::error_code& error)
         else if (getMSTimeDiff(_lastChangeMsTime, curtime) > _maxCoreStuckTimeInMs)
         {
             TC_LOG_ERROR("server.worldserver", "World Thread hangs, kicking out server!");
-            ASSERT(false);
+            ABORT();
         }
 
         _freezeCheckTimer.expires_from_now(boost::posix_time::seconds(1));
