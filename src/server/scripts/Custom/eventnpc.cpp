@@ -46,10 +46,10 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Weihnachtsevent.", GOSSIP_SENDER_MAIN, 1);
 			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Halloweenevent. 21.10. - 11.11.", GOSSIP_SENDER_MAIN, 2);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Exitares Spassevent", GOSSIP_SENDER_MAIN, 3);
-
 			pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 			return true;
 		}
+			
 
 
 		bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 /*uiSender*/, uint32 uiAction)
@@ -80,7 +80,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 						
 				case 0: {
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Dieser NPC zeigt an, welche Events von MMOwning gerade aktiv sind. Wenn keine Events aktiv sind, werden auch keine angezeigt.",
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Dieser NPC zeigt die MMOwning Events an. Mit einem Klick auf das entsprechende Event bekommst du entweder eine Erklaerung, oder wirst bei aktivem Event direkt dorthin geportet. ",
 						pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					return true;
@@ -93,14 +93,14 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					bool active = ae.find(71) != ae.end();
 					if (active = true){
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Viel Spass beim Halloweenevent.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Viel Spass beim Halloweenevent wuenscht dir Exitare und das gesammte MMOwning Team.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
 					}
 					else{
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Halloweenevent ist noch nicht aktiv. ",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Halloweenevent ist noch nicht aktiv. Bitte gedulde dich bis zum 21.10 jedes Jahr.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
@@ -110,10 +110,23 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 
 				case 3:
 				{
-					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Spassevent von Exitare findet immer in der ersten Woche des Monats statt. Es gibt verschiedene Bonusbelohnungen sowie Spezialquests.",
-						pPlayer->GetName());
-					pPlayer->PlayerTalkClass->SendCloseGossip();
+					GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
+					bool active = ae.find(72) != ae.end();
+					if (active == true){
+						pPlayer->GetGUID();
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Der Start ist bei Exitare auf der Insel. Wir wuenschen viel Spass.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+
+					else{
+						pPlayer->GetGUID();
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Spassevent von Exitare findet immer in der ersten Woche des Monats statt. Es gibt verschiedene Bonusbelohnungen sowie Spezialquests.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
 					return true;
 				}break;
 

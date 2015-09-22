@@ -74,7 +74,7 @@ public:
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_SHADOW_SPIKE, 8000);
 			_events.ScheduleEvent(EVENT_FEAR, 10000);
-			_events.ScheduleEvent(EVENT_BLIZZARD, 15000);
+			_events.ScheduleEvent(EVENT_BLIZZARD, 30000);
 		
 		}
 
@@ -97,7 +97,7 @@ public:
 				_events.ScheduleEvent(EVENT_ENRAGE, 15000);
 				_events.ScheduleEvent(EVENT_ACID_BLAST, 6000);
 				_events.ScheduleEvent(EVENT_ENRAGE, 20000);
-				_events.ScheduleEvent(EVENT_BLIZZARD, 12000);
+				_events.ScheduleEvent(EVENT_BLIZZARD, 30000);
 			}
 		}
 

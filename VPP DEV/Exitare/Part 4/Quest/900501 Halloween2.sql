@@ -73,7 +73,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
  /*  LogTitle  */ 'Und weiter gehts mit dem Halloweenspass',
- /*  LogDescription  */  'Hey $N, heute veranstalten wir unser erstes Blutbad. Toetet die Kürbissoldaten die auf einer Insel an der Kueste von Westfall stehen.',
+ /*  LogDescription  */  'Hey $N, heute veranstalten wir unser erstes Blutbad. Toetet die Kuerbissoldaten die auf einer Insel an der Kueste von Westfall stehen.',
  /*  QuestDescription   */ 'Hallo $N, die Kuerbissoldaten gehen mir betraechtlich auf die Nerven. Toetet sie und veranstaltet ein wundervolles Kuerbiskratzfest!',
  /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
@@ -159,5 +159,4 @@ REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800067, 900501);
-
 

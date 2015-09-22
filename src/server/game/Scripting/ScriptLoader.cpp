@@ -126,6 +126,8 @@ void AddSC_lighthardmode();
 void AddSC_dark2();
 //playerhello
 void AddSC_Announce_NewPlayer();
+//halloween
+void AddSC_halloween();
 
 
 #ifdef SCRIPTS
@@ -868,6 +870,8 @@ void AddCommandScripts()
 	AddSC_dark2();
 	//helloplayer
 	AddSC_Announce_NewPlayer();
+	//halloween
+	AddSC_halloween();
 }
 
 void AddWorldScripts()

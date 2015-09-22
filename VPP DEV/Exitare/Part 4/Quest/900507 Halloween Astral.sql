@@ -74,7 +74,8 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointOption  */ 0,
  /*  LogTitle  */ 'Astraler Spuck',
  /*  LogDescription  */  'Hey $N, habt ihr schon die noetigen Halloweenmarken zusammen bekommen? Nein? Schade.',
- /*  QuestDescription   */ 'Hallo $N, um diese Quest zu beenden, muesst ihr Euch dem Halloweenevent stellen und die Quest abarbeiten. Es wird sich aber definitiv lohnen. Sammelt die Halloweenmarken und gebt sie bei mir ab. Bei mir sind sie sicher, und ihr bekommt sogar eine schaurig schoene Belohnung.'
+ /*  QuestDescription   */ 'Hallo $N, um diese Quest zu beenden, muesst ihr Euch dem Halloweenevent stellen und die Quest abarbeiten. Es wird sich aber definitiv lohnen. Sammelt die Halloweenmarken und gebt sie bei mir ab. Bei mir sind sie sicher, und ihr bekommt sogar eine schaurig schoene Belohnung.',
+  /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
  /*  RequestItemsText  */ 'Habt ihr alles?',
  /*  QuestCompletionLog  */ 'Erfolg!',
@@ -154,4 +155,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
+(800067, 900506);
+
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800067, 900506);

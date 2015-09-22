@@ -34,10 +34,8 @@ public:
 	void OnLogin(Player * player, bool online)
 	{
 		std::ostringstream ss;
-		uint32 guid = player->GetGUID();
 		
-	
-
+		
 		if (player->GetTotalPlayedTime() < 5)
 		{
 

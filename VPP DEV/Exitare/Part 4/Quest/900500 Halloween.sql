@@ -140,7 +140,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
   /*  PrevQuestID */ 0,
-  /*  NextQuestID  */900500,
+  /*  NextQuestID  */900501,
   /*  ExclusiveGroup  */ 0,
   /*  RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
@@ -157,7 +157,5 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 (800067, 900500);
 
-REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
-(800067, 900500);
 
 

@@ -2,6 +2,38 @@
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 #include "Player.h"
+#include "ScriptMgr.h"
+#include "AccountMgr.h"
+#include "time.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "GameEventMgr.h"
+#include "AccountMgr.h"
+#include "time.h"
+#include <stdio.h>
+#include "Bag.h"
+#include "Common.h"
+#include "Config.h"
+#include "DatabaseEnv.h"
+#include "DBCStructure.h"
+#include "Define.h"
+#include "Field.h"
+#include "GameEventMgr.h"
+#include "Item.h"
+#include "ItemPrototype.h"
+#include "Language.h"
+#include "Log.h"
+#include "ObjectGuid.h"
+#include "ObjectMgr.h"
+#include "Player.h"
+#include "QueryResult.h"
+#include "ScriptMgr.h"
+#include "SharedDefines.h"
+#include "Transaction.h"
+#include "WorldSession.h"
+#include <sstream>
+#include <string>
+#include <stdlib.h>
 
 enum Spells
 {
@@ -30,8 +62,6 @@ enum Events
 	EVENT_PSYCHOSIS = 8,
 	EVENT_ARCANE_DEVASTION = 9,
 	EVENT_ARMY_OF_DEAD = 10
-
-
 
 };
 
@@ -68,6 +98,7 @@ public:
 
 		void Reset() override
 		{
+			
 			_events.Reset();
 			Summons.DespawnAll();
 		}

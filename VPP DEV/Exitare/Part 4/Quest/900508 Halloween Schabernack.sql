@@ -21,14 +21,14 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredFactionValue2   */ 0,
  /*  NextQuestIdChain  */ 0,
  /*  RewardXPId   */72,
- /*  RewardOrRequiredMoney  */ 2000000,
- /*  RewardMoneyMaxLevel  */ 2000000,
+ /*  RewardOrRequiredMoney  */ 3000000,
+ /*  RewardMoneyMaxLevel  */ 3000000,
  /*  RewardSpell   */ 0,
  /*  RewardSpellCast  */ 0,
  /*  RewardHonor  */ 0,
  /*  RewardHonorMultiplier  */ 0,
  /*  SourceItemId  */ 0,
- /*  Flags  */ 32768,
+ /*  Flags  */ 4096,
  /*  RewardTitle  */ 0,
  /*  RequiredPlayerKills  */ 0,
  /*  RewardTalents  */ 0,
@@ -37,7 +37,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RewardItem2   */ 0,
  /*  RewardItem3   */ 0,
  /*  RewardItem4   */ 0,
- /*  RewardAmount1 */ 15,
+ /*  RewardAmount1 */ 2,
  /*  RewardAmount2 */ 0,
  /*  RewardAmount3 */ 0,
  /*  RewardAmount4 */ 0,
@@ -72,9 +72,10 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
- /*  LogTitle  */ 'Astraler Spuck',
- /*  LogDescription  */  'Hey $N, habt ihr schon die noetigen Halloweenmarken zusammen bekommen? Nein? Schade.',
- /*  QuestDescription   */ 'Hallo $N, um diese Quest zu beenden, muesst ihr Euch dem Halloweenevent stellen und die Quest abarbeiten. Es wird sich aber definitiv lohnen. Sammelt die Halloweenmarken und gebt sie bei mir ab. Bei mir sind sie sicher, und ihr bekommt sogar eine schaurig schoene Belohnung.'
+ /*  LogTitle  */ 'Halloween Schabernack',
+ /*  LogDescription  */  'Hey $N, bringt mir Bier in rauen Mengen.',
+ /*  QuestDescription   */ 'Hallo $N, dieses Jahr feiern wir Halloween mit Bier. Viel Bier! Die Dunkeleisenzwerge haben ihr Gebraeu verloren. Also los schnappt es Euch. In Dalaran, Insel, Orgrimmar, Ratchet sowie Sturmwind solltest du fuendig werden.',
+  /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
  /*  RequestItemsText  */ 'Habt ihr alles?',
  /*  QuestCompletionLog  */ 'Erfolg!',
@@ -94,7 +95,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredSourceItemCount2  */ 0,
  /*  RequiredSourceItemCount3  */ 0,
  /*  RequiredSourceItemCount4  */ 0,
- /*  RequiredItemId1  */ 700520,
+ /*  RequiredItemId1  */ 11325,
  /*  RequiredItemId2  */ 0,
  /*  RequiredItemId3  */ 0,
  /*  RequiredItemId4  */ 0,
@@ -138,8 +139,8 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
-  /*  PrevQuestID */ 900505,
-  /*  NextQuestID  */900508,
+  /*  PrevQuestID */ 900506,
+  /*  NextQuestID  */900509,
   /*  ExclusiveGroup  */ 0,
   /*  RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
@@ -154,4 +155,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
+(800067, 900508);
+
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800067, 900508);

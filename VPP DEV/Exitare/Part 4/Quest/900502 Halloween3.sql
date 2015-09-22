@@ -160,4 +160,3 @@ REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800067, 900502);
 
-

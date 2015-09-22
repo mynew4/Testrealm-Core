@@ -33,11 +33,11 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredPlayerKills  */ 0,
  /*  RewardTalents  */ 0,
  /*  RewardArenaPoints  */ 0,
- /*  RewardIten    */ 0,
+ /*  RewardIten    */ 38186,
  /*  RewardItem2   */ 0,
  /*  RewardItem3   */ 0,
  /*  RewardItem4   */ 0,
- /*  RewardAmount1 */ 0,
+ /*  RewardAmount1 */ 20,
  /*  RewardAmount2 */ 0,
  /*  RewardAmount3 */ 0,
  /*  RewardAmount4 */ 0,
@@ -102,7 +102,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredItemId5  */ 0,
  /*  RequiredItemId6  */ 0,
  /*  RequiredItemCount1  */ 100,
- /*  RequiredItemCount2  */ 5,
+ /*  RequiredItemCount2  */ 10,
  /*  RequiredItemCount3  */ 0,
  /*  RequiredItemCount4  */ 0,
  /*  RequiredItemCount5  */ 0,
@@ -155,6 +155,9 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
+(800067, 900505);
+
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800067, 900505);
 
 

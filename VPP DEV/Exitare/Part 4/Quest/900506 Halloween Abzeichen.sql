@@ -11,7 +11,7 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  QuestLevel  */ 80,
  /*  MinLevel   */80,
  /*  QuestSortID  */ -22,
- /*  QuestType*/ 82,
+ /*  QuestType*/ 62,
  /*  SuggestedGroupNum  */ 0,
  /*  LimitTime  */ 0,
  /*  RequiredRaces   */1791,
@@ -21,8 +21,8 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredFactionValue2   */ 0,
  /*  NextQuestIdChain  */ 0,
  /*  RewardXPId   */72,
- /*  RewardOrRequiredMoney  */ 2000000,
- /*  RewardMoneyMaxLevel  */ 2000000,
+ /*  RewardOrRequiredMoney  */ 8000000,
+ /*  RewardMoneyMaxLevel  */ 8000000,
  /*  RewardSpell   */ 0,
  /*  RewardSpellCast  */ 0,
  /*  RewardHonor  */ 0,
@@ -37,11 +37,11 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RewardItem2   */ 0,
  /*  RewardItem3   */ 0,
  /*  RewardItem4   */ 0,
- /*  RewardAmount1 */ 5,
+ /*  RewardAmount1 */ 0,
  /*  RewardAmount2 */ 0,
  /*  RewardAmount3 */ 0,
  /*  RewardAmount4 */ 0,
- /*  RewardChoiceItemID1  */ 0,
+ /*  RewardChoiceItemID1  */ 10,
  /*  RewardChoiceItemID2  */ 0,
  /*  RewardChoiceItemID3  */ 0,
  /*  RewardChoiceItemID4  */ 0,
@@ -74,7 +74,8 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointOption  */ 0,
  /*  LogTitle  */ 'Was ist das?',
  /*  LogDescription  */  'Hey $N, dies ist eine sehr wichtige Quest wie ihr bald herausfinden werdet. Besiegt den Halloweenschreck.',
- /*  QuestDescription   */ 'Hallo $N, mit dieser Quest eroeffnet ihr Euch eine Quest die Euch reich belohnen wird, wenn ihr sie taeglich abschliesst. Der Halloweenschreck ist leider selbst so schreckhaft, das ihr ihn suchen muesst. Er befindet sich irgendwo auf den Oestlichen Koenigreichen. Ein guter Anfang der Suche ist das Gebiet Loch Modan, Dun Morogh und Sumpfland.'
+ /*  QuestDescription   */ 'Hallo $N, mit dieser Quest eroeffnet ihr Euch eine Quest die Euch reich belohnen wird, wenn ihr sie taeglich abschliesst. Der Halloweenschreck ist leider selbst so schreckhaft, das ihr ihn suchen muesst. Er befindet sich irgendwo auf den Oestlichen Koenigreichen. Ein guter Anfang der Suche ist das Gebiet Loch Modan, Dun Morogh und Sumpfland.',
+ /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
  /*  RequestItemsText  */ 'Habt ihr alles?',
  /*  QuestCompletionLog  */ 'Erfolg!',
@@ -155,3 +156,9 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 (800067, 900506);
+
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
+(800067, 900506);
+
+
+

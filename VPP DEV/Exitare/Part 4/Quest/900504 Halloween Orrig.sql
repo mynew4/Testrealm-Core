@@ -157,5 +157,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
 (800002, 900504);
 
+REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
+(800002, 900504);
 
 
