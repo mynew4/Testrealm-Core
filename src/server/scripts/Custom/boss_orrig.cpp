@@ -95,7 +95,7 @@ public:
 				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_ARCANE_BOMB, 5000);
 				_events.ScheduleEvent(EVENT_ENRAGE, 15000);
-				_events.ScheduleEvent(EVENT_ACID_BLAST, 6000);
+				_events.ScheduleEvent(EVENT_ACID_BLAST, 16000);
 				_events.ScheduleEvent(EVENT_ENRAGE, 20000);
 				_events.ScheduleEvent(EVENT_BLIZZARD, 30000);
 			}

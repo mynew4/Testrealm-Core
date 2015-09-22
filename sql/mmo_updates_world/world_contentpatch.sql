@@ -18553,7 +18553,7 @@ VALUES ( /*  ID */ 800038,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
-  /* Name  */'Therakin Schatten',
+  /* Name  */'Therakins Schatten',
   /* Subname */'',
   /* Iconname */'',
   /* gossip_menu_id`  */800038,
@@ -19400,30 +19400,37 @@ INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
 VALUES (800041, 52006, 0, 1, 0, 1, 0, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 38186, 0, 0.01, 0, 1, 0, 5, 25);
+VALUES (800041, 38186, 0, 1, 0, 1, 0, 5, 25);
 
 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 37180, 0, 25, 0, 1, 1, 1, 1); 
+VALUES (800041, 45117, 0, 25, 0, 1, 1, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 35570, 0, 25, 0, 1, 1, 1, 1); 
+VALUES (800041, 45119, 0, 25, 0, 1, 1, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 41793, 0, 25, 0, 1, 1, 1, 1); 
+VALUES (800041, 45106, 0, 25, 0, 1, 1, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 37193, 0, 25, 0, 1, 1, 1, 1); 
+VALUES (800041, 45113, 0, 25, 0, 1, 1, 1, 1); 
 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 41793, 0, 25, 0, 1, 2, 1, 1); 
+VALUES (800041, 45143, 0, 25, 0, 1, 2, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 37186, 0, 25, 0, 1, 2, 1, 1); 
+VALUES (800041, 45151, 0, 25, 0, 1, 2, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 37191, 0, 25, 0, 1, 2, 1, 1); 
+VALUES (800041, 45141, 0, 25, 0, 1, 2, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 37194, 0, 12.5, 0, 1, 2, 1, 1); 
+VALUES (800041, 45142, 0, 12.5, 0, 1, 2, 1, 1); 
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
-VALUES (800041, 49307, 0, 12.5, 0, 1, 2, 1, 1); 
+VALUES (800041, 45137, 0, 12.5, 0, 1, 2, 1, 1); 
 
-
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 45445, 0, 25, 0, 1, 3, 1, 1); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 45443, 0, 25, 0, 1, 3, 1, 1); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 700519, 0, 25, 0, 1, 3, 9, 25); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 45226, 0, 25, 0, 3, 3, 1, 1); 
 
 
 DELETE FROM `creature` WHERE `guid` = 800041;
@@ -19501,7 +19508,7 @@ VALUES ( /*  ID */ 800041,
   /*  flags_extra` */0, 
   /*  Scriptname  */'');
 
-UPDATE `creature_template` SET `HealthModifier`=1500, `ArmorModifier`=50, `DamageModifier`=110 WHERE `entry`=800041;
+UPDATE `creature_template` SET `HealthModifier`=500, `ArmorModifier`=50, `DamageModifier`=50 WHERE `entry`=800041;
 
 
 DELETE FROM `creature_text` WHERE `entry` = 800041;
@@ -21094,7 +21101,7 @@ REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`eq
 
 DELETE FROM `npc_vendor` WHERE `entry` =800051;  
 -- 300 Ehrenpunkte = 1 Ehrenpunkt
-REPLACE INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`) VALUES 
+INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`) VALUES 
 (800051, 0, 43308, 0, 0, 826);
 -- 15 Triumphmarken = 1 Auktionsitem
 REPLACE INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`) VALUES 
@@ -21105,9 +21112,7 @@ REPLACE INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `Ext
 -- 1 Feine Gewuerze = 1 Mal der Illidari
 REPLACE INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`) VALUES 
 (800051, 0, 3713, 10, 10000, 1959);
--- 1Scharfes Gewuerz =
-REPLACE INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `ExtendedCost`) VALUES 
-(800051, 0, 3713, 10, 10000, 1959);
+
 
 
 
