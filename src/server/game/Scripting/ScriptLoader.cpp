@@ -130,6 +130,8 @@ void AddSC_Announce_NewPlayer();
 void AddSC_halloween();
 //portitem
 void AddSC_port_item();
+//wandervolk
+void AddSC_wandervolk();
 
 
 #ifdef SCRIPTS
@@ -876,6 +878,8 @@ void AddCommandScripts()
 	AddSC_halloween();
 	//portitem
 	AddSC_port_item();
+	//wandervolk
+	AddSC_wandervolk();
 }
 
 void AddWorldScripts()

@@ -1,12 +1,12 @@
-DELETE FROM `quest_template` WHERE  `id` = 900800;
-DELETE FROM `quest_template_addon` WHERE `id` = 900800;
-DELETE FROM `creature_questender` WHERE `id` = 800027 AND `quest` = 900800;
-DELETE FROM `creature_queststarter` WHERE `id` = 800015   AND `quest` = 900800;
+DELETE FROM `quest_template` WHERE  `id` = 900801;
+DELETE FROM `quest_template_addon` WHERE `id` = 900801;
+DELETE FROM `creature_questender` WHERE `id` = 800070 AND `quest` = 900801;
+DELETE FROM `creature_queststarter` WHERE `id` = 800027   AND `quest` = 900801;
 
 
 
 REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestType`, `SuggestedGroupNum`, `LimitTime`, `RequiredRaces`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `NextQuestIdChain`, `RewardXPId`, `RewardOrRequiredMoney`, `RewardMoneyMaxLevel`, `RewardSpell`, `RewardSpellCast`, `RewardHonor`, `RewardHonorMultiplier`, `SourceItemId`, `Flags`, `RewardTitle`, `RequiredPlayerKills`, `RewardTalents`, `RewardArenaPoints`, `RewardItem1`, `RewardItem2`, `RewardItem3`, `RewardItem4`, `RewardAmount1`, `RewardAmount2`, `RewardAmount3`, `RewardAmount4`, `RewardChoiceItemID1`, `RewardChoiceItemID2`, `RewardChoiceItemID3`, `RewardChoiceItemID4`, `RewardChoiceItemID5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity1`, `RewardChoiceItemQuantity2`, `RewardChoiceItemQuantity3`, `RewardChoiceItemQuantity4`, `RewardChoiceItemQuantity5`, `RewardChoiceItemQuantity6`, `RewardFactionID1`, `RewardFactionID2`, `RewardFactionID3`, `RewardFactionID4`, `RewardFactionID5`, `RewardFactionValue1`, `RewardFactionValue2`, `RewardFactionValue3`, `RewardFactionValue4`, `RewardFactionValue5`, `RewardFactionOverride1`, `RewardFactionOverride2`, `RewardFactionOverride3`, `RewardFactionOverride4`, `RewardFactionOverride5`, `PointMapId`, `PointX`, `PointY`, `PointOption`, `LogTitle`, `LogDescription`, `QuestDescription`, `EndText`, `OfferRewardText`, `RequestItemsText`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, `RequiredSourceItemId1`, `RequiredSourceItemId2`, `RequiredSourceItemId3`, `RequiredSourceItemId4`, `RequiredSourceItemCount1`, `RequiredSourceItemCount2`, `RequiredSourceItemCount3`, `RequiredSourceItemCount4`, `RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `DetailsEmote1`, `DetailsEmote2`, `DetailsEmote3`, `DetailsEmote4`, `DetailsEmoteDelay1`, `DetailsEmoteDelay2`, `DetailsEmoteDelay3`, `DetailsEmoteDelay4`, `EmoteOnIncomplete`, `EmoteOnComplete`, `OfferRewardEmote1`, `OfferRewardEmote2`, `OfferRewardEmote3`, `OfferRewardEmote4`, `OfferRewardEmoteDelay1`, `OfferRewardEmoteDelay2`, `OfferRewardEmoteDelay3`, `OfferRewardEmoteDelay4`, `VerifiedBuild`) VALUES
-(/*  ID    */900800,
+(/*  ID    */900801,
  /*  Method  */ 2,
  /*  QuestLevel  */ 80,
  /*  MinLevel   */80,
@@ -21,8 +21,8 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredFactionValue2   */ 0,
  /*  NextQuestIdChain  */ 0,
  /*  RewardXPId   */72,
- /*  RewardOrRequiredMoney  */ 4000000,
- /*  RewardMoneyMaxLevel  */ 4000000,
+ /*  RewardOrRequiredMoney  */ 2000000,
+ /*  RewardMoneyMaxLevel  */ 2000000,
  /*  RewardSpell   */ 0,
  /*  RewardSpellCast  */ 0,
  /*  RewardHonor  */ 0,
@@ -72,9 +72,9 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  PointX  */ 0,
  /*  PointY  */ 0,
  /*  PointOption  */ 0,
- /*  LogTitle  */ 'Exitares Event',
- /*  LogDescription  */  'Hey du. Wir kennen uns ja bereits. Na dann wollen wir mal starten.',
- /*  QuestDescription   */ 'Hallo $N, na wir sehen uns aber oft. Na dann schicke ich Euch zu eurem ersten Autraggeber. Geht zu Eowyn und gebt die Quest ab.',
+ /*  LogTitle  */ 'Das Wandervolk!',
+ /*  LogDescription  */  'Das Wandervolk ist ein interessantes Volk. Um das Volk kennenzulernen braucht ihr 2 Auktionspapiere und 100 Feine Gewuerze',
+ /*  QuestDescription   */ 'Hallo $N, das Wandervolk ist ein interessantes Volk, welches im Dunkel der Welten haußt. Erfuellt die Quest und ihr steht in ihrer Gunst.',
  /*  EndText   */  '',
  /*  OfferRewardText  */  'Gut das ihr es geschafft habt.',
  /*  RequestItemsText  */ 'Habt ihr alles?',
@@ -95,14 +95,14 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
  /*  RequiredSourceItemCount2  */ 0,
  /*  RequiredSourceItemCount3  */ 0,
  /*  RequiredSourceItemCount4  */ 0,
- /*  RequiredItemId1  */ 0,
- /*  RequiredItemId2  */ 0,
+ /*  RequiredItemId1  */ 21140,
+ /*  RequiredItemId2  */ 3713,
  /*  RequiredItemId3  */ 0,
  /*  RequiredItemId4  */ 0,
  /*  RequiredItemId5  */ 0,
  /*  RequiredItemId6  */ 0,
- /*  RequiredItemCount1  */ 0,
- /*  RequiredItemCount2  */ 0,
+ /*  RequiredItemCount1  */ 2,
+ /*  RequiredItemCount2  */ 100,
  /*  RequiredItemCount3  */ 0,
  /*  RequiredItemCount4  */ 0,
  /*  RequiredItemCount5  */ 0,
@@ -135,17 +135,17 @@ REPLACE INTO `quest_template` (`ID`, `Method`, `QuestLevel`, `MinLevel`, `QuestS
 
 
 REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES
-( /*  ID  */900800,
+( /*  ID  */900801,
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
-  /*   PrevQuestID */ 0,
-  /*  NextQuestID  */900801,
+  /*   PrevQuestID */ 900800,
+  /*  NextQuestID  */900802,
   /*  ExclusiveGroup  */ 0,
   /*   RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
   /*  RequiredSkillID  */ 0,
-  /*  RequiredSkillPoints  */ 0,
+  /*  RequiredSkillPoints  */ 0,q
   /*  RequiredMinRepFaction  */ 0,
   /*  RequiredMaxRepFaction  */ 0,
   /*   RequiredMinRepValue */ 0,
@@ -155,7 +155,8 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
 
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800027, 900800);
+(800070, 900801);
+
 
 
 
