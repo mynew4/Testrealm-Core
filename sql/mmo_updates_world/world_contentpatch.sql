@@ -23230,6 +23230,15 @@ VALUES (800041, 700519, 0, 25, 0, 1, 3, 9, 25);
 REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
 VALUES (800041, 45226, 0, 25, 0, 3, 3, 1, 1); 
 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 47200, 0, 25, 0, 1, 4, 1, 1); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 47503, 0, 25, 0, 1, 4, 1, 1); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 47509, 0, 25, 0, 1, 4, 1, 1); 
+REPLACE INTO `creature_loot_template` (`Entry`,`Item`,`Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`)
+VALUES (800041, 47181, 0, 25, 0, 3, 4, 1, 1); 
+
 
 DELETE FROM `creature` WHERE `guid` = 800041;
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
@@ -23306,7 +23315,7 @@ VALUES ( /*  ID */ 800041,
   /*  flags_extra` */0, 
   /*  Scriptname  */'');
 
-UPDATE `creature_template` SET `HealthModifier`=500, `ArmorModifier`=50, `DamageModifier`=50 WHERE `entry`=800041;
+UPDATE `creature_template` SET `HealthModifier`=450, `ArmorModifier`=50, `DamageModifier`=50 WHERE `entry`=800041;
 
 
 DELETE FROM `creature_text` WHERE `entry` = 800041;
