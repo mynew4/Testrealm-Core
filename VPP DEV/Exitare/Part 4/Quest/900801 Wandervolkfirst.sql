@@ -145,7 +145,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*   RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
   /*  RequiredSkillID  */ 0,
-  /*  RequiredSkillPoints  */ 0,q
+  /*  RequiredSkillPoints  */ 0,
   /*  RequiredMinRepFaction  */ 0,
   /*  RequiredMaxRepFaction  */ 0,
   /*   RequiredMinRepValue */ 0,
