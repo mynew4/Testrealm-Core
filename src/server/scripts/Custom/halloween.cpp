@@ -34,6 +34,7 @@ public:
 
 	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 opt){
 		if (quest->GetQuestId() == 900510){
+			
 			player->AddAura(44185, player);
 			creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 			return true;
@@ -44,7 +45,8 @@ public:
 
 	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest){
 		if (quest->GetQuestId() == 900509){
-			player->CanFlyInZone(0, 40);
+			/*player->CanFlyInZone(0, 40);*/
+			player->CanFly();
 			player->ResetDailyQuestStatus();
 			return true;
 		}
