@@ -40,7 +40,7 @@ public: seruc() : CreatureScript("seruc"){ }
 		{
 			pPlayer->ADD_GOSSIP_ITEM(7, "Raid [Gesperrt] 20.000 Goldkosten", GOSSIP_SENDER_MAIN, 0);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Instanz [Gesperrt] 20.000 Goldkosten", GOSSIP_SENDER_MAIN, 13);
-			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zum PVP Areal [500 Wertung]", GOSSIP_SENDER_MAIN, 1);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zum PVP Areal", GOSSIP_SENDER_MAIN, 1);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zur Insel ", GOSSIP_SENDER_MAIN, 2);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Teleport zu Yasio ", GOSSIP_SENDER_MAIN, 3);
 			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Worldbosse", GOSSIP_SENDER_MAIN, 15);
@@ -70,15 +70,16 @@ public: seruc() : CreatureScript("seruc"){ }
 				uint32 guid = pPlayer->GetGUID();
 
 				pPlayer->PlayerTalkClass->ClearMenus();
+				pPlayer->ADD_GOSSIP_ITEM(7, "Was sind die MMO Bosse?", GOSSIP_SENDER_MAIN, 17);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Orrig [5-10] ", GOSSIP_SENDER_MAIN, 4);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Exitares Schatten [7-15]", GOSSIP_SENDER_MAIN, 5);
-				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Die gequälte Seele [5-15]", GOSSIP_SENDER_MAIN, 6);
+				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Die gequaelte Seele [5-15]", GOSSIP_SENDER_MAIN, 6);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Kayoula [25-40]", GOSSIP_SENDER_MAIN, 7);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Therakin [15-25]", GOSSIP_SENDER_MAIN, 8);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Arcturus [5-10] ", GOSSIP_SENDER_MAIN, 9);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Moon [25-40]", GOSSIP_SENDER_MAIN, 10);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Maltyriun [5-10]", GOSSIP_SENDER_MAIN, 11);
-				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: LORDofDOOM [10-25]", GOSSIP_SENDER_MAIN, 12);
+				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: LORDofDOOM [7-15]", GOSSIP_SENDER_MAIN, 12);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Tyranium [5-10]", GOSSIP_SENDER_MAIN, 14);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Tolreos [5-10]", GOSSIP_SENDER_MAIN, 16);
 				pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
@@ -89,21 +90,12 @@ public: seruc() : CreatureScript("seruc"){ }
 				pPlayer->GetGUID();
 				
 				uint32 rating = pPlayer->GetArenaPersonalRating(1);
-					if (rating >= 500){
+					
 						pPlayer->ModifyHonorPoints(-500, NULL);
 						pPlayer->TeleportTo(0, -793.67,1565.25,19.88,3.25);
 						pPlayer->ModifyMoney(-200000);
 						return true;
-					}
 					
-					else{
-						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Deine persönliche Wertung ist zu gering. Sie muss mindestens 500 betragen.",
-							pPlayer->GetName());
-						pPlayer->PlayerTalkClass->SendCloseGossip();
-						return true;
-					}
-					return true;
 			}break;
 				
 				
@@ -244,6 +236,12 @@ public: seruc() : CreatureScript("seruc"){ }
 					return true;
 				}break;
 
+				case 17: {
+					pPlayer->GetGUID();
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Die MMO-Bosse sind dafuer gemacht worden, eine neue Herausforderung zu sein. Es wird Loot verteilt, der entsprechend dem Aufwand verteilt wird. Jeder Boss hat mehrere Loottables die per Zufall ausgewaehlt werden. Die Bosse sind nicht dazu da, etwaige Instanzen oder Raids zu ersetzen.", pPlayer->GetName());
+					pPlayer->PlayerTalkClass->SendCloseGossip();
+					return true;
+				}break;
 
 			}
 			return true;

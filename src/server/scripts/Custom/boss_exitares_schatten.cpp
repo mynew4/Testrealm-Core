@@ -76,8 +76,8 @@ public:
 		{
 			Talk(SAY_AGGRO);
 			_events.SetPhase(PHASE_ONE);
-			_events.ScheduleEvent(EVENT_TOXIC_WASTE, 8000);
-			_events.ScheduleEvent(EVENT_POISON_NOVA, 10000);
+			_events.ScheduleEvent(EVENT_TOXIC_WASTE, 20000);
+			_events.ScheduleEvent(EVENT_POISON_NOVA, 40000);
 			_events.ScheduleEvent(EVENT_MOONFIRE, 8000);
 			_events.ScheduleEvent(EVENT_SPALTEN, 15000);
 
@@ -88,10 +88,11 @@ public:
 			if (me->HealthBelowPctDamaged(75, damage) && _events.IsInPhase(PHASE_ONE))
 			{
 				_events.SetPhase(PHASE_TWO);
-				_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 10000);
+				_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 60000);
 				_events.ScheduleEvent(EVENT_RAIN_OF_FIRE, 8000);
 				_events.ScheduleEvent(EVENT_FLAME_BURST, 12000);
-				_events.ScheduleEvent(EVENT_SUMMONS, 10000);
+				_events.ScheduleEvent(EVENT_BURN, 25000);
+				_events.ScheduleEvent(EVENT_SUMMONS, 45000);
 
 			}
 
@@ -99,9 +100,9 @@ public:
 			{
 				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_ARCANE_BOMB, 5000);
-				_events.ScheduleEvent(EVENT_POISON_NOVA, 15000);
-				_events.ScheduleEvent(EVENT_TOXIC_WASTE, 6000);
-				_events.ScheduleEvent(EVENT_ENRAGE, 25000);
+				_events.ScheduleEvent(EVENT_POISON_NOVA, 60000);
+				_events.ScheduleEvent(EVENT_TOXIC_WASTE, 45000);
+				_events.ScheduleEvent(EVENT_ENRAGE, 120000);
 				_events.ScheduleEvent(EVENT_SPALTEN, 12000);
 			}
 		}
@@ -124,9 +125,10 @@ public:
 			char msg[250];
 			snprintf(msg, 250, "|cffff0000[Boss System]|r Boss|cffff6060 Exitares Schatten|r wurde getoetet! Respawn in 6h 33min.");
 			sWorld->SendGlobalText(msg, NULL);
+			
 		}
 
-		
+				
 
 		void UpdateAI(uint32 diff) override
 		{
@@ -144,7 +146,7 @@ public:
 					break;
 				case EVENT_TOXIC_WASTE:
 					DoCastToAllHostilePlayers(SPELL_TOXIC_WASTE);
-					_events.ScheduleEvent(EVENT_TOXIC_WASTE, 8000);
+					_events.ScheduleEvent(EVENT_TOXIC_WASTE, 45000);
 					break;
 				case EVENT_ENRAGE:
 					Talk(SAY_RANDOM);
@@ -162,27 +164,30 @@ public:
 				case EVENT_SUMMONS:
 					Talk(SAY_HELP);
 					me->SummonCreature(NPC_PUSTELIGER_SCHRECKEN, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 12000);
-					_events.ScheduleEvent(EVENT_SUMMONS, 30000);
+					me->SummonCreature(NPC_PUSTELIGER_SCHRECKEN, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 12000);
+					me->SummonCreature(NPC_PUSTELIGER_SCHRECKEN, me->GetPositionX() + 5, me->GetPositionY(), me->GetPositionZ() + 5, 0, TEMPSUMMON_CORPSE_DESPAWN, 12000);
+					_events.ScheduleEvent(EVENT_SUMMONS, 60000);
 					break;
 				case EVENT_ARCANE_BOMB:
 					Talk(SAY_ENRAGE);
-					DoCast(me, SPELL_ARCANE_BOMB);
+					DoCastToAllHostilePlayers(SPELL_ARCANE_BOMB);
 					_events.ScheduleEvent(EVENT_ARCANE_BOMB, 10000);
 					break;
 				case EVENT_LIGHT_VORTEX:
-					DoCast(me, SPELL_LIGHT_VORTEX);
-					_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 15000);
+					DoCastAOE(SPELL_LIGHT_VORTEX, false);
+					_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 45000);
 					break;
 				case EVENT_MOONFIRE:
 					DoCastToAllHostilePlayers(SPELL_MOONFIRE);
 					_events.ScheduleEvent(EVENT_MOONFIRE, 10000);
 					break;
 				case EVENT_SPALTEN:
-					DoCastVictim(SPELL_SPALTEN);
+					DoCastToAllHostilePlayers(SPELL_SPALTEN);
 					_events.ScheduleEvent(EVENT_SPALTEN, 20000);
 					break;
 				case SPELL_BURN:
-					DoCastToAllHostilePlayers(SPELL_BURN);
+					me->SelectNearestTarget(2.5f);
+					DoCastVictim(SPELL_BURN);
 					_events.ScheduleEvent(SPELL_BURN, 5000);
 					break;
 

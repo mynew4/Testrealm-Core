@@ -35,6 +35,7 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Ich habe einen Fehler gefunden. Was tun?", GOSSIP_SENDER_MAIN, 3);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es hier Crossfaction?", GOSSIP_SENDER_MAIN, 4);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie schreibe ich im Worldchat?", GOSSIP_SENDER_MAIN, 5);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert nicht bei mir.", GOSSIP_SENDER_MAIN, 6);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -97,6 +98,17 @@ public:
 					pPlayer->GetSession()->SendAreaTriggerMessage("Oeffne dein Chatfenster un tippe .w gefolgt von deinem Text.");
 					return true;
 				}
+
+				case 6:
+				{
+					pPlayer->GetGUID();
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Die komplette Rampoquestreihe ist per Questcompleter abschliessbar. Bitte nutze diesen auch.", pPlayer->GetName());
+					pPlayer->PlayerTalkClass->SendCloseGossip();
+					pPlayer->GetSession()->SendAreaTriggerMessage("Die Rampoquestreihe ist komplett per Questcompleter abschliessbar.");
+					return true;
+				}
+ 
+				
 
 				return true;
 			};

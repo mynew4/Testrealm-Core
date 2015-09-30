@@ -39,11 +39,7 @@ public:
 			creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 			return true;
 		}
-		return true;
 
-	}
-
-	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest){
 		if (quest->GetQuestId() == 900509){
 			/*player->CanFlyInZone(0, 40);*/
 			player->CanFly();
@@ -51,6 +47,11 @@ public:
 			return true;
 		}
 		return true;
+
+	}
+
+	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest){
+			return true;
 	}
 
 };

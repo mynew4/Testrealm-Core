@@ -1,6 +1,6 @@
 DELETE FROM `quest_template` WHERE  `id` = 900802;
 DELETE FROM `quest_template_addon` WHERE `id` = 900802;
-DELETE FROM `creature_questender` WHERE `id` = 800027 AND `quest` = 900802;
+DELETE FROM `creature_questender` WHERE `id` = 800071 AND `quest` = 900802;
 DELETE FROM `creature_queststarter` WHERE `id` = 800027   AND `quest` = 900802;
 
 
@@ -132,7 +132,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*   SpecialFlags */ 0);
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800027, 900802);
+(800071, 900802);
 
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
 (800027, 900802);
