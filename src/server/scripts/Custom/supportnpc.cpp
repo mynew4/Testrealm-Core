@@ -35,7 +35,11 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Ich habe einen Fehler gefunden. Was tun?", GOSSIP_SENDER_MAIN, 3);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es hier Crossfaction?", GOSSIP_SENDER_MAIN, 4);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie schreibe ich im Worldchat?", GOSSIP_SENDER_MAIN, 5);
+<<<<<<< HEAD
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert nicht bei mir.", GOSSIP_SENDER_MAIN, 6);
+=======
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Complete mir Quests!", GOSSIP_SENDER_MAIN, 6);
+>>>>>>> 1a7f26a721d8eb49636b7df99712927f0f50b977
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -66,7 +70,7 @@ public:
 				case 2:
 				{
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das ist uns bekannt. Der Questcompleter verschickt nicht immer alle Questitems. Ist die Quest normal abschließbar wird es hier keine Erstattung geben. Ein Zuruecktreten vom Completen kann auch nicht erfolgen. Weitere Informationen gibt es auf der Homepage.", pPlayer->GetName());
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das ist uns bekannt. Der Questcompleter verschickt nicht immer alle Questitems. Ist die Quest normal abschlieÃŸbar wird es hier keine Erstattung geben. Ein Zuruecktreten vom Completen kann auch nicht erfolgen. Weitere Informationen gibt es auf der Homepage.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Das ist bekannt und wird nicht erstattet. Genauere Informationen auf der Homepage.");
 					return true;
@@ -77,7 +81,7 @@ public:
 					pPlayer->GetGUID();
 					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hast du einen Fehler gefunden, melde dich bitte ueber den Bugtracker. Da Entwickler nicht auf dem Liveserver spielen, lesen sie keine Tickets. Im Bugtracker bekommt ihr fuer eingereichte Daten 20 Punkte gutgeschrieben.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
-					pPlayer->GetSession()->SendAreaTriggerMessage("Melde dich am besten über den Bugtracker. Entwickler werden keine Tickets lesen, da sie nicht auf dem Liveserver spielen.");
+					pPlayer->GetSession()->SendAreaTriggerMessage("Melde dich am besten Ã¼ber den Bugtracker. Entwickler werden keine Tickets lesen, da sie nicht auf dem Liveserver spielen.");
 					return true;
 				}
 
@@ -96,6 +100,18 @@ public:
 					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Oeffne dein Chatfenster und schreibe .w gefolgt von deinem gewuenschten Text. Bsp: .w hallo.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Oeffne dein Chatfenster un tippe .w gefolgt von deinem Text.");
+					return true;
+				}
+				
+				case 6:
+				{
+					pPlayer->GetGUID();
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Deine Quest mit der ID " + id + " wurde completed!", pPlayer->GetName());
+					pPlayer->PlayerTalkClass->SendCloseGossip();
+					///TODO Quest mit GetID holen
+					
+					
+					pPlayer->CompleteQuest();
 					return true;
 				}
 
