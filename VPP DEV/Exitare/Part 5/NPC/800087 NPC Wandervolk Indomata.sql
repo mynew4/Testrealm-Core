@@ -1,17 +1,17 @@
-DELETE FROM `creature_template` WHERE `entry` = 800086;
+DELETE FROM `creature_template` WHERE `entry` = 800087;
 INSERT INTO `creature_template` (`entry`, `difficulty_entry_1`, `difficulty_entry_2`, `difficulty_entry_3`, `KillCredit1`, `KillCredit2`, `modelid1`, `modelid2`, `modelid3`, `modelid4`, `name`, `subname`, `IconName`, `gossip_menu_id`, `minlevel`, `maxlevel`, `exp`, `faction`,`npcflag`, `speed_walk`, `speed_run`, `scale`, `rank`, `dmgschool`, `BaseAttackTime`, `RangeAttackTime`, `unit_class`, `unit_flags`, `unit_flags2`, `dynamicflags`, `family`, `trainer_type`, `trainer_spell`, `trainer_class`, `trainer_race`, `type`, `type_flags`, `lootid`, `pickpocketloot`, `skinloot`, `resistance1`, `resistance2`, `resistance3`, `resistance4`, `resistance5`, `resistance6`, `spell1`, `spell2`, `spell3`, `spell4`, `spell5`, `spell6`, `spell7`, `spell8`, `PetSpellDataId`, `VehicleId`, `mingold`, `maxgold`, `AIName`, `MovementType`, `InhabitType`, `HoverHeight`, `RacialLeader`, `movementId`, `RegenHealth`, `mechanic_immune_mask`, `flags_extra`, `ScriptName`) 
 
-VALUES ( /*  ID */ 800086,
+VALUES ( /*  ID */ 800087,
   /*  Dificculty 1 */0,
  /* Dif2  */ 0,
   /*  Dif3 */0,
   /* KillCredit1  */0,
   /*  KillCredit2  */0,
-  /* Modelid  */16754,
+  /* Modelid  */16217,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
- /* Name  */'Leandaria',
+ /* Name  */'Indomata',
   /*  Subname */'Wandervolk',
   /*  Iconname */'',
   /* gossip_menu_id`  */0,
@@ -68,8 +68,8 @@ VALUES ( /*  ID */ 800086,
   /*  RegenHealth`` */1, 
   /*  mechanic_immune_mask` */0, 
   /*  flags_extra` */0, 
-  /* Scriptname  */'leandaria');
+  /* Scriptname  */'');
   
-  DELETE FROM `creature` WHERE `id` = 800086;
+  DELETE FROM `creature` WHERE `id` = 800087;
   REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800086','800086','0','1','1','16754','0','3085.04','-6149.00','131.98','5.44','25','0','0','1000000','250000','0');
+('800087','800087','0','1','1','16217','0','3085.04','-6149.00','131.98','5.44','25','0','0','1000000','250000','0');
