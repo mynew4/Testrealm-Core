@@ -11,7 +11,7 @@ VALUES ( /*  ID */ 800072,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
- /* Name  */'Verteidiger des Wandervolkes',
+ /* Name  */'Urahne des Wandervolkes',
   /*  Subname */'Wandervolk',
   /*  Iconname */'',
   /* gossip_menu_id`  */0,
@@ -72,4 +72,4 @@ VALUES ( /*  ID */ 800072,
   
   DELETE FROM `creature` WHERE `id` = 800072;
   REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800072','800072','0','1','1','25553','0','3085.04','-6149.00','131.98','5.44','25','0','0','1000000','250000','0');
+('800072','800072','0','1','1','12051','0','3085.04','-6149.00','131.98','5.44','25','0','0','1000000','250000','0');
