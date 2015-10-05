@@ -72,4 +72,4 @@ VALUES ( /*  ID */ 800080,
   
   DELETE FROM `creature` WHERE `id` = 800080;
   REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800080','800080','0','1','1','19740','0','3085.04','-6149.00','131.98','5.44','25','0','0','1000000','250000','0');
+('800080','800080','0','1','1','19740','0','3094.93','-6133.26','201.16','0.47','25','0','0','1000000','250000','0');
