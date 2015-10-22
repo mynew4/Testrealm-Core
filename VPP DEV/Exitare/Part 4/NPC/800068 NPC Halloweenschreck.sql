@@ -70,7 +70,7 @@ VALUES ( /*  ID */ 800068,
   /*  flags_extra` */0, 
   /* Scriptname  */'');
   
-UPDATE `creature_template` SET `HealthModifier`='150', `ArmorModifier`='50', `DamageModifier`='60' WHERE `entry`='800068';
+UPDATE `creature_template` SET `HealthModifier`='150', `ArmorModifier`='20', `DamageModifier`='60' WHERE `entry`='800068';
 DELETE FROM `creature` WHERE `id` = 800068;
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
 ('800068','800068','0','1','1','21822','0','-4887.84','-2754.46','325.66','3.62','43200','5000','0','1000000','250000','1');

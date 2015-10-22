@@ -1,12 +1,12 @@
-DELETE FROM `quest_template` WHERE  `id` = 900805;
-DELETE FROM `quest_template_addon` WHERE `id` = 900805;
-DELETE FROM `creature_questender` WHERE `id` = 800084 AND `quest` = 900805;
-DELETE FROM `creature_queststarter` WHERE `id` = 800084   AND `quest` = 900805;
+DELETE FROM `quest_template` WHERE  `id` = 900301;
+DELETE FROM `quest_template_addon` WHERE `id` = 900301;
+DELETE FROM `creature_questender` WHERE `id` = 800091 AND `quest` = 900301;
+DELETE FROM `creature_queststarter` WHERE `id` = 800092   AND `quest` = 900301;
 
 
 REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestInfoID`, `SuggestedGroupNum`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `RewardNextQuest`, `RewardXPDifficulty`, `RewardMoney`, `RewardBonusMoney`, `RewardDisplaySpell`, `RewardSpell`, `RewardHonor`, `RewardKillHonor`, `StartItem`, `Flags`, `RequiredPlayerKills`, `RewardItem1`, `RewardAmount1`, `RewardItem2`, `RewardAmount2`, `RewardItem3`, `RewardAmount3`, `RewardItem4`, `RewardAmount4`, `ItemDrop1`, `ItemDropQuantity1`, `ItemDrop2`, `ItemDropQuantity2`, `ItemDrop3`, `ItemDropQuantity3`, `ItemDrop4`, `ItemDropQuantity4`, `RewardChoiceItemID1`, `RewardChoiceItemQuantity1`, `RewardChoiceItemID2`, `RewardChoiceItemQuantity2`, `RewardChoiceItemID3`, `RewardChoiceItemQuantity3`, `RewardChoiceItemID4`, `RewardChoiceItemQuantity4`, `RewardChoiceItemID5`, `RewardChoiceItemQuantity5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity6`, `POIContinent`, `POIx`, `POIy`, `POIPriority`, `RewardTitle`, `RewardTalents`, `RewardArenaPoints`, `RewardFactionID1`, `RewardFactionValue1`, `RewardFactionOverride1`, `RewardFactionID2`, `RewardFactionValue2`, `RewardFactionOverride2`, `RewardFactionID3`, `RewardFactionValue3`, `RewardFactionOverride3`, `RewardFactionID4`, `RewardFactionValue4`, `RewardFactionOverride4`, `RewardFactionID5`, `RewardFactionValue5`, `RewardFactionOverride5`, `TimeAllowed`, `AllowableRaces`, `LogTitle`, `LogDescription`, `QuestDescription`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, `RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `VerifiedBuild`) VALUES
 (
-/* Id  */ '900805', 
+/* Id  */ '900301', 
 /* TYPE  */ '2',
 /* LEVEL  */ '80',
 /* MINLevel  */ '80',
@@ -19,8 +19,8 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RequiredFactionValue2` */ '0',
 /* RewardNextQuest` */'0',
 /* RewardXPDifficulty` */ '70', 
-/* RewardMoney`  */'-10000000', 
-/* RewardBonusMoney` */'-10000000',
+/* RewardMoney`  */'10000000', 
+/* RewardBonusMoney` */'10000000',
 /* RewardDisplaySpell`  */'0',
 /* RewardSpell`  */'0',
 /* RewardHonor` */ '0',
@@ -28,8 +28,8 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* Startitem */ '0',
 /* Flags` */ '0',
 /* RequiredPlayerKills`  */'0',
-/* RewardItem1` */ '700498',
-/* RewardAmount1` */ '1',
+/* RewardItem1` */ '38186',
+/* RewardAmount1` */ '5',
 /* RewardItem2`  */'0',
 /* RewardAmount2`  */'0',
 /* RewardItem3`   */'0',
@@ -80,9 +80,9 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RewardFactionOverride5  */ '0',
 /* TimeAllowed  */ '0',
 /* AllowableRaces  */ '1791',
-/* LogTitle   */'Das Schwert',
-/* LogDescription  */ 'Bezahlt mir einen kleinen Obulus und die Sache hat sich erledigt. So als kleines "Geschenk".',
-/* QuestDescription   */'Hallo $N, seit ich beim Wandervolk aufgenommen wurde, hat sich mein Leben verbessert.',
+/* LogTitle   */'Das Portalevent',
+/* LogDescription  */ 'Macht Euch mit dem Portalevent vertraut um spaeter ueber Eure Grenzen hinauszuwachsen und grosse Erfolge zu erreichen.',
+/* QuestDescription   */'Hallo $N, damit ihr nicht ins kalte Wasser fallt, sollt ihr Euch erstmal in Ruhe mit diesem Event auseinander setzen. Erreicht das Ende um Eure Belohnung abzuholen.',
 /* QuestCompletionLog  */ 'Es ist eure Sache was ihr tut.',
 /* RequiredNpcOrGo1   */'0',
 /* RequiredNpcOrGo2`  */ '0',
@@ -113,12 +113,12 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 
 
 REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES
-( /*  ID  */900805,
+( /*  ID  */900301,
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
-  /*   PrevQuestID */ 900804,
-  /*  NextQuestID  */900806,
+  /*   PrevQuestID */ 0,
+  /*  NextQuestID  */0,
   /*  ExclusiveGroup  */ 0,
   /*   RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
@@ -132,7 +132,6 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*   SpecialFlags */ 0);
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800084, 900805);
-
+(800091, 900301);
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
-(800084, 900805);
+(800092, 900301);

@@ -7,7 +7,7 @@ VALUES ( /*  ID */ 800089,
   /*  Dif3 */0,
   /* KillCredit1  */0,
   /*  KillCredit2  */0,
-  /* Modelid  */11885,
+  /* Modelid  */7625,
   /* Modelid2  */0,
   /* Modelid3   */0,
   /* Model4  */ 0,
@@ -68,8 +68,8 @@ VALUES ( /*  ID */ 800089,
   /*  RegenHealth`` */1, 
   /*  mechanic_immune_mask` */0, 
   /*  flags_extra` */0, 
-  /* Scriptname  */'raetsel');
+  /* Scriptname  */'');
   
   DELETE FROM `creature` WHERE `id` = 800089;
   REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800089','800089','1','1','1','11885','0','7378.31','-1570.42','161.34','5.52','120','0','0','1000000','250000','0');
+('800089','800089','1','1','1','7625','0','7358.63','-1539.30','154.62','2.74','120','0','0','1000000','250000','0');
