@@ -100,7 +100,7 @@ VALUES ( /*  ID */ 800095,
   /*  flags_extra` */262144, 
   /* Scriptname  */'anna');
   
-UPDATE `creature_template` SET `HealthModifier`444, `ArmorModifier`=50, `DamageModifier`=123 WHERE `entry`=800095;
+UPDATE `creature_template` SET `HealthModifier` = 444, `ArmorModifier`=50, `DamageModifier`=123 WHERE `entry` = 800095;
 
 /* Position für den Port wäre 
 	
