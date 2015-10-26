@@ -1,12 +1,25 @@
 #include "ScriptMgr.h"
 #include "ScriptedCreature.h"
 
+
+enum Texts
+{
+	SAY_AGGRO = 0,			// Ihr seid Narren, hoffentlich habt ihr genug Klassen mitgenommen um mich zu besiegen, hahahhaaaa!
+	SAY_PHASE_1 = 1,		// Nehmt euch in Acht, meidet den Platz vor mir!
+	SAY_PHASE_2 = 2,		// Man munkelt, dass man eine gute Reinigungskraft hier benoetigt!
+	SAY_PHASE_3 = 3,		// Wer mag kuscheln? 
+	SAY_PHASE_4 = 4,		// Ich muss meine Kraft aufbewahren fuer die letzte, entscheidende Phase!
+	SAY_PHASE_5 = 5,		// Es wir langsam Zeit, das Spiel zu beenden! 
+	SAY_WIRBELWIND = 6,		// WUAHAAHAHAHAA! Lasst uns Spass haben!
+	SAY_KILL = 7,			// Ich, ich werde geraecht werden!
+	SAY_DEATH = 8,			// Es hat nicht gereicht!
+};
+
 enum Spells{
 	SPELL_HEX = 66054,							// FLUCH
-	SPELL_SHEEP = 59634,						// PENGUIN!
 	SPELL_FLUCH_DER_PEIN = 65814,				// FLUCH alle 2 Sekunden 2k Schaden 
 	SPELL_SPALTEN = 40504,						// bis zu 3 Ziele
-	SPELL_SCHATTENWORT_SCHMERZ = 65541,			// MAGIE
+	SPELL_SCHATTENWORT_SCHMERZ = 46560,			// MAGIE
 	SPELL_RUESTUNG_ZERREISSEN = 74367,			// stackbar bis 5x
 	SPELL_VERDERBNIS = 65810,					// MAGIE
 	SPELL_FLEISCH_EINAESCHERN = 66237,			// 30k muessen weggeheilt werden sonst explodiert der Spell und fuegt AOE Feuerschaden zu
@@ -19,18 +32,17 @@ enum Spells{
 
 enum Events{
 	EVENT_HEX = 1,
-	EVENT_SHEEP = 2,
-	EVENT_FLUCH_DER_PEIN = 3,
-	EVENT_SPALTEN = 4,
-	EVENT_SCHATTENWORT_SCHMERZ = 5,
-	EVENT_RUESTUNG_ZERREISSEN = 6,
-	EVENT_VERDERBNIS = 7,
-	EVENT_FLEISCH_EINAESCHERN = 8,
-	EVENT_ZAUBERSCHILD = 9,
-	EVENT_WIRBELWIND = 10,
-	EVENT_VERDERBENDE_SEUCHE = 11,
-	EVENT_WUNDGIFT = 12,
-	EVENT_HAMMER_DER_GERECHTIGKEIT = 13
+	EVENT_FLUCH_DER_PEIN = 2,
+	EVENT_SPALTEN = 3,
+	EVENT_SCHATTENWORT_SCHMERZ = 4,
+	EVENT_RUESTUNG_ZERREISSEN = 5,
+	EVENT_VERDERBNIS = 6,
+	EVENT_FLEISCH_EINAESCHERN = 7,
+	EVENT_ZAUBERSCHILD = 8,
+	EVENT_WIRBELWIND = 9,
+	EVENT_VERDERBENDE_SEUCHE = 10,
+	EVENT_WUNDGIFT = 11,
+	EVENT_HAMMER_DER_GERECHTIGKEIT = 12
 };
 
 enum Phases{
@@ -56,6 +68,8 @@ public:
 
 		void EnterCombat(Unit* /*who*/) override
 		{
+			Talk(SAY_AGGRO);
+			Talk(SAY_PHASE_1);
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 1000);
 			_events.ScheduleEvent(EVENT_SPALTEN, 10000);
@@ -65,8 +79,8 @@ public:
 		{
 			if (me->HealthBelowPctDamaged(80, damage) && _events.IsInPhase(PHASE_ONE))
 			{
+				Talk(SAY_PHASE_2);
 				_events.SetPhase(PHASE_TWO);
-				_events.ScheduleEvent(EVENT_SHEEP, 0);
 				_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 1000);
 				_events.ScheduleEvent(EVENT_SPALTEN, 8000);
 				_events.ScheduleEvent(EVENT_SCHATTENWORT_SCHMERZ, 10000);
@@ -74,6 +88,7 @@ public:
 
 			if (me->HealthBelowPctDamaged(60, damage) && _events.IsInPhase(PHASE_TWO))
 			{
+				Talk(SAY_PHASE_3);
 				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_VERDERBNIS, 500);
 				_events.ScheduleEvent(EVENT_HEX, 1000);
@@ -83,30 +98,30 @@ public:
 
 			if (me->HealthBelowPctDamaged(40, damage) && _events.IsInPhase(PHASE_THREE))
 			{
+				Talk(SAY_PHASE_4);
 				_events.SetPhase(PHASE_FOUR);
 				_events.ScheduleEvent(EVENT_HAMMER_DER_GERECHTIGKEIT, 1000);
 				_events.ScheduleEvent(EVENT_HEX, 1500);
-				_events.ScheduleEvent(EVENT_SHEEP, 2500);
 				_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 3000);
-				_events.ScheduleEvent(EVENT_FLEISCH_EINAESCHERN, 10000);
 				_events.ScheduleEvent(EVENT_SCHATTENWORT_SCHMERZ, 12000);
-				_events.ScheduleEvent(EVENT_WIRBELWIND, 15000);
 			}
 
-			if (me->HealthBelowPctDamaged(20, damage) && _events.IsInPhase(PHASE_FOUR))
+			if (me->HealthBelowPctDamaged(25, damage) && _events.IsInPhase(PHASE_FOUR))
 			{
+				Talk(SAY_PHASE_5);
 				_events.SetPhase(PHASE_FIVE);
 				_events.ScheduleEvent(EVENT_ZAUBERSCHILD, 0);
 				_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 1000);
 				_events.ScheduleEvent(EVENT_FLEISCH_EINAESCHERN, 2000);
-				_events.ScheduleEvent(EVENT_VERDERBENDE_SEUCHE, 800);
+				_events.ScheduleEvent(EVENT_VERDERBENDE_SEUCHE, 8000);
 				_events.ScheduleEvent(EVENT_WUNDGIFT, 1000);
-
+				
 			}
 		}
 
 		void JustDied(Unit* /*killer*/) override
 		{
+			Talk(SAY_KILL);
 			char msg[250];
 			snprintf(msg, 250, "|cffff0000[Boss System]|r Boss|cffff6060 Anna|r wurde getoetet! Der Respawn erfolgt in 7 Tagen.");
 			sWorld->SendGlobalText(msg, NULL);
@@ -129,13 +144,6 @@ public:
 						DoCast(target, SPELL_HEX);
 					}
 					_events.ScheduleEvent(EVENT_HEX, 16000);
-					break;
-
-				case EVENT_SHEEP:
-					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 2)){
-						DoCast(target, SPELL_SHEEP);
-					}
-					_events.ScheduleEvent(EVENT_SHEEP, 20000);
 					break;
 
 				case EVENT_FLUCH_DER_PEIN:
@@ -175,10 +183,11 @@ public:
 					break;
 
 				case EVENT_WIRBELWIND:
+					Talk(SAY_WIRBELWIND);
 					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1)){
 						DoCast(target, SPELL_WIRBELWIND);
 					}
-					_events.ScheduleEvent(EVENT_WIRBELWIND, 16000);
+					_events.ScheduleEvent(EVENT_WIRBELWIND, 32000);
 					break;
 
 				case EVENT_VERDERBENDE_SEUCHE:
