@@ -102,8 +102,11 @@ VALUES ( /*  ID */ 800095,
   
 UPDATE `creature_template` SET `HealthModifier`444, `ArmorModifier`=50, `DamageModifier`=123 WHERE `entry`=800095;
 
-/* Postition gehört angepasst, steht da wo Tolreos sein sollte, nur etwas versetzt*/
+/* Position für den Port wäre 
+	
+	pPlayer->TeleportTo(169, 3036.49, -3145.50, 92.87, 0.91);
+*/
 
 DELETE FROM `creature` WHERE `guid` = 800095;
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800095','800095','530','1','1','29791','1859','-1056.30','1283.93','448.26','5.48','14400','0','0','1000000','250000','0');
+('800095','800095','169','1','1','29791','1859','3077.28','-3097.19','99.93','3.98','14400','0','0','1000000','250000','0');
