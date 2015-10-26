@@ -7,7 +7,6 @@ enum Spells{
 	SPELL_FLUCH_DER_PEIN = 65814,				// FLUCH alle 2 Sekunden 2k Schaden 
 	SPELL_SPALTEN = 40504,						// bis zu 3 Ziele
 	SPELL_SCHATTENWORT_SCHMERZ = 65541,			// MAGIE
-	SPELL_FROSTFIEBER = 67767,					// KRANKHEIT
 	SPELL_RUESTUNG_ZERREISSEN = 74367,			// stackbar bis 5x
 	SPELL_VERDERBNIS = 65810,					// MAGIE
 	SPELL_FLEISCH_EINAESCHERN = 66237,			// 30k muessen weggeheilt werden sonst explodiert der Spell und fuegt AOE Feuerschaden zu
@@ -15,10 +14,7 @@ enum Spells{
 	SPELL_WIRBELWIND = 40219,					// 6 Sekunden Wirbelwind
 	SPELL_VERDERBENDE_SEUCHE = 60588,			// STERBT EINFACH
 	SPELL_WUNDGIFT = 65962,						// GIFT
-	SPELL_HAMMER_DER_GERECHTIGKEIT = 66613,		// STUN
-	SPELL_GOETTLICHER_STURM = 66006				// Melee AOE auf 4 Targets, Waffenschaden+Heiligschaden
-
-
+	SPELL_HAMMER_DER_GERECHTIGKEIT = 66613		// STUN
 };
 
 enum Events{
@@ -27,16 +23,14 @@ enum Events{
 	EVENT_FLUCH_DER_PEIN = 3,
 	EVENT_SPALTEN = 4,
 	EVENT_SCHATTENWORT_SCHMERZ = 5,
-	EVENT_FROSTFIEBER = 6,
-	EVENT_RUESTUNG_ZERREISSEN = 7,
-	EVENT_VERDERBNIS = 8,
-	EVENT_FLEISCH_EINAESCHERN = 9,
-	EVENT_ZAUBERSCHILD = 10,
-	EVENT_WIRBELWIND = 11,
-	EVENT_VERDERBENDE_SEUCHE = 12,
-	EVENT_WUNDGIFT = 13,
-	EVENT_HAMMER_DER_GERECHTIGKEIT = 14,
-	EVENT_GOETTLICHER_STURM = 15
+	EVENT_RUESTUNG_ZERREISSEN = 6,
+	EVENT_VERDERBNIS = 7,
+	EVENT_FLEISCH_EINAESCHERN = 8,
+	EVENT_ZAUBERSCHILD = 9,
+	EVENT_WIRBELWIND = 10,
+	EVENT_VERDERBENDE_SEUCHE = 11,
+	EVENT_WUNDGIFT = 12,
+	EVENT_HAMMER_DER_GERECHTIGKEIT = 13
 };
 
 enum Phases{
@@ -65,7 +59,6 @@ public:
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 1000);
 			_events.ScheduleEvent(EVENT_SPALTEN, 10000);
-			_events.ScheduleEvent(EVENT_FROSTFIEBER, 1000);
 		}
 
 		void DamageTaken(Unit* /*attacker*/, uint32& damage) override
@@ -73,7 +66,7 @@ public:
 			if (me->HealthBelowPctDamaged(80, damage) && _events.IsInPhase(PHASE_ONE))
 			{
 				_events.SetPhase(PHASE_TWO);
-				_events.ScheduleEvent(EVENT_HEX, 0);
+				_events.ScheduleEvent(EVENT_SHEEP, 0);
 				_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 1000);
 				_events.ScheduleEvent(EVENT_SPALTEN, 8000);
 				_events.ScheduleEvent(EVENT_SCHATTENWORT_SCHMERZ, 10000);
@@ -84,8 +77,6 @@ public:
 				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_VERDERBNIS, 500);
 				_events.ScheduleEvent(EVENT_HEX, 1000);
-				_events.ScheduleEvent(EVENT_SHEEP, 1500);
-				_events.ScheduleEvent(EVENT_FROSTFIEBER, 5000);
 				_events.ScheduleEvent(EVENT_HAMMER_DER_GERECHTIGKEIT, 20000);
 				_events.ScheduleEvent(EVENT_WIRBELWIND, 21000);
 			}
@@ -94,9 +85,9 @@ public:
 			{
 				_events.SetPhase(PHASE_FOUR);
 				_events.ScheduleEvent(EVENT_HAMMER_DER_GERECHTIGKEIT, 1000);
-				_events.ScheduleEvent(EVENT_HEX, 1000);
-				_events.ScheduleEvent(EVENT_SHEEP, 1000);
-				_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 2000);
+				_events.ScheduleEvent(EVENT_HEX, 1500);
+				_events.ScheduleEvent(EVENT_SHEEP, 2500);
+				_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 3000);
 				_events.ScheduleEvent(EVENT_FLEISCH_EINAESCHERN, 10000);
 				_events.ScheduleEvent(EVENT_SCHATTENWORT_SCHMERZ, 12000);
 				_events.ScheduleEvent(EVENT_WIRBELWIND, 15000);
@@ -110,7 +101,6 @@ public:
 				_events.ScheduleEvent(EVENT_FLEISCH_EINAESCHERN, 2000);
 				_events.ScheduleEvent(EVENT_VERDERBENDE_SEUCHE, 800);
 				_events.ScheduleEvent(EVENT_WUNDGIFT, 1000);
-				_events.ScheduleEvent(EVENT_GOETTLICHER_STURM, 15000);
 
 			}
 		}
@@ -152,7 +142,7 @@ public:
 					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0)){	
 						DoCast(target, SPELL_FLUCH_DER_PEIN);
 					}
-					_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 12000);
+					_events.ScheduleEvent(EVENT_FLUCH_DER_PEIN, 14000);
 					break;
 
 				case EVENT_SPALTEN:
@@ -167,14 +157,14 @@ public:
 
 				case EVENT_RUESTUNG_ZERREISSEN:
 					DoCastVictim(SPELL_RUESTUNG_ZERREISSEN);
-					_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 20000);
+					_events.ScheduleEvent(EVENT_RUESTUNG_ZERREISSEN, 15000);
 					break;
 
 				case EVENT_VERDERBNIS:
 					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0)){
 						DoCast(target, SPELL_VERDERBNIS);
 					}
-					_events.ScheduleEvent(EVENT_VERDERBNIS, 15000);
+					_events.ScheduleEvent(EVENT_VERDERBNIS, 17000);
 					break;
 
 				case EVENT_FLEISCH_EINAESCHERN:
@@ -188,7 +178,7 @@ public:
 					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 1)){
 						DoCast(target, SPELL_WIRBELWIND);
 					}
-					_events.ScheduleEvent(EVENT_WIRBELWIND, 30000);
+					_events.ScheduleEvent(EVENT_WIRBELWIND, 16000);
 					break;
 
 				case EVENT_VERDERBENDE_SEUCHE:
@@ -208,11 +198,6 @@ public:
 						DoCast(target, SPELL_HAMMER_DER_GERECHTIGKEIT);
 					}
 					_events.ScheduleEvent(EVENT_HAMMER_DER_GERECHTIGKEIT, 12000);
-					break;
-
-				case EVENT_GOETTLICHER_STURM:
-					DoCastVictim(SPELL_GOETTLICHER_STURM);
-					_events.ScheduleEvent(EVENT_GOETTLICHER_STURM, 20000);
 					break;
 
 				case EVENT_ZAUBERSCHILD:

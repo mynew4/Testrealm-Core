@@ -42,8 +42,8 @@ VALUES ( /*  ID */ 800095,
   /* Modelid3   */0,
   /* Model4  */ 0,
  /* Name  */'Anna',
-  /*  Subname */'',
-  /*  Iconname */'',
+  /*  Subname */'die teuflische',
+  /*  Iconname */'Attack',
   /* gossip_menu_id`  */0,
   /*  Min Level */80,
   /* Max Level  */80,
@@ -52,10 +52,10 @@ VALUES ( /*  ID */ 800095,
   /*  npcflag Was ist er Questgeber oder weiteres? */0,
   /*  Speedwalk */2,
  /*  speedrun */ 2.14286,
-  /*  scale */3,
+  /*  scale */1.5,
   /*  rank  Normal, Elite?*/3,
   /*  dmgschool Normal Holy Fire? */0,
-  /* BaseAttackTime`  */1000,
+  /* BaseAttackTime`  */7000,
   /* RangeAttackTime`  */2000,
   /*  Welche Klasse? Krieger Pala, also Mana oder kein MAna? */0,
   /*  unit flag */0,
@@ -109,4 +109,6 @@ UPDATE `creature_template` SET `HealthModifier` = 444, `ArmorModifier`=50, `Dama
 
 DELETE FROM `creature` WHERE `guid` = 800095;
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800095','800095','169','1','1','29791','1859','3077.28','-3097.19','99.93','3.98','14400','0','0','1000000','250000','0');
+('800095','800095','169','1','1','29791','367','3077.28','-3097.19','99.93','3.98','14400','0','0','1000000','250000','0');
+
+REPLACE INTO `creature_equip_template` (`entry`, `id`, `itemEntry1`, `itemEntry2`, `itemEntry3`) VALUES ('800095', '1', '50731', '1859', '0');
