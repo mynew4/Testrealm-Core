@@ -178,7 +178,7 @@ public:
 				case EVENT_EARTH:
 					Talk(SAY_ENRAGE);
 					if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO, 0)){
-						DoCastAOE(SPELL_EARTH);
+						DoCast(target, SPELL_EARTH);
 					}
 					_events.ScheduleEvent(EVENT_EARTH, 10000);
 					break;
