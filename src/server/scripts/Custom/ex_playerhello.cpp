@@ -35,12 +35,18 @@ public:
 	{
 		std::ostringstream ss;
 		
-		
-		if (player->GetTotalPlayedTime() < 5)
-		{
+		uint32 guid = player->GetGUID();
 
-			ss << "|cff54b5ffWir heissen unseren neuen Mitspieler|r " << ChatHandler(player->GetSession()).GetNameLink() << " |cff54b5ff willkommen!|r";
+		QueryResult accountres = CharacterDatabase.PQuery("SELECT account FROM characters WHERE guid = %u", guid);
+		uint32 accountresint = (*accountres)[0].GetUInt32();
+		QueryResult charresult = CharacterDatabase.PQuery("Select count(guid) From characters where account = '%u'", accountresint);
+		uint32 charresultint = (*charresult)[0].GetUInt32();
+		
+		if (player->GetTotalPlayedTime() < 1 && charresultint == 1)
+		{
+			ss << "|cff54b5ffWir heissen unseren neuesten Mitspieler|r " << ChatHandler(player->GetSession()).GetNameLink() << " |cff54b5ff auf MMOwning willkommen!|r";
 			sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
+			sWorld->SendGMText(LANG_GM_BROADCAST,"Ein neuer Spieler ist auf MMO online gegangen.");
 			return;
 		}
 		else

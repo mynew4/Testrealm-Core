@@ -80,7 +80,7 @@ public: seruc() : CreatureScript("seruc"){ }
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Moon [25-40]", GOSSIP_SENDER_MAIN, 10);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Maltyriun [5-10]", GOSSIP_SENDER_MAIN, 11);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: LORDofDOOM [7-15]", GOSSIP_SENDER_MAIN, 12);
-				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Tyranium [5-10]", GOSSIP_SENDER_MAIN, 14);
+				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Eonar [5-10]", GOSSIP_SENDER_MAIN, 14);
 				pPlayer->ADD_GOSSIP_ITEM(7, "Boss: Tolreos [5-10]", GOSSIP_SENDER_MAIN, 16);
 				pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 				return true;
@@ -122,7 +122,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*ORRIG*/
 				case 4: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0, -12556.57,-1366.97,41.56,1.024);
+					pPlayer->TeleportTo(169, -2902.55,-1259.97,121.88,3.28);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 
@@ -134,7 +134,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*EXI*/
 				case 5: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0, -7440.66,-2029.63,313.72,6.28);
+					pPlayer->TeleportTo(169, -480.42,3326.65,286.07, 4.69);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -146,7 +146,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*GEQUÄLTE*/
 				case 6: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0,-12978.69, -1774.43, 137.11,3.5);
+					pPlayer->TeleportTo(169, -250.27, 3081.07, 96.45,3.10);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -155,7 +155,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*KAYOULA*/
 				case 7: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(530, -2793.37,493.29,-25.33,0.42);
+					pPlayer->TeleportTo(169, -1221.52, -2432.34, 112.95, 1.00);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -165,7 +165,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*Theriakin*/
 				case 8: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(1, -8041.57, 1603.90, 14.58,3.19);
+					pPlayer->TeleportTo(169, 3617.89, 4050.67, 92.00,3.50);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -175,7 +175,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*ARC*/
 				case 9: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(571,2973.87,-5825.54,262.95,1.6);
+					pPlayer->TeleportTo(169, -1743.87, -854.50 ,121.70,2.06);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -185,7 +185,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						/*MOON*/
 				case 10: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0,-12474.73,-2688.13,89.61,3.05);
+					pPlayer->TeleportTo(169,-2872.38,-1386.17,118.51,2.60);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -194,7 +194,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						 /*MALTYRIUN*/
 				case 11: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0,-11764.75,-3560.32,86.50,5.31);
+					pPlayer->TeleportTo(169,-4385.68,-754.82,120.89,0.63);
 					return true;
 				}break;
 
@@ -204,7 +204,7 @@ public: seruc() : CreatureScript("seruc"){ }
 						 /*LORDOFDOOM*/
 				case 12: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0,-6362.47,-2324.61,390.93,0.55);
+					pPlayer->TeleportTo(169, -2710.73, -2722.46,127.87,0.42);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -223,7 +223,7 @@ public: seruc() : CreatureScript("seruc"){ }
 					/*Tyranium*/
 				case 14: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(0, -4698.80, -2045.90, 521.12, 1.4);
+					pPlayer->TeleportTo(169, -4367.24, -1477.58, 92.00, 0.21);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;
@@ -231,7 +231,7 @@ public: seruc() : CreatureScript("seruc"){ }
 					/*Tolreos*/
 				case 16: {
 					pPlayer->GetGUID();
-					pPlayer->TeleportTo(530, -1281.67, 1375.05, 6.75, 1.04);
+					pPlayer->TeleportTo(169, -3655.76, -1052.01, 126.75, 3.38);
 					pPlayer->ModifyMoney(-200000);
 					return true;
 				}break;

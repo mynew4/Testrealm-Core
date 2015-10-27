@@ -62,10 +62,12 @@ public:
 	{
 		orrigAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
 
+		uint32 kills = 0;
 		void Reset() override
 		{
 			_events.Reset();
 			Summons.DespawnAll();
+			
 		}
 
 		void EnterCombat(Unit* /*who*/) override
@@ -122,6 +124,18 @@ public:
 			sWorld->SendGlobalText(msg, NULL);
 		}
 
+
+		void KilledUnit(Unit* victim) override
+		{
+			
+			if (victim->GetTypeId() != TYPEID_PLAYER)
+				return;
+			char msg[250];
+			
+			++kills;
+			snprintf(msg, 250, "|cffff0000[Boss System]|r |cffff6060 Orrig|r hat einen Spieler getoetet! Was fuer eine Schmach. Insgesamt steht der Killcounter seit dem letzten Restart bei: %u", kills);
+			sWorld->SendGlobalText(msg, NULL);
+		}
 		
 
 		void UpdateAI(uint32 diff) override
@@ -147,7 +161,9 @@ public:
 					DoCast(SPELL_ENRAGE);
 					break;
 				case EVENT_BLIZZARD:
-					DoCastVictim(SPELL_BLIZZARD);
+					if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0)){
+						DoCastVictim(SPELL_BLIZZARD);
+					}
 					_events.ScheduleEvent(EVENT_BLIZZARD, 15000);
 					break;
 				case EVENT_POISON_SHOCK:

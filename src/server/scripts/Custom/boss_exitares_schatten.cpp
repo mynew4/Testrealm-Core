@@ -11,11 +11,11 @@ enum Spells
 	SPELL_RAIN_OF_FIRE = 59971,
 	SPELL_FLAME_BURST = 41131,
 	SPELL_ARCANE_BOMB = 56431,
-	SPELL_LIGHT_VORTEX = 66046,
 	SPELL_MOONFIRE = 48463,
-	SPELL_SPALTEN = 20691,
+	SPELL_SPALTEN = 56909,
 	SPELL_SARGERAS = 28342,
-	SPELL_BURN = 46218
+	SPELL_BURN = 46218,
+	SPELL_FLAME_BREATH = 56908
 };
 
 enum Events
@@ -26,11 +26,11 @@ enum Events
 	EVENT_RAIN_OF_FIRE = 4,
 	EVENT_FLAME_BURST = 5,
 	EVENT_ARCANE_BOMB = 6,
-	EVENT_LIGHT_VORTEX = 7,
 	EVENT_MOONFIRE = 8,
 	EVENT_SUMMONS = 9,
 	EVENT_SPALTEN= 10,
-	EVENT_BURN = 11
+	EVENT_BURN = 11,
+	EVENT_BREATH = 12
 
 
 };
@@ -78,8 +78,8 @@ public:
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_TOXIC_WASTE, 20000);
 			_events.ScheduleEvent(EVENT_POISON_NOVA, 40000);
-			_events.ScheduleEvent(EVENT_MOONFIRE, 8000);
-			_events.ScheduleEvent(EVENT_SPALTEN, 15000);
+			_events.ScheduleEvent(EVENT_SPALTEN, 30000);
+			_events.ScheduleEvent(EVENT_BREATH, 35000);
 
 		}
 
@@ -88,10 +88,9 @@ public:
 			if (me->HealthBelowPctDamaged(75, damage) && _events.IsInPhase(PHASE_ONE))
 			{
 				_events.SetPhase(PHASE_TWO);
-				_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 60000);
 				_events.ScheduleEvent(EVENT_RAIN_OF_FIRE, 8000);
 				_events.ScheduleEvent(EVENT_FLAME_BURST, 12000);
-				_events.ScheduleEvent(EVENT_BURN, 25000);
+				_events.ScheduleEvent(EVENT_BREATH, 35000);
 				_events.ScheduleEvent(EVENT_SUMMONS, 45000);
 
 			}
@@ -99,11 +98,10 @@ public:
 			if (me->HealthBelowPctDamaged(35, damage) && _events.IsInPhase(PHASE_TWO))
 			{
 				_events.SetPhase(PHASE_THREE);
-				_events.ScheduleEvent(EVENT_ARCANE_BOMB, 5000);
 				_events.ScheduleEvent(EVENT_POISON_NOVA, 60000);
 				_events.ScheduleEvent(EVENT_TOXIC_WASTE, 45000);
-				_events.ScheduleEvent(EVENT_ENRAGE, 120000);
-				_events.ScheduleEvent(EVENT_SPALTEN, 12000);
+				_events.ScheduleEvent(EVENT_ENRAGE, 440000);
+				_events.ScheduleEvent(EVENT_SPALTEN, 30000);
 			}
 		}
 
@@ -115,7 +113,7 @@ public:
 			{
 			case NPC_PUSTELIGER_SCHRECKEN:
 				if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 300.0f))
-					summon->AI()->AttackStart(target); // I think it means the Tank !
+					summon->AI()->AttackStart(target); 
 				break;
 			}
 		}
@@ -143,6 +141,7 @@ public:
 				{
 				case EVENT_POISON_NOVA:
 					DoCastAOE(SPELL_POISON_NOVA);
+					_events.ScheduleEvent(EVENT_TOXIC_WASTE, 30000);
 					break;
 				case EVENT_TOXIC_WASTE:
 					DoCastToAllHostilePlayers(SPELL_TOXIC_WASTE);
@@ -153,8 +152,9 @@ public:
 					DoCast(SPELL_ENRAGE);
 					break;
 				case EVENT_RAIN_OF_FIRE:
+					me->FinishSpell(CURRENT_CHANNELED_SPELL, true);
 					DoCastToAllHostilePlayers(SPELL_RAIN_OF_FIRE);
-					_events.ScheduleEvent(EVENT_RAIN_OF_FIRE, 15000);
+					_events.ScheduleEvent(EVENT_RAIN_OF_FIRE, 10000);
 					break;
 				case EVENT_FLAME_BURST:
 					Talk(SAY_BERSERK);
@@ -171,27 +171,23 @@ public:
 				case EVENT_ARCANE_BOMB:
 					Talk(SAY_ENRAGE);
 					DoCastToAllHostilePlayers(SPELL_ARCANE_BOMB);
-					_events.ScheduleEvent(EVENT_ARCANE_BOMB, 10000);
-					break;
-				case EVENT_LIGHT_VORTEX:
-					DoCastAOE(SPELL_LIGHT_VORTEX, false);
-					_events.ScheduleEvent(EVENT_LIGHT_VORTEX, 45000);
-					break;
-				case EVENT_MOONFIRE:
-					DoCastToAllHostilePlayers(SPELL_MOONFIRE);
-					_events.ScheduleEvent(EVENT_MOONFIRE, 10000);
+					_events.ScheduleEvent(EVENT_ARCANE_BOMB, 15000);
 					break;
 				case EVENT_SPALTEN:
 					DoCastToAllHostilePlayers(SPELL_SPALTEN);
-					_events.ScheduleEvent(EVENT_SPALTEN, 20000);
+					_events.ScheduleEvent(EVENT_SPALTEN, 30000);
 					break;
-				case SPELL_BURN:
-					me->SelectNearestTarget(2.5f);
+				case EVENT_BURN:
 					DoCastVictim(SPELL_BURN);
-					_events.ScheduleEvent(SPELL_BURN, 5000);
+					_events.ScheduleEvent(EVENT_BURN, 5000);
 					break;
-
-
+				case EVENT_BREATH:
+					if (Unit* target = SelectTarget(SELECT_TARGET_TOPAGGRO,0)){
+						DoCast(target,SPELL_FLAME_BREATH);
+					}
+					
+					_events.ScheduleEvent(EVENT_BREATH, 35000);
+					break;
 
 				default:
 					break;

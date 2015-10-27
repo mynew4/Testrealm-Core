@@ -13,7 +13,6 @@
 set(scripts_STAT_SRCS
   Custom/npc_vip.cpp 
   Custom/cs_fake.cpp  
-  Custom/cs_worldchannel.cpp  
   Custom/Congrats_on_Level.cpp
   Custom/firstnpc.cpp
   Custom/serucporter.cpp
@@ -37,6 +36,8 @@ set(scripts_STAT_SRCS
   Custom/halloween.cpp 
   Custom/wandervolk.cpp
   Custom/teleportitem.cpp
+  Custom/leandaria.cpp
+  Custom/raetsel.cpp
   ${scripts_STAT_SRCS}
 #  ${sources_Custom}
   Custom/Transmog/Transmogrification.h

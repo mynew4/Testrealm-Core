@@ -89,7 +89,7 @@ void AddSC_npc_teleport();
 // Fake Players
 void AddSC_fake_commandscript();
 // WorldChat
-void AddSC_cs_world_chat();
+//void AddSC_cs_world_chat();
 // Congrats on Level
 void AddSC_custom_CongratsOnLevel();
 //welcome_npc
@@ -132,7 +132,10 @@ void AddSC_halloween();
 void AddSC_port_item();
 //wandervolk
 void AddSC_wandervolk();
-
+//leandaria
+void AddSC_leandaria();
+//raetsel
+void AddSC_raetsel();
 
 #ifdef SCRIPTS
 //world
@@ -837,7 +840,7 @@ void AddCommandScripts()
     // Fake Players
     AddSC_fake_commandscript();		
 	//WorldChat
-	AddSC_cs_world_chat();	
+	//AddSC_cs_world_chat();	
     // Congrats on Level
     AddSC_custom_CongratsOnLevel();	
 	//firstnpc
@@ -880,6 +883,10 @@ void AddCommandScripts()
 	AddSC_port_item();
 	//wandervolk
 	AddSC_wandervolk();
+	//leandaria
+	AddSC_leandaria();
+	//raetsel
+	AddSC_raetsel();
 }
 
 void AddWorldScripts()
