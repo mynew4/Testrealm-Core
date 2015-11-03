@@ -1,16 +1,16 @@
-DELETE FROM `quest_template` WHERE  `id` = 800551;
-DELETE FROM `quest_template_addon` WHERE `id` = 800551;
-DELETE FROM `creature_questender` WHERE `id` = 800073 AND `quest` = 800551;
-DELETE FROM `creature_queststarter` WHERE `id` = 800073   AND `quest` = 800551;
+DELETE FROM `quest_template` WHERE  `id` = 800555;
+DELETE FROM `quest_template_addon` WHERE `id` = 800555;
+DELETE FROM `creature_questender` WHERE `id` = 800073 AND `quest` = 800555;
+DELETE FROM `creature_queststarter` WHERE `id` = 800073   AND `quest` = 800555;
 
 
 REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestInfoID`, `SuggestedGroupNum`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `RewardNextQuest`, `RewardXPDifficulty`, `RewardMoney`, `RewardBonusMoney`, `RewardDisplaySpell`, `RewardSpell`, `RewardHonor`, `RewardKillHonor`, `StartItem`, `Flags`, `RequiredPlayerKills`, `RewardItem1`, `RewardAmount1`, `RewardItem2`, `RewardAmount2`, `RewardItem3`, `RewardAmount3`, `RewardItem4`, `RewardAmount4`, `ItemDrop1`, `ItemDropQuantity1`, `ItemDrop2`, `ItemDropQuantity2`, `ItemDrop3`, `ItemDropQuantity3`, `ItemDrop4`, `ItemDropQuantity4`, `RewardChoiceItemID1`, `RewardChoiceItemQuantity1`, `RewardChoiceItemID2`, `RewardChoiceItemQuantity2`, `RewardChoiceItemID3`, `RewardChoiceItemQuantity3`, `RewardChoiceItemID4`, `RewardChoiceItemQuantity4`, `RewardChoiceItemID5`, `RewardChoiceItemQuantity5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity6`, `POIContinent`, `POIx`, `POIy`, `POIPriority`, `RewardTitle`, `RewardTalents`, `RewardArenaPoints`, `RewardFactionID1`, `RewardFactionValue1`, `RewardFactionOverride1`, `RewardFactionID2`, `RewardFactionValue2`, `RewardFactionOverride2`, `RewardFactionID3`, `RewardFactionValue3`, `RewardFactionOverride3`, `RewardFactionID4`, `RewardFactionValue4`, `RewardFactionOverride4`, `RewardFactionID5`, `RewardFactionValue5`, `RewardFactionOverride5`, `TimeAllowed`, `AllowableRaces`, `LogTitle`, `LogDescription`, `QuestDescription`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, `RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `VerifiedBuild`) VALUES
 (
-/* Id  */ '800551', 
+/* Id  */ '800555', 
 /* TYPE  */ '2',
 /* LEVEL  */ '80',
 /* MINLevel  */ '80',
-/* QuestSortID`  */'-1',
+/* QuestSortID`  */'-22',
 /* QuestInfoID`  */ '0',
 /* SuggestedGroupNum`  */ '0',
 /* RequiredFactionId1`  */'0',
@@ -80,9 +80,9 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RewardFactionOverride5  */ '0',
 /* TimeAllowed  */ '0',
 /* AllowableRaces  */ '1791',
-/* LogTitle   */'Die Waffen der Unterstuetzer',
-/* LogDescription  */ 'Bringt mir die Waffen und ihr erhaltet Abzeichen von Darkshadow.',
-/* QuestDescription   */'Hallo $N, die Waffen sind mein Lebenselixier. Ich bin ein verruckter Sammler. ',
+/* LogTitle   */'Die Waffen',
+/* LogDescription  */ 'Bringt mir 30 Waffen der Unterstuetzer.',
+/* QuestDescription   */'Hallo $N, ich moechte diese Waffen haben. Bringt mir 30 Stueck und ihr bekommt 1 Abzeichen von Darkshadow.',
 /* QuestCompletionLog  */ 'Es ist eure Sache was ihr tut.',
 /* RequiredNpcOrGo1   */'0',
 /* RequiredNpcOrGo2`  */ '0',
@@ -98,7 +98,7 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RequiredItemId4`   */'0',
 /* RequiredItemId5`  */ '0',
 /* RequiredItemId6`  */ '0',
-/* RequiredItemCount1   */'0',
+/* RequiredItemCount1   */'30',
 /* RequiredItemCount2`  */ '0',
 /* RequiredItemCount3`  */ '0',
 /* RequiredItemCount4`   */'0',
@@ -113,7 +113,7 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 
 
 REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES
-( /*  ID  */800551,
+( /*  ID  */800555,
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
@@ -132,7 +132,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*   SpecialFlags */ 0);
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800073, 800551);
+(800073, 800555);
 
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
-(800073, 800551);
+(800073, 800555);

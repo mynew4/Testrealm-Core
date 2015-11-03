@@ -42,7 +42,7 @@ VALUES ( /*  ID */ 800095,
   /* Modelid3   */0,
   /* Model4  */ 0,
  /* Name  */'Anna',
-  /*  Subname */'Die toedlichst Liebevolle',
+  /*  Subname */'die teuflische',
   /*  Iconname */'Attack',
   /* gossip_menu_id`  */0,
   /*  Min Level */80,
@@ -96,11 +96,11 @@ VALUES ( /*  ID */ 800095,
   /* Racial Leader  */0,
  /* movement id  */ 0, 
   /*  RegenHealth`` */1, 
-  /*  mechanic_immune_mask` */936328615, 
+  /*  mechanic_immune_mask` */13613872, 
   /*  flags_extra` */262144, 
   /* Scriptname  */'anna');
   
-UPDATE `creature_template` SET `HealthModifier` = 400, `ArmorModifier`=50, `DamageModifier`=20 WHERE `entry` = 800095;
+UPDATE `creature_template` SET `HealthModifier` = 444, `ArmorModifier`=50, `DamageModifier`=123 WHERE `entry` = 800095;
 
 /* Position für den Port wäre 
 	
@@ -109,23 +109,7 @@ UPDATE `creature_template` SET `HealthModifier` = 400, `ArmorModifier`=50, `Dama
 
 DELETE FROM `creature` WHERE `guid` = 800095;
 REPLACE INTO `creature` (`guid`,`id`,`map`,`spawnMask`,`phaseMask`,`modelid`,`equipment_id`,`position_x`,`position_y`,`position_z`,`orientation`,`spawntimesecs`,`spawndist`,`currentwaypoint`,`curhealth`,`curmana`,`MovementType`) VALUES 
-('800095','800095','169','1','1','29791','0','3077.28','-3097.19','99.93','3.98','14400','0','0','1000000','250000','0');
+('800095','800095','169','1','1','29791','367','3077.28','-3097.19','99.93','3.98','14400','0','0','1000000','250000','0');
 
-
-DELETE FROM `creature_equip_template` WHERE `CreatureID` = 800095;
-
-/* ItemID1 = rechts, ItemID2 = links, ItemID3 = range weapon*/ 
-REPLACE INTO `creature_equip_template` (`CreatureID`, `id`, `ItemID1`, `ItemID2`, `ItemID3`) VALUES ('800095', '1', '50731', '0', '0');
-
-
-
-DELETE FROM `creature_text` WHERE `entry`=800095;
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '0', 'Ihr seid Narren, hoffentlich habt ihr genug Klassen mitgenommen um mich zu besiegen, hahahhaaaa!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '1', 'Nehmt euch in Acht, meidet den Platz vor mir!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '2', 'Man munkelt, dass man eine gute Reinigungskraft hier benoetigt!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '3', 'Wer mag kuscheln? ', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '4', 'Ich muss meine Kraft aufbewahren fuer die letzte, entscheidende Phase!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '5', 'Es wir langsam Zeit, das Spiel zu beenden!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '6', 'WUAHAAHAHAHAA! Lasst uns Spass haben!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '7', 'Ich, ich werde geraecht werden!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
-INSERT INTO `creature_text` (`entry`, `groupid`, `id`, `text`, `type`, `language`, `probability`, `emote`, `duration`, `sound`, `BroadcastTextId`, `TextRange`, `comment`) VALUES ('800095', '0', '8', 'Es hat nicht gereicht!', '14', '0', '0', '0', '0', '0', '0', '0', 'Boss Anna');
+DELETE FROM `creature_equip_template` where `CreatureID` = 800095;
+REPLACE INTO `creature_equip_template` (`CreatureID`, `id`, `ItemID1`, `ItemID2`, `ItemID3`) VALUES ('800095', '1', '50731', '1859', '0');
