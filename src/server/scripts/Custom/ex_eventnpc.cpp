@@ -45,10 +45,13 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 		
 			pPlayer->ADD_GOSSIP_ITEM(7, "Was tut dieser NPC?", GOSSIP_SENDER_MAIN, 0);
 			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Weihnachtsevent. Informationen folgen bald.", GOSSIP_SENDER_MAIN, 1);
-			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Halloweenevent. 21.10. - 11.11.", GOSSIP_SENDER_MAIN, 2);
+			pPlayer->ADD_GOSSIP_ITEM(7, "MMOwning Halloweenevent", GOSSIP_SENDER_MAIN, 2);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Das Wandervolk", GOSSIP_SENDER_MAIN, 3);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Jumpevent", GOSSIP_SENDER_MAIN, 4);
 			pPlayer->ADD_GOSSIP_ITEM(7, "Das Portal", GOSSIP_SENDER_MAIN, 5);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Neujahrsevent", GOSSIP_SENDER_MAIN, 6);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Chopper", GOSSIP_SENDER_MAIN, 7);
+
 			pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 			return true;
 		}
@@ -96,7 +99,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					bool active = ae.find(71) != ae.end();
 					if (active == true){
 						pPlayer->GetGUID();
-						pPlayer->TeleportTo(0, -9741.38, 1258.66, 11.31, 5.93);
+						pPlayer->TeleportTo(0, -9739.81, 2162.37, 9.36, 5.72);
 						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Viel Spass beim Halloweenevent wuenscht dir Exitare und das gesammte MMOwning Team.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
@@ -183,6 +186,65 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					}
 					return true;
 				}break;
+
+
+				//Neujahrsevent
+				case 6:
+				{
+					GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
+					bool active = ae.find(75) != ae.end();
+					if (active == true && pPlayer->getLevel() == 1){
+						pPlayer->GetGUID();
+						pPlayer->TeleportTo(1, -8455.62, -1321.31, 8.87, 3.29);
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+
+					if (pPlayer->getLevel() > 1){
+						pPlayer->GetSession()->SendNotification("Du bist nicht Level 1.");
+					}
+
+					else{
+						pPlayer->GetGUID();
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event 'Neujahrsevent' ist ab 1.01. verfuegbar.  Aktuell ist es nicht aktiv.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+					return true;
+				}break;
+
+
+				//Neujahrsevent
+				case 7:
+				{
+					GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
+					bool active = ae.find(76) != ae.end();
+					if (active == true && pPlayer->getLevel() == 1){
+						pPlayer->GetGUID();
+						pPlayer->TeleportTo(0, 2075.54, 2392.44, 131.25, 3.12);
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+
+					if (pPlayer->getLevel() > 1){
+						pPlayer->GetSession()->SendNotification("Du bist nicht Level 1.");
+					}
+
+					else{
+						pPlayer->GetGUID();
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Chopperevent wird von dem Event-Team manuell gestartet. Informiert Euch bei diesen.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+					return true;
+				}break;
+
 
 					return true;
 			}

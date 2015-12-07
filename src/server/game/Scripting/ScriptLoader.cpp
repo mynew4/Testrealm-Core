@@ -132,10 +132,17 @@ void AddSC_halloween();
 void AddSC_port_item();
 //wandervolk
 void AddSC_wandervolk();
-//leandaria
-void AddSC_leandaria();
-//raetsel
-void AddSC_raetsel();
+//commands
+void AddSC_ex_commands();
+
+//Neujahrsevent
+void AddSC_neujahrsevent();
+
+//Therakin
+void AddSC_therakin();
+
+//gildenhausvendor
+void AddSC_gildenvendor();
 
 #ifdef SCRIPTS
 //world
@@ -884,10 +891,19 @@ void AddCommandScripts()
 	//wandervolk
 	AddSC_wandervolk();
 	//leandaria
-	AddSC_leandaria();
+	//AddSC_leandaria();
 	//raetsel
-	AddSC_raetsel();
+	//AddSC_raetsel();
+	AddSC_ex_commands();
+	//Neujahrsevent
+	AddSC_neujahrsevent();
+	//boss therakin
+	AddSC_therakin();
+
+	//gildenhausvendor
+	AddSC_gildenvendor();
 }
+
 
 void AddWorldScripts()
 {

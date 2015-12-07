@@ -141,7 +141,7 @@ public:
 
 			if (me->HealthBelowPctDamaged(35, damage) && _events.IsInPhase(PHASE_TWO))
 			{
-				me->Yell("Werdet verschart in nassem Sand. Habt Exi`s Spieluhr in der Hand.", LANG_UNIVERSAL, nullptr);
+				me->Yell("Werdet verschart in nassem Sand. Habt eine Spieluhr in der Hand.", LANG_UNIVERSAL, nullptr);
 				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_ARMY_OF_DEAD, 5000);
 				_events.ScheduleEvent(EVENT_CURRUPTION, 6000);
@@ -157,8 +157,9 @@ public:
 			char msg[250];
 			snprintf(msg, 250, "|cffff0000[Boss System]|r Boss|cffff6060 Tolreos|r wurde getoetet! Respawn in 5h.");
 			sWorld->SendGlobalText(msg, NULL);
+			Summons.DespawnAll();
 		}
-
+		 
 		void KilledUnit(Unit* victim) override
 		{
 			kills++;
@@ -228,7 +229,7 @@ public:
 					_events.ScheduleEvent(EVENT_ARCANE_DEVASTION, 12000);
 					break;
 				case EVENT_ARMY_OF_DEAD:
-					me->Yell("Hilfe meine Diener. Kommt mir zur Hilfe!", LANG_UNIVERSAL, nullptr);
+					me->Yell("Kommt mir zur Hilfe!", LANG_UNIVERSAL, nullptr);
 					DoCastToAllHostilePlayers(SPELL_ARMY_OF_DEAD);
 					_events.ScheduleEvent(EVENT_ARMY_OF_DEAD, 20000);
 					break;
@@ -276,7 +277,7 @@ public:
 
 		void EnterCombat(Unit*) override
 		{
-			me->Yell("In 30 Sekunden seid ihr Tod Abschaum", LANG_UNIVERSAL, nullptr);
+			me->Yell("In 30 Sekunden seid ihr Tod Abschaum!", LANG_UNIVERSAL, nullptr);
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_SCHATTENFALLE, 30000);
 			

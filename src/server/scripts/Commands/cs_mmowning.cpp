@@ -25,10 +25,19 @@
 #include "SpellAuras.h"
 #include "World.h"
 
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <random>
+#include <algorithm>
+
 #include "ScriptMgr.h"
 #include "ObjectMgr.h"
 #include "Chat.h"
 #include "SocialMgr.h"
+
+
+
 
 class mmowning_commandscript : public CommandScript
 {
@@ -54,7 +63,10 @@ public:
 			//GuildHouse Tele
 			{ "gh",             SEC_PLAYER,      	false, &HandleGHCommand,				"", NULL },	
 			//insel
-			{ "insel",			SEC_PLAYER,			false, &HandleInselCommand,				"", NULL },
+			{ "tester",		SEC_ADMINISTRATOR,	false, &HandleInselCommand,				"", NULL },
+
+			{ "gutschein",			SEC_PLAYER,			false, &HandleGutscheinCommand, "", NULL },
+
 			//{ "tcrecon",        SEC_MODERATOR,      false, &HandleIRCRelogCommand,            "", NULL },	
 			{ NULL,             0,                  false,  NULL,                            "", NULL }
         };
@@ -88,9 +100,9 @@ static bool HandleGambleCommand(ChatHandler* handler, const char* args)
              //if (rand()%100 < 50)
 			 if (rand()%100 < 40)
              {
-				  chr->ModifyMoney(money);	
+				  chr->ModifyMoney(money-(money/10));	
                   //chr->ModifyMoney(money*2);
-                  handler->PSendSysMessage("Du hast gewonnen und einen Einsatz verdoppelt");
+                  handler->PSendSysMessage("Du hast gewonnen und deinen Einsatz verdoppelt");
              }
              else
              {
@@ -130,6 +142,7 @@ static bool HandleRouletteCommand(ChatHandler* handler, const char* args)
                   chr->ModifyMoney(money*36);
                   handler->PSendSysMessage("Du hast das 36x deines Einsatzes gewonnen, GZ!");
              }
+
              else
              {
                   chr->ModifyMoney(-int(money));
@@ -160,8 +173,8 @@ static bool HandleMallCommand(ChatHandler* handler, const char* /*args*/)
         //SetSentErrorMessage(true);
         return false;
         }
-
-        chr->ResurrectPlayer(0.5, false);
+        //Comment because of using it afk killing and buy Things at Vendor
+        //chr->ResurrectPlayer(0.5, false);
 
         switch(chr->GetTeam())
    {
@@ -206,7 +219,7 @@ static bool HandleDalaCommand(ChatHandler* handler, const char* /*args*/)
 //Buffer
 static bool HandleBuffsCommand(ChatHandler* handler, const char* /*args*/)              
 {
-                                Player *chr = handler->GetSession()->GetPlayer();
+        Player *chr = handler->GetSession()->GetPlayer();
                                 
         if (chr->IsInCombat())
         {
@@ -310,6 +323,77 @@ static bool HandleInselCommand(ChatHandler* handler, const char* args)
 }
 
 
+
+
+static bool HandleGutscheinCommand(ChatHandler* handler, const char* args)
+	{
+		Player *player = handler->GetSession()->GetPlayer();
+		
+		std::string itemCode = std::string((char*)args);
+
+		if (itemCode == "")
+		{
+			player->GetSession()->SendNotification("Ohne Code geht das leider nicht!");
+			return true;
+		}
+
+		if (itemCode == "Gutschein"){
+			return true;
+		}
+		
+
+
+		QueryResult result = WorldDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt` FROM `item_codes` WHERE `code` = '%s'", itemCode);
+
+
+
+		if (result)
+		{
+			
+			Field* fields = result->Fetch();
+			std::string code = fields[0].GetCString();
+			uint32 belohnung = fields[1].GetUInt32();
+			uint32 anzahl = fields[2].GetUInt32();
+			uint8 benutzt = fields[3].GetUInt8();
+
+			if (benutzt == 0)
+			{
+			Item* item = Item::CreateItem(belohnung, anzahl);
+			player->GetSession()->SendNotification("Dein Code wurde akzeptiert!");
+			SQLTransaction trans = CharacterDatabase.BeginTransaction();
+			item->SaveToDB(trans);
+			MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
+			.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+			CharacterDatabase.CommitTransaction(trans);
+
+			WorldDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
+			WorldDatabase.PExecute("UPDATE item_codes SET benutzt = 1 WHERE code = '%s'", itemCode);
+
+			char msg[250];
+			snprintf(msg, 250, "Dein Code wurde akzeptiert.");
+			ChatHandler(player->GetSession()).PSendSysMessage(msg,
+				player->GetName());
+			return true;
+
+		}
+		else{
+				char msg[250];
+				snprintf(msg, 250, "Dein Code wurde bereits verwendet.");
+				ChatHandler(player->GetSession()).PSendSysMessage(msg,
+			player->GetName());
+				return true;
+		}
+
+	}
+			else{
+				char msg[250];
+				snprintf(msg, 250, "Der eingegebene Code exisitert nicht.");
+				ChatHandler(player->GetSession()).PSendSysMessage(msg,
+				player->GetName());
+				return true;
+			}
+		return true;
+	}
 
 
 };

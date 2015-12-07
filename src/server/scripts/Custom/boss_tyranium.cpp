@@ -48,8 +48,7 @@ enum Phases
 
 enum Summons
 {
-	NPC_ADD = 800094,
-	NPC_
+	NPC_ADD = 800094
 };
 
 enum Texts
@@ -63,6 +62,7 @@ enum Texts
 };
 
 uint32 kills = 0;
+
 
 class tyranium : public CreatureScript
 {
@@ -83,11 +83,11 @@ public:
 			me->SetObjectScale(1);
 			me->SetArmor(20);
 			
+			
 		}
 
 		void EnterCombat(Unit* /*who*/) override
 		{
-			Talk(SAY_AGGRO);
 			_events.SetPhase(PHASE_ONE);
 			_events.ScheduleEvent(EVENT_MANA_DESTRUCTION, 1000);
 			_events.ScheduleEvent(EVENT_BRAIN_LINK_DAMAGE, 60000);
@@ -124,20 +124,21 @@ public:
 		}
 
 
-		void JustDied(Unit* )
+		void JustDied(Unit* player)
 		{
 	
 			char msg[250];
 			snprintf(msg, 250, "|cffff0000[Boss System]|r Boss|cffff6060 Eonar|r wurde getoetet! Respawn in 4h 30min.");
 			sWorld->SendGlobalText(msg, NULL);
-			
+			Summons.DespawnAll();	
 		}
+
 
 
 		void SpellHit(Unit* caster, SpellInfo const* spell) override
 		{
 			
-			if (spell->Id == 48638){
+			if (spell->Id == 35395){
 				me->Yell("Eure Kreuzfahrerstoesse werden Euch nicht retten.", LANG_UNIVERSAL, nullptr);
 				me->SetInCombatWith(caster);
 				me->SetDisplayId(27971);
@@ -146,14 +147,12 @@ public:
 			
 			if (spell->Id == 49921 || spell->Id == 66992){
 				armor = me->GetArmor();
-				Player* target;
 				me->SetName("Eonar der Alte");
 				me->SetObjectScale(2);
-				me->Whisper("Eure Seuchen. Bitte fuehrt sie weiter aus. Dient mir als Sklave wenn ich Euch unterwerfe.", LANG_UNIVERSAL, target, true);
 				me->CombatStop(true);
 				armor = armor + 10;
 				me->SetArmor(armor);
-				me->Yell("Eure Seuchen werden mich nicht aufhalten. Meine Ruestung wird immer haerter! Sie ist aktuell bei: " + armor, LANG_UNIVERSAL, nullptr);
+				me->Yell("Eure Seuchen werden mich nicht aufhalten. Meine Ruestung wird immer haerter!", LANG_UNIVERSAL, nullptr);
 
 			}
 
@@ -285,7 +284,7 @@ public: tyraniumadd() : CreatureScript("tyraniumadd") { }
 			void SpellHit(Unit* caster, SpellInfo const* spell) override
 			{
 
-				if (spell->Id == 1752){
+				if (spell->Id == 48638){
 					me->Yell("Spuert meine Macht!", LANG_UNIVERSAL, nullptr);
 					me->SelectNearestHostileUnitInAggroRange(false);
 					me->DealHeal(me, 20000);

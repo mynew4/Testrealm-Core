@@ -35,7 +35,8 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie funktioniert das?", GOSSIP_SENDER_MAIN, 0);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Rassenwechsel Kosten: 500 Gold & 2 Frostmarken", GOSSIP_SENDER_MAIN,1);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Fraktionswechsel Kosten: 500 Gold & 2 Frostmarken", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Fraktions & Rassenwechsel Kosten: 500 Gold & 2 Frostmarken.", GOSSIP_SENDER_MAIN,3);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Fraktions & Rassenwechsel Kosten: 1000 Gold & 4 Frostmarken.", GOSSIP_SENDER_MAIN,3);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Rename Kosten: 500 Gold", GOSSIP_SENDER_MAIN, 4);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -54,68 +55,93 @@ public:
 				return true;
 			break;
 		case  1:
-			if (pPlayer->HasItemCount(49426, 2)){
+			if (pPlayer->HasItemCount(49426, 2) && pPlayer->HasEnoughMoney(500*GOLD)){
 				pPlayer->DestroyItemCount(49426, 2, true, false);
 				pPlayer->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
 				pPlayer->GetGUID();
-				sWorld->SendGMText(LANG_GM_BROADCAST, "Ein Rassenwechsel wurde vorgenommen.");
+				std::ostringstream ss;
+				ss << "|cff54b5ffEin Rassenwechsel wurde durchgefuehrt von: |r " << ChatHandler(pPlayer->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Bitte ausloggen um Aenderungen durchzufuehren.",
 					pPlayer->GetName());
-				pPlayer->ModifyMoney(-5000000);
+				pPlayer->ModifyMoney(-500*GOLD);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				return true;
 			}
 
 			else{
-				pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Marken zum wechseln. Komm wieder wenn du genug hast.");
+				pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Frostmarken oder nicht Gold zum Wechseln. Komm wieder wenn du genug hast.");
 				return true;
 			}
 
 			break;
 		case  2:
 
-			if (pPlayer->HasItemCount(49426, 2)){
+			if (pPlayer->HasItemCount(49426, 2) && pPlayer->HasEnoughMoney(500 * GOLD)){
 				pPlayer->DestroyItemCount(49426, 2, true);
 				pPlayer->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
 				pPlayer->GetGUID();
-				sWorld->SendGMText(LANG_GM_BROADCAST, "Ein Franktionswechsel wurde vorgenommen.");
+				std::ostringstream ss;
+				ss << "|cff54b5ffEin Fraktionswechsel wurde durchgefuehrt von: |r " << ChatHandler(pPlayer->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Bitte ausloggen um Aenderungen durchzufuehren.",
 					pPlayer->GetName());
-				pPlayer->ModifyMoney(-5000000);
+				pPlayer->ModifyMoney(-500 * GOLD);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				return true;
 			}
 
 
 		else{
-			pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Marken zum wechseln. Komm wieder wenn du genug hast.");
+			pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Frostmarken oder nicht Gold zum Wechseln. Komm wieder wenn du genug hast.");
 			return true;
 		}
 
 			break;
+
+
 		case 3:
-			if (pPlayer->HasItemCount(49426, 2)){
-				pPlayer->DestroyItemCount(49426, 2, true, false);
+			if (pPlayer->HasItemCount(49426, 4) && pPlayer->HasEnoughMoney(1000 * GOLD)){
+				pPlayer->DestroyItemCount(49426, 4, true, false);
 				pPlayer->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
 				pPlayer->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
 				
 				pPlayer->GetGUID();
-				sWorld->SendGMText(LANG_GM_BROADCAST, "Ein Fraktions und Rassenwechsel wurde vorgenommen.");
-				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Bitte ausloggen um Aenderungen durchzuführen.",
+				std::ostringstream ss;
+				ss << "|cff54b5ffEin Rassen und Fraktionswechsel wurde durchgefuehrt von: |r " << ChatHandler(pPlayer->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Bitte ausloggen um Aenderungen durchzufuehren.",
 					pPlayer->GetName());
-				pPlayer->ModifyMoney(-5000000);
+				pPlayer->ModifyMoney(-1000 * GOLD);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				return true;
 			}
 
 
 			else{
-				pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Frostmarken zum wechseln. Komm wieder wenn du genug hast.");
+				pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Frostmarken oder nicht Gold zum Wechseln. Komm wieder wenn du genug hast.");
 				return true;
+			}break;
+
+
+		case 4:
+			if (pPlayer->HasEnoughMoney(500 * GOLD)){
+				pPlayer->SetAtLoginFlag(AT_LOGIN_RENAME);
+				pPlayer->ModifyMoney(-500 * GOLD);
+				std::ostringstream ss;
+				ss << "|cff54b5ffEine Namensaenderung wurde durchgefuehrt von : |r " << ChatHandler(pPlayer->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Bitte ausloggen um Aenderungen durchzufuehren.",
+					pPlayer->GetName());
+				return true;
+
 			}
 
+			else{
+				pPlayer->GetSession()->SendAreaTriggerMessage("Du hast nicht genug Gold um deinen Namen zu aendern. Komm wieder wenn du genug hast.");
+				return true;
+			}break;
 
-			break;
 		}
 		return true;
 	}
