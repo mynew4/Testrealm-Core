@@ -368,7 +368,7 @@ class npc_first_char : public CreatureScript
 							if (guildmemberint > 25 && charresultint == 1 && ipadrcountint == 1 && onecharint != 1 && accountanzgesint <= 1){
 								pPlayer->SetLevel(80);
 								pPlayer->LearnDefaultSkill(762, 4);
-								pPlayer->TeleportTo(0, -792.84, -1607.55, 142.30, 2.33, 0);
+								pPlayer->TeleportTo(0, -866.84, -1551.72, 189.62, 0.79, 0);
 								pPlayer->AddItem(20400, 4);
 								pPlayer->SetMoney(50000000);
 								pPlayer->UpdateSkillsToMaxSkillsForLevel();
