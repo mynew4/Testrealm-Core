@@ -48,7 +48,7 @@ public:
 		{
 		case 0:
 		{
-			pPlayer->TeleportTo(1, -1577.000000, 357.257538, 235.820755, 5.379027);
+			pPlayer->TeleportTo(1, -1577.00, 357.25, 235.82, 5.37);
 
 			return true;
 
@@ -61,10 +61,8 @@ public:
 
 
 
-
-	void AddSC_sb_worldevent()
-	{
+void AddSC_sb_worldevent()
+{
 		new sb_porter1();
 //		new sb_porter2();
-
-	}
+}
