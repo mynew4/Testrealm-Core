@@ -706,7 +706,7 @@ class npc_first_char : public CreatureScript
 					
 
 						if (pPlayer->GetSession()->GetSecurity() == 3){	
-							pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Nicht aktiv, geht nicht!]", GOSSIP_SENDER_MAIN, 12);
+							pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Kosten: 3000 Gold]", GOSSIP_SENDER_MAIN, 12);
 							pPlayer->ADD_GOSSIP_ITEM(7, "Aufwertungen einsehen", GOSSIP_SENDER_MAIN, 4);
 						}
 
