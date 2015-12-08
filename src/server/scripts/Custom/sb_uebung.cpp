@@ -52,10 +52,10 @@ public:
 		{
 		case 0:
 		{
-<<<<<<< HEAD
+
 
 		}
-=======
+
 			if (pPlayer->getLevel() >= 50)
 			{
 				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Glückwunsch du bist Level 50 oder höher!");
@@ -69,7 +69,7 @@ public:
 		return true;
 		}
 		break;
->>>>>>> 87e33a0da29e374f36df1f051ef10a3290a7f206
+
 		case 1:
 		{
 			pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
