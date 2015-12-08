@@ -40,7 +40,7 @@ class npc_first_char : public CreatureScript
 		public: npc_first_char() : CreatureScript("npc_first_char"){ }
 
 				void DBeintrag(Player* player, std::string grund){
-					WorldDatabase.PExecute("INSERT INTO firstnpc_log "
+					CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
 						"(grund,spieler, guid)"
 						"VALUES ('%s', '%s', '%u')",
 						grund, player->GetSession()->GetPlayerName(),player->GetGUID());
@@ -478,7 +478,7 @@ class npc_first_char : public CreatureScript
 							pPlayer->ModifyMoney(-5000 * GOLD);
 							std::string name = pPlayer->GetName();
 
-							WorldDatabase.PExecute("INSERT INTO zweitausstattung "
+							CharacterDatabase.PExecute("INSERT INTO zweitausstattung "
 								"(uid,spieler, account) "
 								"VALUES ('%u', '%s', '%u')",
 								guid, name, acc);
@@ -635,7 +635,7 @@ class npc_first_char : public CreatureScript
 							std::string grund = "Gutschein";
 
 							if (r % 5 == 0){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, r, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -646,7 +646,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 1){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, 9999, 5, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, 9999, 5, 1, pPlayer->GetName());
 								
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -656,7 +656,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 2){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, r, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(FROSTMARKEN, 2);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -668,7 +668,7 @@ class npc_first_char : public CreatureScript
 
 							if (r % 5 == 3){
 								
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(TRIUMPHMARKEN, 4);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -679,7 +679,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 4){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -697,16 +697,17 @@ class npc_first_char : public CreatureScript
 					{
 						pPlayer->PlayerTalkClass->ClearMenus();
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein generieren [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 23);
-						
-							if (pPlayer->GetSession()->IsPremium()){
-								pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein zum Verschenken generieren [Kosten: 5000 Gold]", GOSSIP_SENDER_MAIN, 24);
-							}
-						
 						pPlayer->ADD_GOSSIP_ITEM(7, "Level 80 Equipment. [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 10);
-					
+						pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Kosten: 3000 Gold]", GOSSIP_SENDER_MAIN, 12);
 
+						
+						
+						if (pPlayer->GetSession()->IsPremium() || pPlayer->GetSession()->GetSecurity() > 0){
+							pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein zum Verschenken generieren [Kosten: 5000 Gold]", GOSSIP_SENDER_MAIN, 24);
+						}
+						
 						if (pPlayer->GetSession()->GetSecurity() == 3){	
-							pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Kosten: 3000 Gold]", GOSSIP_SENDER_MAIN, 12);
+							
 							pPlayer->ADD_GOSSIP_ITEM(7, "Aufwertungen einsehen", GOSSIP_SENDER_MAIN, 4);
 						}
 
@@ -747,7 +748,7 @@ class npc_first_char : public CreatureScript
 
 
 							if (r % 5 == 0){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, ASTRALER_KREDIT, anzahl, 0);
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, ASTRALER_KREDIT, anzahl, 0);
 								std::ostringstream ss;
 								//ss << "Dein Code lautet:" << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
@@ -758,7 +759,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 1){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, 9999, anzahl, 0);
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, 9999, anzahl, 0);
 
 								std::ostringstream ss;
 								//ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
@@ -770,7 +771,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 2){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, FROSTMARKEN, anzahl, 0);
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, FROSTMARKEN, anzahl, 0);
 								
 								std::ostringstream ss;
 								//ss << "Dein Code lautet:" << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
@@ -784,7 +785,7 @@ class npc_first_char : public CreatureScript
 
 							if (r % 5 == 3){
 
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, TRIUMPHMARKEN, anzahl, 0);
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, TRIUMPHMARKEN, anzahl, 0);
 								
 								std::ostringstream ss;
 								//ss << "Dein Code lautet:" << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
@@ -797,7 +798,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 4){
-								WorldDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, TRIUMPHMARKEN, anzahl, 0);
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, TRIUMPHMARKEN, anzahl, 0);
 								
 								std::ostringstream ss;
 								//ss << "Dein Code lautet:" << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";

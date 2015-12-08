@@ -343,7 +343,7 @@ static bool HandleGutscheinCommand(ChatHandler* handler, const char* args)
 		
 
 
-		QueryResult result = WorldDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt` FROM `item_codes` WHERE `code` = '%s'", itemCode);
+		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt` FROM `item_codes` WHERE `code` = '%s'", itemCode);
 
 
 
@@ -366,8 +366,8 @@ static bool HandleGutscheinCommand(ChatHandler* handler, const char* args)
 			.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 			CharacterDatabase.CommitTransaction(trans);
 
-			WorldDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
-			WorldDatabase.PExecute("UPDATE item_codes SET benutzt = 1 WHERE code = '%s'", itemCode);
+			CharacterDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
+			CharacterDatabase.PExecute("UPDATE item_codes SET benutzt = 1 WHERE code = '%s'", itemCode);
 
 			char msg[250];
 			snprintf(msg, 250, "Dein Code wurde akzeptiert.");
