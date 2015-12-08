@@ -32,13 +32,17 @@ class sb_uebung : public CreatureScript
 public:
 	sb_uebung() : CreatureScript("sb_uebung") { }
 
-	bool OnGossipHello(Player* pPlayer, Creature* _creature)
+	bool OnGossipHello(Player* pPlayer, Creature* pCreature)
 	{
-		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 1", GOSSIP_SENDER_MAIN, 0);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Levelprüfen", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 2", GOSSIP_SENDER_MAIN, 1);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 3", GOSSIP_SENDER_MAIN, 2);
+
+		if (pPlayer->GetSession()->GetSecurity() > 1){
+			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 4", GOSSIP_SENDER_MAIN, 3);
+		}
 		
-		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
+		pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 		return true;
 
 }
@@ -48,12 +52,55 @@ public:
 		{
 		case 0:
 		{
+<<<<<<< HEAD
 
 		}
+=======
+			if (pPlayer->getLevel() >= 50)
+			{
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Glückwunsch du bist Level 50 oder höher!");
+				return true;
+			}
+			else
+			{
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du bist leider noch nicht Level 50.");
+				return true;
+			}
+		return true;
+		}
+		break;
+>>>>>>> 87e33a0da29e374f36df1f051ef10a3290a7f206
 		case 1:
-		{}
+		{
+			pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
+			pPlayer->PlayerTalkClass->ClearMenus();
+			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 5", GOSSIP_SENDER_MAIN, 4);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 6", GOSSIP_SENDER_MAIN, 5);
+			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 7", GOSSIP_SENDER_MAIN, 6);
+			pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
+			return true;
+		}
+		break;
 		case 2:
-		{}
+		{
+		}
+		break;
+		case 3:
+		{
+		}
+		break;
+		case 4:
+		{
+		}
+		break;
+		case 5:
+		{
+		}
+		break;
+		case 6:
+		{
+		}
+		break;
 		return true;
 		}
 	}
