@@ -36,26 +36,22 @@ public:
 	{
 		pPlayer->ADD_GOSSIP_ITEM(7, "Levelprüfen", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 2", GOSSIP_SENDER_MAIN, 1);
-		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 3", GOSSIP_SENDER_MAIN, 2);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Questreward", GOSSIP_SENDER_MAIN, 2);
 
 		if (pPlayer->GetSession()->GetSecurity() > 1){
 			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 4", GOSSIP_SENDER_MAIN, 3);
 		}
-		
+
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 		return true;
 
-}
+	}
 	bool OnGossipSelect(Player* pPlayer, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{
 		case 0:
 		{
-
-
-		}
-
 			if (pPlayer->getLevel() >= 50)
 			{
 				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Glückwunsch du bist Level 50 oder höher!");
@@ -66,7 +62,7 @@ public:
 				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du bist leider noch nicht Level 50.");
 				return true;
 			}
-		return true;
+			return true;
 		}
 		break;
 
@@ -81,30 +77,58 @@ public:
 			return true;
 		}
 		break;
+
 		case 2:
 		{
+			if (pPlayer->GetQuestRewardStatus(9999) == QUEST_STATUS_COMPLETE)
+			{
+				pPlayer->GetSession()->SendNotification("Du wurdest geportet");
+				pPlayer->PlayerTalkClass->SendCloseGossip();
+				pPlayer->TeleportTo(1 ,1 ,1 ,1 ,1,1);
+				return true;
+			}
+			else {
+				return false;
+			}
+			return true;
 		}
 		break;
+
 		case 3:
 		{
+	
 		}
 		break;
+
 		case 4:
 		{
+
 		}
 		break;
+
 		case 5:
 		{
+
 		}
 		break;
+
 		case 6:
 		{
+
 		}
 		break;
 		return true;
 		}
 	}
+};
+
 void AddSC_sb_uebung()
 {
 	new sb_uebung();
 }
+
+
+
+
+
+
