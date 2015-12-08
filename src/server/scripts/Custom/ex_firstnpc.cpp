@@ -39,6 +39,15 @@ class npc_first_char : public CreatureScript
 {
 		public: npc_first_char() : CreatureScript("npc_first_char"){ }
 
+				void DBeintrag(Player* player, std::string grund){
+					WorldDatabase.PExecute("INSERT INTO firstnpc_log "
+						"(grund,spieler, guid)"
+						"VALUES ('%s', '%s', '%u')",
+						grund, player->GetSession()->GetPlayerName(),player->GetGUID());
+					return;
+
+				}
+
 
 				void Berufeskillen(Player* player, uint32 beruf){
 					if (player->HasSkill(beruf) && player->HasEnoughMoney(3000 * GOLD)){
@@ -46,7 +55,7 @@ class npc_first_char : public CreatureScript
 						uint32 skill = player->GetSkillValue(beruf);
 						player->GetPureMaxSkillValue(beruf);
 						player->SetSkill(beruf, player->GetSkillStep(beruf), 450, 450);
-
+						DBeintrag(player->GetSession()->GetPlayer(), "Berufskillen");
 
 
 						ChatHandler(player->GetSession()).PSendSysMessage("[Beruf System] Dein Beruf wurde hochgesetzt.",
@@ -139,6 +148,7 @@ class npc_first_char : public CreatureScript
 							pPlayer->AddItem(20400, 4);
 							pPlayer->SetMoney(50000000);
 							pPlayer->UpdateSkillsToMaxSkillsForLevel();
+							DBeintrag(pPlayer->GetSession()->GetPlayer(), "Firstaustattung einzel");
 
 
 
@@ -296,7 +306,7 @@ class npc_first_char : public CreatureScript
 
 								ss << "|cff54b5ffEine 10er Gildenfirstausstattung wurde von |r " << ChatHandler(pPlayer->GetSession()).GetNameLink() << " |cff54b5ff in Anspruch genommen!|r";
 								sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
-
+								DBeintrag(pPlayer->GetSession()->GetPlayer(), "Firstaustattung 10er");
 								CharacterDatabase.PExecute("REPLACE INTO first_char "
 									"(guid,Charname, account, Accname, time, guildid,ip) "
 									"VALUES ('%u', '%s', %u, '%s', %u, %u, '%s')",
@@ -403,6 +413,7 @@ class npc_first_char : public CreatureScript
 									"(guid,Charname, account, Accname, time, guildid,ip) "
 									"VALUES ('%u', '%s', %u, '%s', %u, %u, '%s')",
 									guid, charname, accountresint, accname, zeit, guildidint, ipadrint);
+								DBeintrag(pPlayer->GetSession()->GetPlayer(), "Firstaustattung 25er");
 								return true;
 							}
 
@@ -471,6 +482,7 @@ class npc_first_char : public CreatureScript
 								"(uid,spieler, account) "
 								"VALUES ('%u', '%s', '%u')",
 								guid, name, acc);
+							DBeintrag(pPlayer->GetSession()->GetPlayer(), "2t Ausstattung");
 							return true;
 						}
 
@@ -524,7 +536,6 @@ class npc_first_char : public CreatureScript
 					{
 						Berufeskillen(pPlayer->GetSession()->GetPlayer(), 197);
 						
-
 					}break;
 
 
@@ -598,6 +609,8 @@ class npc_first_char : public CreatureScript
 
 					}break;
 
+
+					//XP Boost
 					case 22:
 					{
 						uint32 guid = pPlayer->GetGUID();
