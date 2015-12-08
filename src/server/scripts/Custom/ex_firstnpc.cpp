@@ -49,18 +49,17 @@ class npc_first_char : public CreatureScript
 
 
 
-						ChatHandler(player->GetSession()).PSendSysMessage("[Aufwertungs System] Dein Beruf wurde hochgesetzt.",
+						ChatHandler(player->GetSession()).PSendSysMessage("[Beruf System] Dein Beruf wurde hochgesetzt.",
 							player->GetName());
 					}
 
 					else {
-						ChatHandler(player->GetSession()).PSendSysMessage("[Aufwertungs System] Du hast diesen Beruf leider nicht erlernt.",
+						ChatHandler(player->GetSession()).PSendSysMessage("[Beruf System] Du hast diesen Beruf leider nicht erlernt.",
 							player->GetName());
 					}
 
 
 				}
-
 
 
 				bool OnGossipHello(Player *pPlayer, Creature* _creature)
