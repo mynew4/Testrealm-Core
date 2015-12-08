@@ -491,7 +491,8 @@ class npc_first_char : public CreatureScript
 						if (pPlayer->HasSkill(186) && pPlayer->HasEnoughMoney(3000* GOLD)){
 							pPlayer->LearnDefaultSkill(186, 6);
 							uint32 skill = pPlayer->GetSkillValue(186);
-							pPlayer->SetSkill(186, pPlayer->GetSkillStep(186), skill,450);
+							pPlayer->GetPureMaxSkillValue(186);
+							pPlayer->SetSkill(186, pPlayer->GetSkillStep(186), 450,450);
 
 							/*ChatHandler handler(pPlayer);
 							char* skill_name;
@@ -499,7 +500,7 @@ class npc_first_char : public CreatureScript
 							skill_name = SkillInfo->name[handler.GetSessionDbcLocale()];
 							uint16 maxLevel = pPlayer->GetPureMaxSkillValue(SkillInfo->id);
 							pPlayer->SetSkill(SkillInfo->id, pPlayer->GetSkillStep(SkillInfo->id), maxLevel, maxLevel);*/
-							pPlayer->GetPureMaxSkillValue(186);
+							
 							
 							
 							ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System] Dein Beruf wurde hochgesetzt.",
