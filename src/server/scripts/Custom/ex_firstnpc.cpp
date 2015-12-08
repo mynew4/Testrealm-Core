@@ -39,6 +39,30 @@ class npc_first_char : public CreatureScript
 {
 		public: npc_first_char() : CreatureScript("npc_first_char"){ }
 
+
+				void Berufeskillen(Player* player, uint32 beruf){
+					if (player->HasSkill(beruf) && player->HasEnoughMoney(3000 * GOLD)){
+						player->LearnDefaultSkill(beruf, 6);
+						uint32 skill = player->GetSkillValue(beruf);
+						player->GetPureMaxSkillValue(beruf);
+						player->SetSkill(beruf, player->GetSkillStep(beruf), 450, 450);
+
+
+
+						ChatHandler(player->GetSession()).PSendSysMessage("[Aufwertungs System] Dein Beruf wurde hochgesetzt.",
+							player->GetName());
+					}
+
+					else {
+						ChatHandler(player->GetSession()).PSendSysMessage("[Aufwertungs System] Du hast diesen Beruf leider nicht erlernt.",
+							player->GetName());
+					}
+
+
+				}
+
+
+
 				bool OnGossipHello(Player *pPlayer, Creature* _creature)
 				{
 					pPlayer->ADD_GOSSIP_ITEM(7, "Informationen und Hilfe", GOSSIP_SENDER_MAIN, 0);
@@ -484,34 +508,15 @@ class npc_first_char : public CreatureScript
 
 					}break;
 
+
+					
+
 					//Bergbau
 					case 13:
 					{
 
-						if (pPlayer->HasSkill(186) && pPlayer->HasEnoughMoney(3000* GOLD)){
-							pPlayer->LearnDefaultSkill(186, 6);
-							uint32 skill = pPlayer->GetSkillValue(186);
-							pPlayer->GetPureMaxSkillValue(186);
-							pPlayer->SetSkill(186, pPlayer->GetSkillStep(186), 450,450);
-
-							/*ChatHandler handler(pPlayer);
-							char* skill_name;
-							SkillLineEntry const *SkillInfo = sSkillLineStore.LookupEntry(skill);
-							skill_name = SkillInfo->name[handler.GetSessionDbcLocale()];
-							uint16 maxLevel = pPlayer->GetPureMaxSkillValue(SkillInfo->id);
-							pPlayer->SetSkill(SkillInfo->id, pPlayer->GetSkillStep(SkillInfo->id), maxLevel, maxLevel);*/
-							
-							
-							
-							ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System] Dein Beruf wurde hochgesetzt.",
-								pPlayer->GetName());
-						}
-
-						else {
-							ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System] Du hast diesen Beruf leider nicht erlernt.",
-								pPlayer->GetName());
-						}
-
+						Berufeskillen(pPlayer->GetSession()->GetPlayer(),186);
+					
 					}break;
 
 					//Schneiderei
