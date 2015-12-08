@@ -32,11 +32,29 @@ class sb_uebung : public CreatureScript
 public:
 	sb_uebung() : CreatureScript("sb_uebung") { }
 
+	bool OnGossipHello(Player* pPlayer, Creature* _creature)
+	{
+		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 1", GOSSIP_SENDER_MAIN, 0);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 2", GOSSIP_SENDER_MAIN, 1);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 3", GOSSIP_SENDER_MAIN, 2);
+		
+		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
+		return true;
 
-
-};
-
-
+}
+	bool OnGossipSelect(Player* pPlayer, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
+	{
+		switch (uiAction)
+		{
+		case 0:
+		{}
+		case 1:
+		{}
+		case 2:
+		{}
+		return true;
+		}
+	}
 void AddSC_sb_uebung()
 {
 	new sb_uebung();
