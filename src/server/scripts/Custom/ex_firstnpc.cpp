@@ -56,10 +56,10 @@ class npc_first_char : public CreatureScript
 						player->GetPureMaxSkillValue(beruf);
 						player->SetSkill(beruf, player->GetSkillStep(beruf), 450, 450);
 						DBeintrag(player->GetSession()->GetPlayer(), "Berufskillen");
-
-
 						ChatHandler(player->GetSession()).PSendSysMessage("[Beruf System] Dein Beruf wurde hochgesetzt.",
 							player->GetName());
+						player->ModifyMoney(-3000 * GOLD);
+						player->GetSession()->SendNotification("Dein Beruf wurde hochgesetzt.");
 					}
 
 					else {
