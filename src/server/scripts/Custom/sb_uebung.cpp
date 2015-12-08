@@ -68,7 +68,7 @@ public:
 			}
 		return true;
 		}
-		break;
+		
 
 		case 1:
 		{
@@ -79,28 +79,33 @@ public:
 			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 7", GOSSIP_SENDER_MAIN, 6);
 			pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 			return true;
-		}
-		break;
+		}break
+		
 		case 2:
 		{
-		}
-		break;
+
+		}break
+		
 		case 3:
 		{
-		}
-		break;
+
+		}break
+		
 		case 4:
 		{
-		}
-		break;
+
+		}break
+		
 		case 5:
 		{
-		}
-		break;
+
+		}break
+		
 		case 6:
 		{
-		}
-		break;
+
+		}break;
+		
 		return true;
 		}
 	}
