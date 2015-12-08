@@ -75,80 +75,35 @@ public:
 			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 7", GOSSIP_SENDER_MAIN, 6);
 			pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 			return true;
-<<<<<<< HEAD
-		}break
-		
-		case 2:
-		{
 
-		}break
+		}break;
 		
+		
+
 		case 3:
 		{
 
-		}break
+		}break;
 		
 		case 4:
 		{
 
-		}break
+		}break;
 		
 		case 5:
 		{
 
-		}break
+		}break;
 		
 		case 6:
 		{
 
 		}break;
-		
-=======
-		}
-		break;
 
-		case 2:
-		{
-			if (pPlayer->GetQuestRewardStatus(9999) == QUEST_STATUS_COMPLETE)
-			{
-				pPlayer->GetSession()->SendNotification("Du wurdest geportet");
-				pPlayer->PlayerTalkClass->SendCloseGossip();
-				pPlayer->TeleportTo(1 ,1 ,1 ,1 ,1,1);
-				return true;
-			}
-			else {
-				return false;
-			}
-			return true;
-		}
-		break;
-
-		case 3:
-		{
 	
-		}
-		break;
-
-		case 4:
-		{
-
-		}
-		break;
-
-		case 5:
-		{
-
-		}
-		break;
-
-		case 6:
-		{
-
-		}
-		break;
->>>>>>> 9ad1d4b39f0cf3a80fec58e36c3c15a2b8db1f40
 		return true;
 		}
+		return true;
 	}
 };
 
