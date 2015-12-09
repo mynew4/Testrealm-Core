@@ -663,8 +663,10 @@ class npc_first_char : public CreatureScript
 
 							std::string grund = "Gutschein";
 
+							uint32 anzahl = 1 + (std::rand() % (5 - 1 + 1));
+
 							if (r % 5 == 0){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -675,7 +677,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 1){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, 9999, 5, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, 9999, anzahl, 1, pPlayer->GetName());
 								
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -685,7 +687,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 2){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(FROSTMARKEN, 2);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -697,7 +699,7 @@ class npc_first_char : public CreatureScript
 
 							if (r % 5 == 3){
 								
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(TRIUMPHMARKEN, 4);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -708,7 +710,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 4){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, r, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
