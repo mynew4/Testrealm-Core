@@ -32,85 +32,118 @@ class sb_uebung : public CreatureScript
 public:
 	sb_uebung() : CreatureScript("sb_uebung") { }
 
+
+
 	bool OnGossipHello(Player* pPlayer, Creature* pCreature)
 	{
-		pPlayer->ADD_GOSSIP_ITEM(7, "Levelprüfen", GOSSIP_SENDER_MAIN, 0);
-		pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 2", GOSSIP_SENDER_MAIN, 1);
-		pPlayer->ADD_GOSSIP_ITEM(7, "Questreward", GOSSIP_SENDER_MAIN, 2);
-
-		if (pPlayer->GetSession()->GetSecurity() > 1){
-			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 4", GOSSIP_SENDER_MAIN, 3);
-		}
+		pPlayer->ADD_GOSSIP_ITEM(7, "1 level aufsteigen. Kosten: 10 Astrale Kredite", GOSSIP_SENDER_MAIN, 0);
+		pPlayer->ADD_GOSSIP_ITEM(7, "10 level aufsteigen.  Kosten: 90 Astrale Kredite.", GOSSIP_SENDER_MAIN, 1);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 2);
 
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 		return true;
 
 	}
+
 	bool OnGossipSelect(Player* pPlayer, Creature* pCreature, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{
 		case 0:
 		{
-			if (pPlayer->getLevel() >= 50)
+			uint16 levela = pPlayer->getLevel();
+
+			if (levela < 80)
 			{
-				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Glückwunsch du bist Level 50 oder höher!");
-				return true;
+				uint16 levelb = levela + 1;
+				uint16 kosten = 10;
+
+				if (pPlayer->HasItemCount(38186, kosten))
+				{
+					pPlayer->SetLevel(levelb);
+					pPlayer->DestroyItemCount(38186, kosten, true);
+					pPlayer->GetSession()->SendNotification("Dir wurden 10 Astralekredite abgezogen und du bist 1 Level höher");
+					return true;
+				}
+
+				else
+				{
+					pPlayer->GetSession()->SendNotification("Du hast leider keine 10 Astralenkredite");
+					return false;
+				}
 			}
 			else
 			{
-				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du bist leider noch nicht Level 50.");
+				pPlayer->GetSession()->SendNotification("Du bist schon Level 80!");
 				return true;
 			}
-			return true;
-		}
-		
+		}break;
 
+		
 		case 1:
 		{
-			pPlayer->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
-			pPlayer->PlayerTalkClass->ClearMenus();
-			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 5", GOSSIP_SENDER_MAIN, 4);
-			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 6", GOSSIP_SENDER_MAIN, 5);
-			pPlayer->ADD_GOSSIP_ITEM(7, "Funktion 7", GOSSIP_SENDER_MAIN, 6);
-			pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
-			return true;
+			uint16 levela = pPlayer->getLevel();
 
-		}break;
-		
-		
+			if (levela <= 70)
+			{
+				uint16 levelb = levela + 10;
+				uint16 kosten = 90;
 
-		case 3:
-		{
+				if (pPlayer->HasItemCount(38186, kosten, true))
+				{
+					pPlayer->SetLevel(levelb);
+					pPlayer->DestroyItemCount(38186, kosten);
+					pPlayer->GetSession()->SendNotification("Dir wurden 90 Astralekredite abgezogen und du bist 1 Level höher");
+					return true;
+				}
 
-		}break;
-		
-		case 4:
-		{
-
-		}break;
-		
-		case 5:
-		{
-
-		}break;
-		
-		case 6:
-		{
-
+				else
+				{
+					pPlayer->GetSession()->SendNotification("Du hast leider keine 90 Astralenkredit");
+					return false;
+				}
+			}
+			else
+			{
+				pPlayer->GetSession()->SendNotification("Du bist schon über Level 70!");
+				return true;
+			}
 		}break;
 
 	
-		return true;
+		case 2:
+		{
+			uint16 kosten = 800;
+
+				if (pPlayer->HasItemCount(38186, kosten))
+				{
+					pPlayer->SetLevel(80);
+					pPlayer->DestroyItemCount(38186, kosten, true);
+					pPlayer->GetSession()->SendNotification("Dir wurden 800 Astralekredite abgezogen und du bist 1 Level höher");
+					return true;
+				}
+
+				else
+				{
+					pPlayer->GetSession()->SendNotification("Du hast leider keine 800 Astralenkredit");
+					return false;
+				}
+			
+			
+		}break;
+
+
 		}
-		return true;
 	}
+
 };
 
 void AddSC_sb_uebung()
 {
 	new sb_uebung();
 }
+
+
 
 
 
