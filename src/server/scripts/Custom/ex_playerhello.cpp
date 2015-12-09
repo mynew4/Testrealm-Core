@@ -641,7 +641,7 @@ public:
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-		if (msg == "")
+		
 	
 	}
 
