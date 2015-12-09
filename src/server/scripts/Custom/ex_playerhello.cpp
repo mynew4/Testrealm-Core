@@ -617,25 +617,7 @@ public:
 	Chatlog() : PlayerScript("Chatlog") { }
 
 
-	void chatpruefung(std::string wort, std::string nachricht,Player* player)
-	{
-		
-		if (nachricht.find(wort) != std::string::npos){
-			std::ostringstream ss;
-			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
-			time_t sek;
-			time(&sek);
-			uint32 zeit = time(&sek);
-			CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-				"(nachricht,player, guid, datum)"
-				"VALUES ('%s', '%s','%u','%u')",
-				nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
-
-			nachricht = "";
-		}
-
-	}
+	
 
 	void chatlog(Player* player, std::string nachricht) {
 		
@@ -661,15 +643,10 @@ public:
 		for (int i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
 			{
-				nachricht = "";
-				ChatHandler(player->GetSession()).PSendSysMessage("Links/Advertisements are not allowed!");
+				nachricht = "Test";
+				ChatHandler(player->GetSession()).PSendSysMessage("");
 				return;
 			}
-
-		//chatpruefung("Frostmourne", nachricht, player->GetSession()->GetPlayer());
-		//chatpruefung("frostmourne", nachricht, player->GetSession()->GetPlayer());
-		
-
 
 	}
 
