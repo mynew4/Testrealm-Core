@@ -713,17 +713,6 @@ public:
 	}
 };
 
-class Arena : public PlayerScript
-{
-public:
-	Arena() : PlayerScript("Arena"){}
-
-	std::ostringstream ss;
-
-	Arena* arena;
-	ArenaTeam* arenateam
-
-};
 
 
 class Shutdown : public WorldScript
