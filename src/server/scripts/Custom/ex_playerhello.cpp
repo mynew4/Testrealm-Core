@@ -27,15 +27,6 @@
 #include <stdlib.h>
 #include "Guild.h"
 
-enum wort 
-{ 
-
-Frostmourne,
-Misan, 
-Misantrop, 
- 
-
-};
 
 class Announce_NewPlayer : public PlayerScript
 {
@@ -627,9 +618,10 @@ public:
 
 
 	void chatlog(Player* player, std::string nachricht) {
-
-		if (nachricht.find(Frostmourne) != std::string::npos) {
+		player->GetSession()->SendNotification("Chatlog Funktion wurde aufgerufen.");
+		if (nachricht.find("Frostmourne") != std::string::npos) {
 			std::ostringstream ss;
+			player->GetSession()->SendNotification("If Schleife benutzt!");
 			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
 			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 			
@@ -649,6 +641,7 @@ public:
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
+		if (msg == "")
 	
 	}
 
