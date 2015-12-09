@@ -618,7 +618,6 @@ public:
 
 
 	
-
 	void chatlog(Player* player, std::string nachricht) {
 		
 		
@@ -643,46 +642,51 @@ public:
 		for (int i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
 			{
-				nachricht = "Test";
+				
 				ChatHandler(player->GetSession()).PSendSysMessage("");
-				return;
-			}
+				time_t sek;
+				time(&sek);
+				uint32 zeit = time(&sek);
+				
+				std::ostringstream tt;
+				tt << "|cff54b5ffFremdwerbung wurde erkannt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 
+
+				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
+					"(nachricht,player, guid, datum)"
+					"VALUES ('%s', '%s','%u','%u')",
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+				return;
+
+
+				
+			}	
 	}
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
-	
-		chatlog(player->GetSession()->GetPlayer(), msg);
-			
+		chatlog(player->GetSession()->GetPlayer(), msg);		
 	}
 
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Player* /*receiver*/) { 
-	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-		
 	
 	}
 
 
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Group* /*group*/) { 
-	
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Group* /*group*/) { 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-
 	}
 
 
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Guild* /*guild*/) { 
-	
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Guild* /*guild*/) { 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-	
 	}
 
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Channel* /*channel*/) { 
-	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-
 	}
 };
 
