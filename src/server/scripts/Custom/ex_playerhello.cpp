@@ -640,8 +640,34 @@ public:
 	void chatlog(Player* player, std::string nachricht) {
 		
 		
-		chatpruefung("Frostmourne", nachricht, player->GetSession()->GetPlayer());
-		chatpruefung("frostmourne", nachricht, player->GetSession()->GetPlayer());
+		std::string lower = nachricht;
+		std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+
+		const uint8 cheksSize = 13;
+		std::string checks[cheksSize];
+		checks[0] = "Frostmourne";
+		checks[1] = "frostmourne";
+		checks[2] = "dyndns";
+		checks[3] = "no-ip";
+		checks[4] = "http://";
+		checks[5] = ".com";
+		checks[6] = ".net";
+		checks[7] = ".org";
+		checks[8] = ".eu";
+		checks[9] = ".fr";
+		checks[10] = ".bg";
+		checks[11] = ".info";
+		checks[12] = ".br";
+		for (int i = 0; i < cheksSize; ++i)
+			if (lower.find(checks[i]) != std::string::npos)
+			{
+				nachricht = "";
+				ChatHandler(player->GetSession()).PSendSysMessage("Links/Advertisements are not allowed!");
+				return;
+			}
+
+		//chatpruefung("Frostmourne", nachricht, player->GetSession()->GetPlayer());
+		//chatpruefung("frostmourne", nachricht, player->GetSession()->GetPlayer());
 		
 
 
