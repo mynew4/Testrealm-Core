@@ -618,7 +618,7 @@ public:
 
 
 	
-	void chatlog(Player* player, std::string nachricht) {
+	std::string chatlog(Player* player, std::string nachricht) {
 		
 		
 		std::string lower = nachricht;
@@ -628,9 +628,9 @@ public:
 		std::string checks[cheksSize];
 		checks[0] = "at";
 		checks[1] = "frostmourne";
-		checks[2] = "dyndns";
-		checks[3] = "no-ip";
-		checks[4] = "http://";
+		checks[2] = "pws";
+		checks[3] = "bigfamily";
+		checks[4] = "castle-wow";
 		checks[5] = ".com";
 		checks[6] = ".net";
 		checks[7] = ".org";
@@ -648,16 +648,20 @@ public:
 				time(&sek);
 				uint32 zeit = time(&sek);
 				
+				
+				std::ostringstream uu;
 				std::ostringstream tt;
 				tt << "|cff54b5ffFremdwerbung wurde erkannt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
+				uu << "Wort das entdeckt wurde" << checks[i];
+				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 
 
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid, datum)"
 					"VALUES ('%s', '%s','%u','%u')",
 					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
-				return;
+				nachricht = "";
+				return nachricht;
 
 
 				
@@ -666,6 +670,8 @@ public:
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
 		chatlog(player->GetSession()->GetPlayer(), msg);		
+		
+
 	}
 
 
