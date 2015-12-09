@@ -50,7 +50,7 @@ class npc_first_char : public CreatureScript
 					player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
 					SQLTransaction trans = CharacterDatabase.BeginTransaction();
 					MailDraft("Dein Gutscheincode", ss.str().c_str())
-						.SendMailTo(trans, MailReceiver(pPlayer, pPlayer->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+						.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 					CharacterDatabase.CommitTransaction(trans);
 
 				}
