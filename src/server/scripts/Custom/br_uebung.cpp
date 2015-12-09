@@ -116,20 +116,19 @@ public: br_uebung() : CreatureScript("br_uebung"){ }
 			{
 				if (pPlayer->IsGameMaster()) {
 					pPlayer->TeleportTo(1, 1, 1, 1, 1, 0);
-
+					return true;
 				}
 
 				else{
 					pPlayer->PlayerTalkClass->SendCloseGossip();
-					return;
+					return true;
 
 				}
-
-
-
+				return true;
 			}
-			}
+			return true;
 		}
+	}
 
 
 };
