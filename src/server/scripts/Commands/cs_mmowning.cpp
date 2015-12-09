@@ -339,7 +339,7 @@ public:
 			return true;
 		}
 
-		if (itemCode == "Gutschein"){
+		if (itemCode == "GOLD"){
 			return true;
 		}
 
