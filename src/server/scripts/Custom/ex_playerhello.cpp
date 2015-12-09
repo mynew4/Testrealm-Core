@@ -768,7 +768,6 @@ public:
 	
 	void chatlog(Player* player, std::string nachricht) {
 		
-		
 		std::string lower = nachricht;
 		std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
 
@@ -789,8 +788,7 @@ public:
 		checks[12] = ".br";
 		for (int i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
-			{
-				
+			{			
 				
 				time_t sek;
 				time(&sek);
@@ -803,29 +801,14 @@ public:
 
 				std::ostringstream uu;
 				std::ostringstream tt;
-				std::ostringstream vv;
+				
 
 
 				tt << "|cff54b5ffFremdwerbung wurde erkannt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
 				uu <<  nachricht;
 				
 				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
-				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
-
-				QueryResult result;
-				result = CharacterDatabase.PQuery("Select count(guid) from `fremdwerbung` where `accid` = '%u'", player->GetSession()->GetAccountId());
-
-				Field *fields = result->Fetch();
-				uint32 anzahl = fields[0].GetUInt32();
-				
-				if (anzahl > 5){
-					vv << ChatHandler(player->GetSession()).GetNameLink() << "ist schon " << anzahl << " Mal aufgefallen. Spieler sollte uberprueft werden.";
-					
-				}
-
-				else {
-					return;
-				}
+				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());		
 				
 			}
 
