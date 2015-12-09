@@ -829,9 +829,6 @@ public:
 				
 			}
 
-			else {
-				return;
-			}
 	}
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
