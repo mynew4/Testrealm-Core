@@ -617,36 +617,34 @@ public:
 	Chatlog() : PlayerScript("Chatlog") { }
 
 
+	void chatpruefung(std::string wort, std::string nachricht,Player* player)
+	{
+		
+		if (nachricht.find(wort) != std::string::npos){
+			std::ostringstream ss;
+			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
+			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
+
+			time_t sek;
+			time(&sek);
+			uint32 zeit = time(&sek);
+
+			CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
+				"(nachricht,player, guid, datum)"
+				"VALUES ('%s', '%s','%u','%u')",
+				nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+
+		}
+
+	}
+
 	void chatlog(Player* player, std::string nachricht) {
 		
 		
-		std::string mystring[] = 
-		{ 
-			"Frostmourne", "frostmourne", "Misantrop" 
-		};
+		chatpruefung("Frostmourne", nachricht, player->GetSession()->GetPlayer());
+		chatpruefung("frostmourne", nachricht, player->GetSession()->GetPlayer());
 		
-		int size = sizeof(mystring);
-		
-		for (uint32 i = 0; i <= size; i++)
-		{
-			if (nachricht.find(mystring[i]) != std::string::npos){
-				std::ostringstream ss;
-				
-				
-				
-				ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 
-				time_t sek;
-				time(&sek);
-				uint32 zeit = time(&sek);
-
-				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-					"(nachricht,player, guid, datum)"
-					"VALUES ('%s', '%s','%u','%u')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
-			}
-		}
 
 	}
 
