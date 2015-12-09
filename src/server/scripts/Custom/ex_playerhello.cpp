@@ -771,21 +771,36 @@ public:
 		std::string lower = nachricht;
 		std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
 
-		const uint8 cheksSize = 13;
+		const uint8 cheksSize = 26;
 		std::string checks[cheksSize];
 		checks[0] = "at";
 		checks[1] = "frostmourne";
 		checks[2] = "pws";
 		checks[3] = "bigfamily";
 		checks[4] = "castle-wow";
-		checks[5] = ".com";
-		checks[6] = ".net";
-		checks[7] = ".org";
-		checks[8] = ".eu";
-		checks[9] = ".fr";
-		checks[10] = ".bg";
-		checks[11] = ".info";
-		checks[12] = ".br";
+		checks[5] = "mwow";
+		checks[6] = "Maxwow";
+		checks[7] = "Hellscream WoW";
+		checks[8] = "Soulwow";
+		checks[9] = "AdeX";
+		checks[10] = "Eternyum";
+		checks[11] = "Eternal";
+		checks[12] = "Back2Basics";
+		checks[13] = "Laenalith";
+		checks[14] = "Monster wow";
+		checks[15] = "Rising-Gods";
+		checks[16] = "Privat-WoW-Server";
+		checks[17] = "Ice-WoW";
+		checks[18] = "Land of Elves";
+		checks[19] = "SolaceWOW";
+		checks[20] = "World of Paranoid";
+		checks[21] = "Buzzteria";
+		checks[22] = "genesis";
+		checks[23] = "Fantasy";
+		checks[24] = "heroes";
+		checks[25] = "stormbalde";
+		
+
 		for (int i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
