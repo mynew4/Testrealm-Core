@@ -791,15 +791,15 @@ public:
 			if (lower.find(checks[i]) != std::string::npos)
 			{
 				
-				ChatHandler(player->GetSession()).PSendSysMessage("");
+				
 				time_t sek;
 				time(&sek);
 				uint32 zeit = time(&sek);
 				
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-					"(nachricht,player, guid, datum)"
-					"VALUES ('%s', '%s','%u','%u')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+					"(nachricht,player, guid,accid, datum)"
+					"VALUES ('%s', '%s','%u','%u','%u')",
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), zeit);
 
 				std::ostringstream uu;
 				std::ostringstream tt;
@@ -813,19 +813,19 @@ public:
 				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 
 				QueryResult result;
-				result = CharacterDatabase.PQuery("Select count(guid) from `fremdwerbung` where `guid` = '%u'", player->GetGUID());
+				result = CharacterDatabase.PQuery("Select count(guid) from `fremdwerbung` where `accid` = '%u'", player->GetSession()->GetAccountId());
 
 				Field *fields = result->Fetch();
 				uint32 anzahl = fields[0].GetUInt32();
 				
-				if (anzahl >= 5){
+				if (anzahl > 5){
 					vv << ChatHandler(player->GetSession()).GetNameLink() << "ist schon " << anzahl << " Mal aufgefallen. Spieler sollte uberprueft werden.";
+					
 				}
 
 				else {
 					return;
 				}
-				return;
 				
 			}
 
