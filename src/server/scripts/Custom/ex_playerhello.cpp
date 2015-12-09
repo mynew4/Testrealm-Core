@@ -29,7 +29,6 @@
 
 
 
-
 class Announce_NewPlayer : public PlayerScript
 {
 
