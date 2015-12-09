@@ -618,22 +618,38 @@ public:
 
 
 	void chatlog(Player* player, std::string nachricht) {
-		player->GetSession()->SendNotification("Chatlog Funktion wurde aufgerufen.");
-		if (nachricht.find("Frostmourne") != std::string::npos) {
-			std::ostringstream ss;
-			player->GetSession()->SendNotification("If Schleife benutzt!");
-			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
-			
-			time_t sek;
-			time(&sek);
-			uint32 zeit = time(&sek);
-			
-			CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-				"(nachricht,player, guid, datum)"
-				"VALUES ('%s', '%s','%u','%u')",
-				nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+		
+		
+		std::string mystring[] = 
+		{ 
+			std::string("Frostmourne"),
+			std::string("frostmourne"),
+			std::string("Misantrop") 
+		};
+		
+		int size = sizeof(mystring);
+		
+		for (uint32 i = 0; i < size; i++)
+		{
+			if (nachricht.find(mystring[i]) != std::string::npos){
+				std::ostringstream ss;
+				
+				std::ostringstream tt;
+				tt << "|cff54b5ffArrayausgabe |r " << mystring[i];
+				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
+				
+				ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
+				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 
+				time_t sek;
+				time(&sek);
+				uint32 zeit = time(&sek);
+
+				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
+					"(nachricht,player, guid, datum)"
+					"VALUES ('%s', '%s','%u','%u')",
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+			}
 		}
 
 	}
@@ -647,27 +663,31 @@ public:
 	}
 
 
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Player* /*receiver*/) { 
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Player* /*receiver*/) { 
 	
-	
-	}
-
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Group* /*group*/) { 
-	
+		chatlog(player->GetSession()->GetPlayer(), msg);
 	
 	}
 
 
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Guild* /*guild*/) { 
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Group* /*group*/) { 
 	
+		chatlog(player->GetSession()->GetPlayer(), msg);
+
+	}
+
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Guild* /*guild*/) { 
+	
+		chatlog(player->GetSession()->GetPlayer(), msg);
 	
 	}
 
 
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Channel* /*channel*/) { 
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Channel* /*channel*/) { 
 	
-	
+		chatlog(player->GetSession()->GetPlayer(), msg);
+
 	}
 };
 
