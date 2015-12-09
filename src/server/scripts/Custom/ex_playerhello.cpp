@@ -630,7 +630,7 @@ public:
 			uint32 zeit = time(&sek);
 			
 			CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-				"(nachricht,spieler, guid, datum)"
+				"(nachricht,player, guid, datum)"
 				"VALUES ('%s', '%s','%u','%u')",
 				nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
 
