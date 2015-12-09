@@ -652,8 +652,9 @@ public:
 				std::ostringstream uu;
 				std::ostringstream tt;
 				tt << "|cff54b5ffFremdwerbung wurde erkannt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-				uu << "Wort das entdeckt wurde" << checks[i];
+				uu << "Wort das entdeckt wurde: " << checks[i];
 				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
+				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 
 
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
