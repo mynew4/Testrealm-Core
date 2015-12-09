@@ -585,7 +585,11 @@ public:
 		ss << "|cff54b5ffDer Server wird bald fuer Updates heruntergefahren. Weitere Informationen koennen auf der Homepage eingesehen werden.|r";
 		sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
 
-		tt << "|cff54b5ffDer Shutdown wurde eingeleitet.|r";
+		Player* player;
+		
+		player->GetSession()->GetPlayer();
+
+		tt << "|cff54b5ffDer Shutdown wurde eingeleitet von: |r " << ChatHandler(player->GetSession()).GetNameLink();
 		sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 		
 	}
@@ -599,6 +603,7 @@ public:
 		sWorld->setRate(RATE_DROP_ITEM_EPIC, 1);
 		sWorld->setRate(RATE_DROP_ITEM_UNCOMMON, 3);
 		sWorld->setBoolConfig(CONFIG_ALLOW_TWO_SIDE_TRADE, true);
+		
 	}
 
 
