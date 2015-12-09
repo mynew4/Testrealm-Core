@@ -766,7 +766,7 @@ public:
 
 
 	
-	std::string chatlog(Player* player, std::string nachricht) {
+	void chatlog(Player* player, std::string nachricht) {
 		
 		
 		std::string lower = nachricht;
