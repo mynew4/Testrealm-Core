@@ -624,7 +624,6 @@ public:
 			std::ostringstream ss;
 			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
 			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
-
 			time_t sek;
 			time(&sek);
 			uint32 zeit = time(&sek);
@@ -651,15 +650,14 @@ public:
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
-		
-
-	
+			
 	}
 
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Player* /*receiver*/) { 
 	
 		chatlog(player->GetSession()->GetPlayer(), msg);
+		
 	
 	}
 
