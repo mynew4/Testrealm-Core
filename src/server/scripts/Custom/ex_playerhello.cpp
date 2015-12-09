@@ -629,14 +629,12 @@ public:
 		
 		int size = sizeof(mystring);
 		
-		for (uint32 i = 0; i < size; i++)
+		for (uint32 i = 0; i <= size; i++)
 		{
 			if (nachricht.find(mystring[i]) != std::string::npos){
 				std::ostringstream ss;
 				
-				std::ostringstream tt;
-				tt << "|cff54b5ffArrayausgabe |r " << mystring[i];
-				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
+				
 				
 				ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
 				sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
