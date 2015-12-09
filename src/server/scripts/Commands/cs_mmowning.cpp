@@ -437,17 +437,16 @@ public:
 			std::ostringstream tt;
 
 
-			tt << "Spieler gefunden: " << eingabe;
-			uu << "Es sind: " << anzahl << " Einträge vorhanden. Uberpruefung ist sinnvoll.";
-
+			tt << "Spieler gefunden: " << eingabe << "\nEs sind: " << anzahl << " Einträge vorhanden. Uberpruefung ist sinnvoll.";
 			sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
-			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
+			
 			return true;
 		}
 
 		else {
 			std::ostringstream uu;
 			uu << "Keine Spieler mit dem Namen " << eingabe << " gefunden";
+			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 			return true;
 		}
 
