@@ -70,7 +70,7 @@ public:
 
 		//10h
 		if (time >= 36000 && time <= 71999){
-		QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
 		if (!result){
 				
 			uint32 uid = player->GetGUID();
@@ -79,14 +79,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 10, player->GetName().c_str(),uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 10, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//20h
 		if (time >= 72000 && time <= 107999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 20, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 20, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -95,14 +95,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 20, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 20, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//30h
 		if (time >= 108000 && time <= 143999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 30, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 30, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -111,7 +111,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 30, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 30, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -120,7 +120,7 @@ public:
 
 		//40h
 		if (time >= 144000 && time <= 179999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 40, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 40, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -129,7 +129,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 40, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 40, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -137,7 +137,7 @@ public:
 
 		//50h
 		if (time >= 180000 && time <= 215999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 50, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 50, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -146,14 +146,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 50, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 50, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//60h
 		if (time >= 216000 && time <= 251999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 60, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 60, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -162,7 +162,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 60, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 60, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -170,7 +170,7 @@ public:
 
 		//70h
 		if (time >= 252000 && time <= 279999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 70, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 70, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -179,7 +179,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 70, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 70, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -187,7 +187,7 @@ public:
 
 		//80h
 		if (time >= 288000 && time <= 323999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 80, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 80, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -196,14 +196,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 80, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 80, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//90h
 		if (time >= 324000 && time <= 359999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 90, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 90, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -212,7 +212,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 90, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 90, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -220,7 +220,7 @@ public:
 
 		//100h
 		if (time >= 360000 && time <= 395999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 100, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 100, player->GetGUID());
 			if (!result){
 				uint32 uid = player->GetGUID();
 				
@@ -232,7 +232,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -240,7 +240,7 @@ public:
 
 		//110h
 		if (time >= 396000 && time <= 431999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 110, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 110, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -249,14 +249,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 110, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 110, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//120h
 		if (time >= 432000 && time <= 467999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 120, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 120, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -265,7 +265,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 120, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 120, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -273,7 +273,7 @@ public:
 
 		//130h
 		if (time >= 468000 && time <= 503999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 130, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 130, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -282,7 +282,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 130, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 130, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -290,7 +290,7 @@ public:
 
 		//140h
 		if (time >= 504000 && time <= 539999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 140, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 140, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -299,7 +299,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 140, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 140, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -307,7 +307,7 @@ public:
 
 		//150h
 		if (time >= 540000 && time <= 575999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 150, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 150, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -316,7 +316,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 150, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 150, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -324,7 +324,7 @@ public:
 
 		//160h
 		if (time >= 576000 && time <= 611999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 160, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 160, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -333,7 +333,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 160, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 160, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -341,7 +341,7 @@ public:
 
 		//170h
 		if (time >= 612000 && time <= 647999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 170, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 170, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -350,14 +350,14 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 170, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 170, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 		//180h
 		if (time >= 648000 && time <= 683999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 180, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 180, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -366,7 +366,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 180, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 180, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -374,7 +374,7 @@ public:
 
 		//190h
 		if (time >= 684000 && time <= 719999){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 190, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 190, player->GetGUID());
 			if (!result){
 
 				uint32 uid = player->GetGUID();
@@ -383,7 +383,7 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 190, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 190, player->GetName().c_str(), uid, 1);
 
 			}
 		}
@@ -391,7 +391,7 @@ public:
 
 		//200h
 		if (time >= 720000){
-			QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 200, player->GetGUID());
+			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 200, player->GetGUID());
 			if (!result){
 
 				Item* item = Item::CreateItem(37719, 1);
@@ -402,13 +402,13 @@ public:
 					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 				CharacterDatabase.CommitTransaction(trans);
 
-				WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 200, player->GetName().c_str(), uid, 1);
+				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 200, player->GetName().c_str(), uid, 1);
 
 			}
 		}
 
 
-		QueryResult result = WorldDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 100, player->GetGUID());
+		QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 100, player->GetGUID());
 		 if (time >= 720000 && !result){
 			uint32 uid = player->GetGUID();
 
@@ -420,7 +420,7 @@ public:
 				.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 			CharacterDatabase.CommitTransaction(trans);
 
-			WorldDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);
+			CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);
 		}
 
 
