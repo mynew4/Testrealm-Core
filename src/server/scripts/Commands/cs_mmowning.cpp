@@ -445,7 +445,7 @@ public:
 
 		else {
 			std::ostringstream uu;
-			uu << "Keine Spieler mit dem Namen " << eingabe << " gefunden";
+			uu << "Keinen Eintrag des Spielers " << eingabe << " vorhanden.";
 			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 			return true;
 		}
