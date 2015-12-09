@@ -622,9 +622,7 @@ public:
 		
 		std::string mystring[] = 
 		{ 
-			std::string("Frostmourne"),
-			std::string("frostmourne"),
-			std::string("Misantrop") 
+			"Frostmourne", "frostmourne", "Misantrop" 
 		};
 		
 		int size = sizeof(mystring);
