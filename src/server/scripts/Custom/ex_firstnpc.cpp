@@ -49,7 +49,7 @@ class npc_first_char : public CreatureScript
 				void fixgutschein(Player* player, uint32 belohnung, uint32 anzahl, std::string grund ){
 
 					CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, belohnung, anzahl, 1, player->GetName());
-					Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
+					Item* item = Item::CreateItem(belohnung, anzahl);
 					player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 					SQLTransaction trans = CharacterDatabase.BeginTransaction();
 					item->SaveToDB(trans);
