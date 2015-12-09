@@ -437,7 +437,7 @@ public:
 			std::ostringstream tt;
 
 
-			tt << "Spieler gefunden: " << eingabe << "Es sind: " << anzahl << " Einträge vorhanden. Uberpruefung ist sinnvoll.";
+			tt << "Es sind: " << anzahl << " Einträge vorhanden. Uberpruefung ist sinnvoll.";
 			sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 			
 			return true;
