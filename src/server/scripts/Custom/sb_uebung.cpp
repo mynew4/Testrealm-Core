@@ -62,7 +62,7 @@ public:
 				{
 					pPlayer->SetLevel(levelb);
 					pPlayer->DestroyItemCount(38186, kosten, true);
-					pPlayer->GetSession()->SendNotification("Dir wurden 10 Astralekredite abgezogen und du bist 1 Level höher");
+					pPlayer->GetSession()->SendNotification("Dir wurden 10 Astralekredite abgezogen und du bist 1 Level hoeher");
 					return true;
 				}
 
@@ -72,11 +72,13 @@ public:
 					return false;
 				}
 			}
+
 			else
 			{
 				pPlayer->GetSession()->SendNotification("Du bist schon Level 80!");
 				return true;
 			}
+
 		}break;
 
 		
@@ -92,22 +94,24 @@ public:
 				if (pPlayer->HasItemCount(38186, kosten, true))
 				{
 					pPlayer->SetLevel(levelb);
-					pPlayer->DestroyItemCount(38186, kosten);
-					pPlayer->GetSession()->SendNotification("Dir wurden 90 Astralekredite abgezogen und du bist 1 Level höher");
+					pPlayer->DestroyItemCount(38186, kosten, true);
+					pPlayer->GetSession()->SendNotification("Dir wurden 90 Astralekredite abgezogen und du bist 10 Level hoeher");
 					return true;
 				}
 
 				else
 				{
-					pPlayer->GetSession()->SendNotification("Du hast leider keine 90 Astralenkredit");
+					pPlayer->GetSession()->SendNotification("Du hast leider keine 90 Astralen Kredite");
 					return false;
 				}
 			}
+
 			else
 			{
-				pPlayer->GetSession()->SendNotification("Du bist schon über Level 70!");
+				pPlayer->GetSession()->SendNotification("Du bist schon ueber Level 70!");
 				return true;
 			}
+
 		}break;
 
 	
@@ -119,13 +123,13 @@ public:
 				{
 					pPlayer->SetLevel(80);
 					pPlayer->DestroyItemCount(38186, kosten, true);
-					pPlayer->GetSession()->SendNotification("Dir wurden 800 Astralekredite abgezogen und du bist 1 Level höher");
+					pPlayer->GetSession()->SendNotification("Dir wurden 800 Astralekredite abgezogen und du bist nun Level 80 hoeher");
 					return true;
 				}
 
 				else
 				{
-					pPlayer->GetSession()->SendNotification("Du hast leider keine 800 Astralenkredit");
+					pPlayer->GetSession()->SendNotification("Du hast leider keine 800 Astralen Kredite");
 					return false;
 				}
 			

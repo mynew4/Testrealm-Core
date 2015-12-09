@@ -40,9 +40,7 @@ public: br_levelNPC() : CreatureScript("br_levelNPC"){ }
 
 		bool OnGossipHello(Player* pPlayer, Creature* _creature) {
 
-
-			pPlayer->ADD_GOSSIP_ITEM(7, "Ich würde gern 1 AstraleKredit gegen Level eintauschen.", GOSSIP_SENDER_MAIN, 0);
-
+			pPlayer->ADD_GOSSIP_ITEM(7, "Ich wuerde gerne 1 Astralen Kredit gegen 1 Level eintauschen.", GOSSIP_SENDER_MAIN, 0);
 
 			pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 			return true;
@@ -64,31 +62,34 @@ public: br_levelNPC() : CreatureScript("br_levelNPC"){ }
 					uint16 levelb = levela + 1;
 
 					if (pPlayer->HasItemCount(38186, 1, false))
-							{
+					{
 						pPlayer->DestroyItemCount(38186, 1, true);
 						pPlayer->SetLevel(levelb);
 						return true;
-							}
-					else
-								{
+					}
+
+					else {
+								
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du hast nicht genug AstraleKredite.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du hast nicht genug Astrale Kredite.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
-								}
+					}
+
 				}
+				
 				else
-						{
+				{
 					pPlayer->GetGUID();
 					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du bist doch schon Level 80.",
 						pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					return true;
-						}
+				}
 
 				return true;
-			}
+			}break;
 			
 			}
 
