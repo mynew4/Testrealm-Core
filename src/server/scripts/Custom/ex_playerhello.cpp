@@ -796,7 +796,11 @@ public:
 				time(&sek);
 				uint32 zeit = time(&sek);
 				
-				
+				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
+					"(nachricht,player, guid, datum)"
+					"VALUES ('%s', '%s','%u','%u')",
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+
 				std::ostringstream uu;
 				std::ostringstream tt;
 				std::ostringstream vv;
@@ -818,14 +822,16 @@ public:
 					vv << ChatHandler(player->GetSession()).GetNameLink() << "ist schon " << anzahl << " Mal aufgefallen. Spieler sollte uberprueft werden.";
 				}
 
-				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-					"(nachricht,player, guid, datum)"
-					"VALUES ('%s', '%s','%u','%u')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
-
-
+				else {
+					return;
+				}
+				return;
 				
-			}	
+			}
+
+			else {
+				return;
+			}
 	}
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
