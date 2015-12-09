@@ -27,7 +27,15 @@
 #include <stdlib.h>
 #include "Guild.h"
 
+enum wort 
+{ 
 
+Frostmourne,
+Misan, 
+Misantrop, 
+ 
+
+};
 
 
 class Announce_NewPlayer : public PlayerScript
@@ -612,6 +620,64 @@ public:
 
 
 
+class Chatlog : public PlayerScript
+{
+
+public:
+	Chatlog() : PlayerScript("Chatlog") { }
+
+
+	void chatlog(Player* player, std::string nachricht) {
+
+		if (nachricht.find(Frostmourne) != std::string::npos) {
+			std::ostringstream ss;
+			ss << "|cff54b5ffFremdwerbung wurde entdeckt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
+			sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
+			
+			time_t sek;
+			time(&sek);
+			uint32 zeit = time(&sek);
+			
+			CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
+				"(nachricht,spieler, guid,datum)"
+				"VALUES ('%s', '%s', ''%u','%u'')",
+				nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+
+		}
+
+	}
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
+	
+		chatlog(player->GetSession()->GetPlayer(), msg);
+	
+	}
+
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Player* /*receiver*/) { 
+	
+	
+	}
+
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Group* /*group*/) { 
+	
+	
+	}
+
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Guild* /*guild*/) { 
+	
+	
+	}
+
+
+	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& /*msg*/, Channel* /*channel*/) { 
+	
+	
+	}
+};
+
 
 void AddSC_Announce_NewPlayer()
 {
@@ -620,4 +686,5 @@ void AddSC_Announce_NewPlayer()
 	new Shutdown();
 	new DuelLog();
 	new GMIsland();
+	new Chatlog();
 }
