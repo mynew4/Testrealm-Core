@@ -437,9 +437,9 @@ public:
 			std::ostringstream tt;
 
 			uu << "Eintrag mit dem Namen: " << eingabe << " vorhanden.";
-			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
-
 			tt << "Es sind: " << anzahl << " Eintraege vorhanden. Uberpruefung ist sinnvoll.";
+			
+			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 			sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 			
 			return true;
