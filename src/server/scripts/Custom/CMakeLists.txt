@@ -46,7 +46,8 @@ set(scripts_STAT_SRCS
   Custom/sb_uebung.cpp
   Custom/sb_worldevent.cpp
   Custom/br_uebung.cpp
-
+  Custom/br_levelNPC.cpp
+  
   ${scripts_STAT_SRCS}
 #  ${sources_Custom}
   Custom/Transmog/Transmogrification.h
