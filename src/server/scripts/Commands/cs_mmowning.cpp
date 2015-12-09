@@ -436,8 +436,10 @@ public:
 			std::ostringstream uu;
 			std::ostringstream tt;
 
-
-			tt << "Es sind: " << anzahl << " Einträge vorhanden. Uberpruefung ist sinnvoll.";
+			uu << "Eintrag mit dem Namen: " << eingabe << " vorhanden.";
+			tt << "Es sind: " << anzahl << " Eintraege vorhanden. Uberpruefung ist sinnvoll.";
+			
+			sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 			sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
 			
 			return true;
