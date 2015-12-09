@@ -626,7 +626,7 @@ public:
 
 		const uint8 cheksSize = 13;
 		std::string checks[cheksSize];
-		checks[0] = "Frostmourne";
+		checks[0] = "at";
 		checks[1] = "frostmourne";
 		checks[2] = "dyndns";
 		checks[3] = "no-ip";
