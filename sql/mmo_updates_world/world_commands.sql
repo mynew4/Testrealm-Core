@@ -58,8 +58,13 @@ UPDATE `command` SET `permission`='195' WHERE `name`='gm ingame';
 DELETE FROM command WHERE `name`='tester';
 INSERT INTO `command` (`name`, `permission`, `help`) VALUES ('tester', 193, 'Syntax: .testing. Bereitet deinen Char auf einen Test vor.');   
 
+/* ITEM CODE BEFEHL */
 DELETE FROM command WHERE `name`='gutschein';
 INSERT INTO `command` (`name`, `permission`, `help`) VALUES ('gutschein', 195, '');   
 
 DELETE FROM command WHERE `name`='generate';
 INSERT INTO `command` (`name`, `permission`, `help`) VALUES ('generate', 195, '');   
+
+/* Fremdwerbung */
+DELETE FROM command WHERE `name`='werbung';
+INSERT INTO `command` (`name`, `permission`, `help`) VALUES ('werbung', 195, '');   
