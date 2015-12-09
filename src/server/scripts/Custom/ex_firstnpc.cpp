@@ -187,6 +187,7 @@ class npc_first_char : public CreatureScript
 						pPlayer->ADD_GOSSIP_ITEM(7, "Ich moechte einen anderen Charakter ausstatten lassen.", GOSSIP_SENDER_MAIN, 8);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Ein Spieler mit der selben IP moechte eine Charakteraufwertung! Wie geht das?", GOSSIP_SENDER_MAIN, 9);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Was bedeutet Level 80 Equipment?", GOSSIP_SENDER_MAIN, 11);
+						pPlayer->ADD_GOSSIP_ITEM(7, "Was ist das Gutschein generieren?", GOSSIP_SENDER_MAIN, 8000);
 						pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 						return true;
 					}break;
@@ -240,7 +241,17 @@ class npc_first_char : public CreatureScript
 					case 11:
 					{
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System]\nLevel 80 Equipment bedeutet, dass ihr Euch fuer 2000 Gold Level 80 Equipment kaufen koennt. Dies kann mit jedem Character benutzt werden.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System]\nLevel 80 Equipment bedeutet, dass ihr Euch fuer 5000 Gold Level 80 Equipment kaufen koennt. Dies kann mit jedem Character benutzt werden.",
+							pPlayer->GetName());
+						pPlayer->PlayerTalkClass->SendCloseGossip();
+						return true;
+					}
+
+
+					case 8000:
+					{
+						pPlayer->GetGUID();
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System]\nFuer 5000 Gold koennt ihr Euch einen Gutscheincode generieren, welcher Euch direkt zugesendet wird. Es gibt dort komplett zufallsgenerierte Belohnungen.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;

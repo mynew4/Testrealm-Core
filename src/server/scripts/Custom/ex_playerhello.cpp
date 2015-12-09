@@ -648,17 +648,19 @@ public:
 				time(&sek);
 				uint32 zeit = time(&sek);
 				
-				nachricht = "";
-
+				
+				std::ostringstream uu;
 				std::ostringstream tt;
 				tt << "|cff54b5ffFremdwerbung wurde erkannt von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-				sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
+				uu << "Wort das entdeckt wurde" << checks[i];
+				sWorld->SendGMText(LANG_GM_BROADCAST, uu.str().c_str());
 
 
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid, datum)"
 					"VALUES ('%s', '%s','%u','%u')",
 					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), zeit);
+				nachricht = "";
 				return nachricht;
 
 
@@ -668,6 +670,8 @@ public:
 
 	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
 		chatlog(player->GetSession()->GetPlayer(), msg);		
+		
+
 	}
 
 
