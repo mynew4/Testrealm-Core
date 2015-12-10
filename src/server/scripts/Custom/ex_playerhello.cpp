@@ -173,21 +173,6 @@
 #define MSG_COLOR_WHITESMOKE           "|cFFF5F5F5"
 #define MSG_COLOR_YELLOW               "|cFFFFFF00"
 
-class FBEvent : public PlayerScript
-{
-
-public:
-	FBEvent() : PlayerScript("FBEvent") {}
-
-	void OnCreate(Player* player) {
-		
-		if(player->GetSession()->GetAccountId() == 1){
-			player->SetLevel(80);
-			return;
-		}
-	}
-
-};
 
 
 
@@ -792,26 +777,26 @@ public:
 		checks[3] = "bigfamily";
 		checks[4] = "castle-wow";
 		checks[5] = "mwow";
-		checks[6] = "Maxwow";
-		checks[7] = "Hellscream WoW";
-		checks[8] = "Soulwow";
-		checks[9] = "AdeX";
-		checks[10] = "Eternyum";
-		checks[11] = "Eternal";
-		checks[12] = "Back2Basics";
-		checks[13] = "Laenalith";
-		checks[14] = "Monster wow";
-		checks[15] = "Rising-Gods";
-		checks[16] = "Privat-WoW-Server";
-		checks[17] = "Ice-WoW";
-		checks[18] = "Land of Elves";
-		checks[19] = "SolaceWOW";
-		checks[20] = "World of Paranoid";
-		checks[21] = "Buzzteria";
+		checks[6] = "maxwow";
+		checks[7] = "hellscream wow";
+		checks[8] = "soulwow";
+		checks[9] = "adex";
+		checks[10] = "eternyum";
+		checks[11] = "eternal";
+		checks[12] = "back2basics";
+		checks[13] = "laenalith";
+		checks[14] = "monster wow";
+		checks[15] = "rising-gods";
+		checks[16] = "privat-woW-server";
+		checks[17] = "ice-wow";
+		checks[18] = "land of elves";
+		checks[19] = "solacewow";
+		checks[20] = "world of paranoid";
+		checks[21] = "buzzteria";
 		checks[22] = "genesis";
-		checks[23] = "Fantasy";
+		checks[23] = "fantasy";
 		checks[24] = "heroes";
-		checks[25] = "stormbalde";
+		checks[25] = "stormblade";
 		
 
 		for (int i = 0; i < cheksSize; ++i)
@@ -877,7 +862,6 @@ public:
 
 void AddSC_Announce_NewPlayer()
 {
-	new FBEvent();
 	new Announce_NewPlayer();
 	new DoupleXP();
 	new Shutdown();
