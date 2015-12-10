@@ -30,10 +30,7 @@
 #include "ArenaTeam.h"
 #include "ArenaScore.h"
 
-enum PlayerMovementType
-{
-Speed
-};
+
 
 class goldaufbank : public PlayerScript
 {
@@ -94,14 +91,16 @@ public:
 
 
 // Speed wieder normal setzen?
-class totlaufen : public PlayerScript
+class totlaufen : public UnitScript
 {
 
 public:
-	totlaufen() : PlayerScript("totlaufen") { }
+	totlaufen() : UnitScript("totlaufen") { }
 	
-	void OnPlayerKilledByCreature(Creature* /*killer*/, Player* pPlayer) 
+	void OnDamage(Unit* /*attacker*/, Unit*  /*victem*/, uint32& /*damage*/)
 	{
+		Player* pPlayer = pPlayer->GetSession()->GetPlayer();
+		
 		uint32 gildenid = pPlayer->GetGuildId();
 		if (gildenid == 0)
 		{
@@ -130,25 +129,6 @@ public:
 };
 
 
-class ruhestein : public PlayerScript
-{
-
-public:
-	ruhestein() : PlayerScript("ruhestein") { }
-
-	
-
-	void OnSpellCast(Player* pPlayer,Spell* 8690)
-{ 
-	{
-		
-		uint32 cCooldown = pPlayer->GetRuneCooldown(6948) * 0.5;
-		pPlayer->SetRuneCooldown(6948, cCooldown, true);
-
-		
-	}
-
-}; 
 
 
 
