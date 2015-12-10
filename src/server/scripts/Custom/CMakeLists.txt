@@ -17,26 +17,25 @@ set(scripts_STAT_SRCS
   Custom/ex_firstnpc.cpp
   Custom/ex_serucporter.cpp
   Custom/ex_eventnpc.cpp
-  Custom/boss_galadriel.cpp
-  Custom/boss_anna.cpp
+  Custom/ex_boss_galadriel.cpp
+  Custom/ex_boss_anna.cpp
   Custom/ex_racechange.cpp
-  Custom/Allianzboss.cpp
-  Custom/hordeboss.cpp
+  Custom/ex_allianzboss.cpp
+  Custom/ex_hordeboss.cpp
   Custom/ex_supportnpc.cpp
-  Custom/boss_orrig.cpp
-  Custom/boss_tolreos.cpp
-  Custom/boss_exitares_schatten.cpp
-  Custom/challenge.cpp
-  Custom/dark.cpp
-  Custom/boss_light.cpp
-  Custom/light_hardmode.cpp
-  Custom/dark2.cpp
+  Custom/ex_boss_orrig.cpp
+  Custom/ex_boss_tolreos.cpp
+  Custom/ex_boss_exitares_schatten.cpp
+  Custom/ex_challenge.cpp
+  Custom/ex_dark.cpp
+  Custom/ex_boss_light.cpp
+  Custom/ex_light_hardmode.cpp
+  Custom/ex_dark2.cpp
   Custom/ex_playerhello.cpp
   Custom/ex_halloween.cpp 
   Custom/ex_wandervolk.cpp
-  Custom/teleportitem.cpp
-  Custom/leandaria.cpp
-  Custom/raetsel.cpp
+  Custom/ex_teleportitem.cpp
+  Custom/ex_raetsel.cpp
   Custom/weihnachtsevent.cpp
   Custom/ex_commands.cpp
   Custom/ex_neujahrsevent.cpp
