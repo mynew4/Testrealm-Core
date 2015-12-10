@@ -35,7 +35,9 @@ enum Belohnungen
 	SARONITBARREN = 36913,
 	GOLDBARREN = 3577,
 	EISENBARREN = 3575,
-	URSARONIT = 49908
+	URSARONIT = 49908,
+	TRAUMSPLITTER = 34052,
+	AKRTISCHERPELZ = 44128
 };
 
 
@@ -44,17 +46,33 @@ class npc_first_char : public CreatureScript
 		public: npc_first_char() : CreatureScript("npc_first_char"){ }
 
 
+				void fixgutschein(Player* player, uint32 belohnung, uint32 anzahl, std::string grund ){
+
+					CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, belohnung, anzahl, 1, player->GetName());
+					Item* item = Item::CreateItem(belohnung, anzahl);
+					player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
+					SQLTransaction trans = CharacterDatabase.BeginTransaction();
+					item->SaveToDB(trans);
+					MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
+						.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+					CharacterDatabase.CommitTransaction(trans);
+					DBeintrag(player->GetSession()->GetPlayer(), "fixgutschein");
+					return;
+				}
+
+
 				void gutscheinzusammenstellen(Player* player, uint32 belohnung, uint32 anzahl, std::string str){
 
 					CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, belohnung, anzahl, 0);
 					std::ostringstream ss;
-					ss << "Dein Code lautet:" << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
+					ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
 					player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
 					SQLTransaction trans = CharacterDatabase.BeginTransaction();
 					MailDraft("Dein Gutscheincode", ss.str().c_str())
 						.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 					CharacterDatabase.CommitTransaction(trans);
-
+					DBeintrag(player->GetSession()->GetPlayer(), "Gutschein zum verschenken");
+					return;
 				}
 
 
@@ -668,14 +686,16 @@ class npc_first_char : public CreatureScript
 							uint32 anzahl = 1 + (std::rand() % (5 - 1 + 1));
 
 							if (r % 5 == 0){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, anzahl, 1, pPlayer->GetName());
+								fixgutschein(pPlayer->GetSession()->GetPlayer(), ASTRALER_KREDIT, anzahl,grund);
+
+								/* CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, ASTRALER_KREDIT, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
 								item->SaveToDB(trans);
 								MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
 									.SendMailTo(trans, MailReceiver(pPlayer, pPlayer->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-								CharacterDatabase.CommitTransaction(trans);
+								CharacterDatabase.CommitTransaction(trans);*/
 							}
 
 							if (r % 5 == 1){
@@ -689,37 +709,43 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 2){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, anzahl, 1, pPlayer->GetName());
+								fixgutschein(pPlayer->GetSession()->GetPlayer(), FROSTMARKEN, anzahl, grund);
+
+								/* CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, FROSTMARKEN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(FROSTMARKEN, 2);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
 								item->SaveToDB(trans);
 								MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
 									.SendMailTo(trans, MailReceiver(pPlayer, pPlayer->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-								CharacterDatabase.CommitTransaction(trans);
+								CharacterDatabase.CommitTransaction(trans); */
 							}
 
 							if (r % 5 == 3){
 								
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, anzahl, 1, pPlayer->GetName());
+								fixgutschein(pPlayer->GetSession()->GetPlayer(), TRIUMPHMARKEN, anzahl, grund);
+
+								/* CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TRIUMPHMARKEN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(TRIUMPHMARKEN, 4);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
 								item->SaveToDB(trans);
 								MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
 									.SendMailTo(trans, MailReceiver(pPlayer, pPlayer->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-								CharacterDatabase.CommitTransaction(trans);
+								CharacterDatabase.CommitTransaction(trans);*/
 							}
 
 							if (r % 5 == 4){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TITANSTAHLBARREN, anzahl, 1, pPlayer->GetName());
+								fixgutschein(pPlayer->GetSession()->GetPlayer(), TITANSTAHLBARREN, anzahl, grund);
+
+								/*CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, TITANSTAHLBARREN, anzahl, 1, pPlayer->GetName());
 								Item* item = Item::CreateItem(ASTRALER_KREDIT, 5);
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
 								item->SaveToDB(trans);
 								MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
 									.SendMailTo(trans, MailReceiver(pPlayer, pPlayer->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-								CharacterDatabase.CommitTransaction(trans);
+								CharacterDatabase.CommitTransaction(trans);*/
 							}
 						}
 
@@ -729,9 +755,9 @@ class npc_first_char : public CreatureScript
 					case 25:
 					{
 						pPlayer->PlayerTalkClass->ClearMenus();
-						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein generieren [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 23);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Level 80 Equipment. [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 10);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Kosten: 3000 Gold]", GOSSIP_SENDER_MAIN, 12);
+						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein generieren [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 23);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein zum Verschenken generieren [Kosten: Premium 5000 / Normal 10.000]", GOSSIP_SENDER_MAIN, 24);
 						
 						
@@ -814,8 +840,16 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 10 == 7){
-
 								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), EISENBARREN, anzahl, str);
+								
+							}
+
+							if (r % 10 == 8){
+								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), TRAUMSPLITTER, anzahl, str);
+							}
+
+							if (r % 10 == 9){
+								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), AKRTISCHERPELZ, anzahl, str);
 							}
 
 
