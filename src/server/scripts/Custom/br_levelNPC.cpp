@@ -43,12 +43,9 @@ public: br_levelNPC() : CreatureScript("br_levelNPC"){ }
 			pPlayer->ADD_GOSSIP_ITEM(7, "Ich wuerde gerne 1 Astralen Kredit gegen 1 Level eintauschen.", GOSSIP_SENDER_MAIN, 0);
 
 
-			if (pPlayer->GetSession()->isPremium()) 
-
+			if (pPlayer->GetSession()->IsPremium()) 
 			{
-
-				pPlayer->ADD_GOSSIP_ITEM(7, "Ich moechte mein Level mit 1 Astralen Kredit um 15 level erhoehen.", GOSSIP_SENDER_MAIN, 1);
-			
+				pPlayer->ADD_GOSSIP_ITEM(7, "Ich moechte mein Level mit 1 Astralen Kredit um 15 level erhoehen.", GOSSIP_SENDER_MAIN, 1);	
 			}
 
 
