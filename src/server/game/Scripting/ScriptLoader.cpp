@@ -138,9 +138,6 @@ void AddSC_ex_commands();
 //Neujahrsevent
 void AddSC_neujahrsevent();
 
-//Therakin
-void AddSC_therakin();
-
 //gildenhausvendor
 void AddSC_gildenvendor();
 
@@ -898,8 +895,7 @@ void AddCommandScripts()
 	AddSC_ex_commands();
 	//Neujahrsevent
 	AddSC_neujahrsevent();
-	//boss therakin
-	AddSC_therakin();
+
 
 	//gildenhausvendor
 	AddSC_gildenvendor();
