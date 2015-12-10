@@ -99,8 +99,8 @@ class totlaufen : public PlayerScript
 
 public:
 	totlaufen() : PlayerScript("totlaufen") { }
-
-	void tot(Player* pPlayer)
+	
+	void OnPlayerKilledByCreature(Creature* /*killer*/, Player* pPlayer) 
 	{
 		uint32 gildenid = pPlayer->GetGuildId();
 		if (gildenid == 0)
@@ -109,9 +109,9 @@ public:
 		}
 		else
 		{
-			if (pPlayer->isDead == true)
+			if (pPlayer->isDead() == true)
 			{
-				if (pPlayer->GetSession()->IsPremium() == true)
+				if (pPlayer->GetSession()->IsPremium())
 				{
 					pPlayer->SetSpeed(MOVE_RUN, 4, true);
 				}
@@ -136,20 +136,19 @@ class ruhestein : public PlayerScript
 public:
 	ruhestein() : PlayerScript("ruhestein") { }
 
-	void cd_ruhestein(Player* pPlayer)
-	{
-		if (pPlayer->HasItemCount(6948, 1, true))
-		{
-			pPlayer->SetRuneCooldown(6948, );
-		}
+	
 
-		else
-		{
-			return;
-		}
+	void OnSpellCast(Player* pPlayer,Spell* 8690)
+{ 
+	{
+		
+		uint32 cCooldown = pPlayer->GetRuneCooldown(6948) * 0.5;
+		pPlayer->SetRuneCooldown(6948, cCooldown, true);
+
+		
 	}
 
-};
+}; 
 
 
 
