@@ -147,6 +147,9 @@ void AddSC_gildenvendor();
 //Worldevent
 void AddSC_sb_worldevent();
 
+//sturm übungsnpc
+void AddSC_sb_uebung();
+
 #ifdef SCRIPTS
 //world
 void AddSC_areatrigger_scripts();
@@ -908,6 +911,9 @@ void AddCommandScripts()
 
 	//worldevent
 	AddSC_sb_worldevent();
+
+	//sturms übungsnpc
+	AddSC_sb_uebung();
 }
 
 
