@@ -25,19 +25,19 @@ class fake_commandscript : public CommandScript
 public:
    fake_commandscript() : CommandScript("fake_commandscript") { }
 
-   ChatCommand* GetCommands() const override
+   std::vector<ChatCommand> GetCommands() const override
    {
-       ChatCommand static fakeCommandTable[] =
+	   static std::vector<ChatCommand> fakeCommandTable =
        {
-           { "account",  SEC_GAMEMASTER,   true, &HandleFakeAccount,  "", NULL },
-           { "player",   SEC_GAMEMASTER,   true,  &HandleFakePlayer,  "", NULL },
-           { NULL,                    0,  false,               NULL,  "", NULL }
+           { "account",  SEC_GAMEMASTER,   true, &HandleFakeAccount,  "" },
+           { "player",   SEC_GAMEMASTER,   true,  &HandleFakePlayer,  "" },
+           { NULL,                    0,  false,               NULL,  "" }
        };
 
-       ChatCommand static commandTable[] =
+	   static std::vector<ChatCommand> commandTable =
        {
            { "fake",    SEC_GAMEMASTER,  true,                NULL,  "", fakeCommandTable },
-           { NULL,                   0,  false,               NULL,  "",             NULL }
+           { NULL,                   0,  false,               NULL,  ""}
        };
 
        return commandTable;
