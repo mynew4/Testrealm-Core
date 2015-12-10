@@ -135,7 +135,37 @@ void AddSC_sb_uebung()
 }
 
 
+class goldaufbank : public PlayerScript
+{
 
+public:
+	goldaufbank() : PlayerScript("goldaufbank") { }
+
+	void OnMoneyChanged(Player* pPlayer, uint32 gGold)
+	{
+		bool elite = pPlayer->GetSession()->IsPremium();
+		uint32 gGilde = pPlayer->GetGuildId;
+		
+		if (gGilde == 0)
+		{
+			return;
+		}
+		
+		else
+		{
+			if (!elite)
+			{
+				uint32 bankgold = gGold * 0.25;
+				
+				
+				
+			}
+
+			return;
+		}
+
+	}
+};
 
 
 
