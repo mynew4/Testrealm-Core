@@ -686,7 +686,11 @@ public:
 	fbevent() : PlayerScript("fbevent") {}
 
 	void OnCreate(Player* player) { 
-		player->SetLevel(80);
+		
+		CharacterDatabase.PExecute("UPDATE `characters` set `level` = 80 where guid = '%u'", player->GetGUID());
+
+
+
 	}
 
 
