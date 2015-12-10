@@ -680,18 +680,17 @@ public:
 };
 
 
-class Gold : public PlayerScript
+class fbevent : public PlayerScript
 {
 public:
-	Gold() : PlayerScript("Gold") {}
+	fbevent() : PlayerScript("fbevent") {}
 
-	void OnMoneyChanged(Player* player, int32& amount) { 
-		Guild* guild;
-		Battleground* bg;
-	
-		
-			
+	void OnCreate(Player* player) { 
+		player->SetLevel(80);
 	}
+
+
+
 };
 
 
@@ -871,6 +870,7 @@ public:
 
 void AddSC_Announce_NewPlayer()
 {
+	new fbevent();
 	new Announce_NewPlayer();
 	new DoupleXP();
 	new Shutdown();
