@@ -834,7 +834,7 @@ public:
 		checks[30] = "wow";
 		
 
-		for (int i = 0; i < cheksSize; ++i)
+		for (uint32 i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
