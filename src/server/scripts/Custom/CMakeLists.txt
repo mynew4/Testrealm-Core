@@ -18,7 +18,6 @@ set(scripts_STAT_SRCS
   Custom/ex_serucporter.cpp
   Custom/ex_eventnpc.cpp
   Custom/boss_galadriel.cpp
-  Custom/boss_tyranium.cpp
   Custom/boss_anna.cpp
   Custom/ex_racechange.cpp
   Custom/Allianzboss.cpp

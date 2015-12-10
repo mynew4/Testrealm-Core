@@ -768,7 +768,7 @@ public:
 		std::string lower = nachricht;
 		std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
 
-		const uint32 cheksSize = 26;
+		const uint32 cheksSize = 31;
 		std::string checks[cheksSize];
 		checks[0] = "at";
 		checks[1] = "frostmourne";
