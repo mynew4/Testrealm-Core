@@ -116,12 +116,7 @@ class npc_first_char : public CreatureScript
 					pPlayer->ADD_GOSSIP_ITEM(7, "Gildenaufwertung 10er", GOSSIP_SENDER_MAIN, 2);
 					pPlayer->ADD_GOSSIP_ITEM(7, "Gildenaufwertung 25er", GOSSIP_SENDER_MAIN, 3);
 					pPlayer->ADD_GOSSIP_ITEM(7, "Features", GOSSIP_SENDER_MAIN, 25);
-					
-
-					if (pPlayer->IsGameMaster()){
-						pPlayer->ADD_GOSSIP_ITEM(7, "Aufwertungen einsehen", GOSSIP_SENDER_MAIN, 4);
-					}
-					
+										
 					pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 					return true;
 
@@ -294,6 +289,8 @@ class npc_first_char : public CreatureScript
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
 					}
+
+
 
 					case 2:
 					{
