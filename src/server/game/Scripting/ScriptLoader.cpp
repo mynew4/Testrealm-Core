@@ -888,8 +888,7 @@ void AddCommandScripts()
 	AddSC_port_item();
 	//wandervolk
 	AddSC_wandervolk();
-	//leandaria
-	//AddSC_leandaria();
+
 	//raetsel
 	//AddSC_raetsel();
 	AddSC_ex_commands();
