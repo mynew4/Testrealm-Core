@@ -2,6 +2,7 @@
 #include "time.h"
 #include <stdio.h>
 #include "Bag.h"
+#include "Mail.h"
 #include "Common.h"
 #include "Config.h"
 #include "DatabaseEnv.h"
@@ -24,6 +25,10 @@
 #include <sstream>
 #include <string>
 #include <stdlib.h>
+#include "Guild.h"
+#include "Arena.h"
+#include "ArenaTeam.h"
+#include "ArenaScore.h"
 
 
 class sb_uebung : public CreatureScript
@@ -125,14 +130,8 @@ public:
 
 
 
-
-
 };
 
-void AddSC_sb_uebung()
-{
-	new sb_uebung();
-}
 
 
 class goldaufbank : public PlayerScript
@@ -141,24 +140,33 @@ class goldaufbank : public PlayerScript
 public:
 	goldaufbank() : PlayerScript("goldaufbank") { }
 
-	void OnMoneyChanged(Player* pPlayer, uint32 gGold)
+
+	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
 		bool elite = pPlayer->GetSession()->IsPremium();
-		uint32 gGilde = pPlayer->GetGuildId;
-		
-		if (gGilde == 0)
+		uint32 gildenid = pPlayer->GetGuildId();
+
+		if (gildenid == 0)
 		{
 			return;
 		}
-		
+
 		else
 		{
 			if (!elite)
 			{
-				uint32 bankgold = gGold * 0.25;
-				
-				
-				
+
+				QueryResult ergebnis;
+				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
+				Field *feld = ergebnis->Fetch();
+				uint32 bankmoney = feld[0].GetUInt32();
+
+				uint32 zusatzbetrag = gGold * 0.25;
+
+				uint32 neubetrag = bankmoney + zusatzbetrag;
+
+				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", neubetrag, gildenid);
+
 			}
 
 			return;
@@ -166,6 +174,13 @@ public:
 
 	}
 };
+
+
+void AddSC_sb_uebung()
+{
+	new sb_uebung();
+}
+
 
 
 
