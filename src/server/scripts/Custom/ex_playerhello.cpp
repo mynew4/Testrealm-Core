@@ -173,21 +173,6 @@
 #define MSG_COLOR_WHITESMOKE           "|cFFF5F5F5"
 #define MSG_COLOR_YELLOW               "|cFFFFFF00"
 
-class FBEvent : public PlayerScript
-{
-
-public:
-	FBEvent() : PlayerScript("FBEvent") {}
-
-	void OnCreate(Player* player) {
-		
-		if(player->GetSession()->GetAccountId() == 1){
-			player->SetLevel(80);
-			return;
-		}
-	}
-
-};
 
 
 
@@ -877,7 +862,6 @@ public:
 
 void AddSC_Announce_NewPlayer()
 {
-	new FBEvent();
 	new Announce_NewPlayer();
 	new DoupleXP();
 	new Shutdown();
