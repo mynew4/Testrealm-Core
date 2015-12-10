@@ -51,94 +51,77 @@ public:
 		{
 		case 0:
 		{
-			uint16 levela = pPlayer->getLevel();
-
-			if (levela < 80)
-			{
-				uint16 levelb = levela + 1;
-				uint16 kosten = 10;
-
-				if (pPlayer->HasItemCount(38186, kosten))
-				{
-					pPlayer->SetLevel(levelb);
-					pPlayer->DestroyItemCount(38186, kosten, true);
-					pPlayer->GetSession()->SendNotification("Dir wurden 10 Astralekredite abgezogen und du bist 1 Level hoeher");
-					return true;
-				}
-
-				else
-				{
-					pPlayer->GetSession()->SendNotification("Du hast leider keine 10 Astralenkredite");
-					return false;
-				}
-			}
-
-			else
-			{
-				pPlayer->GetSession()->SendNotification("Du bist schon Level 80!");
-				return true;
-			}
+			
+			levelup(pPlayer, 10, 79, 1);
 
 		}break;
 
 		
 		case 1:
 		{
-			uint16 levela = pPlayer->getLevel();
-
-			if (levela <= 70)
-			{
-				uint16 levelb = levela + 10;
-				uint16 kosten = 90;
-
-				if (pPlayer->HasItemCount(38186, kosten, true))
-				{
-					pPlayer->SetLevel(levelb);
-					pPlayer->DestroyItemCount(38186, kosten, true);
-					pPlayer->GetSession()->SendNotification("Dir wurden 90 Astralekredite abgezogen und du bist 10 Level hoeher");
-					return true;
-				}
-
-				else
-				{
-					pPlayer->GetSession()->SendNotification("Du hast leider keine 90 Astralen Kredite");
-					return false;
-				}
-			}
-
-			else
-			{
-				pPlayer->GetSession()->SendNotification("Du bist schon ueber Level 70!");
-				return true;
-			}
+			
+			levelup(pPlayer, 90, 70, 10);
 
 		}break;
 
 	
 		case 2:
 		{
-			uint16 kosten = 800;
+			uint16 abstand = 80 - pPlayer->getLevel();
+			// abstand ist der abstand des Spielerlevels zu Level 80
 
-				if (pPlayer->HasItemCount(38186, kosten))
-				{
-					pPlayer->SetLevel(80);
-					pPlayer->DestroyItemCount(38186, kosten, true);
-					pPlayer->GetSession()->SendNotification("Dir wurden 800 Astralekredite abgezogen und du bist nun Level 80 hoeher");
-					return true;
-				}
-
-				else
-				{
-					pPlayer->GetSession()->SendNotification("Du hast leider keine 800 Astralen Kredite");
-					return false;
-				}
-			
+			levelup(pPlayer, 800, 80, abstand); 
 			
 		}break;
 
 
 		}
+		return true;
 	}
+
+
+
+	
+
+	void levelup(Player* pPlayer, uint16 kosten, uint16 levelanforderung, uint16 levelerhoehung)
+	
+		// kosten sind die Kredite die benötigt werden
+		// levelanforderung ist der Schwellenwert ab wann eine Aufwertung nicht durchgeführt wird
+		// levelerhoehung ist der Wert um den das level erhoeht wird
+
+	{
+
+		if (pPlayer->getLevel() <= levelanforderung)
+		{
+			
+			if (pPlayer->HasItemCount(38186, kosten, true))
+			{
+				pPlayer->SetLevel(pPlayer->getLevel() + levelerhoehung);
+				pPlayer->DestroyItemCount(38186, kosten, true);
+				pPlayer->GetSession()->SendNotification("Dir wurden Astralekredite abgezogen und dein Level wurde erhoeht");
+				return;
+			}
+
+			else
+			{
+				pPlayer->GetSession()->SendNotification("Du hast leider nicht genug Astralekredite");
+				return;
+			}
+		}
+
+		else
+		{
+			pPlayer->GetSession()->SendNotification("Dein Level ist schon zuhoch!");
+			return;
+		}
+
+
+	}
+
+
+
+
+
 
 };
 
