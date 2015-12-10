@@ -691,7 +691,7 @@ public:
 		bool active = ae.find(78) != ae.end();
 		
 		QueryResult anzahl;
-		anzahl = CharacterDatabase.PQuery("SELECT count(accountid) FROM fb_event WHERE guid = '%u'", player->GetGUID());
+		anzahl = CharacterDatabase.PQuery("SELECT count(accountid) FROM fb_event WHERE accountid = '%u'", player->GetSession()->GetAccountId());
 		Field *felder = anzahl->Fetch();
 		uint32 accountanzahl = felder[0].GetUInt32();
 		time_t sek;
