@@ -797,12 +797,21 @@ public:
 		checks[23] = "fantasy";
 		checks[24] = "heroes";
 		checks[25] = "stormblade";
+		checks[26] = "fm";
+		checks[27] = "b2b";
+		checks[28] = "molten";
+		checks[29] = "warmane";
+		checks[30] = "wow";
 		
 
 		for (int i = 0; i < cheksSize; ++i)
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
+				if (checks[i] == "Nicht an der Tastatur"){
+					return;
+				}
+
 				time_t sek;
 				time(&sek);
 				uint32 zeit = time(&sek);
