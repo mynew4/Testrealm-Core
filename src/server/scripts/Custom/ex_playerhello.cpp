@@ -686,10 +686,28 @@ public:
 	fbevent() : PlayerScript("fbevent") {}
 
 	void OnCreate(Player* player) { 
+
+		GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
+		bool active = ae.find(78) != ae.end();
 		
-		CharacterDatabase.PExecute("UPDATE `characters` set `level` = 80 where guid = '%u'", player->GetGUID());
+		QueryResult anzahl;
+		anzahl = CharacterDatabase.PQuery("SELECT count(accountid) FROM fb_event WHERE guid = '%u'", player->GetGUID());
+		Field *felder = anzahl->Fetch();
+		uint32 accountanzahl = felder[0].GetUInt32();
 
+		if (active == true && accountanzahl == 0){
+			CharacterDatabase.PExecute("UPDATE `characters` set `level` = 80 where guid = '%u'", player->GetGUID());
+			player->SetFullHealth();
+			QueryResult accountname = LoginDatabase.PQuery("SELECT username FROM account where id = %u", player->GetSession()->GetAccountId());
+			std::string accname = (*accountname)[0].GetString();
 
+			CharacterDatabase.PExecute("INSERT INTO fb_event (name,guid,accountname,accountid,date) Values ('%s','%u','%s','%u','%u')", player->GetSession()->GetPlayerName(),player->GetGUID() , accname, player->GetSession()->GetAccountId(), );
+		}
+		
+		else{
+			return;
+		}
+		
 
 	}
 
