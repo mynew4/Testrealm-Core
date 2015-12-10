@@ -390,6 +390,9 @@ static bool HandleVipHomeCommand(ChatHandler* handler, const char* /*args*/)
 		return true;
 	}			
 
+	chr->CastSpell(chr, 8690, true);
+	
+
     // remove CD and cast spell
 	//TODO: Needs fix
     //chr->RemoveSpellCooldown(8690,true);

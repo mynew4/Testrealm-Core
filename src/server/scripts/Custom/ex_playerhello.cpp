@@ -690,7 +690,8 @@ public:
 
 	void OnMoneyChanged(Player* player, int32& amount) { 
 		Guild* guild;
-		
+		Battleground* bg;
+	
 		
 			
 	}
