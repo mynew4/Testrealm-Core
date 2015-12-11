@@ -70,7 +70,7 @@ public:
 			{ "werbung", SEC_ADMINISTRATOR, false, &HandleWerbungCommand, "" },
 
 			//{ "tcrecon",        SEC_MODERATOR,      false, &HandleIRCRelogCommand,            "" },	
-			{ NULL, 0, false, NULL, "" }
+			
 		};
 
 		return commandTable;
