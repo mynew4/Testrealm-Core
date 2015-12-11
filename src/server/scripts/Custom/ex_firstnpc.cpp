@@ -44,6 +44,42 @@ enum Belohnungen
 class npc_first_char : public CreatureScript
 {
 		public: npc_first_char() : CreatureScript("npc_first_char"){ }
+    
+    
+        void levelup(Player* pPlayer, uint16 kosten, uint16 levelanforderung, uint16 levelerhoehung)
+    
+        // kosten sind die Kredite die benoetigt werden
+        // levelanforderung ist der Schwellenwert ab wann eine Aufwertung nicht durchgefuehrt wird
+        // levelerhoehung ist der Wert um den das level erhoeht wird
+    
+        {
+        
+            if (pPlayer->getLevel() <= levelanforderung)
+            {
+            
+                if (pPlayer->HasItemCount(38186, kosten, true))
+                {
+                    pPlayer->SetLevel(pPlayer->getLevel() + levelerhoehung);
+                    pPlayer->DestroyItemCount(38186, kosten, true);
+                    pPlayer->GetSession()->SendNotification("Die Level wurden dir gutgeschrieben.");
+                    return;
+                }
+            
+                else
+                {
+                    pPlayer->GetSession()->SendNotification("Du hast leider nicht genug Astrale Kredite um dir eine Levelaufwertung zu kaufen.");
+                    return;
+                }
+            }
+        
+            else
+            {
+                pPlayer->GetSession()->SendNotification("Dein Level ist zu hoch.");
+                return;
+            }
+        
+        
+        }
 
 
 				void fixgutschein(Player* player, uint32 belohnung, uint32 anzahl, std::string grund ){
@@ -561,7 +597,8 @@ class npc_first_char : public CreatureScript
 						pPlayer->ADD_GOSSIP_ITEM(7, "Verzauberkunst", GOSSIP_SENDER_MAIN, 21);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Inschriftenkunde", GOSSIP_SENDER_MAIN, 9000);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Ingenieurskunst", GOSSIP_SENDER_MAIN, 9001);
-
+                        pPlayer->ADD_GOSSIP_ITEM(7, "Zu den Features", GOSSIP_SENDER_MAIN, 25);
+                        
 						pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
 						return true;
 
@@ -720,7 +757,7 @@ class npc_first_char : public CreatureScript
 						pPlayer->ADD_GOSSIP_ITEM(7, "Berufe skillen [Kosten: 3000 Gold]", GOSSIP_SENDER_MAIN, 12);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein generieren [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 23);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein zum Verschenken generieren [Kosten: Premium 5000 / Normal 10.000]", GOSSIP_SENDER_MAIN, 24);
-						
+						pPlayer->ADD_GOSSIP_ITEM(7, "Level kaufen", GOSSIP_SENDER_MAIN, 9500);
 						
 						if (pPlayer->GetSession()->GetSecurity() == 3){	
 							
@@ -823,7 +860,55 @@ class npc_first_char : public CreatureScript
 								pPlayer->GetName());
 						}
 					
-					}break;
+                    }break;
+                            
+                    
+                    case 9500:
+                    {
+                        pPlayer->PlayerTalkClass->ClearMenus();
+                        pPlayer->ADD_GOSSIP_ITEM(7, "1 Level aufsteigen. Kosten: 10 Astrale Kredite", GOSSIP_SENDER_MAIN, 9501);
+                        pPlayer->ADD_GOSSIP_ITEM(7, "10 Level aufsteigen.  Kosten: 90 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9502);
+                        
+                        if (pPlayer->getLevel() < 80)
+                        {
+                            pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
+                            
+                        }
+                        
+                        pPlayer->ADD_GOSSIP_ITEM(7, "Zu den Features", GOSSIP_SENDER_MAIN, 25);
+                        pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
+                        return true;
+                        
+
+                    }break;
+                            
+                    case 9501:
+                    {
+                            
+                        levelup(pPlayer, 10, 79, 1);
+                        return true;
+                            
+                    }break;
+                            
+                        
+                    case 9502:
+                    {
+                        
+                        levelup(pPlayer, 90, 70, 10);
+                        return true;
+                            
+                    }break;
+                            
+                            
+                    case 9503:
+                    {
+                        uint16 abstand = 80 - pPlayer->getLevel();
+                        // abstand ist der abstand des Spielerlevels zu Level 80
+                            
+                        levelup(pPlayer, 800, 80, abstand);
+                        return true;
+                            
+                    }break;
 
 				
 

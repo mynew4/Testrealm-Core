@@ -68,6 +68,8 @@ public:
 			{ "gutschein", SEC_PLAYER, false, &HandleGutscheinCommand, "" },
 
 			{ "werbung", SEC_ADMINISTRATOR, false, &HandleWerbungCommand, "" },
+            
+            { "gutscheinerstellen", SEC_ADMINISTRATOR, false, &HandlegutscheinerstellenCommand, "" },
 
 			//{ "tcrecon",        SEC_MODERATOR,      false, &HandleIRCRelogCommand,            "" },	
 			
@@ -77,44 +79,104 @@ public:
 	}
 
 
+    void DBeintrag(Player* player, std::string grund){
+        CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
+                                   "(grund,spieler, guid)"
+                                   "VALUES ('%s', '%s', '%u')",
+                                   grund, player->GetSession()->GetPlayerName(),player->GetGUID());
+        return;
+        
+				}
+
+    
+    static bool HandleGambleCommand(ChatHandler* handler, const char* args)
+    {
+        Player *chr = handler->GetSession()->GetPlayer();
+        
+        char* px = strtok((char*)args, " ");
+        
+        if (!px)
+            return false;
+        
+        uint32 money = (uint32)atoi(px);
+        
+        if (chr->GetMoney() < money)
+        {
+            handler->PSendSysMessage("Du kannst kein Gold setzen welches du nicht hast!");
+            return true;
+        }
+        
+        else
+        {
+            if (money > 0)
+            {
+                //if (rand()%100 < 50)
+                if (rand() % 100 < 40)
+                {
+                    chr->ModifyMoney(money - (money / 10));
+                    //chr->ModifyMoney(money*2);
+                    handler->PSendSysMessage("Du hast gewonnen und deinen Einsatz verdoppelt");
+                }
+                else
+                {
+                    chr->ModifyMoney(-int(money));
+                    handler->PSendSysMessage("Du hast verloren");
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    
+    void gutscheinzusammenstellen(Player* player, uint32 belohnung, uint32 anzahl, std::string str){
+        
+        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, belohnung, anzahl, 0);
+        std::ostringstream ss;
+        ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
+        player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
+        SQLTransaction trans = CharacterDatabase.BeginTransaction();
+        MailDraft("Dein Gutscheincode", ss.str().c_str())
+        .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+        CharacterDatabase.CommitTransaction(trans);
+        DBeintrag(player->GetSession()->GetPlayer(), "Eventteamgutschein");
+        return;
+				}
+    
+    
 	//Allows your players to gamble for fun and prizes
-	static bool HandleGambleCommand(ChatHandler* handler, const char* args)
+	static bool HandlegutscheinerstellenCommand(ChatHandler* handler, const char* args)
 	{
-		Player *chr = handler->GetSession()->GetPlayer();
+        
+        Player* player = handler->GetSession()->GetPlayer();
+        
+        
+        uint32 item = uint32((char*)args);
+        
+        if (!itemCode)
+        {
+            player->GetSession()->SendNotification("Ohne Itemid geht das leider nicht!");
+            return true;
+        }
+        
+        
 
-		char* px = strtok((char*)args, " ");
-
-		if (!px)
-			return false;
-
-		uint32 money = (uint32)atoi(px);
-
-		if (chr->GetMoney() < money)
-		{
-			handler->PSendSysMessage("Du kannst kein Gold setzen welches du nicht hast!");
-			return true;
-		}
-
-		else
-		{
-			if (money > 0)
-			{
-				//if (rand()%100 < 50)
-				if (rand() % 100 < 40)
-				{
-					chr->ModifyMoney(money - (money / 10));
-					//chr->ModifyMoney(money*2);
-					handler->PSendSysMessage("Du hast gewonnen und deinen Einsatz verdoppelt");
-				}
-				else
-				{
-					chr->ModifyMoney(-int(money));
-					handler->PSendSysMessage("Du hast verloren");
-				}
-			}
-		}
-
-		return true;
+       
+        auto randchar = []() -> char
+        {
+            const char charset[] =
+            "0123456789"
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            "abcdefghijklmnopqrstuvwxyz";
+            const size_t max_index = (sizeof(charset) - 1);
+            return charset[rand() % max_index];
+        };
+        std::string str(10, 0);
+        std::generate_n(str.begin(), 10, randchar);
+        
+        gutscheinerstellen(player->GetSession()->GetPlayer(),item,5,str);
+        
+        
 	}
 
 	static bool HandleRouletteCommand(ChatHandler* handler, const char* args)
