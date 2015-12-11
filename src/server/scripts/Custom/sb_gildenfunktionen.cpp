@@ -90,15 +90,15 @@ public:
 }; 
 
 
-// Speed wieder normal setzen?
+/* Speed wieder normal setzen?
 class totlaufen : public UnitScript
 {
 
 public:
 	totlaufen() : UnitScript("totlaufen") { }
-	
-	void OnDamage(Unit* /*attacker*/, Unit*  /*victem*/, uint32& /*damage*/)
-	{
+*/	
+//	void OnDamage(Unit* /*attacker*/, Unit*  /*victem*/, uint32& /*damage*/)
+/*	{
 		Player* pPlayer = pPlayer->GetSession()->GetPlayer();
 		
 		uint32 gildenid = pPlayer->GetGuildId();
@@ -127,24 +127,40 @@ public:
 
 	}
 };
+*/
 
-
-
-
-
-class X : public PlayerScript
+/*
+class ruhestein : public PlayerScript
 {
 
 public:
-	X() : PlayerScript("X") { }
+	ruhestein() : PlayerScript("ruhestein") { }
+
+	// zZauber ist Variable für Ruhestein-zauber
+	// cCooldown ist Variable für Cooldown vom Ruhestein
+
+	void OnSpellCast(Player* pPlayer, Spell* spell, bool skipCheck)
+	{
+	SpellInfo const* zZauber;
+
+		if (zZauber->Id == 8690)
+		{
+			uint32 cCooldown = pPlayer->GetRuneCooldown(6948) * 0.5;
+			pPlayer->SetRuneCooldown(6948, cCooldown, true);
+
+		}
+	}
 
 };
+
+*/
+
 
 
 
 void AddSC_sb_uebung()
 {
 	new goldaufbank();
-	new totlaufen();
+
 }
 
