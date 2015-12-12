@@ -78,7 +78,7 @@ public:
 		return commandTable;
 	}
 
-    
+    //Allow player to loss all their money.
     static bool HandleGambleCommand(ChatHandler* handler, const char* args)
     {
         Player *chr = handler->GetSession()->GetPlayer();
