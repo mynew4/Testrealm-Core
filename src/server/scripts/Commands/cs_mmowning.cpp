@@ -174,7 +174,7 @@ public:
         std::string str(10, 0);
         std::generate_n(str.begin(), 10, randchar);
         
-        gutscheinerstellen(player->GetSession()->GetPlayer(),item,5,str);
+        gutscheinzusammenstellen(player->GetSession()->GetPlayer(),item,5,str);
         
         
 	}
