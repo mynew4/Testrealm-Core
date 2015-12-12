@@ -86,7 +86,7 @@ public:
                                    grund, player->GetSession()->GetPlayerName(),player->GetGUID());
         return;
         
-				}
+    }
 
     
     static bool HandleGambleCommand(ChatHandler* handler, const char* args)
@@ -141,7 +141,7 @@ public:
         CharacterDatabase.CommitTransaction(trans);
         DBeintrag(player->GetSession()->GetPlayer(), "Eventteamgutschein");
         return;
-				}
+    }
     
     
 	//Allows your players to gamble for fun and prizes
