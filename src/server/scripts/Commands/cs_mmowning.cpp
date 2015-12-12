@@ -151,7 +151,7 @@ public:
         Player* player = handler->GetSession()->GetPlayer();
         
         
-        uint32 item = uint32((char*)args);
+        uint32 item = atoi((char*)args);
         
         if (!itemCode)
         {
