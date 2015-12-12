@@ -78,16 +78,6 @@ public:
 		return commandTable;
 	}
 
-
-    void DBeintrag(Player* player, std::string grund){
-        CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
-                                   "(grund,spieler, guid)"
-                                   "VALUES ('%s', '%s', '%u')",
-                                   grund, player->GetSession()->GetPlayerName(),player->GetGUID());
-        return;
-        
-    }
-
     
     static bool HandleGambleCommand(ChatHandler* handler, const char* args)
     {
@@ -129,22 +119,9 @@ public:
     }
     
     
-    void gutscheinzusammenstellen(Player* player, uint32 belohnung, uint32 anzahl, std::string str){
-        
-        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, belohnung, anzahl, 0);
-        std::ostringstream ss;
-        ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
-        player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
-        SQLTransaction trans = CharacterDatabase.BeginTransaction();
-        MailDraft("Dein Gutscheincode", ss.str().c_str())
-        .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-        CharacterDatabase.CommitTransaction(trans);
-        DBeintrag(player->GetSession()->GetPlayer(), "Eventteamgutschein");
-        return;
-    }
     
     
-	//Allows your players to gamble for fun and prizes
+	//Gibt dem Eventteam die Moeglichkeit Gutscheine fuer Spieler zu erstellen.
 	static bool HandlegutscheinerstellenCommand(ChatHandler* handler, const char* args)
 	{
         
@@ -174,8 +151,23 @@ public:
         std::string str(10, 0);
         std::generate_n(str.begin(), 10, randchar);
         
-        gutscheinzusammenstellen(player->GetSession()->GetPlayer(),item,5,str);
+        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, 5, 0);
+        std::ostringstream ss;
+        ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
+        player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
+        SQLTransaction trans = CharacterDatabase.BeginTransaction();
+        MailDraft("Dein Gutscheincode", ss.str().c_str())
+        .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+        CharacterDatabase.CommitTransaction(trans);
+
         
+        
+        CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
+                                   "(grund,spieler, guid)"
+                                   "VALUES ('%s', '%s', '%u')",
+                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID());
+
+        return true;
         
 	}
 
