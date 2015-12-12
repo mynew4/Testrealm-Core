@@ -153,7 +153,7 @@ public:
         
         uint32 item = atoi((char*)args);
         
-        if (!itemCode)
+        if (!item)
         {
             player->GetSession()->SendNotification("Ohne Itemid geht das leider nicht!");
             return true;
