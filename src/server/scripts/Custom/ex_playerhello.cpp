@@ -185,10 +185,10 @@ public:
     
     void Belohnung(Player* player, uint32 zeit, uint32 guid,uint32 money){
     
-        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `guid`= '%u'", zeit, player->GetGUID());
+        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", zeit, player->GetGUID());
         if (!result){
             
-            uint32 uid = player->GetGUID();
+            
             SQLTransaction trans = CharacterDatabase.BeginTransaction();
             MailDraft("Ein Geschenk", "Das MMOwning-Team bedankt sich fuer deine Unterstuetzung mit einer kleinen Geste. Viel Spass weiterhin auf MMOwning World.").AddMoney(money * GOLD)
             .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
