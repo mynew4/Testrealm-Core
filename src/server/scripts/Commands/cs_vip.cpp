@@ -429,7 +429,7 @@ static bool HandleVipCapitalCommand(ChatHandler* handler, const char* /*args*/)
     return true;
 }
 
-static bool HandleVipCommand(ChatHandler* handler, char const* args)
+static bool HandleVipCommand(ChatHandler* handler, char const* /*args*/)
 {
 	uint32 accountId;
 /*

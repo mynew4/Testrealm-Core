@@ -44,7 +44,7 @@ public:
 		return true;
 	}
 
-	bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 /*uiSender*/, uint32 uiAction)
+	bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature*/, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{
@@ -77,13 +77,7 @@ class janarius : public CreatureScript
 public:
 	janarius() : CreatureScript("janarius") { }
 
-	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) {
-        return true;
-    }
 	
-	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/){
-        return true;
-    }
 };
 
 
@@ -109,7 +103,7 @@ public:
 		return true;
 	}
 
-	bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 /*uiSender*/, uint32 uiAction)
+	bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature*/, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{
@@ -155,7 +149,7 @@ public:
 		return true;
 	}
 
-	bool OnGossipSelect(Player * pPlayer, Creature * pCreature, uint32 /*uiSender*/, uint32 uiAction)
+	bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature */, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{

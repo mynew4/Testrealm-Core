@@ -153,8 +153,13 @@ public:
         
         CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, 5, 0);
         std::ostringstream ss;
+        std::ostringstream tt;
+        
         ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
         player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
+        
+        tt << "Gutscheincode: " << str;
+        handler->PSendSysMessage("Gutscheincode:", tt.str().c_str());
         SQLTransaction trans = CharacterDatabase.BeginTransaction();
         MailDraft("Dein Gutscheincode", ss.str().c_str())
         .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
