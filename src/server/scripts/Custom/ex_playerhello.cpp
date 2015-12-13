@@ -231,19 +231,7 @@ public:
 		if (time >= 1 /*36000*/ && time <= 71999){
             
             Belohnung(player->GetSession()->GetPlayer(), 10, player->GetGUID(), 250);
-            
-			/*QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
-		if (!result){
-				
-			uint32 uid = player->GetGUID();
-				SQLTransaction trans = CharacterDatabase.BeginTransaction();
-				MailDraft("Ein Geschenk", "Das MMOwning-Team bedankt sich fuer deine Unterstuetzung mit einer kleinen Geste. Viel Spass weiterhin auf MMOwning World.").AddMoney(250 * GOLD)
-					.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-				CharacterDatabase.CommitTransaction(trans);
-
-				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 10, player->GetName().c_str(), uid, 1);
-
-			}*/
+          
 		}
 
 		//20h

@@ -858,79 +858,9 @@ class npc_first_char : public CreatureScript
                         }
                         
 						if (pPlayer->HasEnoughMoney(10000 * GOLD) && !pPlayer->GetSession()->IsPremium()){
+                           
                             pPlayer->ModifyMoney(-10000 * GOLD);
-							
-							srand(time(NULL));
-							int r = rand();
-
-							
-							auto randchar = []() -> char
-							{
-								const char charset[] =
-									"0123456789"
-									"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-									"abcdefghijklmnopqrstuvwxyz";
-								const size_t max_index = (sizeof(charset) - 1);
-								return charset[rand() % max_index];
-							};
-							std::string str(10, 0);
-							std::generate_n(str.begin(), 10, randchar);
-							
-
-							uint32 anzahl = 1 + (std::rand() % (5 - 1 + 1));
-
-
-							if (r % 10 == 0){
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), ASTRALER_KREDIT, anzahl, str);
-								
-							}
-
-							if (r % 10 == 1){
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), TITANSTAHLBARREN, anzahl, str);
-											
-							}
-
-							if (r % 10 == 2){
-
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), FROSTMARKEN, anzahl, str);
-
-							}
-
-							if (r % 10 == 3){
-
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), TRIUMPHMARKEN, anzahl, str);
-								
-							}
-
-							if (r % 10 == 4){
-								
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), SARONITBARREN, anzahl, str);		
-							}
-
-							if (r % 10 == 5){
-								uint32 saroanzahl = 1 + (std::rand() % (2 - 1 + 1));
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), URSARONIT, saroanzahl, str);
-							}
-
-							if (r % 10 == 6){
-
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), GOLDBARREN, anzahl, str);
-							}
-
-							if (r % 10 == 7){
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), EISENBARREN, anzahl, str);
-								
-							}
-
-							if (r % 10 == 8){
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), TRAUMSPLITTER, anzahl, str);
-							}
-
-							if (r % 10 == 9){
-								gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), AKRTISCHERPELZ, anzahl, str);
-							}
-
-
+                            gutscheineverteilen(pPlayer->GetSession()->GetPlayer());
 
 						}
 							
