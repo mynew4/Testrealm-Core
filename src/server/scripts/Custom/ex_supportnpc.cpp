@@ -30,12 +30,13 @@ public:
 		bool OnGossipHello(Player* player, Creature* creature)
 	{
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es eine Erstaustattung?", GOSSIP_SENDER_MAIN, 0);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es einen Gildentransfer?", GOSSIP_SENDER_MAIN, 7);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie kann ich einen GM erreichen?", GOSSIP_SENDER_MAIN, 1);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Der Questcompleter hat mir nicht alle Items zugesendet. Was tun?", GOSSIP_SENDER_MAIN, 2);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Ich habe einen Fehler gefunden. Was tun?", GOSSIP_SENDER_MAIN, 3);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es hier Crossfaction?", GOSSIP_SENDER_MAIN, 4);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie schreibe ich im Worldchat?", GOSSIP_SENDER_MAIN, 5);
-		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert nicht bei mir.", GOSSIP_SENDER_MAIN, 6);
+		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert bei mir nicht.", GOSSIP_SENDER_MAIN, 6);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -48,11 +49,11 @@ public:
 				{
 					
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Ja, es gibt eine Erstaustattung. In jedem Startgebiet steht der entsprechende NPC. Es darf nur der erste Charakter ausgestattet werden.", pPlayer->GetName());
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Ja, es gibt eine Erstaustattung. In jedem Startgebiet steht der entsprechende NPC. Es darf und kann nur der erste Charakter ausgestattet werden.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Ja in den Startgebieten. Naehere Informationen auf der HP oder im Chatfenster.");
 					return true;
-				}
+                }break;
 
 				case 1:
 				{
@@ -61,7 +62,7 @@ public:
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Per Ticket, auf der Homepage, ueber den Launcher, oder ueber ein PN");
 					return true;
-				}
+                }break;
 
 				case 2:
 				{
@@ -70,16 +71,16 @@ public:
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Das ist bekannt und wird nicht erstattet. Genauere Informationen auf der Homepage.");
 					return true;
-				}
+                }break;
 
 				case 3:
 				{
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hast du einen Fehler gefunden, melde dich bitte ueber den Bugtracker. Da Entwickler nicht auf dem Liveserver spielen, lesen sie keine Tickets. Im Bugtracker bekommt ihr fuer eingereichte Daten 20 Punkte gutgeschrieben.", pPlayer->GetName());
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hast du einen Fehler gefunden, melde dich bitte ueber den Bugtracker. Da Entwickler nicht auf dem Liveserver spielen, lesen sie keine Tickets. Im Bugtracker koennt ihr den Bearbeitungszustand eurer Tickets jederzeit nachverfolgen.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Melde dich am besten über den Bugtracker. Entwickler werden keine Tickets lesen, da sie nicht auf dem Liveserver spielen.");
 					return true;
-				}
+                }break;
 
 				case 4:
 				{
@@ -88,16 +89,16 @@ public:
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Crossfaction spielen ist auf MMOwning nicht moeglich. Wir haben uns bewusst dagegen entschieden.");
 					return true;
-				}
+                }break;
 
 				case 5:
 				{
 					pPlayer->GetGUID();
 					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Oeffne dein Chatfenster und schreibe /join Horde bzw. /join Allianz um dem Fraktionschat beizutreten.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
-					pPlayer->GetSession()->SendAreaTriggerMessage("Oeffne dein Chatfenster un tippe .w gefolgt von deinem Text.");
+					pPlayer->GetSession()->SendAreaTriggerMessage("Oeffne dein Chatfenster und gib /join Horde bzw. /join Allianz ein.");
 					return true;
-				}
+                }break;
 
 				case 6:
 				{
@@ -106,7 +107,18 @@ public:
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Die Rampoquestreihe ist komplett per Questcompleter abschliessbar.");
 					return true;
-				}
+                }break;
+                    
+                
+                case 7:
+                {
+                    pPlayer->GetGUID();
+                    ChatHandler(pPlayer->GetSession()).PSendSysMessage("Einen 1:1 Gildentransfer gibt es nicht. Eine Aufwertung fuer neue Gilden ab 25 Spieler mit 251er Gear ist jedoch moeglich.", pPlayer->GetName());
+                    pPlayer->PlayerTalkClass->SendCloseGossip();
+                    pPlayer->GetSession()->SendAreaTriggerMessage("Einen 1:1 Transfer gibt es nicht. Aber eine Aufwertung fuer Gilden. Naehere Informationen gibt es auf der Homepage.");
+                    return true;
+                }break;
+
  
 				
 

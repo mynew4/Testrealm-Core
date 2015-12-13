@@ -34,7 +34,9 @@ public:
 
 	bool OnGossipHello(Player *pPlayer, Creature* _creature)
 	{
+       Quest const* quest;
 		pPlayer->ADD_GOSSIP_ITEM(7, "Ich moechte das MMOwning Weihnachten erleben.", GOSSIP_SENDER_MAIN, 0);
+        
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}
