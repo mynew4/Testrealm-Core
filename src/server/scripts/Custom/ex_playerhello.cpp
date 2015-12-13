@@ -185,7 +185,7 @@ public:
     
     void Belohnung(Player* player, uint32 zeit, uint32 guid,uint32 money){
     
-        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", zeit, player->GetGUID());
+        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `guid`= '%u'", zeit, player->GetGUID());
         if (!result){
             
             uint32 uid = player->GetGUID();
@@ -194,24 +194,23 @@ public:
             .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
             CharacterDatabase.CommitTransaction(trans);
             
-            CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", zeit, player->GetName().c_str(), uid, 1);
+            CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", zeit, player->GetName().c_str(), guid, 1);
             
         }
         
     }
     
     
-	void OnLogin(Player * player, bool online)
+	void OnLogin(Player * player, bool /*online*/)
 	{
 		std::ostringstream ss;
 		
-		uint32 guid = player->GetGUID();
+		
 		uint32 accountid = player->GetSession()->GetAccountId();
 
 
-		QueryResult accountres = CharacterDatabase.PQuery("SELECT account FROM characters WHERE guid = %u", guid);
-		uint32 accountresint = (*accountres)[0].GetUInt32();
-		QueryResult charresult = CharacterDatabase.PQuery("Select count(guid) From characters where account = '%u'", accountresint);
+		
+		QueryResult charresult = CharacterDatabase.PQuery("Select count(guid) From characters where account = '%u'", accountid);
 		uint32 charresultint = (*charresult)[0].GetUInt32();
 		
 		if (player->GetTotalPlayedTime() < 1 && charresultint == 1)
@@ -229,11 +228,11 @@ public:
 #pragma region
 
 		//10h
-		if (time >= 36000 && time <= 71999){
+		if (time >= 1 /*36000*/ && time <= 71999){
             
             Belohnung(player->GetSession()->GetPlayer(), 10, player->GetGUID(), 250);
             
-			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
+			/*QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
 		if (!result){
 				
 			uint32 uid = player->GetGUID();
@@ -244,7 +243,7 @@ public:
 
 				CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 10, player->GetName().c_str(), uid, 1);
 
-			}
+			}*/
 		}
 
 		//20h
