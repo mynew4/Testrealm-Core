@@ -182,6 +182,25 @@ class Announce_NewPlayer : public PlayerScript
 public:
 	Announce_NewPlayer() : PlayerScript("Announce_NewPlayer") {}	
 
+    
+    void Belohnung(Player* player, uint32 zeit, uint32 guid,uint32 money){
+    
+        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", zeit, player->GetGUID());
+        if (!result){
+            
+            uint32 uid = player->GetGUID();
+            SQLTransaction trans = CharacterDatabase.BeginTransaction();
+            MailDraft("Ein Geschenk", "Das MMOwning-Team bedankt sich fuer deine Unterstuetzung mit einer kleinen Geste. Viel Spass weiterhin auf MMOwning World.").AddMoney(money * GOLD)
+            .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+            CharacterDatabase.CommitTransaction(trans);
+            
+            CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", zeit, player->GetName().c_str(), uid, 1);
+            
+        }
+        
+    }
+    
+    
 	void OnLogin(Player * player, bool online)
 	{
 		std::ostringstream ss;
@@ -211,6 +230,9 @@ public:
 
 		//10h
 		if (time >= 36000 && time <= 71999){
+            
+            Belohnung(player->GetSession()->GetPlayer(), 10, player->GetGUID(), 250);
+            
 			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 10, player->GetGUID());
 		if (!result){
 				
@@ -227,6 +249,9 @@ public:
 
 		//20h
 		if (time >= 72000 && time <= 107999){
+            
+            Belohnung(player->GetSession()->GetPlayer(), 20, player->GetGUID(), 250);
+            
 			QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = '%u' AND `uid`= '%u'", 20, player->GetGUID());
 			if (!result){
 

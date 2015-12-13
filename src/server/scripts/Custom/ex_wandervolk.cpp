@@ -77,9 +77,13 @@ class janarius : public CreatureScript
 public:
 	janarius() : CreatureScript("janarius") { }
 
-	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) {}
+	bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) {
+        return true;
+    }
 	
-	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/){ }
+	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/){
+        return true;
+    }
 };
 
 
@@ -121,7 +125,7 @@ public:
 
 		case 1: {
 			pPlayer->GetGUID();
-			pPlayer->TeleportTo(0, 3174.49, -6000.48, 203.88, 0.27);
+			pPlayer->TeleportTo(0, 3174.49, -6000.48, 205.00, 0.27);
 			return true;
 		}break;
 
