@@ -93,7 +93,7 @@ public:
 				case 5:
 				{
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Oeffne dein Chatfenster und schreibe .w gefolgt von deinem gewuenschten Text. Bsp: .w hallo.", pPlayer->GetName());
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Oeffne dein Chatfenster und schreibe /join Horde bzw. /join Allianz um dem Fraktionschat beizutreten.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Oeffne dein Chatfenster un tippe .w gefolgt von deinem Text.");
 					return true;
@@ -102,7 +102,7 @@ public:
 				case 6:
 				{
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Die komplette Rampoquestreihe ist per Questcompleter abschliessbar. Bitte nutze diesen auch.", pPlayer->GetName());
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Die komplette Rampoquestreihe ist per Questcompleter abschliessbar. Bitte nutze diesen auch bevor du ein Ticket eroeffnest.", pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					pPlayer->GetSession()->SendAreaTriggerMessage("Die Rampoquestreihe ist komplett per Questcompleter abschliessbar.");
 					return true;
