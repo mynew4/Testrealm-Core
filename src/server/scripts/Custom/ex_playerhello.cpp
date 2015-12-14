@@ -703,10 +703,11 @@ public:
                 QueryResult zeit;
                 zeit = CharacterDatabase.PQuery("SELECT UNIX_TIMESTAMP(start_time) FROM characters");
                 
+                Field* fields = zeit->Fetch();
                 uint64 starttime = fields[0].GetUInt64();
                 time_t start_time = time_t(starttime);
                 
-                std::string zeitstring = TimeToTimestampStr(start_time).c_str());
+                std::string zeitstring = TimeToTimestampStr(start_time).c_str();
 				
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid,accid, datum)"
