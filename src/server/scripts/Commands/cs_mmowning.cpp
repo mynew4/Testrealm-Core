@@ -412,16 +412,12 @@ public:
 		}
 
         
-        QueryResult itemid = WorldDatabase.PQuery("SELECT `entry` FROM `item_template` WHERE `entry` = '%u'", itemCode);
+        
         
 		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt` FROM `item_codes` WHERE `code` = '%s'", itemCode);
-
-        if(!itemid){
-            player->GetSession()->SendNotification("Das Item scheint nicht zu existieren. Der Code wird daher abgelehnt");
-            return true;
-        }
-
-		if (result && itemid)
+        
+        
+		if (result)
 		{
 
 			Field* fields = result->Fetch();
@@ -429,6 +425,15 @@ public:
 			uint32 belohnung = fields[1].GetUInt32();
 			uint32 anzahl = fields[2].GetUInt32();
 			uint8 benutzt = fields[3].GetUInt8();
+            
+            
+            QueryResult itemid = WorldDatabase.PQuery("SELECT `entry` FROM `item_template` WHERE `entry` = '%u'", belohnung);
+            
+            if(!itemid){
+                player->GetSession()->SendNotification("Das Item scheint nicht zu existieren. Der Code wird daher abgelehnt");
+                return true;
+            }
+
 
 			if (benutzt == 0)
 			{
