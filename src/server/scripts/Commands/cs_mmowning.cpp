@@ -140,10 +140,7 @@ public:
         }
         
         
-            CharacterDatabase.PExecute("INSERT INTO eventteamlog "
-                                       "(player,guid, itemid)"
-                                       "VALUES ('%s', '%u', '%u')",
-                                       player->GetSession()->GetPlayerName(),player->GetGUID(),item);
+        
         
 
         
@@ -177,9 +174,14 @@ public:
         
         
         CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
-                                   "(grund,spieler, guid,gutscheincode)"
-                                   "VALUES ('%s', '%s', '%u','%s')",
-                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID(),str);
+                                   "(grund,spieler, guid)"
+                                   "VALUES ('%s', '%s', '%u')",
+                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID());
+        
+        CharacterDatabase.PExecute("INSERT INTO eventteamlog "
+                                   "(player,guid, itemid,gutscheincode)"
+                                   "VALUES ('%s', '%u', '%u', '%s')",
+                                   player->GetSession()->GetPlayerName(),player->GetGUID(),item,str);
 
         return true;
         
