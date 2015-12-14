@@ -38,6 +38,11 @@ class goldaufbank : public PlayerScript
 public:
 	goldaufbank() : PlayerScript("goldaufbank") { }
 
+	// gildenid -> GildenID des Spielers
+	// gGold -> Gold das der Spieler GRADE lootet
+	// gGoldBank -> Das Gold des Spielers auf der Gildenbank
+	// gGoldAdd -> 10% des gelootet Goldes als Betrag
+	// gGoldNew -> Der neue Bankbetrag der Guilde (inkl. der 10%)
 
 	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
@@ -57,13 +62,13 @@ public:
 				QueryResult ergebnis;
 				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
 				Field *feld = ergebnis->Fetch();
-				uint32 bankmoney = feld[0].GetUInt32();
+				uint32 gGoldBank = feld[0].GetUInt32();
 
-				uint32 zusatzbetrag = gGold * 0.10;
+				uint32 gGoldAdd = gGold * 0.10;
 
-				uint32 neubetrag = bankmoney + zusatzbetrag;
+				uint32 gGoldNew = gGoldBank + gGoldAdd;
 
-				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", neubetrag, gildenid);
+				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
 			}
 
@@ -73,13 +78,13 @@ public:
 				QueryResult ergebnis;
 				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
 				Field *feld = ergebnis->Fetch();
-				uint32 bankmoney = feld[0].GetUInt32();
+				uint32 gGoldBank = feld[0].GetUInt32();
 
-				uint32 zusatzbetrag = gGold * 0.20;
+				uint32 gGoldAdd = gGold * 0.20;
 
-				uint32 neubetrag = bankmoney + zusatzbetrag;
+				uint32 gGoldNew = gGoldBank + gGoldAdd;
 
-				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", neubetrag, gildenid);
+				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
 			}
 
@@ -90,44 +95,7 @@ public:
 }; 
 
 
-/* Speed wieder normal setzen?
-class totlaufen : public UnitScript
-{
 
-public:
-	totlaufen() : UnitScript("totlaufen") { }
-*/	
-//	void OnDamage(Unit* /*attacker*/, Unit*  /*victem*/, uint32& /*damage*/)
-/*	{
-		Player* pPlayer = pPlayer->GetSession()->GetPlayer();
-		
-		uint32 gildenid = pPlayer->GetGuildId();
-		if (gildenid == 0)
-		{
-			return;
-		}
-		else
-		{
-			if (pPlayer->isDead() == true)
-			{
-				if (pPlayer->GetSession()->IsPremium())
-				{
-					pPlayer->SetSpeed(MOVE_RUN, 4, true);
-				}
-
-				else
-				{
-					pPlayer->SetSpeed(MOVE_RUN, 4, true);
-				}
-
-			}
-
-			return;
-		}
-
-	}
-};
-*/
 
 /*
 class ruhestein : public PlayerScript

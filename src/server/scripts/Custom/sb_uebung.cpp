@@ -296,7 +296,7 @@ public:
 
 void AddSC_sb_uebung()
 {
-	new sb_uebung();
+	new sb_bossbelohnung();
 }
 
 
