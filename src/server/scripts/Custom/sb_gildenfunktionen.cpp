@@ -66,16 +66,19 @@ public:
 
 			if (!elite)
 			{
-				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf");
+				
+				Guild* guild;
+				uint32 bankgold = guild->GetBankMoney();
 
-				QueryResult ergebnis;
-				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
-				Field *feld = ergebnis->Fetch();
-				uint32 gGoldBank = feld[0].GetUInt32();
+				
+
+				pPlayer->GetSession()->SendNotification("DEBUG:");
 
 				uint32 gGoldAdd = gGold * 0.10;
 
-				uint32 gGoldNew = gGoldBank + gGoldAdd;
+				uint32 gGoldNew = bankgold + gGoldAdd;
+
+				
 
 				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
