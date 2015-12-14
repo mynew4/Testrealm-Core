@@ -35,7 +35,7 @@ public:
 	bool OnGossipHello(Player *pPlayer, Creature* _creature)
 	{
       
-        bool status = pPlayer->GetQuestRewardStatus(900000);
+        bool status = pPlayer->GetQuestRewardStatus(900001);
         if (status){
             pPlayer->ADD_GOSSIP_ITEM(7, "Teleportiert mich nach oben.", GOSSIP_SENDER_MAIN, 0);
         }
@@ -53,7 +53,7 @@ public:
 
 			case 0: {
                 //Port to upper position
-                pPlayer->TeleportTo(0, 0, 0, 0, 0);
+                pPlayer->TeleportTo(1,16219.61,16375.57,170.78,4.74);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				pPlayer->GetGUID();
 				return true;
@@ -85,7 +85,7 @@ public:
 
 	bool OnQuestReward(Player* player, Creature* /*creature*/, Quest const* quest, uint32 /*opt*/)
 	{
-		if (quest->GetQuestId() == 900000){   //Erste Quest
+		if (quest->GetQuestId() == 900001){   //Erste Quest
 			player->AddAura(155,player);  //Weihnachtswichtel
 		}
 		return true;

@@ -138,6 +138,9 @@ void AddSC_ex_commands();
 //Neujahrsevent
 void AddSC_neujahrsevent();
 
+//weihnachtsevent
+void AddSC_weihnachtsevent();
+
 //gildenhausvendor
 void AddSC_gildenvendor();
 
@@ -895,6 +898,8 @@ void AddCommandScripts()
 	//Neujahrsevent
 	AddSC_neujahrsevent();
 
+	//weihnachtsevent
+	AddSC_weihnachtsevent()
 
 	//gildenhausvendor
 	AddSC_gildenvendor();

@@ -454,3 +454,9 @@ UPDATE `item_template` SET `bonding`='1' WHERE `entry`='38186';
 UPDATE `item_template` SET `BagFamily`='2048' WHERE `entry`='38186';
 
 
+/* Weihnachtsevent */
+DELETE FROM `creature_queststarter` where `id` = 800065 and `quest` = 900000;
+DELETE FROM `creature_questender` where `id` = 800066 and `quest` = 900000;
+INSERT INTO `creature_queststarter` (`id`, `quest`) VALUES ('800065', '900000');
+INSERT INTO `creature_questender` (`id`, `quest`) VALUES ('800066', '900000');
+
