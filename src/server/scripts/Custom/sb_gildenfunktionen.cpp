@@ -47,6 +47,9 @@ public:
 	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
 		pPlayer->GetSession()->GetPlayer();
+
+		pPlayer->GetSession()->SendNotification("DEBUG: DEBUGMODUS AN");
+		
 		bool elite = pPlayer->GetSession()->IsPremium();
 		uint32 gildenid = pPlayer->GetGuildId();
 
@@ -57,8 +60,13 @@ public:
 
 		else
 		{
+
+			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf");
+
+
 			if (!elite)
 			{
+				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf");
 
 				QueryResult ergebnis;
 				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
@@ -71,10 +79,12 @@ public:
 
 				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
+				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
 			}
 
 			else
 			{
+				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf");
 
 				QueryResult ergebnis;
 				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
@@ -87,7 +97,11 @@ public:
 
 				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
+				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
+
 			}
+
+			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf beendet");
 
 			return;
 		}
