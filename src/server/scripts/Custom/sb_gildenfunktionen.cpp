@@ -141,7 +141,7 @@ public:
 
 
 
-void AddSC_sb_uebung()
+void AddSC_sb_gildenfunktionen()
 {
 	new goldaufbank();
 

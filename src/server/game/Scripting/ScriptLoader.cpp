@@ -151,7 +151,7 @@ void AddSC_gildenvendor();
 void AddSC_sb_worldevent();
 
 // GIldenfunktionen
-void AddSC_sb_uebung();
+void AddSC_sb_gildenfunktionen();
 
 #ifdef SCRIPTS
 //world
@@ -916,7 +916,7 @@ void AddCommandScripts()
 	AddSC_sb_worldevent();
 
 	//gildenfunktionen
-	AddSC_sb_uebung();
+	AddSC_sb_gildenfunktionen();
 
 }
 
