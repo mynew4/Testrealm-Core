@@ -195,6 +195,8 @@ public:
             CharacterDatabase.CommitTransaction(trans);
             
             CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", zeit, player->GetName().c_str(), guid, 1);
+            player->SaveToDB();
+            return;
             
         }
         
@@ -844,12 +846,11 @@ public:
 		
 
 		for (uint32 i = 0; i < cheksSize; ++i)
+            
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
-				if (checks[i] == "Nicht an der Tastatur"){
-					return;
-				}
+				
 
 				time_t sek;
 				time(&sek);
