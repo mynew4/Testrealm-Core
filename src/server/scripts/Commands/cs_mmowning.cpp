@@ -130,14 +130,32 @@ public:
         
         Player* player = handler->GetSession()->GetPlayer();
         
-        
-        uint32 item = atoi((char*)args);
+		
+		char* itemid = *args != '"' ? strtok(NULL, "") : (char*)args;
+		if (!itemid)
+			return false;
+
+		char* anzahlitem = handler->extractQuotedArg(itemid);
+		if (!anzahlitem)
+			return false;
+
+        uint32 item = atoi((char*)itemid);
+
+		uint32 anzahl = atoi((char*)anzahlitem);
+
+
+
         
         if (!item)
         {
             player->GetSession()->SendNotification("Ohne Itemid geht das leider nicht!");
             return true;
         }
+
+		if (!anzahl){
+			player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
+			return true;
+		}
         
         
         if(item == 49623){
@@ -175,7 +193,7 @@ public:
         std::string str(10, 0);
         std::generate_n(str.begin(), 10, randchar);
         
-        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, 5, 0);
+        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, anzahl, 0);
         std::ostringstream ss;
         std::ostringstream tt;
         

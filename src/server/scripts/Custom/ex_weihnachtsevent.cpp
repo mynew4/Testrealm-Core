@@ -53,7 +53,7 @@ public:
 
 			case 0: {
                 //Port to upper position
-                pPlayer->TeleportTo(1,16219.61,16375.57,170.78,4.74);
+                pPlayer->TeleportTo(1,16219.61,16375.57,175,4.74);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				pPlayer->GetGUID();
 				return true;
