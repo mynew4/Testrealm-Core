@@ -707,12 +707,10 @@ public:
                 uint64 starttime = fields[0].GetUInt64();
                 time_t start_time = time_t(starttime);
                 
-                std::string zeitstring = TimeToTimestampStr(start_time).c_str();
-				
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid,accid, datum)"
 					"VALUES ('%s', '%s','%u','%u','%s')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), zeitstring);
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), TimeToTimestampStr(start_time).c_str());
 
 				std::ostringstream uu;
 				std::ostringstream tt;
