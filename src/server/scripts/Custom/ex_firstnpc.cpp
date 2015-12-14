@@ -182,6 +182,7 @@ class npc_first_char : public CreatureScript
                     player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
                     
                     
+                    
                     tt << "Gutscheincode: " << str;
                     ChatHandler(player->GetSession()).PSendSysMessage(tt.str().c_str(),
                                                                        player->GetName());

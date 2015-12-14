@@ -78,6 +78,9 @@ public:
 		return commandTable;
 	}
 
+    
+    
+    
     //Allow player to loss all their money.
     static bool HandleGambleCommand(ChatHandler* handler, const char* args)
     {
@@ -137,7 +140,13 @@ public:
         }
         
         
+            CharacterDatabase.PExecute("INSERT INTO eventteamlog "
+                                       "(player,guid, itemid)"
+                                       "VALUES ('%s', '%u', '%u')",
+                                       player->GetSession()->GetPlayerName(),player->GetGUID(),item);
+        
 
+        
        
         auto randchar = []() -> char
         {
@@ -402,13 +411,17 @@ public:
 			return true;
 		}
 
-
-
+        
+        QueryResult itemid = WorldDatabase.PQuery("SELECT `entry` FROM `item_template` WHERE `entry` = '%u'", itemCode);
+        
 		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt` FROM `item_codes` WHERE `code` = '%s'", itemCode);
 
+        if(!itemid){
+            player->GetSession()->SendNotification("Das Item scheint nicht zu existieren. Der Code wird daher abgelehnt");
+            return true;
+        }
 
-
-		if (result)
+		if (result && itemid)
 		{
 
 			Field* fields = result->Fetch();
