@@ -46,6 +46,7 @@ public:
 
 	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
+		pPlayer->GetSession()->GetPlayer();
 		bool elite = pPlayer->GetSession()->IsPremium();
 		uint32 gildenid = pPlayer->GetGuildId();
 

@@ -286,6 +286,7 @@ public:
 
 	void OnCreatureKill(Player* pPlayer, Creature* creature) 
 	{
+		pPlayer->GetSession()->GetPlayer();
 		uint32 creatureid = creature->GetEntry();
 		bosskill(pPlayer, creatureid);
 
