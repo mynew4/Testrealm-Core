@@ -697,7 +697,7 @@ public:
 
 		for (uint32 i = 0; i < cheksSize; ++i)
             
-			if (lower.find(checks[i]) != std::string::npos)
+			if (lower.find(checks[i]) != std::string::npos && lower.find(checks[i] != "Nicht an der Tastatur")
 			{			
 				
                 
@@ -705,8 +705,6 @@ public:
                 time_t sek;
                 time(&sek);
                 uint32 zeit = time(&sek);
-                
-               
                 
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid,accid, datum)"
