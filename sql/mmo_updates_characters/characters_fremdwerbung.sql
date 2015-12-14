@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS `fremdwerbung` (
   `player` VARCHAR(45) NULL COMMENT '',
   `guid` INT NULL COMMENT '',
   `accid` INT NULL COMMENT '',
-  `datum` DATETIME NULL COMMENT '',
+  `datum` INT NULL COMMENT '',
   PRIMARY KEY (`id`)  COMMENT '');

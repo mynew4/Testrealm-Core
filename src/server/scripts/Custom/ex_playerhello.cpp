@@ -700,17 +700,18 @@ public:
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
-                QueryResult zeit;
-                zeit = CharacterDatabase.PQuery("SELECT UNIX_TIMESTAMP(start_time) FROM characters");
                 
-                Field* fields = zeit->Fetch();
-                uint64 starttime = fields[0].GetUInt64();
-                time_t start_time = time_t(starttime);
+                
+                time_t sek;
+                time(&sek);
+                uint32 zeit = time(&sek);
+                
+               
                 
 				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
 					"(nachricht,player, guid,accid, datum)"
-					"VALUES ('%s', '%s','%u','%u','%s')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), TimeToTimestampStr(start_time).c_str());
+					"VALUES ('%s', '%s','%u','%u','%u')",
+					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), zeit);
 
 				std::ostringstream uu;
 				std::ostringstream tt;
