@@ -158,8 +158,8 @@ public:
         ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
         player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
         
-        tt << "Gutscheincode: " << str;
-        handler->PSendSysMessage("Gutscheincode:", tt.str().c_str());
+        tt << str;
+        handler->PSendSysMessage(tt.str().c_str(),player->GetName());
         SQLTransaction trans = CharacterDatabase.BeginTransaction();
         MailDraft("Dein Gutscheincode", ss.str().c_str())
         .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));

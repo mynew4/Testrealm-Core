@@ -181,7 +181,9 @@ class npc_first_char : public CreatureScript
 					ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
                     player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
                     
-                    ChatHandler(player->GetSession()).PSendSysMessage("Gutscheincode: ", tt.str().c_str(),
+                    
+                    tt << "Gutscheincode: " << str;
+                    ChatHandler(player->GetSession()).PSendSysMessage(tt.str().c_str(),
                                                                        player->GetName());
 					SQLTransaction trans = CharacterDatabase.BeginTransaction();
 					MailDraft("Dein Gutscheincode", ss.str().c_str())
