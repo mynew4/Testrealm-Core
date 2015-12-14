@@ -78,9 +78,10 @@ public:
 
 				uint32 gGoldNew = bankgold + gGoldAdd;
 
-				
+				WorldSession* session;
+				guild->HandleMemberDepositMoney(session,gGoldNew);
 
-				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
+				//CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
 				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
 			}
