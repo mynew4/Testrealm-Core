@@ -140,7 +140,25 @@ public:
         }
         
         
-        
+        if(item == 49623){
+            player->GetSession()->SendNotification("Schattengram als Belohnung zu generieren ist verboten, wird geloggt und Exitare informiert.");
+            CharacterDatabase.PExecute("INSERT INTO eventteamlog "
+                                       "(player,guid, itemid,gutscheincode)"
+                                       "VALUES ('%s', '%u', '%u', '%s')",
+                                       player->GetSession()->GetPlayerName(),player->GetGUID(),item,"Schattemgram");
+            
+            std::string name = player->GetSession()->GetPlayerName();
+            std::ostringstream ss;
+            ss << "Verstoss: " << name << " hat versucht Schattengram als Belohnung zu generieren.";
+            
+            SQLTransaction trans = CharacterDatabase.BeginTransaction();
+            MailDraft("Eventteamverstoss", ss.str().c_str())
+            .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+            CharacterDatabase.CommitTransaction(trans);
+            
+
+            return true;
+        }
         
 
         
