@@ -150,6 +150,9 @@ void AddSC_gildenvendor();
 //Worldevent
 void AddSC_sb_worldevent();
 
+// GIldenfunktionen
+void AddSC_sb_uebung();
+
 #ifdef SCRIPTS
 //world
 void AddSC_areatrigger_scripts();
@@ -911,6 +914,10 @@ void AddCommandScripts()
 
 	//worldevent
 	AddSC_sb_worldevent();
+
+	//gildenfunktionen
+	AddSC_sb_uebung();
+
 }
 
 

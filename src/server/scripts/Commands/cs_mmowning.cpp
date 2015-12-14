@@ -131,6 +131,15 @@ public:
         Player* player = handler->GetSession()->GetPlayer();
         
 		
+		char* tailStr = *args != '"' ? strtok(NULL, "") : (char*)args;
+		if (!tailStr)
+			return false;
+
+		char* guildStr = handler->extractQuotedArg(tailStr);
+		if (!guildStr)
+			return false;
+
+
 		char* itemid = *args != '"' ? strtok(NULL, "") : (char*)args;
 		if (!itemid)
 			return false;
