@@ -46,7 +46,7 @@ public:
 
 	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
-		pPlayer->GetSession()->GetPlayer();
+		/*pPlayer->GetSession()->GetPlayer();
 
 		pPlayer->GetSession()->SendNotification("DEBUG: DEBUGMODUS AN");
 		
@@ -78,7 +78,7 @@ public:
 
 				uint32 gGoldNew = bankgold + gGoldAdd;
 
-				WorldSession* session = pPlayer->GetSession()->GetPlayer();
+				
 				guild->HandleMemberDepositMoney(session,gGoldNew);
 				
 				//CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
@@ -107,7 +107,7 @@ public:
 
 			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf beendet");
 
-			return;
+			return;*/
 		}
 
 	}
