@@ -697,10 +697,12 @@ public:
 
 		for (uint32 i = 0; i < cheksSize; ++i)
             
-			if (lower.find(checks[i]) != std::string::npos && lower.find(checks[i] != "Nicht an der Tastatur")
+			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
-                
+                if(nachricht == "Nicht an der Tastatur"){
+                    return;
+                }
                 
                 time_t sek;
                 time(&sek);
