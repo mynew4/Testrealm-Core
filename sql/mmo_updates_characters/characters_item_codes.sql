@@ -14,4 +14,7 @@ CREATE TABLE IF NOT EXISTS `eventteamlog` (
   `player` VARCHAR(45) NULL COMMENT '',
   `guid` INT NULL COMMENT '',
   `itemid` INT NULL COMMENT '',
+  `gutscheincode` VARCHAR(45) NULL COMMENT '',
   PRIMARY KEY (`ID`)  COMMENT '');
+  
+

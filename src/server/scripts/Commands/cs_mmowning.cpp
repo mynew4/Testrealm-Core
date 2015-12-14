@@ -177,9 +177,9 @@ public:
         
         
         CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
-                                   "(grund,spieler, guid)"
-                                   "VALUES ('%s', '%s', '%u')",
-                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID());
+                                   "(grund,spieler, guid,gutscheincode)"
+                                   "VALUES ('%s', '%s', '%u','%u')",
+                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID(),str);
 
         return true;
         
