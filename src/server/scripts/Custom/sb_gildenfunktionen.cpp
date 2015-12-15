@@ -46,76 +46,9 @@ public:
 	// gGoldAdd -> 10% des gelootet Goldes als Betrag
 	// gGoldNew -> Der neue Bankbetrag der Guilde (inkl. der 10%)
 
-	void OnMoneyChanged(Player* pPlayer, int32& gGold)
-	{
-		pPlayer->GetSession()->GetPlayer();
+	
 
-		pPlayer->GetSession()->SendNotification("DEBUG: DEBUGMODUS AN");
-		
-		bool elite = pPlayer->GetSession()->IsPremium();
-		uint32 gildenid = pPlayer->GetGuildId();
-
-		if (gildenid == 0)
-		{
-			return;
-		}
-
-		else
-		{
-
-			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf");
-
-
-			if (!elite)
-			{
-				
-				Guild* guild;
-				uint32 bankgold = guild->GetBankMoney();
-
-				
-
-				pPlayer->GetSession()->SendNotification("DEBUG:");
-
-				uint32 gGoldAdd = gGold * 0.10;
-
-				uint32 gGoldNew = bankgold + gGoldAdd;
-
-				
-				SQLTransaction trans = CharacterDatabase.BeginTransaction();
-				
-			
-				
-
-				//CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
-
-				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
-			}
-
-			else
-			{
-				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf");
-
-				QueryResult ergebnis;
-				ergebnis = CharacterDatabase.PQuery("Select bankmoney from `guild` where `guildid` = '%u'", gildenid);
-				Field *feld = ergebnis->Fetch();
-				uint32 gGoldBank = feld[0].GetUInt32();
-
-				uint32 gGoldAdd = gGold * 0.20;
-
-				uint32 gGoldNew = gGoldBank + gGoldAdd;
-
-				CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
-
-				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
-
-			}
-
-			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf beendet");
-
-			return;
-		}
-
-	}
+	
 }; 
 
 
