@@ -82,6 +82,7 @@ public:
 
 				
 				SQLTransaction trans = CharacterDatabase.BeginTransaction();
+				
 			
 				
 
