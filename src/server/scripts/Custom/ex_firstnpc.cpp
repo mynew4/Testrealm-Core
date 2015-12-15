@@ -889,7 +889,10 @@ class npc_first_char : public CreatureScript
 							pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
                             
                         }
-                        
+						else {
+							pPlayer->GetSession()->SendNotification("Du bist schon Level 80.");
+						}
+
                         pPlayer->ADD_GOSSIP_ITEM(7, "Zu den Features", GOSSIP_SENDER_MAIN, 25);
                         pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
                         return true;
