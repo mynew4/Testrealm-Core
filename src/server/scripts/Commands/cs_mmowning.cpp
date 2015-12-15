@@ -211,7 +211,7 @@ public:
 		Field *fields = itemsql->Fetch();
 		std::string itemname = fields[0].GetCString();
 
-		ss << "Dein Code lautet: " << str << " . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
+		ss << "Der Code fuer das Item: " << itemname << " mit der Anzahl "<< anzahlint <<" lautet " << str <<" . Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team";
         player->GetSession()->SendNotification("Dein Code wurde generiert und dir zugesendet.");
         
         tt << str << " ist der generierte Gutscheincode fuer das Item " << itemname << " und der Anzahl " << anzahlint;
