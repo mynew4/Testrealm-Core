@@ -701,7 +701,7 @@ public:
 			if (lower.find(checks[i]) != std::string::npos)
 			{			
 				
-                if(nachricht == "Nicht an der Tastatur"){
+                if(nachricht == "nicht an der tastatur"){
                     return;
                 }
                 
