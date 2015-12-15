@@ -137,12 +137,14 @@ class npc_first_char : public CreatureScript
                     pPlayer->SetLevel(pPlayer->getLevel() + levelerhoehung);
                     pPlayer->DestroyItemCount(38186, kosten, true);
                     pPlayer->GetSession()->SendNotification("Die Level wurden dir gutgeschrieben.");
+					pPlayer->PlayerTalkClass->SendCloseGossip();
                     return;
                 }
             
                 else
                 {
                     pPlayer->GetSession()->SendNotification("Du hast leider nicht genug Astrale Kredite um dir eine Levelaufwertung zu kaufen.");
+					pPlayer->PlayerTalkClass->SendCloseGossip();
                     return;
                 }
             }
@@ -879,12 +881,12 @@ class npc_first_char : public CreatureScript
                     case 9500:
                     {
                         pPlayer->PlayerTalkClass->ClearMenus();
-                        pPlayer->ADD_GOSSIP_ITEM(7, "1 Level aufsteigen. Kosten: 10 Astrale Kredite", GOSSIP_SENDER_MAIN, 9501);
-                        pPlayer->ADD_GOSSIP_ITEM(7, "10 Level aufsteigen.  Kosten: 90 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9502);
-                        
-                        if (pPlayer->getLevel() < 80)
-                        {
-                            pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
+						
+						if (pPlayer->getLevel() < 80)
+						{
+							pPlayer->ADD_GOSSIP_ITEM(7, "1 Level aufsteigen. Kosten: 10 Astrale Kredite", GOSSIP_SENDER_MAIN, 9501);
+							pPlayer->ADD_GOSSIP_ITEM(7, "10 Level aufsteigen.  Kosten: 90 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9502);
+							pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
                             
                         }
                         
@@ -899,6 +901,7 @@ class npc_first_char : public CreatureScript
                     {
                             
                         levelup(pPlayer, 10, 79, 1);
+						
                         return true;
                             
                     }break;
@@ -908,6 +911,7 @@ class npc_first_char : public CreatureScript
                     {
                         
                         levelup(pPlayer, 90, 70, 10);
+						
                         return true;
                             
                     }break;
