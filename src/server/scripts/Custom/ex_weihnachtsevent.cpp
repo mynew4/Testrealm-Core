@@ -83,10 +83,11 @@ public:
 	weihnachtseventplattform() : CreatureScript("weihnachtseventplattform") { }
 
 
-	bool OnQuestReward(Player* player, Creature* /*creature*/, Quest const* quest, uint32 /*opt*/)
+	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/)
 	{
+		
 		if (quest->GetQuestId() == 900001){   //Erste Quest
-			player->AddAura(155,player);  //Weihnachtswichtel
+			player->AddAura(155,player);  //Weihnachtswichtel		
 		}
 		return true;
 	}

@@ -29,6 +29,8 @@
 #include "Arena.h"
 #include "ArenaTeam.h"
 #include "ArenaScore.h"
+#include "Guild.h"
+#include "GuildMgr.h"
 
 
 
@@ -46,7 +48,7 @@ public:
 
 	void OnMoneyChanged(Player* pPlayer, int32& gGold)
 	{
-		/*pPlayer->GetSession()->GetPlayer();
+		pPlayer->GetSession()->GetPlayer();
 
 		pPlayer->GetSession()->SendNotification("DEBUG: DEBUGMODUS AN");
 		
@@ -79,8 +81,10 @@ public:
 				uint32 gGoldNew = bankgold + gGoldAdd;
 
 				
-				guild->HandleMemberDepositMoney(session,gGoldNew);
+				SQLTransaction trans = CharacterDatabase.BeginTransaction();
+			
 				
+
 				//CharacterDatabase.PExecute("UPDATE guild SET `bankmoney` = '%u' WHERE `guildid` = '%u'", gGoldNew, gildenid);
 
 				pPlayer->GetSession()->SendNotification("DEBUG: Hauptfunktionsaufruf beendet");
@@ -107,7 +111,7 @@ public:
 
 			pPlayer->GetSession()->SendNotification("DEBUG: Funktionsaufruf beendet");
 
-			return;*/
+			return;
 		}
 
 	}

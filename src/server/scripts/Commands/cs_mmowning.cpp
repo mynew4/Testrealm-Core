@@ -24,6 +24,8 @@
 #include "Log.h"
 #include "SpellAuras.h"
 #include "World.h"
+#include "Guild.h"
+#include "GuildMgr.h"
 
 #include <iostream>
 #include <iterator>
@@ -127,28 +129,23 @@ public:
 	//Gibt dem Eventteam die Moeglichkeit Gutscheine fuer Spieler zu erstellen.
 	static bool HandlegutscheinerstellenCommand(ChatHandler* handler, const char* args)
 	{
-        
-        Player* player = handler->GetSession()->GetPlayer();
-        
-		
-		char* tailStr = *args != '"' ? strtok(NULL, "") : (char*)args;
-		if (!tailStr)
-			return false;
 
-		char* guildStr = handler->extractQuotedArg(tailStr);
-		if (!guildStr)
-			return false;
-
+		Player* player = handler->GetSession()->GetPlayer();
 
 		char* itemid = *args != '"' ? strtok(NULL, "") : (char*)args;
-		if (!itemid)
-			return false;
+		if (!itemid){
+			player->GetSession()->SendNotification("Ohne Itemid geht das leider nicht!");
+			return true;
+		}
 
 		char* anzahlitem = handler->extractQuotedArg(itemid);
-		if (!anzahlitem)
-			return false;
+		if (!anzahlitem){
+			player->GetSession()->SendNotification("Ohne Itemanzahl geht das leider nicht!");
+			return true;
+		}
 
-        uint32 item = atoi((char*)itemid);
+		
+		uint32 item = atoi((char*)itemid);
 
 		uint32 anzahl = atoi((char*)anzahlitem);
 
@@ -174,14 +171,15 @@ public:
                                        "VALUES ('%s', '%u', '%u', '%s')",
                                        player->GetSession()->GetPlayerName(),player->GetGUID(),item,"Schattemgram");
             
-            std::string name = player->GetSession()->GetPlayerName();
+            /*std::string name = player->GetSession()->GetPlayerName();
             std::ostringstream ss;
             ss << "Verstoss: " << name << " hat versucht Schattengram als Belohnung zu generieren.";
             
+			
             SQLTransaction trans = CharacterDatabase.BeginTransaction();
             MailDraft("Eventteamverstoss", ss.str().c_str())
             .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-            CharacterDatabase.CommitTransaction(trans);
+            CharacterDatabase.CommitTransaction(trans);*/
             
 
             return true;
