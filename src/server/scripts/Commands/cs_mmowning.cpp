@@ -141,7 +141,8 @@ public:
 		char* anzahl = strtok(NULL, " ");
 		if (!anzahl || !atoi(anzahl))
 			return false;
-
+		
+		uint32 anzahlint = atoi((char*)anzahl);
 		
 		//uint32 item = atoi((char*)args);
 
@@ -196,7 +197,7 @@ public:
         std::string str(10, 0);
         std::generate_n(str.begin(), 10, randchar);
         
-        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, anzahl, 0);
+        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, item, anzahlint, 0);
         std::ostringstream ss;
         std::ostringstream tt;
         
