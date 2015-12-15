@@ -55,8 +55,10 @@ namespace Trinity
 
 template <typename T> inline T* ASSERT_NOTNULL(T* pointer)
 {
-   ASSERT(pointer);
-    return pointer;
+
+
+    ASSERT(pointer);
+	return pointer;
 }
 
 #endif

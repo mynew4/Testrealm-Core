@@ -613,24 +613,9 @@ class Shutdown : public WorldScript
 public:
 	Shutdown() : WorldScript("Shutdown"){}
 
-	std::ostringstream ss;
-	std::ostringstream tt;
-	std::ostringstream uu;
-
-
-	void OnShutdownInitiate(ShutdownExitCode /*code*/, ShutdownMask /*mask*/){
-		
-		ss << "|cff54b5ffDer Server wird bald fuer Updates heruntergefahren. Weitere Informationen koennen auf der Homepage eingesehen werden.|r";
-		sWorld->SendServerMessage(SERVER_MSG_STRING, ss.str().c_str());
-
-		Player* player = player->GetSession()->GetPlayer();
-
-		tt << "|cff54b5ffDer Shutdown wurde eingeleitet von: |r " << ChatHandler(player->GetSession()).GetNameLink();
-		sWorld->SendGMText(LANG_GM_BROADCAST, tt.str().c_str());
-		
-	}
 
 	void OnStartup(){
+		std::ostringstream uu;
 		uu << "Willkommen auf MMOwning World.";
 		sWorld->SetMotd(uu.str().c_str());
 		sWorld->setRate(RATE_DROP_ITEM_LEGENDARY,1);
