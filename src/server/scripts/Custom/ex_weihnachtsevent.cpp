@@ -40,7 +40,7 @@ public:
             pPlayer->ADD_GOSSIP_ITEM(7, "Teleportiert mich nach oben.", GOSSIP_SENDER_MAIN, 0);
         }
 
-		pPlayer->ADD_GOSSIP_ITEM(7, "Ich moechte das MMOwning Weihnachten erleben.", GOSSIP_SENDER_MAIN, 1);
+		
         
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
@@ -53,23 +53,12 @@ public:
 
 			case 0: {
                 //Port to upper position
-                pPlayer->TeleportTo(1,16219.61,16375.57,175,4.74);
+                pPlayer->TeleportTo(1,16220.94,16350.46,210.77,1.48);
 				pPlayer->PlayerTalkClass->SendCloseGossip();
 				pPlayer->GetGUID();
 				return true;
 			}break;
                 
-                
-            case 1: {
-                ChatHandler(pPlayer->GetSession()).PSendSysMessage("Wir wuenschen dir viel Spass und hoffen dass du ein paar Erinnerungen an uns mitnimmst.",
-                     pPlayer->GetName());
-				
-
-			    pPlayer->PlayerTalkClass->SendCloseGossip();
-                pPlayer->GetGUID();
-                return true;
-            }break;
-
 
 			return true;
 		}
