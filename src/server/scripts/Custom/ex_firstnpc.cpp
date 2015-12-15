@@ -832,6 +832,10 @@ class npc_first_char : public CreatureScript
 							}
 						}
 
+						else {
+							pPlayer->GetSession()->SendNotification("Du hast zu wenig Gold um dir einen Gutschein zu generieren.");
+						}
+
 
 					}break;
 
