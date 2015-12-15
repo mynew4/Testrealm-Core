@@ -704,6 +704,10 @@ public:
                 if(nachricht == "nicht an der tastatur"){
                     return;
                 }
+
+				if (nachricht == "gatherer"){
+					return;
+				}
                 
                 time_t sek;
                 time(&sek);
