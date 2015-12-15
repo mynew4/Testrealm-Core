@@ -530,6 +530,7 @@ public:
 		bool active = ae.find(70) != ae.end();
 		
 		if (active == true){
+			player->SetPvP(false);
 			return;
 		}
 
