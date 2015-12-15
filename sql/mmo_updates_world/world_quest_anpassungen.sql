@@ -460,3 +460,5 @@ DELETE FROM `creature_questender` where `id` = 800066 and `quest` = 900000;
 INSERT INTO `creature_queststarter` (`id`, `quest`) VALUES ('800065', '900000');
 INSERT INTO `creature_questender` (`id`, `quest`) VALUES ('800066', '900000');
 
+/* SUPPORTNPC DISPLAY ID AND NAME */
+UPDATE `creature_template` SET `modelid1`='17870', `subname`='MMOwning Team' WHERE `entry`='800057';
