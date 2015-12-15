@@ -133,14 +133,19 @@ public:
 		Player* player = handler->GetSession()->GetPlayer();
 		
 		char* itemid = strtok((char*)args, " ");
-		if (!itemid)
-			return false;
+		if (!itemid){
+			player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
+			return true;
+		}
 
 		uint32 item = atoi((char*)itemid);
 
 		char* anzahl = strtok(NULL, " ");
-		if (!anzahl || !atoi(anzahl))
-			return false;
+		if (!anzahl || !atoi(anzahl)){
+			player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
+			return true;
+		}
+			
 		
 		uint32 anzahlint = atoi((char*)anzahl);
 		
@@ -164,9 +169,9 @@ public:
         if(item == 49623){
             player->GetSession()->SendNotification("Schattengram als Belohnung zu generieren ist verboten, wird geloggt und Exitare informiert.");
             CharacterDatabase.PExecute("INSERT INTO eventteamlog "
-                                       "(player,guid, itemid,gutscheincode)"
-                                       "VALUES ('%s', '%u', '%u', '%s')",
-                                       player->GetSession()->GetPlayerName(),player->GetGUID(),item,"Schattemgram");
+                                       "(player,guid, itemid,gutscheincode,anzahl)"
+                                       "VALUES ('%s', '%u', '%u', '%s','%u')",
+                                       player->GetSession()->GetPlayerName(),player->GetGUID(),item,"Schattemgram",0);
             
             /*std::string name = player->GetSession()->GetPlayerName();
             std::ostringstream ss;
@@ -219,9 +224,9 @@ public:
                                    "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID());
         
         CharacterDatabase.PExecute("INSERT INTO eventteamlog "
-                                   "(player,guid, itemid,gutscheincode)"
-                                   "VALUES ('%s', '%u', '%u', '%s')",
-                                   player->GetSession()->GetPlayerName(),player->GetGUID(),item,str);
+                                   "(player,guid, itemid,gutscheincode,anzahl)"
+                                   "VALUES ('%s', '%u', '%u', '%s','%u')",
+                                   player->GetSession()->GetPlayerName(),player->GetGUID(),item,str,anzahlint);
 
         return true;
         
