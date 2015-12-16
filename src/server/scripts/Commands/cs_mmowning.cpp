@@ -504,7 +504,7 @@ public:
 
 					CharacterDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
 					CharacterDatabase.PExecute("UPDATE item_codes SET benutzt = '%u' WHERE code = '%s'", benutzt, itemCode);
-					CharacterDatabase.PExecute("INSERT INTO item_codes_(name,accid,code) Values('%s','%u','%s')", player->GetSession()->GetPlayerName(), player->GetSession()->GetAccountId(), itemCode);
+					CharacterDatabase.PExecute("INSERT INTO item_codes_account (name,accid,code) Values('%s','%u','%s')", player->GetSession()->GetPlayerName(), player->GetSession()->GetAccountId(), itemCode);
 
 					char msg[250];
 					snprintf(msg, 250, "Dein Code wurde akzeptiert.");
