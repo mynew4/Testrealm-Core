@@ -161,7 +161,7 @@ class npc_first_char : public CreatureScript
 
 				void fixgutschein(Player* player, uint32 belohnung, uint32 anzahl, std::string grund ){
 
-					CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, belohnung, anzahl, 1, player->GetName());
+					CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name,benutztbar) Values ('%s','%u','%u','%u','%s','%u')", grund, belohnung, anzahl, 1, player->GetName(),1);
 					Item* item = Item::CreateItem(belohnung, anzahl);
 					player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 					SQLTransaction trans = CharacterDatabase.BeginTransaction();
@@ -176,7 +176,7 @@ class npc_first_char : public CreatureScript
 
 				void gutscheinzusammenstellen(Player* player, uint32 belohnung, uint32 anzahl, std::string str){
 
-					CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt) Values ('%s','%u','%u','%u')", str, belohnung, anzahl, 0);
+					CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) Values ('%s','%u','%u','%u','%u')", str, belohnung, anzahl, 0,1);
 					std::ostringstream ss;
                     std::ostringstream tt;
                     
@@ -810,7 +810,7 @@ class npc_first_char : public CreatureScript
 							}
 
 							if (r % 5 == 1){
-								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name) Values ('%s','%u','%u','%u','%s')", grund, 9999, anzahl, 1, pPlayer->GetName());
+								CharacterDatabase.PExecute("INSERT INTO item_codes (code,belohnung,anzahl,benutzt,name,benutztbar) Values ('%s','%u','%u','%u','%s')", grund, 9999, anzahl, 1, pPlayer->GetName(),1);
 								
 								pPlayer->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 								SQLTransaction trans = CharacterDatabase.BeginTransaction();
