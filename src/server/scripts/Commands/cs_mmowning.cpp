@@ -479,7 +479,7 @@ public:
 			uint8 benutzt = fields[3].GetUInt8();
 			uint32 benutztbar = fields[4].GetUInt32();
 			
-			QueryResult accvorhanden = CharacterDatabase.PQuery("SELECT `accid`,`code` FROM `item_codes_account` WHERE `accid` = '%s'", player->GetSession()->GetAccountId());
+			QueryResult accvorhanden = CharacterDatabase.PQuery("SELECT `accid`,`code` FROM `item_codes_account` WHERE `accid` = '%u'", player->GetSession()->GetAccountId());
 			
 			if (!accvorhanden){
 				QueryResult itemid = WorldDatabase.PQuery("SELECT `entry` FROM `item_template` WHERE `entry` = '%u'", belohnung);
