@@ -40,7 +40,8 @@ public:
             pPlayer->ADD_GOSSIP_ITEM(7, "Teleportiert mich nach oben.", GOSSIP_SENDER_MAIN, 0);
         }
 
-		
+		pPlayer->ADD_GOSSIP_ITEM(7, "Was bin ich?", GOSSIP_SENDER_MAIN, 1);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Gibt es eine Moeglichkeit einen Port zu nehmen?", GOSSIP_SENDER_MAIN, 2);
         
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
@@ -58,7 +59,24 @@ public:
 				pPlayer->GetGUID();
 				return true;
 			}break;
-                
+             
+
+			case 1:
+			{
+				pPlayer->GetGUID();
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Ich bin ein Weihnachtswichtel. Ich bin verantwortlich damit nur Gnome hier durchkommen.",
+					pPlayer->GetName());
+				pPlayer->PlayerTalkClass->SendCloseGossip();
+			}break;
+
+
+			case 2:
+			{
+				pPlayer->GetGUID();
+				ChatHandler(pPlayer->GetSession()).PSendSysMessage("Wenn ihr die Quest abgeschlossen habt, koennt ihr Euch immer wieder nach oben porten.",
+					pPlayer->GetName());
+				pPlayer->PlayerTalkClass->SendCloseGossip();
+			}break;
 
 			return true;
 		}
