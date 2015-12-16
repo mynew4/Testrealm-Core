@@ -466,7 +466,7 @@ public:
         
         
         
-		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar`,`accountid` FROM `item_codes` WHERE `code` = '%s'", itemCode);
+		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = '%s'", itemCode);
         
         
 		if (result)
@@ -478,9 +478,10 @@ public:
 			uint32 anzahl = fields[2].GetUInt32();
 			uint8 benutzt = fields[3].GetUInt8();
 			uint32 benutztbar = fields[4].GetUInt32();
-			uint32 accountid = fields[5].GetInt32();
 			
-
+			QueryResult accvorhanden = CharacterDatabase.PQuery("SELECT `accid`,`code` FROM `item_codes_account` WHERE `code` = '%s'", itemCode);
+			
+			if (!accvorhanden){
 				QueryResult itemid = WorldDatabase.PQuery("SELECT `entry` FROM `item_template` WHERE `entry` = '%u'", belohnung);
 
 				if (!itemid){
@@ -490,7 +491,7 @@ public:
 
 
 
-				if (benutzt < benutztbar && accountid == 0)
+				if (benutzt < benutztbar)
 				{
 					benutzt++;
 					Item* item = Item::CreateItem(belohnung, anzahl);
@@ -501,10 +502,9 @@ public:
 						.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 					CharacterDatabase.CommitTransaction(trans);
 
-					uint32 account = player->GetSession()->GetAccountId();
 					CharacterDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
-					CharacterDatabase.PExecute("UPDATE item_codes SET benutzt = '%u' WHERE code = '%s'",benutzt, itemCode);
-					CharacterDatabase.PExecute("UPDATE item_codes SET accountid = '%u' WHERE code = '%s'", account, itemCode);
+					CharacterDatabase.PExecute("UPDATE item_codes SET benutzt = '%u' WHERE code = '%s'", benutzt, itemCode);
+					CharacterDatabase.PExecute("INSERT INTO item_codes_(name,accid,code) Values('%s','%u','%s')", player->GetSession()->GetPlayerName(), player->GetSession()->GetAccountId(), itemCode);
 
 					char msg[250];
 					snprintf(msg, 250, "Dein Code wurde akzeptiert.");
@@ -520,6 +520,16 @@ public:
 						player->GetName());
 					return true;
 				}
+			}
+
+			else{
+				char msg[250];
+				snprintf(msg, 250, "Du hast den Code bereits verwendet.");
+				ChatHandler(player->GetSession()).PSendSysMessage(msg,
+					player->GetName());
+				return true;
+
+			}
 		}
 		else{
 			char msg[250];
