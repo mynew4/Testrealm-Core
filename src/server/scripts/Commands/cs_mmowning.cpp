@@ -515,7 +515,7 @@ public:
 				}
 				else{
 					char msg[250];
-					snprintf(msg, 250, "Dein Code wurde bereits verwendet.");
+					snprintf(msg, 250, "Der Code hat keine weitere Aufladung und wird daher abgelehnt.");
 					ChatHandler(player->GetSession()).PSendSysMessage(msg,
 						player->GetName());
 					return true;
