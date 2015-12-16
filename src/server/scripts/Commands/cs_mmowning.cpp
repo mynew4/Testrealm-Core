@@ -490,7 +490,7 @@ public:
 
 
 
-				if (benutzt <= benutztbar)
+				if (benutzt < benutztbar)
 				{
 					benutzt++;
 					Item* item = Item::CreateItem(belohnung, anzahl);
