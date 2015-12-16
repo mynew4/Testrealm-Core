@@ -11,5 +11,5 @@ ALTER TABLE `item_codes`
 ADD COLUMN `benutztbar` INT NULL COMMENT '' AFTER `name`;
 
   
-
-
+ALTER TABLE `item_codes` 
+ADD COLUMN `accountid` INT NULL DEFAULT 0 COMMENT '' AFTER `benutztbar`;
