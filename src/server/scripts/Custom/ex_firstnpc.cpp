@@ -121,15 +121,15 @@ class npc_first_char : public CreatureScript
             
         }
     
-        void levelup(Player* pPlayer, uint16 kosten, uint16 levelanforderung, uint16 levelerhoehung)
+        void levelup(Player* pPlayer, uint16 kosten, uint16 maxlevel, uint16 levelerhoehung)
     
         // kosten sind die Kredite die benoetigt werden
-        // levelanforderung ist der Schwellenwert ab wann eine Aufwertung nicht durchgefuehrt wird
+        // maxlevel ist höchste Leven ab wann eine Aufwertung nicht durchgefuehrt wird
         // levelerhoehung ist der Wert um den das level erhoeht wird
     
         {
         
-            if (pPlayer->getLevel() <= levelanforderung)
+			if (pPlayer->getLevel() <= maxlevel)
             {
             
                 if (pPlayer->HasItemCount(38186, kosten, true))
