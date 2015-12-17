@@ -29,7 +29,7 @@
 #include "Arena.h"
 #include "ArenaTeam.h"
 #include "ArenaScore.h"
-
+#include "ArenaTeamMgr.h"
 
 
 #define MSG_COLOR_ALICEBLUE            "|cFFF0F8FF"
@@ -490,7 +490,7 @@ public:
 			date.day_of_week() == boost::date_time::Sunday){
 			if (player->getLevel() < 80){
 				if (!premium){
-
+					
 					char msg[250];
 					snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
 					ChatHandler(player->GetSession()).PSendSysMessage(msg,
@@ -588,6 +588,7 @@ public:
 
 
 };
+
 
 
 
