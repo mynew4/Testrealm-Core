@@ -303,6 +303,7 @@ class npc_first_char : public CreatureScript
 							pPlayer->AddItem(20400, 4);
 							pPlayer->SetMoney(50000000);
 							pPlayer->UpdateSkillsToMaxSkillsForLevel();
+							pPlayer->UpdateSkillsForLevel();
 							DBeintrag(pPlayer->GetSession()->GetPlayer(), "Firstaustattung einzel");
 
 
@@ -471,6 +472,7 @@ class npc_first_char : public CreatureScript
 								pPlayer->AddItem(20400, 4);
 								pPlayer->SetMoney(50000000);
 								pPlayer->UpdateSkillsToMaxSkillsForLevel();
+								pPlayer->UpdateSkillsForLevel();
 
 								ss << "|cff54b5ffEine 10er Gildenfirstausstattung wurde von |r " << ChatHandler(pPlayer->GetSession()).GetNameLink() << " |cff54b5ff in Anspruch genommen!|r";
 								sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
@@ -573,7 +575,7 @@ class npc_first_char : public CreatureScript
 								pPlayer->AddItem(20400, 4);
 								pPlayer->SetMoney(50000000);
 								pPlayer->UpdateSkillsToMaxSkillsForLevel();
-
+								pPlayer->UpdateSkillsForLevel();
 
 								ss << "|cff54b5ffEine 25er Gildenfirstausstattung wurde von |r " << ChatHandler(pPlayer->GetSession()).GetNameLink() << " |cff54b5ff in Anspruch genommen!|r";
 								sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
@@ -695,7 +697,7 @@ class npc_first_char : public CreatureScript
 					//Bergbau
 					case 13:
 					{
-
+						
 						Berufeskillen(pPlayer->GetSession()->GetPlayer(),186);
 					
 					}break;
@@ -888,9 +890,9 @@ class npc_first_char : public CreatureScript
 						
 						if (pPlayer->getLevel() < 80)
 						{
-							pPlayer->ADD_GOSSIP_ITEM(7, "1 Level aufsteigen. Kosten: 10 Astrale Kredite", GOSSIP_SENDER_MAIN, 9501);
-							pPlayer->ADD_GOSSIP_ITEM(7, "10 Level aufsteigen.  Kosten: 90 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9502);
-							pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 800 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
+							pPlayer->ADD_GOSSIP_ITEM(7, "1 Level aufsteigen. Kosten: 2 Astrale Kredite", GOSSIP_SENDER_MAIN, 9501);
+							pPlayer->ADD_GOSSIP_ITEM(7, "10 Level aufsteigen.  Kosten: 15 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9502);
+							pPlayer->ADD_GOSSIP_ITEM(7, "Auf Level 80 setzen.  Kosten: 100 Astrale Kredite.", GOSSIP_SENDER_MAIN, 9503);
                             
                         }
 						else {
@@ -907,7 +909,7 @@ class npc_first_char : public CreatureScript
                     case 9501:
                     {
                             
-                        levelup(pPlayer, 10, 79, 1);
+                        levelup(pPlayer, 2, 79, 1);
 						
                         return true;
                             
@@ -917,7 +919,7 @@ class npc_first_char : public CreatureScript
                     case 9502:
                     {
                         
-                        levelup(pPlayer, 90, 70, 10);
+                        levelup(pPlayer, 15, 70, 10);
 						
                         return true;
                             
@@ -929,7 +931,7 @@ class npc_first_char : public CreatureScript
                         uint16 abstand = 80 - pPlayer->getLevel();
                         // abstand ist der abstand des Spielerlevels zu Level 80
                             
-                        levelup(pPlayer, 800, 80, abstand);
+                        levelup(pPlayer, 100, 80, abstand);
                         return true;
                             
                     }break;
