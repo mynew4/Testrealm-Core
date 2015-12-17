@@ -71,7 +71,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					bool active = ae.find(70) != ae.end();
 					if (active == true){
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Viel Spaß beim Weihnachtsevent wuenscht dir Exitare und das gesammte MMOwning Team. Der Eventbeginn ist in Dalaran bei Bitty Frostschleuder.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Viel Spass beim Weihnachtsevent wuenscht dir Exitare und das gesammte MMOwning Team. Der Eventbeginn ist in Dalaran bei Bitty Frostschleuder.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						pPlayer->TeleportTo(1, 16226.21, 16256.77, 13.19, 1.65);
