@@ -65,11 +65,7 @@ public: exitarenpc() : CreatureScript("exitarenpc"){ }
 
 		bool OnGossipHello(Player *player, Creature* _creature)
 		{
-
-
 			player->ADD_GOSSIP_ITEM(7, "Wer bist du?", GOSSIP_SENDER_MAIN, 0);
-			
-
 			player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 			return true;
 		}

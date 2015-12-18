@@ -148,7 +148,8 @@ void AddSC_gildenvendor();
 //Worldevent
 void AddSC_sb_worldevent();
 
-
+//Inselnpc
+void AddSC_inselnpc();
 
 #ifdef SCRIPTS
 //world
@@ -910,7 +911,8 @@ void AddCommandScripts()
 	//worldevent
 	AddSC_sb_worldevent();
 
-
+	//inselnpc
+	AddSC_inselnpc();
 }
 
 
