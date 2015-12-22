@@ -729,7 +729,7 @@ public:
 					"(nachricht,player, guid,accid, datum)"
 					"VALUES ('%s', '%s','%u','%u','%u')",
 					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), zeit);
-
+				break;
 				
 			}
 
