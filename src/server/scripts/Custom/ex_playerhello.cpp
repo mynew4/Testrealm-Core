@@ -530,13 +530,13 @@ public:
 		bool active = ae.find(70) != ae.end();
 		
 		if (active == true){
-			player->SetPvP(false);
 			return;
 		}
 
 		else{
 			if (newzone == 876 && newarea == 876 && active == false && player->GetSession()->GetSecurity() == 0){
 				player->TeleportTo(0, -9773, 2126.72, 15.40, 3.88);
+                player->SetPvP(false);
 			}
 		}
 
