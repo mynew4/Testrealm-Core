@@ -230,7 +230,7 @@ public:
 
 
 		//10h
-		if (time >= 1 /*36000*/ && time <= 71999){
+		if (time >= 36000 && time <= 71999){
             
             Belohnung(player->GetSession()->GetPlayer(), 10, player->GetGUID(), 250);
           
