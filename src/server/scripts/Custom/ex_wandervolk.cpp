@@ -281,5 +281,5 @@ void AddSC_wandervolk()
 	new leandaria();
 	new raetsel();
 	new indomatanpc();
-	new lucionnpc();
+	//new lucionnpc();
 }

@@ -635,14 +635,6 @@ public:
 
 
 
-
-
-
-
-
-
-
-
 void AddSC_Announce_NewPlayer()
 {
 	new fbevent();
