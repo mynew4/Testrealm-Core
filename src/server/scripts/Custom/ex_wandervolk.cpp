@@ -203,6 +203,31 @@ public: indomatanpc() : CreatureScript("indomatanpc"){ }
 				return true;
 			}
 
+			if (quest->GetQuestId() == 900829){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Dieser Verrat muss geraecht werden!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900830){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Der erste ist tot. Schlachtet den naechsten ab!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900831){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Der erste ist tot. Schlachtet den naechsten ab!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900832){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Und der Zweite ist tot. Ihr seid ein wahrer Krieger!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+
 			return true;
 		}
 
@@ -231,7 +256,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 
 			void JustDied(Unit* killer) override
 			{
-			
+				me->Yell("Ihr habt mich besiegt. Aber mein Meister wird weitere schicken!", LANG_UNIVERSAL, nullptr);
 			}
 
 
@@ -258,7 +283,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			}
 
 			if (quest->GetQuestId() == 900828){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_ATTACK2HTIGHT);
 				creature->Yell("Nun seid ihr an der Reihe Abschaum. Sterbt!", LANG_UNIVERSAL, NULL);
 				creature->setFaction(21);
 				return true;
