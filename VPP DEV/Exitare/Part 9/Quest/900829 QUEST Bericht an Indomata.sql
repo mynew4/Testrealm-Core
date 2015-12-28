@@ -80,7 +80,7 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RewardFactionOverride5  */ '0',
 /* TimeAllowed  */ '0',
 /* AllowableRaces  */ '1791',
-/* LogTitle   */'Die Raren sind die Wichtigen.',
+/* LogTitle   */'Bericht an Indomata.',
 /* LogDescription  */ 'Besorgt mir mehr Materialien. Ich brauche diese.',
 /* QuestDescription   */'Hallo $N, diese glitzernden Gegenstaende wie Gold, Silber. Ich brauche sie, ich will sie haben. Oh aber natuerlich bekommt ihr euren Teil der Beute ab. Nur wie viel das wolllen wir nochmal ueberdenken. Sammelt also fuer mich die nachfolgenden Dinge.',
 /* QuestCompletionLog  */ 'Es ist eure Sache was ihr tut.',
