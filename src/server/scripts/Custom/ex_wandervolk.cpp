@@ -247,14 +247,24 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 		}
 
 		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
-			if (quest->GetQuestId() == 900810){
+			if (quest->GetQuestId() == 900823){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_ATTACK1H);
-				creature->Yell("Nun werdet ihr sterben ihr Narren!", LANG_UNIVERSAL, NULL);
+				creature->Yell("Danke fuer die Vorraete!", LANG_UNIVERSAL, NULL);
 				return true;
 			}
 
 			return true;
 		}
+
+
+		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) { 
+			if (quest->GetQuestId() == 900825){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_EAT);
+				creature->Yell("ich muss euch etwas wichtiges erzaehlen bevor wir hier weitermachen koennen. Groot und Kraserius von den Sammlern verdaechtigen mich, das ich ein Verraeter sei und nicht im Interesse von uns handeln wuerde. Aber ich kann Euch versichern, dem ist nicht so. Es ist eher anders, die beiden betruegen uns und das gesamte Volk. Sie nutzen uns aus und berreichern sich selbst. Glaubt mir! Ich moechte nicht das auch ihr ausgenutzt werdet.", LANG_UNIVERSAL, NULL);
+			}
+			return true;
+		}
+
 
 };
 
