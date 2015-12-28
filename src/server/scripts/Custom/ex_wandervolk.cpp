@@ -234,7 +234,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 				Quest const* quest;
 				quest = sObjectMgr->GetQuestTemplate(900829);	
 				Object* questgiver;
-				player->AddQuest(quest, questgiver->ToCreature());
+				player->AddTimedQuest(900829);
 				me->setFaction(35);
 			}
 
