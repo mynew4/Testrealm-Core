@@ -63,24 +63,10 @@ public: exitarenpc() : CreatureScript("exitarenpc"){ }
 };
 
 
-class indomatanpc : public CreatureScript
-{
-public: indomatanpc() : CreatureScript("indomatanpc"){ }
 
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
-			if (quest->GetQuestId() == 900808){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
-				creature->Yell("Du hast es geschafft", LANG_UNIVERSAL, NULL);
-				return true;
-			}
-			return true;
-		}
-
-};
 
 
 void AddSC_inselnpc()
 {
 	new exitarenpc();
-	new indomatanpc();
 }

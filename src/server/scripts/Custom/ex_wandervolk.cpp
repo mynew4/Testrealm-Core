@@ -24,6 +24,12 @@
 #include <sstream>
 #include <string>
 #include <stdlib.h>
+#include "ScriptMgr.h"
+#include "ScriptedCreature.h"
+
+enum Phases{
+	PHASE_ONE = 1
+};
 
 
 class wandervolk : public CreatureScript
@@ -179,10 +185,84 @@ public:
 
 };
 
+
+class indomatanpc : public CreatureScript
+{
+public: indomatanpc() : CreatureScript("indomatanpc"){ }
+
+		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+			if (quest->GetQuestId() == 900808){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900809){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			return true;
+		}
+
+};
+
+
+class lucionnpc : public CreatureScript
+{
+public: lucionnpc() : CreatureScript("lucion"){ }
+
+		struct lucionAI: public ScriptedAI{
+
+			lucionAI(Creature* creature) : ScriptedAI(creature) {}
+
+			void Reset() override
+			{
+				_events.Reset();
+			}
+
+			void EnterCombat(Unit* /*who*/) override
+			{
+				_events.SetPhase(PHASE_ONE);
+
+			}
+
+			void JustDied(Unit* /*killer*/) override
+			{
+				Player* player = player->GetSession()->GetPlayer();
+				Quest const* quest;
+				quest = sObjectMgr->GetQuestTemplate(900811);
+				player->AddQuest(quest,nullptr);
+			}
+
+
+		private:
+			EventMap _events;
+		};
+
+		CreatureAI* GetAI(Creature* creature) const override
+		{
+			return new lucionAI(creature);
+		}
+
+		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+			if (quest->GetQuestId() == 900810){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_ATTACK1H);
+				creature->Yell("Nun werdet ihr sterben ihr Narren!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			return true;
+		}
+
+};
+
 void AddSC_wandervolk()
 {
 	new wandervolk();
 	new leandaria();
 	new raetsel();
-	
+	new indomatanpc();
+	new lucionnpc();
 }

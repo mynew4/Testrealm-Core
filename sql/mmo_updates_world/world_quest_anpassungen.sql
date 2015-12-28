@@ -493,3 +493,5 @@ INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `Exte
 /*(99321, 0, ??, 0, 0 ,2707); //1 эмблема триумфа */ 
 /*(99321, 0, ??, 0, 0 ,2723); //15 эмблем триумфа */
 
+/* Lucion */ 
+UPDATE `creature_template` SET `ScriptName`='lucion' WHERE `entry`='800055';
