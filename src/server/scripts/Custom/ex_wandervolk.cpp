@@ -253,8 +253,15 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 				return true;
 			}
 
+			if (quest->GetQuestId() == 900824){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
+				creature->Yell("Endlich liegen diese Maden im Dreck!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
 			return true;
 		}
+
 
 
 		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) { 
