@@ -110,7 +110,7 @@ public:
 
 		case 0: {
 			pPlayer->GetGUID();
-			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hallo, ich bin Leandaria. Ihr muesst erst in meiner Gunst stehen um bei mir etwas zu bekommen. Schliesst zuerst die Quest 'Der Wyrm' ab.",
+			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hallo, ich bin Leandaria. Ihr muesst erst in meiner Gunst stehen um bei mir etwas zu bekommen. Schliesst zuerst die Quest 'Elostraio' ab.",
 				pPlayer->GetName());
 			pPlayer->PlayerTalkClass->SendCloseGossip();
 			return true;
