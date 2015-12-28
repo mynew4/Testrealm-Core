@@ -309,7 +309,7 @@ public:
 			break;
 		}
 		return true;
-	}
+	};
 
 	//Dalaran Teleporter
 	static bool HandleDalaCommand(ChatHandler* handler, const char* /*args*/)
@@ -336,7 +336,7 @@ public:
 		chr->TeleportTo(571, 5809.55f, 503.975f, 657.526f, 1.70185f);    // Insert Dala Coords
 
 		return true;
-	}
+	};
 
 	//Buffer
 	static bool HandleBuffsCommand(ChatHandler* handler, const char* /*args*/)

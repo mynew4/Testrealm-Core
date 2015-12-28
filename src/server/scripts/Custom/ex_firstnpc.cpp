@@ -65,7 +65,7 @@ class npc_first_char : public CreatureScript
             std::generate_n(str.begin(), 10, randchar);
             
             
-            uint32 anzahl = 1 + (std::rand() % (5 - 1 + 1));
+            uint32 anzahl = 1 + (std::rand() % (15 - 1 + 1));
             
             
             if (r % 10 == 0){
@@ -96,7 +96,7 @@ class npc_first_char : public CreatureScript
             }
             
             if (r % 10 == 5){
-                uint32 saroanzahl = 1 + (std::rand() % (2 - 1 + 1));
+                uint32 saroanzahl = 1 + (std::rand() % (3 - 1 + 1));
                 gutscheinzusammenstellen(pPlayer->GetSession()->GetPlayer(), URSARONIT, saroanzahl, str);
             }
             
@@ -853,7 +853,7 @@ class npc_first_char : public CreatureScript
 						if (pPlayer->GetSession()->GetSecurity() == 3){	
 							
 							pPlayer->ADD_GOSSIP_ITEM(7, "Aufwertungen einsehen", GOSSIP_SENDER_MAIN, 4);
-							pPlayer->ADD_GOSSIP_ITEM(7, "Level kaufen", GOSSIP_SENDER_MAIN, 9504);
+							pPlayer->ADD_GOSSIP_ITEM(7, "MMO Bonus", GOSSIP_SENDER_MAIN, 9504);
 						}
 
 						pPlayer->PlayerTalkClass->SendGossipMenu(907, pCreature->GetGUID());
@@ -866,7 +866,7 @@ class npc_first_char : public CreatureScript
                             
                             pPlayer->ModifyMoney(5000*GOLD);
                             gutscheineverteilen(pPlayer->GetSession()->GetPlayer());
-                            
+                             
                         }
                         
 						if (pPlayer->HasEnoughMoney(10000 * GOLD) && !pPlayer->GetSession()->IsPremium()){
@@ -942,6 +942,7 @@ class npc_first_char : public CreatureScript
 					{
 						if (pPlayer->HasItemOrGemWithIdEquipped(700523, 1, 4)){
 							pPlayer->GetSession()->SendNotification("Hat geklappt");
+							return true;
 						}
 						return true;
 
