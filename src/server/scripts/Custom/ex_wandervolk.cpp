@@ -24,12 +24,6 @@
 #include <sstream>
 #include <string>
 #include <stdlib.h>
-#include "ScriptMgr.h"
-#include "ScriptedCreature.h"
-
-enum Phases{
-	PHASE_ONE = 1
-};
 
 
 class wandervolk : public CreatureScript
@@ -116,7 +110,7 @@ public:
 
 		case 0: {
 			pPlayer->GetGUID();
-			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hallo, ich bin Leandaria. Ihr muesst erst in meiner Gunst stehen um bei mir etwas zu bekommen. Schliesst zuerst die Quest 'Elostraio' ab.",
+			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hallo, ich bin Leandaria. Ihr muesst erst in meiner Gunst stehen um bei mir etwas zu bekommen. Schliesst zuerst die Quest 'Der Wyrm' ab.",
 				pPlayer->GetName());
 			pPlayer->PlayerTalkClass->SendCloseGossip();
 			return true;
@@ -185,101 +179,10 @@ public:
 
 };
 
-
-class indomatanpc : public CreatureScript
-{
-public: indomatanpc() : CreatureScript("indomatanpc"){ }
-
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
-			if (quest->GetQuestId() == 900808){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
-				creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
-				return true;
-			}
-
-			if (quest->GetQuestId() == 900809){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
-				creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
-				return true;
-			}
-
-			return true;
-		}
-
-};
-
-
-class lucionnpc : public CreatureScript
-{
-public: lucionnpc() : CreatureScript("lucion"){ }
-
-		struct lucionAI: public ScriptedAI{
-
-			lucionAI(Creature* creature) : ScriptedAI(creature) {}
-
-			void Reset() override
-			{
-				_events.Reset();
-			}
-
-			void EnterCombat(Unit* /*who*/) override
-			{
-				_events.SetPhase(PHASE_ONE);
-
-			}
-
-			void JustDied(Unit* /*killer*/) override
-			{
-				Player* player = player->GetSession()->GetPlayer();
-				Quest const* quest;
-				quest = sObjectMgr->GetQuestTemplate(900811);
-				//player->AddQuest(quest,nullptr);
-			}
-
-
-		private:
-			EventMap _events;
-		};
-
-		CreatureAI* GetAI(Creature* creature) const override
-		{
-			return new lucionAI(creature);
-		}
-
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
-			if (quest->GetQuestId() == 900823){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
-				creature->Yell("Danke fuer die Vorraete!", LANG_UNIVERSAL, NULL);
-				return true;
-			}
-
-			if (quest->GetQuestId() == 900824){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
-				creature->Yell("Endlich liegen diese Maden im Dreck!", LANG_UNIVERSAL, NULL);
-				return true;
-			}
-
-			return true;
-		}
-
-
-
-		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) { 
-			if (quest->GetQuestId() == 900825){
-				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
-				creature->Yell("Hoert mir zu. Ich muss euch etwas wichtiges erzaehlen bevor wir hier weitermachen koennen. Groot und Kraserius von den Sammlern verdaechtigen mich, das ich ein Verraeter sei und nicht im Interesse von uns handeln wuerde. Aber ich kann Euch versichern, dem ist nicht so. Es ist eher anders, die beiden betruegen uns und das gesamte Volk. Sie nutzen uns aus und berreichern sich selbst. Glaubt mir! Ich moechte nicht das auch ihr ausgenutzt werdet.", LANG_UNIVERSAL, NULL);
-			}
-			return true;
-		}
-
-
-};
-
 void AddSC_wandervolk()
 {
 	new wandervolk();
 	new leandaria();
 	new raetsel();
-	new indomatanpc();
-	//new lucionnpc();
+	
 }
