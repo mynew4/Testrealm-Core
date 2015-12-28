@@ -230,12 +230,12 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 
 			void JustDied(Unit* /*killer*/) override
 			{
-				Player* player = player->GetSession()->GetPlayer();
+				/*Player* player = player->GetSession()->GetPlayer();
 				Quest const* quest;
 				quest = sObjectMgr->GetQuestTemplate(900829);	
 				Object* questgiver;
 				player->AddTimedQuest(900829);
-				me->setFaction(35);
+				me->setFaction(35);*/
 			}
 
 
