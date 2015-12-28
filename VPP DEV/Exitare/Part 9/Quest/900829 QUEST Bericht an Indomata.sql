@@ -1,12 +1,12 @@
-DELETE FROM `quest_template` WHERE  `id` = 900821;
-DELETE FROM `quest_template_addon` WHERE `id` = 900821;
-DELETE FROM `creature_questender` WHERE `id` = 800087 AND `quest` = 900821;
-DELETE FROM `creature_queststarter` WHERE `id` = 800087   AND `quest` = 900821;
+DELETE FROM `quest_template` WHERE  `id` = 900829;
+DELETE FROM `quest_template_addon` WHERE `id` = 900829;
+DELETE FROM `creature_questender` WHERE `id` = 800055 AND `quest` = 900829;
+DELETE FROM `creature_queststarter` WHERE `id` = 800055   AND `quest` = 900829;
 
 
 REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `QuestSortID`, `QuestInfoID`, `SuggestedGroupNum`, `RequiredFactionId1`, `RequiredFactionId2`, `RequiredFactionValue1`, `RequiredFactionValue2`, `RewardNextQuest`, `RewardXPDifficulty`, `RewardMoney`, `RewardBonusMoney`, `RewardDisplaySpell`, `RewardSpell`, `RewardHonor`, `RewardKillHonor`, `StartItem`, `Flags`, `RequiredPlayerKills`, `RewardItem1`, `RewardAmount1`, `RewardItem2`, `RewardAmount2`, `RewardItem3`, `RewardAmount3`, `RewardItem4`, `RewardAmount4`, `ItemDrop1`, `ItemDropQuantity1`, `ItemDrop2`, `ItemDropQuantity2`, `ItemDrop3`, `ItemDropQuantity3`, `ItemDrop4`, `ItemDropQuantity4`, `RewardChoiceItemID1`, `RewardChoiceItemQuantity1`, `RewardChoiceItemID2`, `RewardChoiceItemQuantity2`, `RewardChoiceItemID3`, `RewardChoiceItemQuantity3`, `RewardChoiceItemID4`, `RewardChoiceItemQuantity4`, `RewardChoiceItemID5`, `RewardChoiceItemQuantity5`, `RewardChoiceItemID6`, `RewardChoiceItemQuantity6`, `POIContinent`, `POIx`, `POIy`, `POIPriority`, `RewardTitle`, `RewardTalents`, `RewardArenaPoints`, `RewardFactionID1`, `RewardFactionValue1`, `RewardFactionOverride1`, `RewardFactionID2`, `RewardFactionValue2`, `RewardFactionOverride2`, `RewardFactionID3`, `RewardFactionValue3`, `RewardFactionOverride3`, `RewardFactionID4`, `RewardFactionValue4`, `RewardFactionOverride4`, `RewardFactionID5`, `RewardFactionValue5`, `RewardFactionOverride5`, `TimeAllowed`, `AllowableRaces`, `LogTitle`, `LogDescription`, `QuestDescription`, `QuestCompletionLog`, `RequiredNpcOrGo1`, `RequiredNpcOrGo2`, `RequiredNpcOrGo3`, `RequiredNpcOrGo4`, `RequiredNpcOrGoCount1`, `RequiredNpcOrGoCount2`, `RequiredNpcOrGoCount3`, `RequiredNpcOrGoCount4`, `RequiredItemId1`, `RequiredItemId2`, `RequiredItemId3`, `RequiredItemId4`, `RequiredItemId5`, `RequiredItemId6`, `RequiredItemCount1`, `RequiredItemCount2`, `RequiredItemCount3`, `RequiredItemCount4`, `RequiredItemCount5`, `RequiredItemCount6`, `Unknown0`, `ObjectiveText1`, `ObjectiveText2`, `ObjectiveText3`, `ObjectiveText4`, `VerifiedBuild`) VALUES
 (
-/* Id  */ '900821', 
+/* Id  */ '900829', 
 /* TYPE  */ '83',
 /* LEVEL  */ '80',
 /* MINLevel  */ '80',
@@ -19,8 +19,8 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RequiredFactionValue2` */ '0',
 /* RewardNextQuest` */'0',
 /* RewardXPDifficulty` */ '70', 
-/* RewardMoney`  */'1000000', 
-/* RewardBonusMoney` */'1000000',
+/* RewardMoney`  */'2000000', 
+/* RewardBonusMoney` */'2000000',
 /* RewardDisplaySpell`  */'0',
 /* RewardSpell`  */'0',
 /* RewardHonor` */ '0',
@@ -44,10 +44,10 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* Quantity3 */ '0',
 /* ItemDrop4`  */ '0', 
 /* Itemdropquantity4   */'0',
-/* RewardChoiceItemID1  */'38186',
-/* RewardChoiceItemQuantity1 */ '5',
-/* RewardChoiceItemID2`  */'200000',
-/* RewardChoiceItemQuantity2` */ '1',
+/* RewardChoiceItemID1  */'0',
+/* RewardChoiceItemQuantity1 */ '0',
+/* RewardChoiceItemID2`  */'0',
+/* RewardChoiceItemQuantity2` */ '0',
 /* RewardChoiceItemID3`  */ '0',
 /* RewardChoiceItemQuantity3`   */'0',
 /* RewardChoiceItemID4`  */'0',
@@ -80,9 +80,9 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RewardFactionOverride5  */ '0',
 /* TimeAllowed  */ '0',
 /* AllowableRaces  */ '1791',
-/* LogTitle   */'Wer ist den nun Felicitas?',
-/* LogDescription  */ 'Das kleine Geheimnis um Felicitas wird gelüftet werden.',
-/* QuestDescription   */'Hallo $N, hast du dich nicht auch schonmal gefragt wer oder was Felicitas ist? Wenn ja wirst du der Antwort immer naeher kommen, wenn wir hier gemeinsam arbeiten. Bringt mir daher bitte 5 Marken von Felicitas. Diese koennt ihr ueber taegliche Quests erreichen, z.B hier beim Wandervolk.',
+/* LogTitle   */'Die Raren sind die Wichtigen.',
+/* LogDescription  */ 'Besorgt mir mehr Materialien. Ich brauche diese.',
+/* QuestDescription   */'Hallo $N, diese glitzernden Gegenstaende wie Gold, Silber. Ich brauche sie, ich will sie haben. Oh aber natuerlich bekommt ihr euren Teil der Beute ab. Nur wie viel das wolllen wir nochmal ueberdenken. Sammelt also fuer mich die nachfolgenden Dinge.',
 /* QuestCompletionLog  */ 'Es ist eure Sache was ihr tut.',
 /* RequiredNpcOrGo1   */'0',
 /* RequiredNpcOrGo2`  */ '0',
@@ -92,13 +92,13 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* RequiredNpcOrGoCount2`  */ '0',
 /* RequiredNpcOrGoCount3`  */ '0',
 /* RequiredNpcOrGoCount4`   */'0',
-/* RequiredItemId1  */ '700522',
+/* RequiredItemId1  */ '0',
 /* RequiredItemId2`  */ '0',
 /* RequiredItemId3` */ '0',
 /* RequiredItemId4`   */'0',
 /* RequiredItemId5`  */ '0',
 /* RequiredItemId6`  */ '0',
-/* RequiredItemCount1   */'5',
+/* RequiredItemCount1   */'0',
 /* RequiredItemCount2`  */ '0',
 /* RequiredItemCount3`  */ '0',
 /* RequiredItemCount4`   */'0',
@@ -113,12 +113,12 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 
 
 REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `SourceSpellID`, `PrevQuestID`, `NextQuestID`, `ExclusiveGroup`, `RewardMailTemplateID`, `RewardMailDelay`, `RequiredSkillID`, `RequiredSkillPoints`, `RequiredMinRepFaction`, `RequiredMaxRepFaction`, `RequiredMinRepValue`, `RequiredMaxRepValue`, `ProvidedItemCount`, `SpecialFlags`) VALUES
-( /*  ID  */900821,
+( /*  ID  */900829,
   /*  MaxLevel  */80,
   /*  AllowableClasses  */2047,
   /*  SourceSpellID  */ 0,
-  /*   PrevQuestID */ 900820,
-  /*  NextQuestID  */900822,
+  /*   PrevQuestID */ 900828,
+  /*  NextQuestID  */900830,
   /*  ExclusiveGroup  */ 0,
   /*   RewardMailTemplateID */ 0,
   /*  RewardMailDelay  */ 0,
@@ -132,7 +132,7 @@ REPLACE INTO `quest_template_addon` (`ID`, `MaxLevel`, `AllowableClasses`, `Sour
   /*   SpecialFlags */ 0);
 
 REPLACE INTO `creature_questender` (`id`, `quest`) VALUES
-(800087, 900821);
+(800055, 900829);
 
 REPLACE INTO `creature_queststarter` (`id`, `quest`) VALUES
-(800087, 900821);
+(800055, 900829);

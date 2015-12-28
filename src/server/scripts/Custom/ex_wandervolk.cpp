@@ -232,8 +232,10 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			{
 				Player* player = player->GetSession()->GetPlayer();
 				Quest const* quest;
-				quest = sObjectMgr->GetQuestTemplate(900811);
+				quest = sObjectMgr->GetQuestTemplate(900829);
+				
 				player->AddQuest(quest,nullptr);
+				me->setFaction(35);
 			}
 
 
@@ -256,6 +258,13 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			if (quest->GetQuestId() == 900824){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 				creature->Yell("Endlich liegen diese Maden im Dreck!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900828){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
+				creature->Yell("Nun seid ihr an der Reihe Abschaum. Sterbt!", LANG_UNIVERSAL, NULL);
+				creature->setFaction(21);
 				return true;
 			}
 
