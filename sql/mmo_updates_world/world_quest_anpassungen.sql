@@ -497,3 +497,7 @@ INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `Exte
 UPDATE `creature_template` SET `ScriptName`='lucion' WHERE `entry`='800055';
 UPDATE `creature` SET `spawntimesecs`='60' WHERE `guid`='800055';
 UPDATE `creature` SET `unit_flags`='8' WHERE `guid`='800055';
+UPDATE `creature_template` SET `lootid`='800055' WHERE entry = 800055;
+REPLACE INTO `creature_loot_template` (`Entry`, `Item`, `Reference`, `Chance`, `QuestRequired`, `LootMode`, `GroupId`, `MinCount`, `MaxCount`) 
+VALUES ('800055', '700524', '0', '100', '0', '1', '1', '1', '1');
+UPDATE `creature_template` SET `HealthModifier` = 10, `ArmorModifier`=5, `DamageModifier`=20 WHERE `entry` = 800055;

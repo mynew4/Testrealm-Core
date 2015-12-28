@@ -220,6 +220,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			void Reset() override
 			{
 				_events.Reset();
+				me->setFaction(35);
 			}
 
 			void EnterCombat(Unit* /*who*/) override
@@ -228,11 +229,9 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 
 			}
 
-			void JustDied(Unit* /*killer*/) override
+			void JustDied(Unit* killer) override
 			{
-				Player* player = player->GetSession()->GetPlayer();
-				player->AddItem(700524,1);
-				me->setFaction(35);
+			
 			}
 
 
