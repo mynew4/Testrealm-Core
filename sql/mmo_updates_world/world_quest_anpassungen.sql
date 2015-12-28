@@ -495,3 +495,5 @@ INSERT INTO `npc_vendor` (`entry`, `slot`, `item`, `maxcount`, `incrtime`, `Exte
 
 /* Lucion */ 
 UPDATE `creature_template` SET `ScriptName`='lucion' WHERE `entry`='800055';
+UPDATE `creature` SET `spawntimesecs`='60' WHERE `guid`='800055';
+UPDATE `creature` SET `unit_flags`='8' WHERE `guid`='800055';
