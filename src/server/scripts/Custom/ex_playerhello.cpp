@@ -572,6 +572,7 @@ public:
 			CharacterDatabase.PExecute("UPDATE `characters` set `map` = 0 where guid = '%u'", player->GetGUID());
             CharacterDatabase.PExecute("UPDATE `characters` set `money` = 50000000 where guid = '%u'", player->GetGUID());
 			
+			
 			player->SetFullHealth();
 			QueryResult accountname = LoginDatabase.PQuery("SELECT username FROM account where id = %u", player->GetSession()->GetAccountId());
 			std::string accname = (*accountname)[0].GetString();
@@ -606,6 +607,7 @@ public:
 		sWorld->SendGMText(LANG_GM_BROADCAST, ss.str().c_str());
 
 	}
+
 };
 
 
@@ -625,143 +627,16 @@ public:
 		sWorld->setRate(RATE_DROP_ITEM_EPIC, 1);
 		sWorld->setRate(RATE_DROP_ITEM_UNCOMMON, 3);
 		sWorld->setBoolConfig(CONFIG_ALLOW_TWO_SIDE_TRADE, true);
-		sWorld->setBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_AUCTION,true);
+		sWorld->setBoolConfig(CONFIG_ALLOW_TWO_SIDE_INTERACTION_AUCTION, true);
 		
 	}
-
-
 
 };
 
 
 
-class Chatlog : public PlayerScript
-{
-
-public:
-	Chatlog() : PlayerScript("Chatlog") { }
 
 
-	
-	void chatlog(Player* player, std::string nachricht) {
-		
-		std::string lower = nachricht;
-		std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
-
-		const uint32 cheksSize = 56;
-		std::string checks[cheksSize];
-		checks[0] = "at";
-		checks[1] = "frostmourne";
-		checks[2] = "pws";
-		checks[3] = "bigfamily";
-		checks[4] = "castle-wow";
-		checks[5] = "mwow";
-		checks[6] = "maxwow";
-		checks[7] = "hellscream wow";
-		checks[8] = "soulwow";
-		checks[9] = "adex";
-		checks[10] = "eternyum";
-		checks[11] = "eternal";
-		checks[12] = "back2basics";
-		checks[13] = "laenalith";
-		checks[14] = "monster wow";
-		checks[15] = "rising-gods";
-		checks[16] = "privat-woW-server";
-		checks[17] = "ice-wow";
-		checks[18] = "land of elves";
-		checks[19] = "solacewow";
-		checks[20] = "world of paranoid";
-		checks[21] = "buzzteria";
-		checks[22] = "genesis";
-		checks[23] = "fantasy";
-		checks[24] = "heroes";
-		checks[25] = "stormblade";
-		checks[26] = "fm";
-		checks[27] = "b2b";
-		checks[28] = "molten";
-		checks[29] = "warmane";
-		checks[30] = "a";
-        checks[31] = "b";
-        checks[32] = "c";
-        checks[33] = "d";
-        checks[34] = "e";
-        checks[35] = "f";
-        checks[36] = "g";
-        checks[37] = "h";
-        checks[38] = "i";
-        checks[39] = "j";
-        checks[40] = "k";
-        checks[41] = "l";
-        checks[42] = "m";
-        checks[43] = "n";
-        checks[44] = "o";
-        checks[45] = "p";
-        checks[46] = "q";
-        checks[47] = "r";
-        checks[48] = "s";
-        checks[49] = "t";
-        checks[50] = "u";
-        checks[51] = "v";
-        checks[52] = "w";
-        checks[53] = "x";
-        checks[54] = "y";
-        checks[55] = "z";
-		
-
-		for (uint32 i = 0; i < cheksSize; ++i)
-            
-			if (lower.find(checks[i]) != std::string::npos)
-			{			
-				
-                if(nachricht == "nicht an der tastatur"){
-                    return;
-                }
-
-				if (nachricht == "gatherer"){
-					return;
-				}
-                
-                time_t sek;
-                time(&sek);
-                uint32 zeit = time(&sek);
-                
-				CharacterDatabase.PExecute("INSERT INTO fremdwerbung "
-					"(nachricht,player, guid,accid, datum)"
-					"VALUES ('%s', '%s','%u','%u','%u')",
-					nachricht, player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), zeit);
-				break;
-				
-			}
-
-	}
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg) {
-		chatlog(player->GetSession()->GetPlayer(), msg);		
-		
-
-	}
-
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Player* /*receiver*/) { 
-		chatlog(player->GetSession()->GetPlayer(), msg);
-	
-	}
-
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Group* /*group*/) { 	
-		chatlog(player->GetSession()->GetPlayer(), msg);
-	}
-
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Guild* /*guild*/) { 	
-		chatlog(player->GetSession()->GetPlayer(), msg);
-	}
-
-
-	void OnChat(Player* player, uint32 /*type*/, uint32 /*lang*/, std::string& msg, Channel* /*channel*/) { 
-		chatlog(player->GetSession()->GetPlayer(), msg);
-	}
-};
 
 
 
@@ -776,5 +651,4 @@ void AddSC_Announce_NewPlayer()
 	new Shutdown();
 	new DuelLog();
 	new GMIsland();
-	new Chatlog();
 }

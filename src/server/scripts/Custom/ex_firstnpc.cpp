@@ -156,7 +156,7 @@ class npc_first_char : public CreatureScript
             }
         
         
-        }
+		}
 
 
 				void fixgutschein(Player* player, uint32 belohnung, uint32 anzahl, std::string grund ){
