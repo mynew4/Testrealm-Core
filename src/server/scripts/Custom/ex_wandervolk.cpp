@@ -227,6 +227,21 @@ public: indomatanpc() : CreatureScript("indomatanpc"){ }
 				return true;
 			}
 
+			if (quest->GetQuestId() == 900834){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_LAND);
+				creature->Yell("Ich danke das ihr mich so unterstuetzt!", LANG_UNIVERSAL, NULL);
+				creature->AddAura(52940,creature);
+				return true;
+			}
+
+			if (quest->GetQuestId() == 900835){
+				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+				creature->Yell("Und der Zweite ist tot. Ihr seid ein wahrer Krieger!", LANG_UNIVERSAL, NULL);
+				return true;
+			}
+
+
+
 
 			return true;
 		}

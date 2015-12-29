@@ -515,3 +515,11 @@ REPLACE INTO `creature_equip_template` (`CreatureID`, `id`, `ItemID1`, `ItemID2`
 /* QUest 900828 */
 UPDATE `quest_template` SET `Flags`='64' WHERE `ID`= '900828';
 UPDATE `quest_template` SET `QuestInfoID`='62' WHERE `ID` ='900828';
+
+
+/* QUest 802021 Sammlung Teil4 */
+UPDATE `quest_template` SET `LogDescription`='Bringt Moon 50 Spinnenseide, 100 Seidenstoffe und toetet 20 Domestizierter Krabbler und 20 verseuchte Baeren.', `QuestDescription`='$N,$Bbringt mir 50 Spinnenseide, 100 Seidenstoffe und toetet 20 Domestizierter Krabbler und 20 verseuchte Baeren. Ihr findet alles im Vorgebirge des Huegellandes.', `RequiredNpcOrGo2`='0', `RequiredNpcOrGo3`='0', `RequiredNpcOrGo4`='2351', `RequiredNpcOrGoCount2`='0', `RequiredNpcOrGoCount3`='0', `RequiredNpcOrGoCount4`='20' WHERE `ID`='802021';
+
+
+/*NPC Weihnachtswichtel */
+UPDATE `creature` SET `position_x`='16227.75', `position_y`='16344.58', `position_z`='215.31', `orientation`='2.18' WHERE `guid`='800066';
