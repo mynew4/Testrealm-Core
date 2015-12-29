@@ -83,6 +83,20 @@ class janarius : public CreatureScript
 public:
 	janarius() : CreatureScript("janarius") { }
 
+	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+
+		if (quest->GetQuestId() == 900808){
+			creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
+			creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
+			return true;
+		}
+
+	}
+
+
+	
+
+
 	
 };
 
@@ -229,7 +243,7 @@ public: indomatanpc() : CreatureScript("indomatanpc"){ }
 
 			if (quest->GetQuestId() == 900834){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_LAND);
-				creature->Yell("Ich danke das ihr mich so unterstuetzt!", LANG_UNIVERSAL, NULL);
+				creature->Yell("Ich danke, dass ihr mich so unterstuetzt!", LANG_UNIVERSAL, NULL);
 				creature->AddAura(52940,creature);
 				return true;
 			}
@@ -239,12 +253,17 @@ public: indomatanpc() : CreatureScript("indomatanpc"){ }
 				creature->Yell("Und der Zweite ist tot. Ihr seid ein wahrer Krieger!", LANG_UNIVERSAL, NULL);
 				return true;
 			}
-
-
-
-
 			return true;
 		}
+
+		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) {
+			if (quest->GetQuestId() == 900835){
+				player->AddItem(5917, 1);
+				return true;
+			}
+			return true;
+		}
+
 
 };
 
