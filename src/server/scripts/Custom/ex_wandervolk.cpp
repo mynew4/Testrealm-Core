@@ -85,9 +85,10 @@ public:
 
 	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
 
-		if (quest->GetQuestId() == 900808){
-			creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
-			creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
+		if (quest->GetQuestId() == 900835){
+			creature->HandleEmoteCommand(EMOTE_ONESHOT_CRY);
+			creature->Yell("Dieser Bericht ist erschreckend! Wir muessen etwas tun!", LANG_UNIVERSAL, NULL);
+			creature->AddAura(72525, creature);
 			return true;
 		}
 

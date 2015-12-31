@@ -523,3 +523,8 @@ UPDATE `quest_template` SET `LogDescription`='Bringt Moon 50 Spinnenseide, 100 S
 
 /*NPC Weihnachtswichtel */
 UPDATE `creature` SET `position_x`='16227.75', `position_y`='16344.58', `position_z`='215.31', `orientation`='2.18' WHERE `guid`='800066';
+
+
+/* WAndervolkmarke anpassung */
+UPDATE `item_template` SET `Quality`='5' WHERE `entry`='700521';
+UPDATE `item_template` SET `Flags`='73' WHERE `entry`='700521';
