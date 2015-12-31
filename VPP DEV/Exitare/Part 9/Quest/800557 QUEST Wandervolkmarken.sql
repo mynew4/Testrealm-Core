@@ -82,7 +82,7 @@ REPLACE INTO `quest_template` (`ID`, `QuestType`, `QuestLevel`, `MinLevel`, `Que
 /* AllowableRaces  */ '1791',
 /* LogTitle   */'Die 6 Aeonen.',
 /* LogDescription  */ 'Bringt mir die Aeonen von Feuer, Schatten, Leben, Erde, Luft und Wasser.',
-/* QuestDescription   */'Hallo $N, moechtet ihr Euch etwas verdienen? Bringt mir 5 Aeonen von Feuer, Schatten, Leben, Erde, Luft und Wasser. Die Marken die ihr bekommt, sind wichtig fuer spaeter.',
+/* QuestDescription   */'Hallo $N, moechtet ihr Euch etwas verdienen? Bringt mir 6 Aeonen von Feuer, Schatten, Leben, Erde, Luft und Wasser. Die Marken die ihr bekommt, sind wichtig fuer spaeter.',
 /* QuestCompletionLog  */ 'Es ist eure Sache was ihr tut.',
 /* RequiredNpcOrGo1   */'0',
 /* RequiredNpcOrGo2`  */ '0',
