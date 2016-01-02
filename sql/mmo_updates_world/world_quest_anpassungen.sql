@@ -528,3 +528,8 @@ UPDATE `creature` SET `position_x`='16227.75', `position_y`='16344.58', `positio
 /* WAndervolkmarke anpassung */
 UPDATE `item_template` SET `Quality`='5' WHERE `entry`='700521';
 UPDATE `item_template` SET `Flags`='73' WHERE `entry`='700521';
+
+
+/* QUEST 802003 GOldanpassung */
+UPDATE `quest_template` SET `QuestDescription`='$N, Ich habe mir vor langer Zeit ein Buch von einem alten Bekannten ausgeliehen.Koenntet ihr es zurueck bringen? Sie befindet sich an der Kueste in Desolace am Sartherisstrand.' WHERE `ID` = 802003 ;
+UPDATE `quest_template` SET `RewardMoney`='1500000' WHERE `ID`='802003';
