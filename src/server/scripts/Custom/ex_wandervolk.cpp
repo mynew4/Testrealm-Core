@@ -304,7 +304,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			return new lucionAI(creature);
 		}
 
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) override {
 			if (quest->GetQuestId() == 900823){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 				creature->Yell("Danke fuer die Vorraete!", LANG_UNIVERSAL, NULL);

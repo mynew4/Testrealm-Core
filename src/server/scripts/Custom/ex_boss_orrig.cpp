@@ -38,10 +38,7 @@ enum Phases
 	PHASE_THREE = 3
 };
 
-enum Summons
-{
-	NPC_PUSTELIGER_SCHRECKEN = 31139
-};
+
 
 enum Texts
 {
@@ -103,18 +100,7 @@ public:
 			}
 		}
 
-		void JustSummoned(Creature* summon) override
-		{
-			Summons.Summon(summon);
-
-			switch (summon->GetEntry())
-			{
-			case NPC_PUSTELIGER_SCHRECKEN:
-				if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 300.0f))
-					summon->AI()->AttackStart(target); // I think it means the Tank !
-				break;
-			}
-		}
+		
 
 
 		void JustDied(Unit* pPlayer)

@@ -535,7 +535,13 @@ enum CharacterDatabaseStatements
 
     CHAR_INS_DESERTER_TRACK,
 
-    MAX_CHARACTERDATABASE_STATEMENTS
+    MAX_CHARACTERDATABASE_STATEMENTS,
+    
+    
+    /* Exi Custom */
+    CHAR_SEL_FRAGEN
+    
+    
 };
 
 class CharacterDatabaseConnection : public MySQLConnection

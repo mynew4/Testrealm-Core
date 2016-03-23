@@ -39,6 +39,7 @@ public:
 			pPlayer->ADD_GOSSIP_ITEM(7, "Das zweite Raetsel", GOSSIP_SENDER_MAIN, 0);
 		}
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
+        pPlayer->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Code eingabe", 0,true);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}
@@ -65,13 +66,34 @@ public:
 			pPlayer->PlayerTalkClass->SendCloseGossip();
 			return true;
 		}break;
-
+                
 			return true;
 		}
 		return true;
 	};
 
-
+    
+    bool OnGossipSelectCode(Player * player, Creature* /*creature*/, uint32 /*sender*/, uint32 action, const char* code){
+      
+        if(action == 2){
+            std::string codes = code;
+            
+            if(codes.empty()){
+                player->GetSession()->SendNotification("Deine Eingabe darf nicht leer sein");
+                return true;
+            }
+            
+        
+            if(codes == "1111"){
+                player->AddItem(2000, 34);
+                player->GetSession()->SendNotification("Dein Code wurde aktzeptiert");
+                return true;
+            }
+            return true;
+        }
+        
+        return true;
+    }
 	
 	
 };

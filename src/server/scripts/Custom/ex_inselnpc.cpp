@@ -52,7 +52,7 @@ class exitarenpc : public CreatureScript
 public: exitarenpc() : CreatureScript("exitarenpc"){ }
 
 
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+		bool OnQuestReward(Player* /*player*/, Creature* creature, Quest const* quest, uint32 /*opt*/) {
 			if (quest->GetQuestId() == 800552){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
 				creature->Yell("Du hast es geschafft", LANG_UNIVERSAL, NULL);

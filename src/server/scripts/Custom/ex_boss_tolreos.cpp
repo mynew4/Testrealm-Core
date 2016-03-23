@@ -91,6 +91,9 @@ enum Texts
 	SAY_DEAD = 5
 };
 
+
+uint32 kills = 0;
+
 class tolreos : public CreatureScript
 {
 public:
@@ -99,7 +102,7 @@ public:
 	struct tolreosAI : public ScriptedAI
 	{
 		tolreosAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
-		uint32 kills = 0;
+		
 		void Reset() override
 		{
 			me->SetObjectScale(1);
@@ -267,7 +270,7 @@ public:
 	struct tolreosaddAI : public ScriptedAI
 	{
 		tolreosaddAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
-		uint32 kills = 0;
+		
 		void Reset() override
 		{
 
@@ -289,14 +292,6 @@ public:
 			if (me->HealthBelowPctDamaged(100, damage) && _events.IsInPhase(PHASE_ONE))
 			{
 				_events.SetPhase(PHASE_TWO);
-				_events.ScheduleEvent(EVENT_SCHATTENFALLE, 30000);
-
-
-			}
-
-			if (me->HealthBelowPctDamaged(50, damage) && _events.IsInPhase(PHASE_TWO))
-			{
-				_events.SetPhase(PHASE_THREE);
 				_events.ScheduleEvent(EVENT_SCHATTENFALLE, 30000);
 
 
