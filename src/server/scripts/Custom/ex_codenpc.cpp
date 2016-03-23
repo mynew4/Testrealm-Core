@@ -117,8 +117,7 @@ public:
    
     bool OnGossipHello(Player *player, Creature* _creature)
     {
-        player->ADD_GOSSIP_ITEM(7,"1", GOSSIP_SENDER_MAIN,0);
-        player->ADD_GOSSIP_ITEM(7,"Hallo", GOSSIP_SENDER_MAIN,1);
+        player->ADD_GOSSIP_ITEM(7,"Stelle mir eine Frage", GOSSIP_SENDER_MAIN,1);
         player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
         player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         return true;
@@ -129,39 +128,36 @@ public:
         
         switch(action){
             
-            case 0:
-            {
-                player->GetSession()->SendNotification("1");
-            }
-                
+            
             case 1:
             {
-                player->GetSession()->SendNotification("Hallo");
+                uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
+                PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+                selfragen->setInt32(0,nr);
+                PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
+                
+                
             }
             
             
             case 2:
             {
-                uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
-        
+                
                 if(action == 2){
             
                     std::string codes = code;
-                    QueryResult ergebnis = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
-            
-                    /*PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
-                    stmt->setInt32(0,nr);
-                    PreparedQueryResult ergebnis = CharacterDatabase.Query(stmt);*/
+                    //QueryResult ergebnis = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
+                    
+                    PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT);
+                    selfragen->setString(0, codes);
+                    PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
+                    
             
                     Field* felder = ergebnis->Fetch();
-                    std::string frage = felder[2].GetString();
+                    //std::string frage = felder[2].GetString();
                     std::string antwort = felder[3].GetString();
             
-                   
-                    std::ostringstream ss;
-                    ss << "Deine Frage lautet: " << frage;
-                    ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
-            
+                
                     if(codes == antwort){
                         pruefen(player, true);
                     }
