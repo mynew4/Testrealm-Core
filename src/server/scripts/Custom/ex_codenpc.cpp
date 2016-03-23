@@ -162,14 +162,18 @@ public:
                     
                     if(ergebnis){
                         pruefen(player->GetSession()->GetPlayer(), true);
+                        return true;
                     }
                     
                     if(!ergebnis){
                         pruefen(player->GetSession()->GetPlayer(), false);
+                        return true;
                     }
                     
                     if(codes == "MMOwning"){
                         player->GetSession()->SendNotification("Testsequenz erfolgreich");
+                         ChatHandler(player->GetSession()).PSendSysMessage("Erfolgreicher Test", player->GetName());
+                        return true;
                     }
         
                     player->PlayerTalkClass->SendCloseGossip();
@@ -180,6 +184,7 @@ public:
         
         return true;
         }
+    return true;
     }
     
     
