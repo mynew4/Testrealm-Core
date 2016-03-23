@@ -84,6 +84,7 @@ public:
                 
                     if(codes == "1111"){
                         player->GetSession()->SendNotification("Hallo");
+                        return true;
                     }
                     
                     PreparedStatement* selantwort = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT);
