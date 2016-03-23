@@ -76,8 +76,10 @@ public:
 
                     Field* felder = ergebnis->Fetch();
                     std::string frage = felder[2].GetString();
-                
-                    TC_LOG_INFO(nr);
+                    
+                    std::ostringstream ss;
+                    ss <<nr << " diese nummer wurde geladen";
+                    TC_LOG_INFO(ss.str().c_str());
                     TC_LOG_INFO(frage);
                     
                     std::ostringstream ss;
