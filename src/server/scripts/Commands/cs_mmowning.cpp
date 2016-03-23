@@ -146,7 +146,17 @@ public:
 			return true;
 		}
 			
+        PreparedStatement * itemquery = WorldDatabase.GetPreparedStatement(WORLD_SEL_ITEM_NR);
+        itemquery->setUInt32(0,item);
+        PreparedQueryResult ergebnis = WorldDatabase.Query(itemquery);
 		
+        
+        if(!ergebnis){
+            player->GetSession()->SendNotification("Item existiert nicht");
+            return;
+        }
+        
+        
 		uint32 anzahlint = atoi((char*)anzahl);
 		
 		//uint32 item = atoi((char*)args);

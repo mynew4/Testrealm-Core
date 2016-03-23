@@ -58,6 +58,7 @@ public:
                 CharacterDatabase.PExecute("UPDATE spielerantworten SET korrekt = '%u' WHERE account = '%u'", korrekt, accid);
                 
                 player->GetSession()->SendNotification("Geschafft");
+                return;
                 
             }
             
@@ -69,11 +70,7 @@ public:
                 return;
                 
             }
-            
-            
-            
-            
-            
+            return;
         }
         
         
@@ -135,6 +132,8 @@ public:
                 PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
                 selfragen->setInt32(0,nr);
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
+                player->PlayerTalkClass->SendCloseGossip();
+                return true;
                 
                 
             }
@@ -156,9 +155,12 @@ public:
                     Field* felder = ergebnis->Fetch();
                     //std::string frage = felder[2].GetString();
                     std::string antwort = felder[3].GetString();
-            
+                    
+                    if(ergebnis){
+                        pruefen(player, true);
+                    }
                 
-                    if(codes == antwort){
+                    /*if(codes == antwort){
                         pruefen(player, true);
                     }
                     
@@ -168,8 +170,8 @@ public:
             
                     if(codes != antwort){
                         pruefen(player,false);
-                    }
-            
+                    }*/
+                    player->PlayerTalkClass->SendCloseGossip();
                     return true;
                 }
         
