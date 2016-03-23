@@ -37,14 +37,31 @@ class codenpc : public CreatureScript
 public:
     codenpc() : CreatureScript("codenpc") { }
     
-    
+    void Belohnung(Player* player, uint32 nr){
+        
+        PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+        itemquery->setInt32(0, nr);
+        PreparedQueryResult result = CharacterDatabase.Query(itemquery);
+        
+        Field* feld = result->Fetch();
+        uint32 belohnung = feld[4].GetInt32();
+        uint32 anzahl = feld[5].GetInt32();
+        
+        Item* item = Item::CreateItem(belohnung, anzahl);
+        uint32 uid = player->GetGUID();
+        SQLTransaction trans = CharacterDatabase.BeginTransaction();
+        item->SaveToDB(trans);
+        MailDraft("Raetsel geloest", "Glueckwunsch. Du hast ein Raetsel geloest. Hier ist deine Belohnung.").AddItem(item)
+        .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+        CharacterDatabase.CommitTransaction(trans);
+        return;
+
+    }
     
     
    
     bool OnGossipHello(Player *player, Creature* _creature)
     {
-        player->ADD_GOSSIP_ITEM(7,"Gib mir die NR aus", GOSSIP_SENDER_MAIN, 0);
-        player->ADD_GOSSIP_ITEM(7,"Stelle mir eine Frage", GOSSIP_SENDER_MAIN,1);
         player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
         player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         return true;
@@ -54,38 +71,6 @@ public:
     bool OnGossipSelectCode(Player * player, Creature* /*creature*/, uint32 /*sender*/, uint32 action, const char* code){
         
         switch(action){
-            
-            case 0:
-            {
-                ChatHandler(player->GetSession()).PSendSysMessage("bal bla bla", player->GetName());
-                player->PlayerTalkClass->SendCloseGossip();
-                return true;
-            }break;
-                
-            
-            case 1:
-                {
-                    uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
-                    PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-                    selfragen->setInt32(0,nr);
-                    PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
-                
-                    //PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
-
-                    Field* felder = ergebnis->Fetch();
-                    std::string frage = felder[2].GetString();
-                    
-                    std::ostringstream ss;
-                    ss <<nr << " diese nummer wurde geladen";
-                    TC_LOG_INFO(ss.str().c_str(), "Schau hier diese %u", nr);
-                    std::ostringstream tt;
-                    tt << "Deine Frage lautet: " << frage;
-                    ChatHandler(player->GetSession()).PSendSysMessage(tt.str().c_str(), player->GetName());
-                    
-                    player->PlayerTalkClass->SendCloseGossip();
-                    return true;
-                
-                }break;
             
             
             case 2:
@@ -102,7 +87,8 @@ public:
                     selantwort->setString(0, codes);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
                     
-                    //Field* feld = ergebnis->Fetch();
+                    Field* feld = ergebnis->Fetch();
+                    uint32 nr = ergebnis[1].uint32();
                     
                     if(!ergebnis){
                         player->GetSession()->SendNotification("Falsch");
@@ -111,6 +97,7 @@ public:
                     
                     if(ergebnis){
                         player->GetSession()->SendNotification("Korrekt");
+                        Belohnung(player->GetSession()->GetPlayer(), nr);
                         return true;
                     }
                     

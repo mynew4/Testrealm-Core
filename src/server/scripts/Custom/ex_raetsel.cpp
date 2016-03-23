@@ -34,17 +34,16 @@ public:
 
 	bool OnGossipHello(Player *pPlayer, Creature* _creature)
 	{
-		bool status = pPlayer->GetQuestRewardStatus(802015);
-		if (status){
-			pPlayer->ADD_GOSSIP_ITEM(7, "Das zweite Raetsel", GOSSIP_SENDER_MAIN, 0);
-		}
+		
+		pPlayer->ADD_GOSSIP_ITEM(7, "Das zweite Raetsel", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
-        pPlayer->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Code eingabe", 0,true);
+        pPlayer->ADD_GOSSIP_ITEM(7, "Wo kann ich die Raetsel abgeben?", GOSSIP_SENDER_MAIN,2);
+        pPlayer->ADD_GOSSIP_ITEM(7, "Zeigt mir die Raetsel!", GOSSIP_SENDER_MAIN, 3);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}
 
-	bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature*/, uint32 /*uiSender*/, uint32 uiAction)
+	bool OnGossipSelect(Player * pPlayer, Creature * creature, uint32 /*uiSender*/, uint32 uiAction)
 	{
 		switch (uiAction)
 		{
@@ -67,34 +66,30 @@ public:
 			return true;
 		}break;
                 
-			return true;
+        case 2:
+        {
+            pPlayer->GetGUID();
+            ChatHandler(pPlayer->GetSession()).PSendSysMessage("Gleich nebenmir steht mein Assistent. Bei diesem koennt ihr die Antworten eingeben, so Ihr diese denn wisst. Ihr muesst nicht die Frage angeben, gebt ihm einfach nur die Antwort. Er wird wissen von was Ihr sprecht.", pPlayer->GetName());
+            pPlayer->PlayerTalkClass->SendCloseGossip();
+            return true;
+
+        }
+                
+        case 3:
+        {
+            pPlayer->PlayerTalkClass->ClearMenus();
+            pPlayer->ADD_GOSSIP_ITEM(7,"Der Drache", GOSSIP_SENDER_MAIN, 4);
+            pPlayer->ADD_GOSSIP_ITEM(7,"Wie alt bin?", GOSSIP_SENDER_MAIN, 5);
+            pPlayer->PlayerTalkClass->SendGossipMenu(907, creature->GetGUID());
+            return true;
+
+        }
+                
+            return true;
 		}
 		return true;
 	};
 
-    
-    bool OnGossipSelectCode(Player * player, Creature* /*creature*/, uint32 /*sender*/, uint32 action, const char* code){
-      
-        if(action == 2){
-            std::string codes = code;
-            
-            if(codes.empty()){
-                player->GetSession()->SendNotification("Deine Eingabe darf nicht leer sein");
-                return true;
-            }
-            
-        
-            if(codes == "1111"){
-                player->AddItem(2000, 34);
-                player->GetSession()->SendNotification("Dein Code wurde aktzeptiert");
-                return true;
-            }
-            return true;
-        }
-        
-        return true;
-    }
-	
 	
 };
 

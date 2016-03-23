@@ -25,7 +25,7 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     
     /* EXI CUSTOM */
     
-    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort`, `belohnung`, `anzahl` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `antwort` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_LOB, "SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = ? AND `uid`= ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_LOB, "INSERT INTO lob (zeit,spieler,uid,benutzt)VALUES (?,?,?,?)", CONNECTION_ASYNC);
