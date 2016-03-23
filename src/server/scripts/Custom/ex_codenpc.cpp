@@ -127,7 +127,7 @@ public:
     
     bool OnGossipSelectCode(Player * player, Creature* /*creature*/, uint32 /*sender*/, uint32 action, const char* code){
         
-        switch(uiAction){
+        switch(action){
             
             case 0:
             {
