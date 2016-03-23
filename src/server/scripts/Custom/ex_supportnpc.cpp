@@ -50,6 +50,7 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie schreibe ich im Worldchat?", GOSSIP_SENDER_MAIN, 5);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert bei mir nicht.", GOSSIP_SENDER_MAIN, 6);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie startet der Contentpatch?", GOSSIP_SENDER_MAIN, 8);
+        player->ADD_GOSSIP_ITEM(7, "Wo kann ich Eventquests abgeben?", GOSSIP_SENDER_MAIN, 9);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
         }
@@ -134,8 +135,14 @@ public:
 
                 
                 case 8:
+                {
                     erklaerung(pPlayer->GetSession()->GetPlayer(),"Der Contentpatch startet ab Level 80 ueber einen Drop bei den Endbosse in allen Instanzen von Nordend oder ueber 2 Quests beim Wandervolk.");
+                }break;
                     
+                case 9:
+                {
+                    erklaerung(pPlayer->GetSession()->GetPlayer(), "Die speziellen Eventquests koennen nur bei den Eventquestgebern /nehmern abgegeben werden. Bitte gedulde dich daher, bis das Event wieder aktiv wird.");
+                }
 				
 
 				return true;

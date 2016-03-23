@@ -54,8 +54,8 @@ public:
                 anzahl++;
                 korrekt++;
                 
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE account = '%u'", anzahl, accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET korrekt = '%u' WHERE account = '%u'", korrekt, accid);
+                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
+                CharacterDatabase.PExecute("UPDATE spielerantworten SET korrekt = '%u' WHERE accountid = '%u'", korrekt, accid);
                 
                 player->GetSession()->SendNotification("Geschafft");
                 return;
@@ -87,9 +87,9 @@ public:
                 anzahl++;
                 falsch++;
                 
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET playerid = '%u' WHERE account = '%u'", player->GetGUID(), accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE account = '%u'", anzahl, accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE account = '%u'", falsch, accid);
+                CharacterDatabase.PExecute("UPDATE spielerantworten SET playerid = '%u' WHERE accountid = '%u'", player->GetGUID(), accid );
+                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
+                CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE accountid = '%u'", falsch, accid);
                 player->GetSession()->SendNotification("Deine Antwort war falsch");
                 return;
             }
@@ -157,20 +157,17 @@ public:
                     std::string antwort = felder[3].GetString();
                     
                     if(ergebnis){
-                        pruefen(player, true);
-                    }
-                
-                    /*if(codes == antwort){
-                        pruefen(player, true);
+                        pruefen(player->GetSession()->GetPlayer(), true);
                     }
                     
-                    if(codes == "1111"){
+                    if(!ergebnis){
+                        pruefen(player->GetSession()->GetPlayer(), false);
+                    }
+                    
+                    if(codes == "MMOwning"){
                         player->GetSession()->SendNotification("Testsequenz erfolgreich");
                     }
-            
-                    if(codes != antwort){
-                        pruefen(player,false);
-                    }*/
+        
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
                 }

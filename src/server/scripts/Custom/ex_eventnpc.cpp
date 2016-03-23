@@ -203,7 +203,11 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
 					bool active = ae.find(75) != ae.end();
 					if (active == true && pPlayer->getLevel() == 1){
-						pPlayer->GetGUID();
+                        if (pPlayer->getLevel() > 1){
+                            pPlayer->GetSession()->SendNotification("Du bist nicht Level 1.");
+                        }
+
+                        pPlayer->GetGUID();
 						pPlayer->TeleportTo(1, -8455.62, -1321.31, 8.87, 3.29);
 						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
 							pPlayer->GetName());
@@ -211,10 +215,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 						return true;
 					}
 
-					if (pPlayer->getLevel() > 1){
-						pPlayer->GetSession()->SendNotification("Du bist nicht Level 1.");
-					}
-
+					
 					else{
 						pPlayer->GetGUID();
 						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event 'Neujahrsevent' ist ab 1.01. verfuegbar.  Aktuell ist es nicht aktiv.",
