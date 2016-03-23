@@ -105,7 +105,7 @@ public:
                 
                     std::string codes = code;
                 
-                    if(codes == "1111"){
+                    if(codes == "Easteregg"){
                         player->GetSession()->SendNotification("Hallo");
                         return true;
                     }
@@ -114,16 +114,18 @@ public:
                     selantwort->setString(0, codes);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
                     
-                    Field* feld = ergebnis->Fetch();
-                    uint32 nr = feld[1].GetInt32();
-                    
                     if(!ergebnis){
                         player->GetSession()->SendNotification("Falsch");
                         return false;
                     }
                     
+                    
+                    Field* feld = ergebnis->Fetch();
+                    uint32 nr = feld[1].GetInt32();
+                    
+                    
                     if(ergebnis){
-                        player->GetSession()->SendNotification("Korrekt");
+                       
                         Belohnung(player->GetSession()->GetPlayer(), nr);
                         return true;
                     }
