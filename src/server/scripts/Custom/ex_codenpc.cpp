@@ -57,12 +57,9 @@ public:
             
             case 0:
             {
-                std::ostringstream uu;
-                uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
-                ChatHandler(player->GetSession()).PSendSysMessage("ZIemliche nervig!", player->GetName());
+                ChatHandler(player->GetSession()).PSendSysMessage("bal bla bla", player->GetName());
                 player->PlayerTalkClass->SendCloseGossip();
                 return true;
-                
             }break;
                 
             
