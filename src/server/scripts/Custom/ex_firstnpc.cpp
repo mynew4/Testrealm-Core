@@ -496,7 +496,7 @@ class npc_first_char : public CreatureScript
 
 
 							else{
-								ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System] Deine Gilde ist nicht neu, oder hat nicht genug oder zu viele Mitglieder.",
+								ChatHandler(pPlayer->GetSession()).PSendSysMessage("[Aufwertungs System] Deine Gilde ist nicht neu, hat nicht genug oder zu viele Mitglieder.",
 									pPlayer->GetName());
 								pPlayer->PlayerTalkClass->SendCloseGossip();
 								return true;

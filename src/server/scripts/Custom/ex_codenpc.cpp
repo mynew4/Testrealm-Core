@@ -59,9 +59,7 @@ public:
             {
                 std::ostringstream uu;
                 uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
-                uu << nr << " hier!";
-                
-                ChatHandler(player->GetSession()).PSendSysMessage(uu.str().c_str(), player->GetName());
+                ChatHandler(player->GetSession()).PSendSysMessage("ZIemliche nervig!", player->GetName());
                 return true;
                 
             }break;
