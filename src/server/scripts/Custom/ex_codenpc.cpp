@@ -115,52 +115,68 @@ public:
     
     
    
-    
-    
-    
-    bool OnGossipHello(Player *pPlayer, Creature* _creature)
+    bool OnGossipHello(Player *player, Creature* _creature)
     {
-        pPlayer->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
-        pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
+        player->ADD_GOSSIP_ITEM(7,"1", GOSSIP_SENDER_MAIN,0);
+        player->ADD_GOSSIP_ITEM(7,"Hallo", GOSSIP_SENDER_MAIN,1);
+        //player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
+        player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         return true;
     }
     
     
     bool OnGossipSelectCode(Player * player, Creature* /*creature*/, uint32 /*sender*/, uint32 action, const char* code){
         
-        
-        uint32 nr = 1 + (std::rand() % (16 - 1 + 1));
-        
-        if(action == 2){
+        switch(uiAction){
             
-            std::string codes = code;
-            //QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
-            
-            PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
-            stmt->setInt32(0,nr);
-            PreparedQueryResult ergebnis = CharacterDatabase.Query(stmt);
-            
-            Field* felder = ergebnis->Fetch();
-            std::string frage = felder[2].GetString();
-            std::string antwort = felder[3].GetString();
-            
-            
-            std::ostringstream ss;
-            ss << "Deine Frage lautet: " << frage;
-            ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
-            
-            if(codes == antwort){
-                pruefen(player, true);
+            case 0:
+            {
+                player->GetSession()->SendNotification("1");
+            }
+                
+            case 1:
+            {
+                player->GetSession()->SendNotification("Hallo");
             }
             
-            if(codes != antwort){
-                pruefen(player,false);
-            }
             
-            return true;
-        }
+            case 2:
+            {
+                uint32 nr = 1 + (std::rand() % (16 - 1 + 1));
+        
+                if(action == 2){
+            
+                    std::string codes = code;
+                    //QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
+            
+                    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
+                    stmt->setInt32(0,nr);
+                    PreparedQueryResult ergebnis = CharacterDatabase.Query(stmt);
+            
+                    Field* felder = ergebnis->Fetch();
+                    std::string frage = felder[2].GetString();
+                    std::string antwort = felder[3].GetString();
+            
+            
+                    std::ostringstream ss;
+                    ss << "Deine Frage lautet: " << frage;
+                    ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
+            
+                    if(codes == antwort){
+                        pruefen(player, true);
+                    }
+            
+                    if(codes != antwort){
+                        pruefen(player,false);
+                    }
+            
+                    return true;
+                }
+        
+            }
         
         return true;
+        }
     }
     
     
