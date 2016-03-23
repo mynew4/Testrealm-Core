@@ -151,6 +151,9 @@ void AddSC_sb_worldevent();
 //Inselnpc
 void AddSC_inselnpc();
 
+//codenpc
+void AddSC_codenpc();
+
 #ifdef SCRIPTS
 //world
 void AddSC_areatrigger_scripts();
@@ -913,6 +916,9 @@ void AddCommandScripts()
 
 	//inselnpc
 	AddSC_inselnpc();
+    
+    //codenpc
+    AddSC_codenpc();
 }
 
 
