@@ -88,7 +88,7 @@ public:
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
                     
                     Field* feld = ergebnis->Fetch();
-                    uint32 nr = ergebnis[1].uint32();
+                    uint32 nr = feld[1].uint32();
                     
                     if(!ergebnis){
                         player->GetSession()->SendNotification("Falsch");
