@@ -77,18 +77,13 @@ public:
                     Field* felder = ergebnis->Fetch();
                     std::string frage = felder[2].GetString();
                 
-                    
+                    TC_LOG_INFO(nr);
+                    TC_LOG_INFO(frage);
                     
                     std::ostringstream ss;
-                    std::ostringstream tt;
-                    std::ostringstream uu;
-                    
-                    tt << nr << " ist diese.";
                     ss << "Deine Frage lautet: " << frage;
-                    uu << nr << " hier!";
                     ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
-                    ChatHandler(player->GetSession()).PSendSysMessage(uu.str().c_str(), player->GetName());
-                    player->GetSession()->SendNotification(tt.str().c_str());
+                    
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
                 
