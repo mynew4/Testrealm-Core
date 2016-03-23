@@ -406,7 +406,7 @@ public:
 	}
 
 	//GuildHouse Tele
-	static bool HandleGHCommand(ChatHandler* handler, const char* args)
+	static bool HandleGHCommand(ChatHandler* handler, const char* /*args*/)
 	{
 		Player *chr = handler->GetSession()->GetPlayer();
 
@@ -459,7 +459,7 @@ public:
 	}
 
 	//GuildHouse Tele
-	static bool HandleInselCommand(ChatHandler* handler, const char* args)
+	static bool HandleInselCommand(ChatHandler* handler, const char* /*args*/)
 	{
 		Player *chr = handler->GetSession()->GetPlayer();
 
@@ -489,8 +489,11 @@ public:
 
         
         
+        PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_ITEMCODEGES);
+        stmt->setString(0, itemCode);
+        PreparedQueryResult result = CharacterDatabase.Query(stmt);
         
-		QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = '%s'", itemCode);
+		//QueryResult result = CharacterDatabase.PQuery("SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = '%s'", itemCode);
         
         
 		if (result)
@@ -528,7 +531,14 @@ public:
 
 					CharacterDatabase.PExecute("UPDATE item_codes SET name = '%s' WHERE code = '%s'", player->GetName().c_str(), itemCode);
 					CharacterDatabase.PExecute("UPDATE item_codes SET benutzt = '%u' WHERE code = '%s'", benutzt, itemCode);
-					CharacterDatabase.PExecute("INSERT INTO item_codes_account (name,accid,code) Values('%s','%u','%s')", player->GetSession()->GetPlayerName(), player->GetSession()->GetAccountId(), itemCode);
+                    
+                    PreparedStatement* itemcodeaccount = CharacterDatabase.GetPreparedStatement(CHAR_INS_ITEMCODEACCOUNT);
+                    itemcodeaccount->setString(0,player->GetSession()->GetPlayerName());
+                    itemcodeaccount->setUInt32(1, player->GetSession()->GetAccountId());
+                    itemcodeaccount->setString(2,itemCode);
+                    CharacterDatabase.Execute(itemcodeaccount);
+                    
+					//CharacterDatabase.PExecute("INSERT INTO item_codes_account (name,accid,code) Values('%s','%u','%s')", player->GetSession()->GetPlayerName(), player->GetSession()->GetAccountId(), itemCode);
 
 					char msg[250];
 					snprintf(msg, 250, "Dein Code wurde akzeptiert.");
@@ -583,18 +593,18 @@ public:
 			return true;
 		}
 
-
+    
 		QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `nachricht`, `player`, `guid`,`accid` FROM `fremdwerbung` WHERE `player` = '%s'", eingabe);
 
 		if (result)
 		{
 
 			Field* fields = result->Fetch();
-			uint32 id = fields[0].GetUInt32();
+			//uint32 id = fields[0].GetUInt32();
 			std::string nachricht = fields[1].GetCString();
 			std::string player = fields[2].GetCString();
-			uint32 guid = fields[3].GetUInt32();
-			uint32 accid = fields[4].GetUInt32();
+			//uint32 guid = fields[3].GetUInt32();
+			//uint32 accid = fields[4].GetUInt32();
 
 
 			QueryResult ergebnis = CharacterDatabase.PQuery("SELECT count(guid) FROM `fremdwerbung` WHERE `player` = '%s'", eingabe);

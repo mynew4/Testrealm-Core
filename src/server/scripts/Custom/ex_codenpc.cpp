@@ -119,7 +119,7 @@ public:
     {
         player->ADD_GOSSIP_ITEM(7,"1", GOSSIP_SENDER_MAIN,0);
         player->ADD_GOSSIP_ITEM(7,"Hallo", GOSSIP_SENDER_MAIN,1);
-        //player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
+        player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
         player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         return true;
     }
