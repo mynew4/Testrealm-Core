@@ -28,6 +28,12 @@ enum CharacterDatabaseStatements
         When updating more than one field, consider looking at the calling function
         name for a suiting suffix.
     */
+    
+    /* Exi Custom */
+    CHAR_SEL_FRAGEN,
+    CHAR_SEL_LOB,
+    CHAR_INS_LOB,
+    /*CUSTOM ENDE */
 
     CHAR_DEL_QUEST_POOL_SAVE,
     CHAR_INS_QUEST_POOL_SAVE,
@@ -535,11 +541,9 @@ enum CharacterDatabaseStatements
 
     CHAR_INS_DESERTER_TRACK,
 
-    MAX_CHARACTERDATABASE_STATEMENTS,
+    MAX_CHARACTERDATABASE_STATEMENTS
     
     
-    /* Exi Custom */
-    CHAR_SEL_FRAGEN
     
     
 };
