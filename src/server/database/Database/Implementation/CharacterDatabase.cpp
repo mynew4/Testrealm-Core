@@ -25,14 +25,14 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     
     /* EXI CUSTOM */
     
-    PrepareStatement(CHAR_SEL_FRAGEN, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_FRAGEN, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_LOB, "SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = ? AND `uid`= ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_LOB, "INSERT INTO lob (zeit,spieler,uid,benutzt)VALUES (?,?,?,?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_FIRSTLOG, "INSERT INTO firstnpc_log (grund,spieler, guid) VALUES (?,?,?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_EVENTLOG, "INSERT INTO eventteamlog (player,guid, itemid,gutscheincode,anzahl) VALUES (?,?,?,?,?)" ,CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_ITEMCODE, "INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,name,benutztbar) VALUES (?,?,?,?,?,?)" , CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_NOPLAYERITEMCODE, "INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) VALUES (?,?,?,?,?)" , CONNECTION_ASYNC);
-    PrepareStatement(CHAR_SEL_ITEMCODEGES, "SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_SEL_ITEMCODEGES, "SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_ITEMCODEACCOUNT, "INSERT INTO item_codes_account (name,accid,code) Values(?,?,?)", CONNECTION_ASYNC);
     /* CUSTOM ENDE */
     
