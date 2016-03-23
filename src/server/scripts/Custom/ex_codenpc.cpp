@@ -79,12 +79,10 @@ public:
                     
                     std::ostringstream ss;
                     ss <<nr << " diese nummer wurde geladen";
-                    TC_LOG_INFO(ss.str().c_str());
-                    TC_LOG_INFO(frage);
-                    
-                    std::ostringstream ss;
-                    ss << "Deine Frage lautet: " << frage;
-                    ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
+                    TC_LOG_INFO(ss.str().c_str(), "Schau hier diese %u", nr);
+                    std::ostringstream tt;
+                    tt << "Deine Frage lautet: " << frage;
+                    ChatHandler(player->GetSession()).PSendSysMessage(tt.str().c_str(), player->GetName());
                     
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
