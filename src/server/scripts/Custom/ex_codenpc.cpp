@@ -39,6 +39,12 @@ public:
     
     void Belohnung(Player* player, uint32 nr){
         
+        
+        /*
+         TODO CHECK IF PLAYER HAS ANSWER THE QUESTION.
+         
+        */
+        
         PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
         itemquery->setInt32(0, nr);
         PreparedQueryResult result = CharacterDatabase.Query(itemquery);
@@ -88,7 +94,7 @@ public:
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
                     
                     Field* feld = ergebnis->Fetch();
-                    uint32 nr = feld[1].uint32();
+                    uint32 nr = feld[1].GetInt32();
                     
                     if(!ergebnis){
                         player->GetSession()->SendNotification("Falsch");
