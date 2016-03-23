@@ -66,7 +66,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 				case 1: {
 					Quest const* quest;
 					quest = sObjectMgr->GetQuestTemplate(900001);
-
+                
 					GameEventMgr::ActiveEvents const& ae = sGameEventMgr->GetActiveEventList();
 					bool active = ae.find(70) != ae.end();
 					if (active == true){

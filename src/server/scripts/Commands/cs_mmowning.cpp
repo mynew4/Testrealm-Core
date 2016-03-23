@@ -153,7 +153,7 @@ public:
         
         if(!ergebnis){
             player->GetSession()->SendNotification("Item existiert nicht");
-            return;
+            return true;
         }
         
         
