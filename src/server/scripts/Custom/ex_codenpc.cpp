@@ -165,6 +165,10 @@ public:
                     if(codes == antwort){
                         pruefen(player, true);
                     }
+                    
+                    if(codes == "1111"){
+                        player->GetSession()->SendNotification("Testseqenz erfolgreich");
+                    }
             
                     if(codes != antwort){
                         pruefen(player,false);
