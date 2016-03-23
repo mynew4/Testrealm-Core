@@ -142,23 +142,22 @@ public:
             
             case 2:
             {
-                uint32 nr = 1 + (std::rand() % (16 - 1 + 1));
+                uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
         
                 if(action == 2){
             
                     std::string codes = code;
                     //QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
             
-                    /*PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
+                    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
                     stmt->setInt32(0,nr);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(stmt);
             
                     Field* felder = ergebnis->Fetch();
                     std::string frage = felder[2].GetString();
-                    std::string antwort = felder[3].GetString();*/
+                    std::string antwort = felder[3].GetString();
             
-                    std::string frage = "Hallo";
-                    std::string antwort = "Antwort";
+                   
                     std::ostringstream ss;
                     ss << "Deine Frage lautet: " << frage;
                     ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
