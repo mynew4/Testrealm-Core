@@ -67,10 +67,15 @@ public:
                     Field* felder = ergebnis->Fetch();
                     std::string frage = felder[2].GetString();
                 
-                
+                    
+                    
                     std::ostringstream ss;
+                    std::ostringstream tt;
+                    
+                    tt << nr << " ist diese.";
                     ss << "Deine Frage lautet: " << frage;
                     ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
+                    player->GetSession()->SendNotification(tt.str().c_str());
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
                 
