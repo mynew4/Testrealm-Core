@@ -204,7 +204,7 @@ public:
         
         /*CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) Values ('%s','%u','%u','%u','%u')", str, item, anzahlint, 0,1);*/
         
-        PreparedStatement * inscode = CharacterDatabase.GetPreparedStatement(CHAR_INS_ITEMCODE);
+        PreparedStatement * inscode = CharacterDatabase.GetPreparedStatement(CHAR_INS_NOPLAYERITEMCODE);
         inscode->setString(0, str);
         inscode->setUInt32(1, item);
         inscode->setUInt32(2, anzahlint);
