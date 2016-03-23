@@ -104,7 +104,11 @@ public:
 
                 Field* felder = ergebnis->Fetch();
                 std::string frage = felder[2].GetString();
-                ChatHandler(player->GetSession()).PSendSysMessage(frage, player->GetName());
+                
+                
+                std::ostringstream ss;
+                ss << "Deine Frage lautet: " << frage;
+                ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
                 player->PlayerTalkClass->SendCloseGossip();
                 return true;
                 
