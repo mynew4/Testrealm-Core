@@ -91,19 +91,18 @@ public:
                     selantwort->setString(0, codes);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
                     
-                    Field* feld = ergebnis->Fetch();
+                    //Field* feld = ergebnis->Fetch();
                     
+                    if(!ergebnis){
+                        player->GetSession()->SendNotification("Falsch");
+                        return false;
+                    }
                     
                     if(ergebnis){
                         player->GetSession()->SendNotification("Korrekt");
                         return true;
                     }
                     
-                    
-                    else{
-                        player->GetSession()->SendNotification("Falsch");
-                        return true;
-                    }
                     
                 
                 }break;
