@@ -79,8 +79,9 @@ public:
         
         else{
             player->GetSession()->SendNotification("Du hast dieses Raetsel schon beantwortet und kannst es daher nicht mehr beantworten.");
+            return;
         }
-        
+    
        
     }
     
