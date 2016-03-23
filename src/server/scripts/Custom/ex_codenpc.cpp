@@ -57,7 +57,7 @@ public:
             
                 case 1:
                 {
-                    uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
+                    uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
                     PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
                     selfragen->setInt32(0,nr);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
@@ -71,10 +71,13 @@ public:
                     
                     std::ostringstream ss;
                     std::ostringstream tt;
+                    std::ostringstream uu;
                     
                     tt << nr << " ist diese.";
                     ss << "Deine Frage lautet: " << frage;
+                    uu << nr << " hier!";
                     ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
+                    ChatHandler(player->GetSession()).PSendSysMessage(uu.str().c_str(), player->GetName());
                     player->GetSession()->SendNotification(tt.str().c_str());
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
