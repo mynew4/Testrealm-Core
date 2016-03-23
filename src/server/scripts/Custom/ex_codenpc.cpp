@@ -60,6 +60,7 @@ public:
                 std::ostringstream uu;
                 uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
                 ChatHandler(player->GetSession()).PSendSysMessage("ZIemliche nervig!", player->GetName());
+                player->PlayerTalkClass->SendCloseGossip();
                 return true;
                 
             }break;
