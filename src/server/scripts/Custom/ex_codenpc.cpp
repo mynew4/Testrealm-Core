@@ -58,7 +58,7 @@ public:
                 CharacterDatabase.PExecute("UPDATE spielerantworten SET korrekt = '%u' WHERE accountid = '%u'", korrekt, accid);
                 
                 player->GetSession()->SendNotification("Geschafft");
-                return;
+                return true;
                 
             }
             
@@ -67,13 +67,13 @@ public:
                 CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,1, 0);
                 
                 player->GetSession()->SendNotification("Deine Antwort war richtig");
-                return;
+                return true;
                 
             }
-            return;
+            return true;
         }
         
-        return;
+        return true;
         
         }
     
@@ -162,7 +162,7 @@ public:
                             CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
                             CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE accountid = '%u'", falsch, accid);
                             player->GetSession()->SendNotification("Deine Antwort war falsch");
-                            return;
+                            return true;
                         }
                         
                         
@@ -171,7 +171,7 @@ public:
                             CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,0, 1);
                             
                             player->GetSession()->SendNotification("Deine Antwort war falsch");
-                            return;
+                            return true;
                             
 
                         
