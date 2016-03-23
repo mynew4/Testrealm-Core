@@ -42,26 +42,46 @@ public:
         
         /*
          TODO CHECK IF PLAYER HAS ANSWER THE QUESTION.
-         
+         ALTER TABLE SPIELERANTWORTEN. -> ID, CHARID, ACCID, QUESTIONNR.
+         CHECK IF ACCOUNT HAS ANSWER NOT ONLY CHAR.
         */
         
-        PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-        itemquery->setInt32(0, nr);
-        PreparedQueryResult result = CharacterDatabase.Query(itemquery);
+        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_ANTWORTEN);
+        account->setInt32(0, nr);
+        account->setInt32(1, player->GetSession()->GetAccountId());
+        PreparedQueryResult ergebnis = CharacterDatabase.Query(account);
         
-        Field* feld = result->Fetch();
-        uint32 belohnung = feld[4].GetInt32();
-        uint32 anzahl = feld[5].GetInt32();
+        if(!ergebnis){
+            PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+            itemquery->setInt32(0, nr);
+            PreparedQueryResult result = CharacterDatabase.Query(itemquery);
+            
+            Field* feld = result->Fetch();
+            uint32 belohnung = feld[4].GetInt32();
+            uint32 anzahl = feld[5].GetInt32();
+            
+            Item* item = Item::CreateItem(belohnung, anzahl);
+            SQLTransaction trans = CharacterDatabase.BeginTransaction();
+            item->SaveToDB(trans);
+            MailDraft("Raetsel geloest", "Glueckwunsch. Du hast ein Raetsel geloest. Hier ist deine Belohnung.").AddItem(item)
+            .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+            CharacterDatabase.CommitTransaction(trans);
+            
+            
+            PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_ANTWORTEN);
+            accountinsert->setString(0, player->GetSession()->GetPlayerName());
+            accountinsert->setInt32(1, player->GetGUID());
+            accountinsert->setInt32(2, player->GetSession()->GetAccountId());
+            accountinsert->setInt32(3, nr);
+            CharacterDatabase.Execute(accountinsert);
+            return;
+        }
         
-        Item* item = Item::CreateItem(belohnung, anzahl);
-        uint32 uid = player->GetGUID();
-        SQLTransaction trans = CharacterDatabase.BeginTransaction();
-        item->SaveToDB(trans);
-        MailDraft("Raetsel geloest", "Glueckwunsch. Du hast ein Raetsel geloest. Hier ist deine Belohnung.").AddItem(item)
-        .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-        CharacterDatabase.CommitTransaction(trans);
-        return;
-
+        else{
+            player->GetSession()->SendNotification("Du hast dieses Raetsel schon beantwortet und kannst es daher nicht mehr beantworten.");
+        }
+        
+       
     }
     
     
