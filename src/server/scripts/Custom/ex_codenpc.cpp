@@ -73,39 +73,6 @@ public:
             return;
         }
         
-        
-        if(!korrekt){
-            QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `spieler`,`playerid`, `accountid`,`anzahl`, `richtig`, `falsch` FROM `spielerantworten` WHERE `accountid` = '%u'", player->GetSession()->GetAccountId());
-            
-            if(result){
-                
-                Field* felder = result->Fetch();
-                uint32 accid = felder[3].GetUInt32();
-                uint32 anzahl = felder[4].GetUInt32();
-                uint32 falsch = felder[6].GetUInt32();
-                
-                anzahl++;
-                falsch++;
-                
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET playerid = '%u' WHERE accountid = '%u'", player->GetGUID(), accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE accountid = '%u'", falsch, accid);
-                player->GetSession()->SendNotification("Deine Antwort war falsch");
-                return;
-            }
-            
-            
-            else{
-                
-                CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,0, 1);
-                
-                player->GetSession()->SendNotification("Deine Antwort war falsch");
-                return;
-                
-                
-            }
-        }
-
         return;
         
         }
@@ -133,10 +100,11 @@ public:
                 selfragen->setInt32(0,nr);
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
                 
-                
+                //PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
+
                 Field* felder = ergebnis->Fetch();
                 std::string frage = felder[2].GetString();
-                ChatHandler(player->GetSession()).PSendSysMessage(frage.c_str(), player->GetName());
+                ChatHandler(player->GetSession()).PSendSysMessage(frage, player->GetName());
                 player->PlayerTalkClass->SendCloseGossip();
                 return true;
                 
@@ -160,21 +128,54 @@ public:
                     //std::string frage = felder[2].GetString();
                     std::string antwort = felder[3].GetString();
                     
+                    if(codes == "MMOwning"){
+                        player->GetSession()->SendNotification("Testsequenz erfolgreich");
+                        ChatHandler(player->GetSession()).PSendSysMessage("Erfolgreicher Test", player->GetName());
+                        return true;
+                    }
+                    
+                    
                     if(ergebnis){
                         pruefen(player->GetSession()->GetPlayer(), true);
                         return true;
                     }
                     
+                    
                     if(!ergebnis){
-                        pruefen(player->GetSession()->GetPlayer(), false);
+                        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `spieler`,`playerid`, `accountid`,`anzahl`, `richtig`, `falsch` FROM `spielerantworten` WHERE `accountid` = '%u'", player->GetSession()->GetAccountId());
+                        
+                        if(result){
+                            
+                            Field* felder = result->Fetch();
+                            uint32 accid = felder[3].GetUInt32();
+                            uint32 anzahl = felder[4].GetUInt32();
+                            uint32 falsch = felder[6].GetUInt32();
+                            
+                            anzahl++;
+                            falsch++;
+                            
+                            CharacterDatabase.PExecute("UPDATE spielerantworten SET playerid = '%u' WHERE accountid = '%u'", player->GetGUID(), accid );
+                            CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
+                            CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE accountid = '%u'", falsch, accid);
+                            player->GetSession()->SendNotification("Deine Antwort war falsch");
+                            return;
+                        }
+                        
+                        
+                        else{
+                            
+                            CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,0, 1);
+                            
+                            player->GetSession()->SendNotification("Deine Antwort war falsch");
+                            return;
+                            
+
+                        
+                        
                         return true;
                     }
                     
-                    if(codes == "MMOwning"){
-                        player->GetSession()->SendNotification("Testsequenz erfolgreich");
-                         ChatHandler(player->GetSession()).PSendSysMessage("Erfolgreicher Test", player->GetName());
-                        return true;
-                    }
+                    
         
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
