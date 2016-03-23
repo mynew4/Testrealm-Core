@@ -132,11 +132,15 @@ public:
                 PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
                 selfragen->setInt32(0,nr);
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
+                
+                
+                Field* felder = ergebnis->Fetch();
+                std::string frage = felder[2].GetString();
+                ChatHandler(player->GetSession()).PSendSysMessage(frage.c_str(), player->GetName());
                 player->PlayerTalkClass->SendCloseGossip();
                 return true;
                 
-                
-            }
+            }break;
             
             
             case 2:
@@ -170,7 +174,7 @@ public:
         
                     player->PlayerTalkClass->SendCloseGossip();
                     return true;
-                }
+                }break;
         
             }
         
