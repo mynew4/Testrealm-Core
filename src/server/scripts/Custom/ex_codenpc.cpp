@@ -43,6 +43,7 @@ public:
    
     bool OnGossipHello(Player *player, Creature* _creature)
     {
+        player->ADD_GOSSIP_ITEM(7,"Gib mir die NR aus", GOSSIP_SENDER_MAIN, 0);
         player->ADD_GOSSIP_ITEM(7,"Stelle mir eine Frage", GOSSIP_SENDER_MAIN,1);
         player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
         player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
@@ -54,8 +55,19 @@ public:
         
         switch(action){
             
+            case 0:
+            {
+                std::ostringstream uu;
+                uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
+                uu << nr << " hier!";
+                
+                ChatHandler(player->GetSession()).PSendSysMessage(uu.str().c_str(), player->GetName());
+                return true;
+                
+            }break;
+                
             
-                case 1:
+            case 1:
                 {
                     uint32 nr = 1 + (std::rand() % (10 - 1 + 1));
                     PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
@@ -85,7 +97,7 @@ public:
                 }break;
             
             
-                case 2:
+            case 2:
                 {
                 
                     std::string codes = code;
