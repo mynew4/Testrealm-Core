@@ -106,7 +106,7 @@ public:
                     std::string codes = code;
                 
                     if(codes == "Easteregg"){
-                        player->GetSession()->SendNotification("Hallo");
+                        player->GetSession()->SendNotification("Viel Spass mit dem Easteregg");
                         return true;
                     }
                     
