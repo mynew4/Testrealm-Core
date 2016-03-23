@@ -38,44 +38,6 @@ public:
     codenpc() : CreatureScript("codenpc") { }
     
     
-    void pruefen(Player * player, bool korrekt){
-        
-        if(korrekt){
-            
-            QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `spieler`,`playerid`, `accountid`,`anzahl`, `richtig`, `falsch` FROM `spielerantworten` WHERE `accountid` = '%u'", player->GetSession()->GetAccountId());
-            
-            if(result){
-                
-                Field* felder = result->Fetch();
-                uint32 accid = felder[3].GetUInt32();
-                uint32 anzahl = felder[4].GetUInt32();
-                uint32 korrekt = felder[5].GetUInt32();
-                
-                anzahl++;
-                korrekt++;
-                
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
-                CharacterDatabase.PExecute("UPDATE spielerantworten SET korrekt = '%u' WHERE accountid = '%u'", korrekt, accid);
-                
-                player->GetSession()->SendNotification("Geschafft");
-                return;
-                
-            }
-            
-            else{
-                
-                CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,1, 0);
-                
-                player->GetSession()->SendNotification("Deine Antwort war richtig");
-                return;
-                
-            }
-            return;
-        }
-        
-        return ;
-        
-        }
     
     
    
@@ -93,104 +55,63 @@ public:
         switch(action){
             
             
-            case 1:
-            {
-                uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
-                PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-                selfragen->setInt32(0,nr);
-                PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
-                
-                //PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
-
-                Field* felder = ergebnis->Fetch();
-                std::string frage = felder[2].GetString();
-                
-                
-                std::ostringstream ss;
-                ss << "Deine Frage lautet: " << frage;
-                ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
-                player->PlayerTalkClass->SendCloseGossip();
-                return true;
-                
-            }break;
-            
-            
-            case 2:
-            {
-                
-                if(action == 2){
-            
-                    std::string codes = code;
-                    //QueryResult ergebnis = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
-                    
-                    PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT);
-                    selfragen->setString(0, codes);
+                case 1:
+                {
+                    uint32 nr = 1 + (std::rand() % (2 - 1 + 1));
+                    PreparedStatement* selfragen = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+                    selfragen->setInt32(0,nr);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(selfragen);
-                    
-            
+                
+                    //PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
+
                     Field* felder = ergebnis->Fetch();
-                    //std::string frage = felder[2].GetString();
-                    std::string antwort = felder[3].GetString();
-                    
-                    if(codes == "MMOwning"){
-                        player->GetSession()->SendNotification("Testsequenz erfolgreich");
-                        ChatHandler(player->GetSession()).PSendSysMessage("Erfolgreicher Test", player->GetName());
-                        return true;
+                    std::string frage = felder[2].GetString();
+                
+                
+                    std::ostringstream ss;
+                    ss << "Deine Frage lautet: " << frage;
+                    ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
+                    player->PlayerTalkClass->SendCloseGossip();
+                    return true;
+                
+                }break;
+            
+            
+                case 2:
+                {
+                
+                    std::string codes = code;
+                
+                    if(codes == "1111"){
+                        player->GetSession()->SendNotification("Hallo");
                     }
+                    
+                    PreparedStatement* selantwort = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT);
+                    selantwort->setString(0, codes);
+                    PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
+                    
+                    Field* feld = ergebnis->Fetch();
                     
                     
                     if(ergebnis){
-                        pruefen(player->GetSession()->GetPlayer(), true);
+                        player->GetSession()->SendNotification("Korrekt");
                         return true;
                     }
                     
                     
-                    if(!ergebnis){
-                        QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `spieler`,`playerid`, `accountid`,`anzahl`, `richtig`, `falsch` FROM `spielerantworten` WHERE `accountid` = '%u'", player->GetSession()->GetAccountId());
-                        
-                        if(result){
-                            
-                            Field* felder = result->Fetch();
-                            uint32 accid = felder[3].GetUInt32();
-                            uint32 anzahl = felder[4].GetUInt32();
-                            uint32 falsch = felder[6].GetUInt32();
-                            
-                            anzahl++;
-                            falsch++;
-                            
-                            CharacterDatabase.PExecute("UPDATE spielerantworten SET playerid = '%u' WHERE accountid = '%u'", player->GetGUID(), accid );
-                            CharacterDatabase.PExecute("UPDATE spielerantworten SET anzahl = '%u' WHERE accountid = '%u'", anzahl, accid );
-                            CharacterDatabase.PExecute("UPDATE spielerantworten SET falsch = '%u' WHERE accountid = '%u'", falsch, accid);
-                            player->GetSession()->SendNotification("Deine Antwort war falsch");
-                            return true;
-                        }
-                        
-                        
-                        else{
-                            
-                            CharacterDatabase.PExecute("Insert INTO spielerantworten (spieler,playerid, accountid, anzahl, richtig, falsch) Values ('%s', '$u', '%u', '%u','%u','%u')",player->GetSession()->GetPlayerName(), player->GetGUID(), player->GetSession()->GetAccountId(), 1,0, 1);
-                            
-                            player->GetSession()->SendNotification("Deine Antwort war falsch");
-                            return true;
-                            
-
-                        
-                        
+                    else{
+                        player->GetSession()->SendNotification("Falsch");
                         return true;
                     }
                     
-                    
-        
-                    player->PlayerTalkClass->SendCloseGossip();
-                    return true;
+                
                 }break;
         
-            }
+                return true;
         
+            }
+    
         return true;
-        }
-    return true;
-    }
     }
     
 };
