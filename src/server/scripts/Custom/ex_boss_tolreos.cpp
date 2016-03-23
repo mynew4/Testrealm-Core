@@ -92,7 +92,7 @@ enum Texts
 };
 
 
-uint32 kills = 0;
+
 
 class tolreos : public CreatureScript
 {
@@ -102,9 +102,10 @@ public:
 	struct tolreosAI : public ScriptedAI
 	{
 		tolreosAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
-		
+        uint32 kills;
 		void Reset() override
 		{
+            kills = 0;
 			me->SetObjectScale(1);
 			me->SetReactState(REACT_DEFENSIVE);
 			_events.Reset();
@@ -269,11 +270,12 @@ public:
 
 	struct tolreosaddAI : public ScriptedAI
 	{
+        uint32 kills = 0;
 		tolreosaddAI(Creature* creature) : ScriptedAI(creature), Summons(me) { }
 		
 		void Reset() override
 		{
-
+            kills = 0;
 			_events.Reset();
 			Summons.DespawnAll();
 		}
