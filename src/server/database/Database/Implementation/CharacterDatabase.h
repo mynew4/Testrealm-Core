@@ -33,6 +33,9 @@ enum CharacterDatabaseStatements
     CHAR_SEL_FRAGEN,
     CHAR_SEL_LOB,
     CHAR_INS_LOB,
+    CHAR_INS_FIRSTLOG,
+    CHAR_INS_EVENTLOG,
+    CHAR_INS_ITEMCODE,
     /*CUSTOM ENDE */
 
     CHAR_DEL_QUEST_POOL_SAVE,

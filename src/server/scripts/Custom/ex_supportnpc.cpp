@@ -27,8 +27,14 @@ class supportnpc : public CreatureScript
 public:
 		supportnpc() : CreatureScript("supportnpc") { }
 		
+    void erklaerung(Player* player, std::string erklaerung){
+        
+        
+    }
+    
+    
 		bool OnGossipHello(Player* player, Creature* creature)
-	{
+        {
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es eine Erstaustattung?", GOSSIP_SENDER_MAIN, 0);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es einen Gildentransfer?", GOSSIP_SENDER_MAIN, 7);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie kann ich einen GM erreichen?", GOSSIP_SENDER_MAIN, 1);
@@ -37,9 +43,10 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Gibt es hier Crossfaction?", GOSSIP_SENDER_MAIN, 4);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie schreibe ich im Worldchat?", GOSSIP_SENDER_MAIN, 5);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert bei mir nicht.", GOSSIP_SENDER_MAIN, 6);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie startet der Contentpatch?", GOSSIP_SENDER_MAIN, 8);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
-	}
+        }
 	
 		bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature*/, uint32 /*uiSender*/, uint32 uiAction)
 		{
@@ -119,7 +126,10 @@ public:
                     return true;
                 }break;
 
- 
+                
+                case 8:
+                    erklaerung(pPlayer->GetSession()->GetPlayer(),"Der Contentpatch startet ab Level 80 ueber einen Drop bei den Endbosse in allen Instanzen von Nordend oder ueber 2 Quests beim Wandervolk.");
+                    
 				
 
 				return true;

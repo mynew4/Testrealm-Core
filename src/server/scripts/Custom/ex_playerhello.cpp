@@ -457,15 +457,15 @@ public:
 			CharacterDatabase.CommitTransaction(trans);
 
              
-             PreparedStatement* insert = CharacterDatabase.GetPreparedStatement(CHAR_INS_LOB);
-             insert->setInt32(0,100);
-             insert->setString(1, player->GetName().c_str());
-             insert->setInt32(2, uid);
-             insert->setInt32(3, 1);
-             CharacterDatabase.Execute(insert);
+             PreparedStatement* inslob = CharacterDatabase.GetPreparedStatement(CHAR_INS_LOB);
+             inslob->setInt32(0,100);
+             inslob->setString(1, player->GetName().c_str());
+             inslob->setInt32(2, uid);
+             inslob->setInt32(3, 1);
+             CharacterDatabase.Execute(inslob);
              
              
-			CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);
+			/*CharacterDatabase.PExecute("INSERT INTO lob (zeit,spieler,uid,benutzt) Values ('%u','%s','%u','%u')", 100, player->GetName().c_str(), uid, 1);*/
 		}
 
 

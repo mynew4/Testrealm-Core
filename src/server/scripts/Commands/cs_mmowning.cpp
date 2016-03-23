@@ -202,7 +202,17 @@ public:
         std::string str(10, 0);
         std::generate_n(str.begin(), 10, randchar);
         
-        CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) Values ('%s','%u','%u','%u','%u')", str, item, anzahlint, 0,1);
+        /*CharacterDatabase.PExecute("INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) Values ('%s','%u','%u','%u','%u')", str, item, anzahlint, 0,1);*/
+        
+        PreparedStatement * inscode = CharacterDatabase.GetPreparedStatement(CHAR_INS_ITEMCODE);
+        inscode->setString(0, str);
+        inscode->setUInt32(1, item);
+        inscode->setUInt32(2, anzahlint);
+        inscode->setUInt32(3, 0);
+        inscode->setUInt32(4, 1);
+        CharacterDatabase.Execute(inscode);
+        
+        
         std::ostringstream ss;
         std::ostringstream tt;
         
@@ -223,15 +233,29 @@ public:
 
         
         
-        CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
+        /*CharacterDatabase.PExecute("INSERT INTO firstnpc_log "
                                    "(grund,spieler, guid)"
                                    "VALUES ('%s', '%s', '%u')",
-                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID());
+                                   "Eventteamgutschein", player->GetSession()->GetPlayerName(),player->GetGUID()); */
         
-        CharacterDatabase.PExecute("INSERT INTO eventteamlog "
+        PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_FIRSTLOG);
+        stmt->setString(0, "Eventteamgutschein");
+        stmt->setString(1, player->GetSession()->GetPlayerName());
+        stmt->setUInt32(2, player->GetGUID());
+        
+        
+        PreparedStatement* eventlog  = CharacterDatabase.GetPreparedStatement(CHAR_INS_EVENTLOG);
+        eventlog->setString(0, player->GetSession()->GetPlayerName());
+        eventlog->setUInt32(1, player->GetGUID());
+        eventlog->setUInt32(2, item);
+        eventlog->setString(3, str);
+        eventlog->setUInt32(4, anzahlint);
+        CharacterDatabase.Execute(eventlog);
+        
+        /*CharacterDatabase.PExecute("INSERT INTO eventteamlog "
                                    "(player,guid, itemid,gutscheincode,anzahl)"
                                    "VALUES ('%s', '%u', '%u', '%s','%u')",
-                                   player->GetSession()->GetPlayerName(),player->GetGUID(),item,str,anzahlint);
+                                   player->GetSession()->GetPlayerName(),player->GetGUID(),item,str,anzahlint); */
 
         return true;
         
