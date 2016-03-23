@@ -157,7 +157,7 @@ public:
                     std::string frage = felder[2].GetString();
                     std::string antwort = felder[3].GetString();*/
             
-            
+                    std::string = "Hallo"
                     std::ostringstream ss;
                     ss << "Deine Frage lautet: " << frage;
                     ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(), player->GetName());
