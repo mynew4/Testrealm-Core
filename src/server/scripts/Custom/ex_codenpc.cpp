@@ -149,13 +149,13 @@ public:
                     std::string codes = code;
                     //QueryResult result = CharacterDatabase.PQuery("SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `nr` = '%u'", nr);
             
-                    PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
+                    /*PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN);
                     stmt->setInt32(0,nr);
                     PreparedQueryResult ergebnis = CharacterDatabase.Query(stmt);
             
                     Field* felder = ergebnis->Fetch();
                     std::string frage = felder[2].GetString();
-                    std::string antwort = felder[3].GetString();
+                    std::string antwort = felder[3].GetString();*/
             
             
                     std::ostringstream ss;
