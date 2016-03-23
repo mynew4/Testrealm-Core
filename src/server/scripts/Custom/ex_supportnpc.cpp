@@ -27,8 +27,15 @@ class supportnpc : public CreatureScript
 public:
 		supportnpc() : CreatureScript("supportnpc") { }
 		
-    void erklaerung(Player* player, std::string erklaerung){
+    void erklaerung(Player* player, std::string hilfe, Creature* creature){
         
+        creature->HandleEmoteCommand(EMOTE_ONESHOT_CRY);
+        ChatHandler(player->GetSession()).PSendSysMessage(hilfe.c_str(), player->GetName());
+        player->PlayerTalkClass->SendCloseGossip();
+        std::ostringstream ss;
+        ss << hilfe;
+        player->GetSession()->SendAreaTriggerMessage(ss.str().c_str());
+        return;
         
     }
     
@@ -48,7 +55,7 @@ public:
 		return true;
         }
 	
-		bool OnGossipSelect(Player * pPlayer, Creature * /*pCreature*/, uint32 /*uiSender*/, uint32 uiAction)
+		bool OnGossipSelect(Player * pPlayer, Creature * creature, uint32 /*uiSender*/, uint32 uiAction)
 		{
 			switch (uiAction)
 			{
@@ -128,7 +135,7 @@ public:
 
                 
                 case 8:
-                    erklaerung(pPlayer->GetSession()->GetPlayer(),"Der Contentpatch startet ab Level 80 ueber einen Drop bei den Endbosse in allen Instanzen von Nordend oder ueber 2 Quests beim Wandervolk.");
+                    erklaerung(pPlayer->GetSession()->GetPlayer(),"Der Contentpatch startet ab Level 80 ueber einen Drop bei den Endbosse in allen Instanzen von Nordend oder ueber 2 Quests beim Wandervolk.", ObjectMgr::GetCreatureData(creature));
                     
 				
 
