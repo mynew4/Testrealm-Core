@@ -83,7 +83,7 @@ class janarius : public CreatureScript
 public:
 	janarius() : CreatureScript("janarius") { }
 
-	bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+	bool OnQuestReward(Player* /*player*/, Creature* creature, Quest const* quest, uint32 /*opt*/) {
 
 		if (quest->GetQuestId() == 900835){
 			creature->HandleEmoteCommand(EMOTE_ONESHOT_CRY);
@@ -91,7 +91,7 @@ public:
 			creature->AddAura(72525, creature);
 			return true;
 		}
-
+        return true;
 	}
 
 
@@ -205,7 +205,7 @@ class indomatanpc : public CreatureScript
 {
 public: indomatanpc() : CreatureScript("indomatanpc"){ }
 
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) {
+		bool OnQuestReward(Player* /*player*/, Creature* creature, Quest const* quest, uint32 /*opt*/) {
 			if (quest->GetQuestId() == 900808){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_DANCE);
 				creature->Yell("Du hast den ersten Schritt geschafft", LANG_UNIVERSAL, NULL);
@@ -257,7 +257,7 @@ public: indomatanpc() : CreatureScript("indomatanpc"){ }
 			return true;
 		}
 
-		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) {
+		bool OnQuestAccept(Player* player, Creature* /*creature*/, Quest const* quest) {
 			if (quest->GetQuestId() == 900835){
 				player->AddItem(5917, 1);
 				return true;
@@ -289,7 +289,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 
 			}
 
-			void JustDied(Unit* killer) override
+			void JustDied(Unit* /*killer*/) override
 			{
 				me->Yell("Ihr habt mich besiegt. Aber mein Meister wird weitere schicken!", LANG_UNIVERSAL, nullptr);
 			}
@@ -304,7 +304,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 			return new lucionAI(creature);
 		}
 
-		bool OnQuestReward(Player* player, Creature* creature, Quest const* quest, uint32 /*opt*/) override {
+		bool OnQuestReward(Player* /*player*/, Creature* creature, Quest const* quest, uint32 /*opt*/) override {
 			if (quest->GetQuestId() == 900823){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 				creature->Yell("Danke fuer die Vorraete!", LANG_UNIVERSAL, NULL);
@@ -329,7 +329,7 @@ public: lucionnpc() : CreatureScript("lucion"){ }
 
 
 
-		bool OnQuestAccept(Player* player, Creature* creature, Quest const* quest) { 
+		bool OnQuestAccept(Player* /*player*/, Creature* creature, Quest const* quest) override {
 			if (quest->GetQuestId() == 900825){
 				creature->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
 				creature->Yell("Hoert mir zu. Ich muss euch etwas wichtiges erzaehlen bevor wir hier weitermachen koennen. Groot und Kraserius von den Sammlern verdaechtigen mich, das ich ein Verraeter sei und nicht im Interesse von uns handeln wuerde. Aber ich kann Euch versichern, dem ist nicht so. Es ist eher anders, die beiden betruegen uns und das gesamte Volk. Sie nutzen uns aus und berreichern sich selbst. Glaubt mir! Ich moechte nicht das auch ihr ausgenutzt werdet.", LANG_UNIVERSAL, NULL);

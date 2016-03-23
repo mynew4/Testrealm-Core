@@ -156,7 +156,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					if (active == true){
 						pPlayer->GetGUID();
 						pPlayer->TeleportTo(1, 7345.04, -1541.83, 161.32, 0.39);
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spass beim Erreichen des Ziels.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
@@ -180,7 +180,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					if (active == true){
 						pPlayer->GetGUID();
 						pPlayer->TeleportTo(1, 7345.04, -1541.83, 161.32, 0.39);
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spass beim Erreichen des Ziels.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;

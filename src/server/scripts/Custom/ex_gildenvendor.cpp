@@ -143,7 +143,7 @@ public: gildenvendor() : CreatureScript("gildenvendor"){ }
 			ergebnis = CharacterDatabase.PQuery("Select count(guildid) from `guildhouses` where `guildid` = '%u'", gildenidneu);
 			uint32 gildeplayer = player->GetGuildId();
 
-			uint32 memberanzahllimit = groesse;
+			//uint32 memberanzahllimit = groesse;
 
 			Field *feld = ergebnis->Fetch();
 			uint32 anzahl = feld[0].GetUInt32();
@@ -1442,7 +1442,7 @@ public: gildenvendor() : CreatureScript("gildenvendor"){ }
 			}break;
 
 			}
-
+            return true;
 		}
 
 };

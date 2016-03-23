@@ -104,7 +104,7 @@ public: br_uebung() : CreatureScript("br_uebung"){ }
 
 				else {
 					pPlayer->GetGUID();
-					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du erfüllst leider die anförderungen nicht.",
+					ChatHandler(pPlayer->GetSession()).PSendSysMessage("Du erfuellst leider die anforderungen nicht.",
 						pPlayer->GetName());
 					pPlayer->PlayerTalkClass->SendCloseGossip();
 					return true;
