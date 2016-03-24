@@ -209,7 +209,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 
                         pPlayer->GetGUID();
 						pPlayer->TeleportTo(1, -8455.62, -1321.31, 8.87, 3.29);
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spass beim Erreichen des Ziels.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
@@ -235,7 +235,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					if (active == true && pPlayer->getLevel() == 1){
 						pPlayer->GetGUID();
 						pPlayer->TeleportTo(0, 2075.54, 2392.44, 131.25, 3.12);
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spass beim Erreichen des Ziels.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
@@ -247,7 +247,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 
 					else{
 						pPlayer->GetGUID();
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Chopperevent wird von dem Event-Team manuell gestartet. Informiert Euch bei diesen.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Chopperevent wird von dem Event-Team manuell gestartet. Informiert Euch bei diesem.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;
@@ -263,7 +263,7 @@ public: eventnpc() : CreatureScript("eventnpc"){ }
 					if (active == true){
 						pPlayer->GetGUID();
 						pPlayer->TeleportTo(0, -4796.05, -1001.17, 895.85 , 5.82);
-						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spaß beim Erreichen des Ziels.",
+						ChatHandler(pPlayer->GetSession()).PSendSysMessage("Das Event ist aktuell aktiv. Viel Spass beim Erreichen des Ziels.",
 							pPlayer->GetName());
 						pPlayer->PlayerTalkClass->SendCloseGossip();
 						return true;

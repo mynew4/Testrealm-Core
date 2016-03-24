@@ -520,6 +520,15 @@ class DoupleXP : public PlayerScript
 public:
 	DoupleXP() : PlayerScript("DoupleXP"){}
 
+    
+    void epzugabe(Player* player, uint32 multiplikator, uint32 amount){
+        amount = amount * 4;
+        char msg[250];
+        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+    }
+    
+    
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
 		
@@ -528,32 +537,105 @@ public:
 		if (date.day_of_week() == boost::date_time::Friday ||
 			date.day_of_week() == boost::date_time::Saturday ||
 			date.day_of_week() == boost::date_time::Sunday){
-			if (player->getLevel() < 80){
+            if (player->getLevel() < 80){
+                
+                PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
+                stmt->setInt32(0, player->GetGUID());
+                PreparedQueryResult result = CharacterDatabase.Query(stmt);
+                time_t sek;
+                time(&sek);
+                uint32 zeit = time(&sek);
+                
 				if (!premium){
 					
-					char msg[250];
-					snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-					ChatHandler(player->GetSession()).PSendSysMessage(msg,
-						player->GetName());
-					amount = amount * 2;
+                    
+                    if(!result){
+                        epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                        /*char msg[250];
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        amount = amount * 2;*/
+                        return;
+                    }
+                    
+                    
+                    Field* feld = result->Fetch();
+                    uint32 playerid = feld[1].GetInt32();
+                    uint32 accountid = feld[2].GetInt32();
+                    uint32 start = feld[3].GetInt32();
+                    uint32 ende = feld[4].GetInt32();
+                    
+                    
+                    
+                    
+                    
+                    if(result && zeit <= ende){
+                        epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+                        
+                       /* char msg[250];
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        amount = amount * 4;*/
+                        return;
+                    }
+                    
+                    else {
+                        epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                        /*char msg[250];
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        amount = amount * 2;*/
+                        return;
+                    }
+                    
+					
 				}
+                
+                if(!result){
+                    /*char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg,
+                                                                      player->GetName());
+                    amount = amount * 1.25;*/
+                    epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
+                    return;
+                }
+                
+                
+                if(result && zeit <= ende){
+                   /* char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                    amount = amount * 2; */
+                    
+                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
 
+                }
+                
 				else {
-					char msg[250];
+					/*char msg[250];
 					snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
 					ChatHandler(player->GetSession()).PSendSysMessage(msg,
 						player->GetName());
-					amount = amount * 1.25;
+					amount = amount * 1.25;*/
+                    epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
 				}
 			}
 		} 
-
-			else if (date.day_of_week() == boost::date_time::Monday ||
-				date.day_of_week() == boost::date_time::Tuesday ||
-				date.day_of_week() == boost::date_time::Wednesday ||
-				date.day_of_week() == boost::date_time::Thursday){
-				amount = amount * 0.75;
-			}
+        
+        if (date.day_of_week() == boost::date_time::Monday ||
+            date.day_of_week() == boost::date_time::Tuesday ||
+            date.day_of_week() == boost::date_time::Wednesday ||
+            date.day_of_week() == boost::date_time::Thursday){
+            if(result && zeit <= ende){
+                epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
+            }
+            
+        else {
+            amount = amount * 0.75;
+        }
+            
+        }
 		
 	}
 };

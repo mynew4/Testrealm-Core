@@ -31,13 +31,15 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`, `nr`,`frage`, `antwort`, `belohnung`, `anzahl` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `antwort` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_LOB, "SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = ? AND `uid`= ?", CONNECTION_SYNCH);
-    PrepareStatement(CHAR_INS_LOB, "INSERT INTO lob (zeit,spieler,uid,benutzt)VALUES (?,?,?,?)", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_INS_LOB, "INSERT INTO lob (zeit,spieler,uid,benutzt)VALUES (?,?,?,?)", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_FIRSTLOG, "INSERT INTO firstnpc_log (grund,spieler, guid) VALUES (?,?,?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_EVENTLOG, "INSERT INTO eventteamlog (player,guid, itemid,gutscheincode,anzahl) VALUES (?,?,?,?,?)" ,CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_ITEMCODE, "INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,name,benutztbar) VALUES (?,?,?,?,?,?)" , CONNECTION_ASYNC);
     PrepareStatement(CHAR_INS_NOPLAYERITEMCODE, "INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) VALUES (?,?,?,?,?)" , CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_ITEMCODEGES, "SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_ITEMCODEACCOUNT, "INSERT INTO item_codes_account (name,accid,code) Values(?,?,?)", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_INS_BONUS_EP, "Insert into Bonusep (player, playerid,start, ende) Values (?,?,?,?)", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_BONUS_EP, "Select `player` ,`playerid`, `start`, `ende` from `Bonusep` where `playerid` = ?", CONNECTION_ASYNC);
     
     /* CUSTOM ENDE */
     

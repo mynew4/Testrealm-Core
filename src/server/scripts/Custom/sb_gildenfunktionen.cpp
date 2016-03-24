@@ -34,18 +34,21 @@
 
 
 
-class goldaufbank : public PlayerScript
+
+class gildengold : public PlayerScript
 {
-
 public:
-	goldaufbank() : PlayerScript("goldaufbank") { }
-
-	
-
-	
-
-	
-}; 
+    gildengold() : PlayerScript("gildengold") {}
+    
+    virtual void OnMoneyChanged(Player* player, int32& /*amount*/) {
+    
+        Guild* guild = player->GetGuild();
+        guild->MassInviteToEvent(player->GetSession(), 80, 80, 0);
+        
+        
+        
+    }
+};
 
 
 
@@ -81,7 +84,7 @@ public:
 
 void AddSC_sb_gildenfunktionen()
 {
-	new goldaufbank();
+	new gildengold();
 
 }
 
