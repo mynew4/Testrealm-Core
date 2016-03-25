@@ -522,7 +522,7 @@ public:
 
     
     void epzugabe(Player* player, uint32 multiplikator, uint32 amount){
-        amount = amount * 4;
+        amount = amount * multiplikator;
         char msg[250];
         snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
@@ -531,115 +531,69 @@ public:
     
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
-        uint32 ende = 0;
-		
-		bool premium = player->GetSession()->IsPremium();
-		boost::gregorian::date date(boost::gregorian::day_clock::local_day());
-		if (date.day_of_week() == boost::date_time::Friday ||
+        
+        
+        boost::gregorian::date date(boost::gregorian::day_clock::local_day());
+        
+        if (date.day_of_week() == boost::date_time::Friday ||
 			date.day_of_week() == boost::date_time::Saturday ||
-			date.day_of_week() == boost::date_time::Sunday){
-            if (player->getLevel() < 80){
-                
-                PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
-                stmt->setInt32(0, player->GetGUID());
-                PreparedQueryResult result = CharacterDatabase.Query(stmt);
-                time_t sek;
-                time(&sek);
-                uint32 zeit = time(&sek);
-                
-				if (!premium){
-					
-                    
-                    if(!result){
-                        epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                        /*char msg[250];
-                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-                        amount = amount * 2;*/
-                        return;
-                    }
-                    
-                    
-                    Field* feld = result->Fetch();
-                    uint32 playerid = feld[1].GetInt32();
-                    uint32 accountid = feld[2].GetInt32();
-                    uint32 start = feld[3].GetInt32();
-                    uint32 ende = feld[4].GetInt32();
-                    
-                    
-                    
-                    
-                    
-                    if(result && zeit <= ende){
-                        epzugabe(player->GetSession()->GetPlayer(), 4, amount);
-                        
-                       /* char msg[250];
-                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-                        amount = amount * 4;*/
-                        return;
-                    }
-                    
-                    else {
-                        epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                        /*char msg[250];
-                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-                        amount = amount * 2;*/
-                        return;
-                    }
-                    
-					
-				}
-                
-                if(!result){
-                    /*char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-                    ChatHandler(player->GetSession()).PSendSysMessage(msg,
-                                                                      player->GetName());
-                    amount = amount * 1.25;*/
-                    epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
-                    return;
-                }
-                
-                
-                if(result && zeit <= ende){
-                   /* char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-                    amount = amount * 2; */
-                    
-                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-
-                }
-                
-				else {
-					/*char msg[250];
-					snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-					ChatHandler(player->GetSession()).PSendSysMessage(msg,
-						player->GetName());
-					amount = amount * 1.25;*/
-                    epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
-				}
-			}
-		} 
+			date.day_of_week() == boost::date_time::Sunday)
+        {
+            PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
+            ep->setInt32(0, player->GetGUID());
+            PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
+            
+            if(!ergebnis){
+                epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                return;
+            }
+            
+            Field* felder = ergebnis->Fetch();
+            uint32 ende = felder[3].GetInt32();
+            //uint32 aktiv = felder[4].GetInt32();
+            
+            time_t sek;
+            time(&sek);
+            uint32 zeit = time(&sek);
+            
+            if(ergebnis && zeit <= ende){
+                epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+            }
+            
+            
+        }
         
         if (date.day_of_week() == boost::date_time::Monday ||
             date.day_of_week() == boost::date_time::Tuesday ||
             date.day_of_week() == boost::date_time::Wednesday ||
-            date.day_of_week() == boost::date_time::Thursday){
-            uint32 ende = 0;
-            uint32 result = 0;
-            uint32 zeit = 0;
+            date.day_of_week() == boost::date_time::Thursday)
+        {
+            PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
+            ep->setInt32(0, player->GetGUID());
+            PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
             
-            if(result && zeit <= ende){
-                epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
+            if(!ergebnis){
+                epzugabe(player->GetSession()->GetPlayer(), 1.5, amount);
+                return;
             }
             
-        else {
-            amount = amount * 0.75;
-        }
+            Field* felder = ergebnis->Fetch();
+            uint32 ende = felder[3].GetInt32();
+            //uint32 aktiv = felder[4].GetInt32();
             
+            time_t sek;
+            time(&sek);
+            uint32 zeit = time(&sek);
+            
+            if(ergebnis && zeit <= ende){
+                epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+            }
+            
+            
+        }
+        
+        else {
+            amount = amount* 0.75;
         }
 		
 	}

@@ -68,6 +68,7 @@ class npc_first_char : public CreatureScript
                 stmt->setInt32(3, endzeit);
                 stmt->setInt32(4, 1);
                 CharacterDatabase.Execute(stmt);
+                player->GetSession()->SendNotification("Dein EP-Bonus ist nun aktiv!");
                 return;
             }
             
