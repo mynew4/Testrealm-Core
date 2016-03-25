@@ -523,7 +523,7 @@ public:
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
         boost::gregorian::date date(boost::gregorian::day_clock::local_day());
-        
+        bool premium = player->GetSession()->IsPremium();
         if (date.day_of_week() == boost::date_time::Friday ||
 			date.day_of_week() == boost::date_time::Saturday ||
 			date.day_of_week() == boost::date_time::Sunday)
@@ -534,11 +534,18 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
+                    if(premium){
+                        amount = amount*4;
+                        char msg[250];
+                        snprintf(msg, 250, "1Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        return;
+                    }
+                    
                     amount = amount*2;
                     char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "2Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-
                     return;
                 }
                 
@@ -551,9 +558,17 @@ public:
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
+                    if(premium){
+                        amount = amount*6;
+                        char msg[250];
+                        snprintf(msg, 250, "3Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        return;
+                    }
+                    
                     amount = amount*4;
                     char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "4Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
@@ -575,9 +590,17 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
+                    if(premium){
+                        amount = amount*1.2;
+                        char msg[250];
+                        snprintf(msg, 250, "5Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        return;
+                    }
+                    
                     amount = amount*0.75;
                     char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "6Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
@@ -591,9 +614,17 @@ public:
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
+                    if(premium){
+                        amount = amount*4;
+                        char msg[250];
+                        snprintf(msg, 250, "7Dir wurden %u EP gutgeschrieben.", amount);
+                        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+                        return;
+                    }
+                    
                     amount = amount*2;
                     char msg[250];
-                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "8Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
