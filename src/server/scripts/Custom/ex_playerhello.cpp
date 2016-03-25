@@ -609,8 +609,8 @@ public:
             player->GiveXP(amount, player);
             return;
         }
-        return;
-	}*/
+        return; */
+	}
 };
 
 
