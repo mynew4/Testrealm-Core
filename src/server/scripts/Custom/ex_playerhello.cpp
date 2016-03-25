@@ -525,7 +525,6 @@ public:
         amount = amount * multiplikator;
         char msg[250];
         snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-        player->GiveXP(amount, player);
         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
         return;
     }
@@ -533,11 +532,7 @@ public:
     
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
-        player->GetSession()->SendNotification("Du hast 400 Bonus-ep erhalten");
-        amount = amount *2;
-        return;
-        
-      /*  boost::gregorian::date date(boost::gregorian::day_clock::local_day());
+        boost::gregorian::date date(boost::gregorian::day_clock::local_day());
         
         if (date.day_of_week() == boost::date_time::Friday ||
 			date.day_of_week() == boost::date_time::Saturday ||
@@ -550,6 +545,7 @@ public:
                 
                 if(!ergebnis){
                     epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
                     return;
                 }
                 
@@ -563,6 +559,7 @@ public:
                 
                 if(ergebnis && zeit <= ende){
                     epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
                     return;
                 }
                 return;
@@ -583,6 +580,7 @@ public:
                 
                 if(!ergebnis){
                     epzugabe(player->GetSession()->GetPlayer(), 1.5, amount);
+                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
                     return;
                 }
                 
@@ -596,6 +594,7 @@ public:
                 
                 if(ergebnis && zeit <= ende){
                     epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
                     return;
                 }
                 return;
@@ -606,10 +605,10 @@ public:
         
         else {
             amount = amount* 0.75;
-            player->GiveXP(amount, player);
+            player->GetSession()->SendNotification("Du hast Bonusep bekommen");
             return;
         }
-        return; */
+        return;
 	}
 };
 
