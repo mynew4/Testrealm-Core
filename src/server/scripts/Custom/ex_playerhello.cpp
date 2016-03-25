@@ -531,6 +531,7 @@ public:
     
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
+        uint32 ende = 0;
 		
 		bool premium = player->GetSession()->IsPremium();
 		boost::gregorian::date date(boost::gregorian::day_clock::local_day());
