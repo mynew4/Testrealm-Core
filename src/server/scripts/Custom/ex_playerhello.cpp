@@ -531,11 +531,11 @@ public:
     }
     
     
-	void OnGiveXP(Player* player, uint32& amount, Unit* victim)
+	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
         player->GetSession()->SendNotification("Du hast 400 Bonus-ep erhalten");
-        player->GiveXP(amount,nullptr);
-        return true;
+        amount = amount *2;
+        return;
         
       /*  boost::gregorian::date date(boost::gregorian::day_clock::local_day());
         
