@@ -526,7 +526,6 @@ public:
         char msg[250];
         snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-        return;
     }
     
     
@@ -562,9 +561,9 @@ public:
                     player->GetSession()->SendNotification("2");
                     return;
                 }
-                return;
+                
             }
-            return;
+           
         }
 
         
@@ -597,9 +596,7 @@ public:
                     player->GetSession()->SendNotification("4");
                     return;
                 }
-                return;
             }
-            return;
         }
         
         
@@ -608,7 +605,7 @@ public:
             player->GetSession()->SendNotification("Du hast Bonusep bekommen");
             return;
         }
-        return;
+        
 	}
 };
 
