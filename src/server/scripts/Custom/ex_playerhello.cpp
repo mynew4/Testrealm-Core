@@ -519,15 +519,6 @@ class DoupleXP : public PlayerScript
 {
 public:
 	DoupleXP() : PlayerScript("DoupleXP"){}
-
-    
-    void epzugabe(Player* player, uint32 multiplikator, uint32 amount){
-        amount = amount * multiplikator;
-        char msg[250];
-        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
-        ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-    }
-    
     
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
@@ -543,9 +534,11 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
-                    //epzugabe(player->GetSession()->GetPlayer(), 2, amount);
                     amount = amount*2;
-                    player->GetSession()->SendNotification("1");
+                    char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+
                     return;
                 }
                 
@@ -558,9 +551,11 @@ public:
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
-                    //epzugabe(player->GetSession()->GetPlayer(), 4, amount);
                     amount = amount*4;
-                    player->GetSession()->SendNotification("2");
+                    char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+
                     return;
                 }
                 
@@ -580,24 +575,27 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
-                   // epzugabe(player->GetSession()->GetPlayer(), 0.75, amount);
-                    player->GetSession()->SendNotification("3");
                     amount = amount*0.75;
+                    char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+
                     return;
                 }
                 
                 Field* felder = ergebnis->Fetch();
                 uint32 ende = felder[3].GetInt32();
-                //uint32 aktiv = felder[4].GetInt32();
                 
                 time_t sek;
                 time(&sek);
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
-                    //epzugabe(player->GetSession()->GetPlayer(), 2, amount);
                     amount = amount*2;
-                    player->GetSession()->SendNotification("4");
+                    char msg[250];
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+                    ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
+
                     return;
                 }
             }
@@ -606,7 +604,6 @@ public:
         
         else {
             amount = amount* 0.75;
-            player->GetSession()->SendNotification("Du hast Bonusep bekommen");
             return;
         }
         
