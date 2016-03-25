@@ -56,11 +56,17 @@ class npc_first_char : public CreatureScript
             uint32 endzeit = zeit+dauer;
             
             if(player->HasEnoughMoney(kosten * GOLD)){
+                
+                PreparedStatement* update = CharacterDatabase.GetPreparedStatement(CHAR_UPD_BONUS_EP);
+                update->setInt32(0, player->GetGUID());
+                CharacterDatabase.Execute(update);
+                
                 PreparedStatement* stmt = CharacterDatabase.GetPreparedStatement(CHAR_INS_BONUS_EP);
                 stmt->setString(0, player->GetSession()->GetPlayerName());
                 stmt->setInt32(1, player->GetGUID());
                 stmt->setInt32(2, zeit);
                 stmt->setInt32(3, endzeit);
+                stmt->setInt32(4, 1);
                 CharacterDatabase.Execute(stmt);
                 return;
             }

@@ -44,6 +44,7 @@ enum CharacterDatabaseStatements
     CHAR_SEL_ANTWORTEN,
     CHAR_INS_BONUS_EP,
     CHAR_SEL_BONUS_EP,
+    CHAR_UPD_BONUS_EP,
     /*CUSTOM ENDE */
 
     CHAR_DEL_QUEST_POOL_SAVE,
