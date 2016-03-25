@@ -38,8 +38,8 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_INS_NOPLAYERITEMCODE, "INSERT INTO `item_codes` (code,belohnung,anzahl,benutzt,benutztbar) VALUES (?,?,?,?,?)" , CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_ITEMCODEGES, "SELECT `code`, `belohnung`, `anzahl`, `benutzt`, `benutztbar` FROM `item_codes` WHERE `code` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_ITEMCODEACCOUNT, "INSERT INTO item_codes_account (name,accid,code) Values(?,?,?)", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_INS_BONUS_EP, "Insert into Bonusep (player, playerid,start, ende) Values (?,?,?,?)", CONNECTION_SYNCH);
-    PrepareStatement(CHAR_SEL_BONUS_EP, "Select `player` ,`playerid`, `start`, `ende` from `Bonusep` where `playerid` = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_INS_BONUS_EP, "Insert into bonusep (player, playerid,start, ende) Values (?,?,?,?)", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_BONUS_EP, "Select `player` ,`playerid`, `start`, `ende` from `bonusep` where `playerid` = ?", CONNECTION_ASYNC);
     
     /* CUSTOM ENDE */
     
