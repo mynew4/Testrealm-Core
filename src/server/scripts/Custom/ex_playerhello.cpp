@@ -543,7 +543,8 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
-                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    //epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    amount = amount*2;
                     player->GetSession()->SendNotification("1");
                     return;
                 }
@@ -557,7 +558,8 @@ public:
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
-                    epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+                    //epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+                    amount = amount*4;
                     player->GetSession()->SendNotification("2");
                     return;
                 }
@@ -578,8 +580,9 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
-                    epzugabe(player->GetSession()->GetPlayer(), 0.75, amount);
+                   // epzugabe(player->GetSession()->GetPlayer(), 0.75, amount);
                     player->GetSession()->SendNotification("3");
+                    amount = amount*0.75;
                     return;
                 }
                 
@@ -592,7 +595,8 @@ public:
                 uint32 zeit = time(&sek);
                 
                 if(ergebnis && zeit <= ende){
-                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    //epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    amount = amount*2;
                     player->GetSession()->SendNotification("4");
                     return;
                 }
