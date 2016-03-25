@@ -534,7 +534,10 @@ public:
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
         
-        boost::gregorian::date date(boost::gregorian::day_clock::local_day());
+        player->GiveXP(400, player);
+        player->GetSession()->SendNotification("Du hast 400 Bonus-ep erhalten");
+        
+      /*  boost::gregorian::date date(boost::gregorian::day_clock::local_day());
         
         if (date.day_of_week() == boost::date_time::Friday ||
 			date.day_of_week() == boost::date_time::Saturday ||
@@ -607,7 +610,7 @@ public:
             return;
         }
         return;
-	}
+	}*/
 };
 
 
