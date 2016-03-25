@@ -537,14 +537,14 @@ public:
                     if(premium){
                         amount = amount*4;
                         char msg[250];
-                        snprintf(msg, 250, "1Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*2;
                     char msg[250];
-                    snprintf(msg, 250, "2Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                     return;
                 }
@@ -561,14 +561,14 @@ public:
                     if(premium){
                         amount = amount*6;
                         char msg[250];
-                        snprintf(msg, 250, "3Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*4;
                     char msg[250];
-                    snprintf(msg, 250, "4Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
@@ -579,14 +579,14 @@ public:
                     if(premium){
                         amount = amount*4;
                         char msg[250];
-                        snprintf(msg, 250, "9Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*2;
                     char msg[250];
-                    snprintf(msg, 250, "10Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                     
                     return;
@@ -613,14 +613,14 @@ public:
                     if(premium){
                         amount = amount*1.2;
                         char msg[250];
-                        snprintf(msg, 250, "5Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*0.75;
                     char msg[250];
-                    snprintf(msg, 250, "6Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
@@ -637,14 +637,14 @@ public:
                     if(premium){
                         amount = amount*4;
                         char msg[250];
-                        snprintf(msg, 250, "7Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*2;
                     char msg[250];
-                    snprintf(msg, 250, "8Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
 
                     return;
@@ -655,14 +655,14 @@ public:
                     if(premium){
                         amount = amount*1.2;
                         char msg[250];
-                        snprintf(msg, 250, "11Dir wurden %u EP gutgeschrieben.", amount);
+                        snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                         return;
                     }
                     
                     amount = amount*0.75;
                     char msg[250];
-                    snprintf(msg, 250, "12Dir wurden %u EP gutgeschrieben.", amount);
+                    snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
                     ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
                     
                     return;

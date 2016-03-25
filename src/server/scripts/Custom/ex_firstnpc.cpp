@@ -54,6 +54,7 @@ class npc_first_char : public CreatureScript
             uint32 zeit = time(&sek);
             
             uint32 endzeit = zeit+dauer;
+            uint32 stundenzahl = dauer / 60 / 60;
             
             if(player->HasEnoughMoney(kosten * GOLD)){
                 
@@ -69,6 +70,11 @@ class npc_first_char : public CreatureScript
                 stmt->setInt32(4, 1);
                 CharacterDatabase.Execute(stmt);
                 player->GetSession()->SendNotification("Dein EP-Bonus ist nun aktiv!");
+                player->ModifyMoney(-kosten * GOLD);
+                std::ostringstream ss;
+                ss << "Dein EP-Bonus ist nun fuer " << stundenzahl << " Stunden aktiv.";
+                player->GetSession()->SendNotification(ss.str().c_str());
+                player->PlayerTalkClass->SendCloseGossip();
                 return;
             }
             
