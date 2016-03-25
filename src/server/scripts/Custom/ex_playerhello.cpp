@@ -628,6 +628,8 @@ public:
             date.day_of_week() == boost::date_time::Tuesday ||
             date.day_of_week() == boost::date_time::Wednesday ||
             date.day_of_week() == boost::date_time::Thursday){
+            uint32 ende = 0;
+            
             if(result && zeit <= ende){
                 epzugabe(player->GetSession()->GetPlayer(), 1.25, amount);
             }
