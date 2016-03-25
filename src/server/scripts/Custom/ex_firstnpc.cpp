@@ -927,6 +927,7 @@ class npc_first_char : public CreatureScript
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein generieren [Kosten: 5000G]", GOSSIP_SENDER_MAIN, 23);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Gutschein zum Verschenken generieren [Kosten: Premium 5000 / Normal 10.000]", GOSSIP_SENDER_MAIN, 24);
 						pPlayer->ADD_GOSSIP_ITEM(7, "Level kaufen", GOSSIP_SENDER_MAIN, 9500);
+                        pPlayer->ADD_GOSSIP_ITEM(7, "XP-BOOST", GOSSIP_SENDER_MAIN, 22);
 						
 						if (pPlayer->GetSession()->GetSecurity() == 3){	
 							
