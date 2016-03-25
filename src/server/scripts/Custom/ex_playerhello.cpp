@@ -525,6 +525,7 @@ public:
         amount = amount * multiplikator;
         char msg[250];
         snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
+        player->GiveXP(amount, player);
         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
     }
     
@@ -594,6 +595,7 @@ public:
         
         else {
             amount = amount* 0.75;
+            player->GiveXP(amount, player);
         }
 		
 	}
