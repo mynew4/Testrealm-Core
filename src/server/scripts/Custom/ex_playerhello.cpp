@@ -545,7 +545,7 @@ public:
                 
                 if(!ergebnis){
                     epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
+                    player->GetSession()->SendNotification("1");
                     return;
                 }
                 
@@ -559,7 +559,7 @@ public:
                 
                 if(ergebnis && zeit <= ende){
                     epzugabe(player->GetSession()->GetPlayer(), 4, amount);
-                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
+                    player->GetSession()->SendNotification("2");
                     return;
                 }
                 return;
@@ -579,8 +579,8 @@ public:
                 PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
                 
                 if(!ergebnis){
-                    epzugabe(player->GetSession()->GetPlayer(), 1.5, amount);
-                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
+                    epzugabe(player->GetSession()->GetPlayer(), 0.75, amount);
+                    player->GetSession()->SendNotification("3");
                     return;
                 }
                 
@@ -594,7 +594,7 @@ public:
                 
                 if(ergebnis && zeit <= ende){
                     epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                    player->GetSession()->SendNotification("Du hast Bonusep bekommen");
+                    player->GetSession()->SendNotification("4");
                     return;
                 }
                 return;
