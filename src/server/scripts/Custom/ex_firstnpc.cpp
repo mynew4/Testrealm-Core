@@ -836,42 +836,42 @@ class npc_first_char : public CreatureScript
                     case 6000:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 500, 3600);
-                    }
+                    }break;
                     
                     case 6001:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 800, 7200);
-                    }
+                    }break;
                             
                     case 6002:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 1500, 18000);
-                    }
+                    }break;
                         
                     case 6003:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 2000, 36000);
-                    }
+                    }break;
                             
                     case 6004:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 4000, 86400);
-                    }
+                    }break;
                     
                     case 6005:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 5000, 172800);
-                    }
+                    }break;
                             
                     case 6006:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 7500, 432000);
-                    }
+                    }break;
                             
                     case 6007:
                     {
                         Bonusep(pPlayer->GetSession()->GetPlayer(), 10000, 864000);
-                    }
+                    }break;
                             
                             
 					case 23:
