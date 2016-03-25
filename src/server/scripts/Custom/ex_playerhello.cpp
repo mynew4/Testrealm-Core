@@ -527,7 +527,7 @@ public:
         snprintf(msg, 250, "Dir wurden %u EP gutgeschrieben.", amount);
         player->GiveXP(amount, player);
         ChatHandler(player->GetSession()).PSendSysMessage(msg, player->GetName());
-        return true;
+        return;
     }
     
     
@@ -535,7 +535,7 @@ public:
 	{
         player->GetSession()->SendNotification("Du hast 400 Bonus-ep erhalten");
         player->GiveXP(amount,nullptr);
-        return;
+        return true;
         
       /*  boost::gregorian::date date(boost::gregorian::day_clock::local_day());
         
