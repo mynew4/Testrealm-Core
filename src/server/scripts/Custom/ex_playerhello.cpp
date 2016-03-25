@@ -534,7 +534,6 @@ public:
 	void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/)
 	{
         
-        
         boost::gregorian::date date(boost::gregorian::day_clock::local_day());
         
         if (date.day_of_week() == boost::date_time::Friday ||
@@ -563,10 +562,11 @@ public:
                     epzugabe(player->GetSession()->GetPlayer(), 4, amount);
                     return;
                 }
-
+                return;
             }
-            
+            return;
         }
+
         
         if (date.day_of_week() == boost::date_time::Monday ||
             date.day_of_week() == boost::date_time::Tuesday ||
@@ -595,16 +595,18 @@ public:
                     epzugabe(player->GetSession()->GetPlayer(), 2, amount);
                     return;
                 }
+                return;
             }
-            
+            return;
         }
+        
         
         else {
             amount = amount* 0.75;
             player->GiveXP(amount, player);
             return;
         }
-		
+        return;
 	}
 };
 
