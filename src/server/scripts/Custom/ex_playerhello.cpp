@@ -541,64 +541,68 @@ public:
 			date.day_of_week() == boost::date_time::Saturday ||
 			date.day_of_week() == boost::date_time::Sunday)
         {
-            PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
-            ep->setInt32(0, player->GetGUID());
-            PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
-            
-            if(!ergebnis){
-                epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                return;
+            if(player->getLevel() < 80){
+                PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
+                ep->setInt32(0, player->GetGUID());
+                PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
+                
+                if(!ergebnis){
+                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    return;
+                }
+                
+                Field* felder = ergebnis->Fetch();
+                uint32 ende = felder[3].GetInt32();
+                //uint32 aktiv = felder[4].GetInt32();
+                
+                time_t sek;
+                time(&sek);
+                uint32 zeit = time(&sek);
+                
+                if(ergebnis && zeit <= ende){
+                    epzugabe(player->GetSession()->GetPlayer(), 4, amount);
+                    return;
+                }
+
             }
-            
-            Field* felder = ergebnis->Fetch();
-            uint32 ende = felder[3].GetInt32();
-            //uint32 aktiv = felder[4].GetInt32();
-            
-            time_t sek;
-            time(&sek);
-            uint32 zeit = time(&sek);
-            
-            if(ergebnis && zeit <= ende){
-                epzugabe(player->GetSession()->GetPlayer(), 4, amount);
-                return;
-            }
-            
             
         }
         
         if (date.day_of_week() == boost::date_time::Monday ||
             date.day_of_week() == boost::date_time::Tuesday ||
-            date.day_of_week() == boost::date_time::Wednesday ||
-            date.day_of_week() == boost::date_time::Thursday)
+            date.day_of_week() == boost::date_time::Wednesday || date.day_of_week() == boost::date_time::Thursday)
         {
-            PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
-            ep->setInt32(0, player->GetGUID());
-            PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
+            if(player->getLevel() < 80){
             
-            if(!ergebnis){
-                epzugabe(player->GetSession()->GetPlayer(), 1.5, amount);
-                return;
+                PreparedStatement* ep = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BONUS_EP);
+                ep->setInt32(0, player->GetGUID());
+                PreparedQueryResult ergebnis = CharacterDatabase.Query(ep);
+                
+                if(!ergebnis){
+                    epzugabe(player->GetSession()->GetPlayer(), 1.5, amount);
+                    return;
+                }
+                
+                Field* felder = ergebnis->Fetch();
+                uint32 ende = felder[3].GetInt32();
+                //uint32 aktiv = felder[4].GetInt32();
+                
+                time_t sek;
+                time(&sek);
+                uint32 zeit = time(&sek);
+                
+                if(ergebnis && zeit <= ende){
+                    epzugabe(player->GetSession()->GetPlayer(), 2, amount);
+                    return;
+                }
             }
-            
-            Field* felder = ergebnis->Fetch();
-            uint32 ende = felder[3].GetInt32();
-            //uint32 aktiv = felder[4].GetInt32();
-            
-            time_t sek;
-            time(&sek);
-            uint32 zeit = time(&sek);
-            
-            if(ergebnis && zeit <= ende){
-                epzugabe(player->GetSession()->GetPlayer(), 2, amount);
-                return;
-            }
-            
             
         }
         
         else {
             amount = amount* 0.75;
             player->GiveXP(amount, player);
+            return;
         }
 		
 	}
