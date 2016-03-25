@@ -73,7 +73,9 @@ class npc_first_char : public CreatureScript
                 player->ModifyMoney(-kosten * GOLD);
                 std::ostringstream ss;
                 ss << "Dein EP-Bonus ist nun fuer " << stundenzahl << " Stunden aktiv.";
-                player->GetSession()->SendNotification(ss.str().c_str());
+                ChatHandler(player->GetSession()).PSendSysMessage(ss.str().c_str(),
+                                                                   player->GetName());
+
                 player->PlayerTalkClass->SendCloseGossip();
                 return;
             }
