@@ -150,7 +150,7 @@ public:
             return true;
         }
         
-        char* anzahl = strtok(NULL, " ");
+        char* anzahl = strtok((char*)belohnung, " ");
         if (!anzahl){
             player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
             return true;
