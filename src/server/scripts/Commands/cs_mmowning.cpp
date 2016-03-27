@@ -72,6 +72,8 @@ public:
 			{ "werbung", SEC_ADMINISTRATOR, false, &HandleWerbungCommand, "" },
             
             { "gutscheinerstellen", SEC_ADMINISTRATOR, false, &HandlegutscheinerstellenCommand, "" },
+            
+            { "frage", SEC_ADMINISTRATOR, false, &HandleFragenCommand, "" },
 
 			//{ "tcrecon",        SEC_MODERATOR,      false, &HandleIRCRelogCommand,            "" },	
 
@@ -124,7 +126,67 @@ public:
     }
     
     
-    
+    //Erstellt neue Fragen in der DB
+    static bool HandleFragenCommand(ChatHandler* handler, const char* args)
+    {
+        Player* player = handler->GetSession()->GetPlayer();
+        
+        char* frage = strtok((char*)args, " ");
+        if (!frage){
+            player->GetSession()->SendNotification("Ohne Frage geht das leider nicht!");
+            return true;
+        }
+        
+        char* antwort = strtok((char*)frage, " ");
+        if (!antwort){
+            player->GetSession()->SendNotification("Ohne Antwort geht das leider nicht!");
+            return true;
+        }
+        
+        
+        char* belohnung = strtok((char*)antwort, " ");
+        if (!belohnung){
+            player->GetSession()->SendNotification("Ohne Belohnung geht das leider nicht!");
+            return true;
+        }
+        
+        char* anzahl = strtok(NULL, " ");
+        if (!anzahl){
+            player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
+            return true;
+        }
+        
+        uint32 intanzahl = atoi((char*)anzahl);
+        uint32 itemid = atoi((char*)belohnung);
+        
+        PreparedStatement * itemquery = WorldDatabase.GetPreparedStatement(WORLD_SEL_ITEM_NR);
+        itemquery->setUInt32(0,itemid);
+        PreparedQueryResult ergebnis = WorldDatabase.Query(itemquery);
+        
+        
+        if(!ergebnis){
+            player->GetSession()->SendNotification("Item existiert nicht.");
+            return true;
+        }
+        
+        if(itemid == 49623){
+            player->GetSession()->SendNotification("Schattengram als Belohnung zu generieren ist verboten, wird geloggt und Exitare informiert.");
+            CharacterDatabase.PExecute("INSERT INTO eventteamlog "
+                                       "(player,guid, itemid,gutscheincode,anzahl)"
+                                       "VALUES ('%s', '%u', '%u', '%s','%u')",
+                                       player->GetSession()->GetPlayerName(),player->GetGUID(),belohnung,"Schattemgram",0);
+        
+        }
+        
+        PreparedStatement* insert = CharacterDatabase.GetPreparedStatement(CHAR_INS_FRAGEN);
+        insert->setString(0, frage);
+        insert->setString(1, antwort);
+        insert->setInt32(2, itemid);
+        insert->setInt32(3, intanzahl);
+        CharacterDatabase.Execute(insert);
+        return true;
+        
+    }
     
 	//Gibt dem Eventteam die Moeglichkeit Gutscheine fuer Spieler zu erstellen.
 	static bool HandlegutscheinerstellenCommand(ChatHandler* handler, const char* args)
@@ -134,7 +196,7 @@ public:
 		
 		char* itemid = strtok((char*)args, " ");
 		if (!itemid){
-			player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
+			player->GetSession()->SendNotification("Ohne ItemID geht das leider nicht!");
 			return true;
 		}
 
@@ -269,7 +331,7 @@ public:
 
         return true;
         
-	}
+    };
 
 	static bool HandleRouletteCommand(ChatHandler* handler, const char* args)
 	{

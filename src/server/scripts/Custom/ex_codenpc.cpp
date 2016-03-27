@@ -40,13 +40,7 @@ public:
     void Belohnung(Player* player, uint32 nr){
         
         
-        /*
-         TODO CHECK IF PLAYER HAS ANSWER THE QUESTION.
-         ALTER TABLE SPIELERANTWORTEN. -> ID, CHARID, ACCID, QUESTIONNR.
-         CHECK IF ACCOUNT HAS ANSWER NOT ONLY CHAR.
-        */
-        
-        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_ANTWORTEN);
+        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_SPIELERANTWORTEN);
         account->setInt32(0, nr);
         account->setInt32(1, player->GetSession()->GetAccountId());
         PreparedQueryResult ergebnis = CharacterDatabase.Query(account);
@@ -68,7 +62,7 @@ public:
             CharacterDatabase.CommitTransaction(trans);
             
             
-            PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_ANTWORTEN);
+            PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_SPIELERANTWORTEN);
             accountinsert->setString(0, player->GetSession()->GetPlayerName());
             accountinsert->setInt32(1, player->GetGUID());
             accountinsert->setInt32(2, player->GetSession()->GetAccountId());
