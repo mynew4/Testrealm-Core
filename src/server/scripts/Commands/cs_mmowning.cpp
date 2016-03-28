@@ -137,20 +137,20 @@ public:
             return true;
         }
         
-        char* antwort = strtok((char*)frage, " ");
+        char* antwort = strtok(NULL, " ");
         if (!antwort){
             player->GetSession()->SendNotification("Ohne Antwort geht das leider nicht!");
             return true;
         }
         
         
-        char* belohnung = strtok((char*)antwort, " ");
+        char* belohnung = strtok(NULL, " ");
         if (!belohnung){
             player->GetSession()->SendNotification("Ohne Belohnung geht das leider nicht!");
             return true;
         }
         
-        char* anzahl = strtok((char*)belohnung, " ");
+        char* anzahl = strtok(NULL, " ");
         if (!anzahl){
             player->GetSession()->SendNotification("Ohne Anzahl geht das leider nicht!");
             return true;

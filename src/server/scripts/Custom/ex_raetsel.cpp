@@ -38,7 +38,7 @@ public:
 		pPlayer->ADD_GOSSIP_ITEM(7, "Das zweite Raetsel", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
         pPlayer->ADD_GOSSIP_ITEM(7, "Wo kann ich die Raetsel abgeben?", GOSSIP_SENDER_MAIN,2);
-        pPlayer->ADD_GOSSIP_ITEM(7, "Zeigt mir die Raetsel!", GOSSIP_SENDER_MAIN, 3);
+        pPlayer->ADD_GOSSIP_ITEM(7, "Stellt mir ein Raetsel!", GOSSIP_SENDER_MAIN, 3);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}
@@ -77,10 +77,36 @@ public:
                 
         case 3:
         {
-            pPlayer->PlayerTalkClass->ClearMenus();
-            pPlayer->ADD_GOSSIP_ITEM(7,"Der Drache", GOSSIP_SENDER_MAIN, 4);
-            pPlayer->ADD_GOSSIP_ITEM(7,"Wie alt bin?", GOSSIP_SENDER_MAIN, 5);
-            pPlayer->PlayerTalkClass->SendGossipMenu(907, creature->GetGUID());
+            PreparedStatement * count = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_COUNT);
+            PreparedQueryResult ergebnis = CharacterDatabase.Query(count);
+            
+            if(!ergebnis){
+                pPlayer->GetSession()->SendNotification("Es gab kein Ergebnis");
+                return true;
+            }
+            
+            Field* fetch = ergebnis->Fetch();
+            uint32 anzahl = fetch[0].GetInt32();
+            
+            uint32 nr = 1 + (std::rand() % (anzahl - 1 + 1));
+            
+            PreparedStatement* fragen_nach_nr = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+            fragen_nach_nr->setInt32(0, nr);
+            PreparedQueryResult result = CharacterDatabase.Query(fragen_nach_nr);
+            
+            if(!result){
+                pPlayer->GetSession()->SendNotification("Es wurden keine Fragen gefunden");
+                return true;
+            }
+            
+            Field* fragen = result->Fetch();
+            std::string frage = fragen[0].GetString();
+            
+            std::ostringstream ss;
+            ss << "Deine Frage lautet: " << frage;
+            pPlayer->GetSession()->SendNotification("Dir wurde ein Raetsel gestellt");
+            ChatHandler(pPlayer->GetSession()).PSendSysMessage(ss.str().c_str(), pPlayer->GetName());
+            pPlayer->PlayerTalkClass->SendCloseGossip();
             return true;
 
         }

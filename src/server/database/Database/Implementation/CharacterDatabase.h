@@ -32,6 +32,7 @@ enum CharacterDatabaseStatements
     /* Exi Custom */
     CHAR_SEL_FRAGEN_NACH_NR,
     CHAR_SEL_FRAGEN_NACH_ANTWORT,
+    CHAR_SEL_FRAGEN_COUNT,
     CHAR_SEL_LOB,
     CHAR_INS_LOB,
     CHAR_INS_FIRSTLOG,
