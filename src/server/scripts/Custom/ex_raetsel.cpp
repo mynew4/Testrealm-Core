@@ -37,6 +37,7 @@ public:
 		
 		pPlayer->ADD_GOSSIP_ITEM(7, "Stell mir ein Raetsel", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Das ist ein Test", GOSSIP_SENDER_MAIN, 2);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}

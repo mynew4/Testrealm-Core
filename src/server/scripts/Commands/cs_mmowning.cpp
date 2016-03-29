@@ -315,7 +315,7 @@ public:
         stmt->setString(0, "Eventteamgutschein");
         stmt->setString(1, player->GetSession()->GetPlayerName());
         stmt->setUInt32(2, player->GetGUID());
-        
+		CharacterDatabase.Execute(stmt);
         
         PreparedStatement* eventlog  = CharacterDatabase.GetPreparedStatement(CHAR_INS_EVENTLOG);
         eventlog->setString(0, player->GetSession()->GetPlayerName());
