@@ -184,6 +184,7 @@ public:
         insert->setInt32(2, itemid);
         insert->setInt32(3, intanzahl);
         CharacterDatabase.Execute(insert);
+		player->GetSession()->SendNotification("Frage wurde erfolgreich eingetragen");
         return true;
         
     }

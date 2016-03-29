@@ -40,9 +40,9 @@ public:
     void Belohnung(Player* player, uint32 nr){
         
         
-        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_SPIELERANTWORTEN);
-        account->setInt32(0, nr);
-        account->setInt32(1, player->GetSession()->GetAccountId());
+        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
+		account->setInt32(0, player->GetSession()->GetAccountId());
+        account->setInt32(1,nr);
         PreparedQueryResult ergebnis = CharacterDatabase.Query(account);
         
         if(!ergebnis){
@@ -83,7 +83,7 @@ public:
    
     bool OnGossipHello(Player *player, Creature* _creature)
     {
-        player->ADD_GOSSIP_ITEM_EXTENDED(7, "Code eingeben" , GOSSIP_SENDER_MAIN, 2, "Antwort", 0,true);
+        player->ADD_GOSSIP_ITEM_EXTENDED(7, "Bitte gib deine Antwort ein!" , GOSSIP_SENDER_MAIN, 2, "Deine Antwort lautet: ", 0,true);
         player->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
         return true;
     }
