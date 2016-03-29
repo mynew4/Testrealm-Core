@@ -35,10 +35,8 @@ public:
 	bool OnGossipHello(Player *pPlayer, Creature* _creature)
 	{
 		
-		pPlayer->ADD_GOSSIP_ITEM(7, "Das zweite Raetsel", GOSSIP_SENDER_MAIN, 0);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Stell mir ein Raetsel", GOSSIP_SENDER_MAIN, 3);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
-        pPlayer->ADD_GOSSIP_ITEM(7, "Wo kann ich die Raetsel abgeben?", GOSSIP_SENDER_MAIN,2);
-        pPlayer->ADD_GOSSIP_ITEM(7, "Stellt mir ein Raetsel!", GOSSIP_SENDER_MAIN, 3);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
 	}
@@ -48,33 +46,17 @@ public:
 		switch (uiAction)
 		{
 
-		case 0: {
-
-			pPlayer->GetGUID();
-			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Ein anderes Wort fuer Dunkel ist gesucht und Soldaten liefen auf gesuchten Routen. Findet ihr dazu 2 Stelzen die Koordinaten veraendern, seid ihr auf dem richtigen Weg.",
-				pPlayer->GetName());
-			pPlayer->PlayerTalkClass->SendCloseGossip();
-			return true;
-		}break;
 
 		case 1: {
 
 			pPlayer->GetGUID();
-			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hier kann man die lukrativen Raetselquestreihen abschliessen. Werden dir keine Quests angezeigt, hast du nicht die erforderlichen Vorquests abgeschlossen.",
+			ChatHandler(pPlayer->GetSession()).PSendSysMessage("Hier kann man die lukrativen Raetselquestreihen abschliessen. Werden dir keine Quests angezeigt, hast du nicht die erforderlichen Vorquests abgeschlossen. Gleich nebenmir steht mein Assistent. Bei diesem koennt ihr die Antworten eingeben, so Ihr diese denn wisst. Ihr muesst nicht die Frage angeben, gebt ihm einfach nur die Antwort. Er wird wissen von was Ihr sprecht.",
 				pPlayer->GetName());
 			pPlayer->PlayerTalkClass->SendCloseGossip();
 			return true;
 		}break;
                 
-        case 2:
-        {
-            pPlayer->GetGUID();
-            ChatHandler(pPlayer->GetSession()).PSendSysMessage("Gleich nebenmir steht mein Assistent. Bei diesem koennt ihr die Antworten eingeben, so Ihr diese denn wisst. Ihr muesst nicht die Frage angeben, gebt ihm einfach nur die Antwort. Er wird wissen von was Ihr sprecht.", pPlayer->GetName());
-            pPlayer->PlayerTalkClass->SendCloseGossip();
-            return true;
 
-        }
-                
         case 3:
         {
         pruefung:
