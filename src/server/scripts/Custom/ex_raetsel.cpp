@@ -32,14 +32,10 @@ class raetsel : public CreatureScript
 public:
 	raetsel() : CreatureScript("raetsel") { }
 
-	bool OnGossipHello(Player *pPlayer, Creature* _creature)
-	{
-		
-		pPlayer->ADD_GOSSIP_ITEM(7, "Stell mir ein Raetsel", GOSSIP_SENDER_MAIN, 0);
-		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
-		pPlayer->ADD_GOSSIP_ITEM(7, "Das ist ein Test", GOSSIP_SENDER_MAIN, 2);
-		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
-		return true;
+	bool OnGossipHello(Player* player, Creature* /*creature*/) {
+		player->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 0);
+		player->ADD_GOSSIP_ITEM(7, "Stelle mir ein Raetsel", GOSSIP_SENDER_MAIN,1);
+	
 	}
 
 	bool OnGossipSelect(Player * pPlayer, Creature * /*creature*/, uint32 /*uiSender*/, uint32 uiAction)
