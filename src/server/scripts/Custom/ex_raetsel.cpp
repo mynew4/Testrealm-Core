@@ -35,7 +35,7 @@ public:
 	bool OnGossipHello(Player *pPlayer, Creature* _creature)
 	{
 		
-		pPlayer->ADD_GOSSIP_ITEM(7, "Stell mir ein Raetsel", GOSSIP_SENDER_MAIN, 3);
+		pPlayer->ADD_GOSSIP_ITEM(7, "Stell mir ein Raetsel", GOSSIP_SENDER_MAIN, 0);
 		pPlayer->ADD_GOSSIP_ITEM(7, "Was tust du hier?", GOSSIP_SENDER_MAIN, 1);
 		pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 		return true;
@@ -57,7 +57,7 @@ public:
 		}break;
                 
 
-        case 3:
+        case 0:
         {
         pruefung:
             PreparedStatement * count = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_COUNT);
