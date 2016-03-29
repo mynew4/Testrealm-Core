@@ -51,6 +51,7 @@ public:
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Die Rampoquestreihe funktioniert bei mir nicht.", GOSSIP_SENDER_MAIN, 6);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Wie startet der Contentpatch?", GOSSIP_SENDER_MAIN, 8);
         player->ADD_GOSSIP_ITEM(7, "Wo kann ich Eventquests abgeben?", GOSSIP_SENDER_MAIN, 9);
+		player->ADD_GOSSIP_ITEM(7, "TEst?", GOSSIP_SENDER_MAIN, 9);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
         }
