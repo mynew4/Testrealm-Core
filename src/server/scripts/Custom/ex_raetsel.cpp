@@ -77,6 +77,7 @@ public:
                 
         case 3:
         {
+        pruefung:
             PreparedStatement * count = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_COUNT);
             PreparedQueryResult ergebnis = CharacterDatabase.Query(count);
             
@@ -94,24 +95,46 @@ public:
             fragen_nach_nr->setInt32(0, nr);
             PreparedQueryResult result = CharacterDatabase.Query(fragen_nach_nr);
             
+            
+            
             if(!result){
                 pPlayer->GetSession()->SendNotification("Es wurden keine Fragen gefunden");
                 return true;
             }
             
             Field* fragen = result->Fetch();
-            std::string frage = fragen[0].GetString();
+            std::string frage = fragen[1].GetString();
             
-            std::ostringstream ss;
-            ss << "Deine Frage lautet: " << frage;
-            pPlayer->GetSession()->SendNotification("Dir wurde ein Raetsel gestellt");
-            ChatHandler(pPlayer->GetSession()).PSendSysMessage(ss.str().c_str(), pPlayer->GetName());
-            pPlayer->PlayerTalkClass->SendCloseGossip();
-            return true;
+            PreparedStatement * sel_beantwortet = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
+            sel_beantwortet->setInt32(0, pPlayer->GetSession()->GetAccountId());
+            sel_beantwortet->setInt32(1, nr);
+            PreparedQueryResult existent = CharacterDatabase.Query(sel_beantwortet);
+            
+            if(!existent){
+                PreparedStatement * insert = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
+                insert->setInt32(0, pPlayer->GetSession()->GetAccountId());
+                insert->setInt32(1, nr);
+                std::ostringstream ss;
+                ss << "Deine Frage lautet: " << frage;
+                pPlayer->GetSession()->SendNotification("Dir wurde ein Raetsel gestellt");
+                ChatHandler(pPlayer->GetSession()).PSendSysMessage(ss.str().c_str(), pPlayer->GetName());
+                pPlayer->PlayerTalkClass->SendCloseGossip();
+                return true;
+
+            }
+            
+            if(existent){
+                goto pruefung;
+            }
+                
+            else{
+                pPlayer->GetSession()->SendNotification("Fehler festgestellt. Bitte Administrator kontaktieren");
+                return true;
+            }
 
         }
                 
-            return true;
+                return true;
 		}
 		return true;
 	};

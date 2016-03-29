@@ -28,9 +28,11 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_INS_SPIELERANTWORTEN, "INSERT INTO spielerantworten (spieler, playerid, accountid, fragennr) VALUES(?,?,?,?)",CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_SPIELERANTWORTEN, "SELECT `accountid` from spielerantworten where `fragennr` = ? AND `accountid` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_FRAGEN, "INSERT INTO antworten (frage, antwort, belohnung, anzahl) VALUES (?,?,?,?)", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `frage` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `nr`,`frage` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `antwort` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_FRAGEN_COUNT, "Select count(id) from `antworten`", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_BEANTWORTET, "Select `accountid`,`nr` from `beantwortete_fragen` where `accountid` = ? and `nr` = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_INS_BEANTWORTET, "Insert INTO beantwortete_fragen (accountid, nr) VALUES (?,?)", CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_LOB, "SELECT `id`, `zeit`, `spieler`,`uid` `benutzt` FROM `lob` WHERE `zeit` = ? AND `uid`= ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_LOB, "INSERT INTO lob (zeit,spieler,uid,benutzt)VALUES (?,?,?,?)", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_FIRSTLOG, "INSERT INTO firstnpc_log (grund,spieler, guid) VALUES (?,?,?)", CONNECTION_ASYNC);
