@@ -42,7 +42,7 @@ public:
         
         PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
 		account->setInt32(0, player->GetSession()->GetAccountId());
-        account->setInt32(1,nr);
+        account->setInt32(1, nr);
         PreparedQueryResult ergebnis = CharacterDatabase.Query(account);
         
         if(!ergebnis){
@@ -62,11 +62,9 @@ public:
             CharacterDatabase.CommitTransaction(trans);
             
             
-            PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_SPIELERANTWORTEN);
-            accountinsert->setString(0, player->GetSession()->GetPlayerName());
-            accountinsert->setInt32(1, player->GetGUID());
-            accountinsert->setInt32(2, player->GetSession()->GetAccountId());
-            accountinsert->setInt32(3, nr);
+			PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
+            accountinsert->setInt32(0, player->GetSession()->GetAccountId());
+            accountinsert->setInt32(1, nr);
             CharacterDatabase.Execute(accountinsert);
             return;
         }
@@ -118,8 +116,7 @@ public:
                     uint32 nr = feld[1].GetInt32();
                     
                     
-                    if(ergebnis){
-                       
+                    if(ergebnis){ 
                         Belohnung(player->GetSession()->GetPlayer(), nr);
                         return true;
                     }

@@ -278,9 +278,7 @@ class npc_first_char : public CreatureScript
 					pPlayer->ADD_GOSSIP_ITEM(7, "Firstausstattung beantragen", GOSSIP_SENDER_MAIN, 1);
 					pPlayer->ADD_GOSSIP_ITEM(7, "Gildenaufwertung 10er", GOSSIP_SENDER_MAIN, 2);
 					pPlayer->ADD_GOSSIP_ITEM(7, "Gildenaufwertung 25er", GOSSIP_SENDER_MAIN, 3);
-					pPlayer->ADD_GOSSIP_ITEM(7, "Features", GOSSIP_SENDER_MAIN, 25);
-					pPlayer->ADD_GOSSIP_ITEM(7, "Features2", GOSSIP_SENDER_MAIN, 26);
-										
+					pPlayer->ADD_GOSSIP_ITEM(7, "Features", GOSSIP_SENDER_MAIN, 25);					
 					pPlayer->PlayerTalkClass->SendGossipMenu(907, _creature->GetGUID());
 					return true;
 
