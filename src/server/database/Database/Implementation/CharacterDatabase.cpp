@@ -28,8 +28,8 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_INS_SPIELERANTWORTEN, "INSERT INTO spielerantworten (spieler, playerid, accountid, fragennr) VALUES(?,?,?,?)",CONNECTION_ASYNC);
     PrepareStatement(CHAR_SEL_SPIELERANTWORTEN, "SELECT `accountid` from spielerantworten where `fragennr` = ? AND `accountid` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_FRAGEN, "INSERT INTO antworten (frage, antwort, belohnung, anzahl) VALUES (?,?,?,?)", CONNECTION_ASYNC);
-    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `nr`,`frage` FROM `antworten` WHERE `nr` = ?", CONNECTION_SYNCH);
-    PrepareStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT, "SELECT `id`, `nr`,`frage`, `antwort` FROM `antworten` WHERE `antwort` = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_FRAGEN_NACH_NR, "SELECT `id`,`frage` FROM `antworten` WHERE `id` = ?", CONNECTION_SYNCH);
+    PrepareStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT, "SELECT `id`,`frage`, `antwort` FROM `antworten` WHERE `antwort` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_FRAGEN_COUNT, "Select count(id) from `antworten`", CONNECTION_SYNCH);
     PrepareStatement(CHAR_SEL_BEANTWORTET, "Select `accountid`,`nr` from `beantwortete_fragen` where `accountid` = ? and `nr` = ?", CONNECTION_SYNCH);
     PrepareStatement(CHAR_INS_BEANTWORTET, "Insert INTO beantwortete_fragen (accountid, nr) VALUES (?,?)", CONNECTION_ASYNC);
@@ -45,7 +45,7 @@ void CharacterDatabaseConnection::DoPrepareStatements()
     PrepareStatement(CHAR_SEL_BONUS_EP, "Select `player` ,`playerid`, `start`, `ende`, `aktiv` from `bonus_ep` where `playerid` = ? and `aktiv` = 1", CONNECTION_SYNCH);
     PrepareStatement(CHAR_UPD_BONUS_EP, "UPDATE bonus_ep SET aktiv = 0 WHERE playerid = ? AND aktiv != 0", CONNECTION_ASYNC);
 
-    
+  
     /* CUSTOM ENDE */
     
     
