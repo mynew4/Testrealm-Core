@@ -128,7 +128,7 @@ public:
                     
                     
                     Field* feld = ergebnis->Fetch();
-                    uint32 nr = feld[1].GetInt32();
+                    uint32 nr = feld[0].GetInt32();
                     
                     
                     if(ergebnis){ 
