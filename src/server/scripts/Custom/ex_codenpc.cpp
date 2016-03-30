@@ -134,7 +134,8 @@ public:
                     if(ergebnis){ 
 						player->GetSession()->SendNotification("Antwort wurde gefunden");
                         Belohnung(player->GetSession()->GetPlayer(), nr);
-						player->GetSession()->SendNotification(nr);
+						ChatHandler(player->GetSession()).PSendSysMessage(nr,
+							player->GetName());
                         return true;
                     }
                     
