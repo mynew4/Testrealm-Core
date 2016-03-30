@@ -48,16 +48,30 @@ public:
 		}
 
 		Field* felder = ergebnis->Fetch();
-		uint32 belohnung = felder[0].GetUInt32();
-		uint32 anzahl = felder[1].GetUInt32();
+		uint32 id = felder[0].GetUInt32();
+		uint32 belohnung = felder[1].GetUInt32();
+		uint32 anzahl = felder[2].GetUInt32();
 
+		PreparedStatement* check = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
+		check->setInt32(0, player->GetSession()->GetAccountId());
+		check->setInt32(1, id);
+		PreparedQueryResult result = CharacterDatabase.Query(check);
 
-		if (ergebnis){
+		if (check){
+			player->GetSession()->SendNotification("Du hast die Frage schon beantwortet. Dies ist nur einmal pro Account moeglich!");
+			return;
+		}
+
+		if (ergebnis && !check){
+			PreparedStatement* insertfrage = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
+			insertfrage->setInt32(0, player->GetSession()->GetAccountId());
+			insertfrage->setInt32(1, id);
+			CharacterDatabase.Execute(insertfrage);
+
 			Item* item = Item::CreateItem(belohnung, anzahl);
-			player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
 			SQLTransaction trans = CharacterDatabase.BeginTransaction();
 			item->SaveToDB(trans);
-			MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
+			MailDraft("Raetselbelohnung", "Du hast ein Raetsel geloest und hier ist deine Belohnung.").AddItem(item)
 				.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 			CharacterDatabase.CommitTransaction(trans);
 			player->GetSession()->SendNotification("Deine Antwort war korrekt. Deine Belohnung wurde zugesandt."); 
