@@ -57,12 +57,12 @@ public:
 		check->setInt32(1, id);
 		PreparedQueryResult result = CharacterDatabase.Query(check);
 
-		if (check){
+		if (result){
 			player->GetSession()->SendNotification("Du hast die Frage schon beantwortet. Dies ist nur einmal pro Account moeglich!");
 			return;
 		}
 
-		if (ergebnis && !check){
+		if (ergebnis && !result){
 			PreparedStatement* insertfrage = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
 			insertfrage->setInt32(0, player->GetSession()->GetAccountId());
 			insertfrage->setInt32(1, id);
