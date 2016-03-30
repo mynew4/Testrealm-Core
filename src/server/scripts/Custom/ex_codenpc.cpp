@@ -61,7 +61,7 @@ public:
 				.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 			CharacterDatabase.CommitTransaction(trans);
 			player->GetSession()->SendNotification("Deine Antwort war korrekt. Deine Belohnung wurde zugesandt."); 
-			return true;
+			return;
 		}
 
     }
