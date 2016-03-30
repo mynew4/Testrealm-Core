@@ -133,9 +133,10 @@ public:
 					std::string antwort = feld[2].GetString();
                     
                     if(ergebnis){ 
+						player->GetGUID();
 						player->GetSession()->SendNotification("Antwort wurde gefunden");
                         Belohnung(player->GetSession()->GetPlayer(), nr);
-						ChatHandler(player->GetSession()).PSendSysMessage(nr,
+						ChatHandler(player->GetSession()).PSendSysMessage(antwort,
 							player->GetName());
                         return true;
                     }
