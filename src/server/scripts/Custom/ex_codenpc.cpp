@@ -37,59 +37,31 @@ class codenpc : public CreatureScript
 public:
     codenpc() : CreatureScript("codenpc") { }
     
-    void Belohnung(Player* player, uint32 nr){
+    void Belohnung(Player* player, std::string codes){
         
-		PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-		itemquery->setInt32(0, nr);
-		PreparedQueryResult result = CharacterDatabase.Query(itemquery);
-		if (result){
-			player->GetSession()->SendNotification("Frage wurde gefunden");
+		PreparedStatement* selantwort = CharacterDatabase.GetPreparedStatement(CHAR_SEL_ANTWORTEN_NACH_ANTWORT);
+		selantwort->setString(0, codes);
+		PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
+		
+		if (!ergebnis){
+			player->GetSession()->SendNotification("Deine Antwort ist nicht korrekt!");
 		}
 
-		if (!result){
-			player->GetSession()->SendNotification("Es gab keinen Treffer");
+		Field* felder = ergebnis->Fetch();
+		uint32 belohnung = felder.GetInt32();
+		uint32 anzahl = felder.GetInt32();
+
+		if (ergebnis){
+			Item* item = Item::CreateItem(belohnung, anzahl);
+			player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
+			SQLTransaction trans = CharacterDatabase.BeginTransaction();
+			item->SaveToDB(trans);
+			MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
+				.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
+			CharacterDatabase.CommitTransaction(trans);
+			player->GetSession()->SendNotification("Deine Antwort war korrekt. Deine Belohnung wurde zugesandt.");
 		}
 
-		else {
-			player->GetSession()->SendNotification("Ein Fehler ist aufgetreten. Setze dich bitte mit den Administratoren in Verbindung.");
-		}
-
-		/*
-        PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
-		account->setInt32(0, player->GetSession()->GetAccountId());
-        account->setInt32(1, nr);
-        PreparedQueryResult ergebnis = CharacterDatabase.Query(account);
-        
-        if(!ergebnis){
-            PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-            itemquery->setInt32(0, nr);
-            PreparedQueryResult result = CharacterDatabase.Query(itemquery);
-            
-            Field* feld = result->Fetch();
-            uint32 belohnung = feld[4].GetInt32();
-            uint32 anzahl = feld[5].GetInt32();
-            
-            Item* item = Item::CreateItem(belohnung, anzahl);
-            SQLTransaction trans = CharacterDatabase.BeginTransaction();
-            item->SaveToDB(trans);
-            MailDraft("Raetsel geloest", "Glueckwunsch. Du hast ein Raetsel geloest. Hier ist deine Belohnung.").AddItem(item)
-            .SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
-            CharacterDatabase.CommitTransaction(trans);
-            
-            
-			PreparedStatement * accountinsert = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
-            accountinsert->setInt32(0, player->GetSession()->GetAccountId());
-            accountinsert->setInt32(1, nr);
-            CharacterDatabase.Execute(accountinsert);
-            return;
-        }
-        
-        else{
-            player->GetSession()->SendNotification("Du hast dieses Raetsel schon beantwortet und kannst es daher nicht mehr beantworten.");
-            return;
-        }
-		*/
-       
     }
     
     
@@ -117,9 +89,9 @@ public:
                         return true;
                     }
                     
-                    PreparedStatement* selantwort = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_ANTWORT);
-                    selantwort->setString(0, codes);
-                    PreparedQueryResult ergebnis = CharacterDatabase.Query(selantwort);
+					Belohnung(player->GetSession()->GetPlayer(), codes);
+
+                    
                     
                     if(!ergebnis){
                         player->GetSession()->SendNotification("Falsch");
@@ -129,15 +101,10 @@ public:
                     
                     Field* feld = ergebnis->Fetch();
                     uint32 nr = feld[0].GetInt32();
-					std::string frage = feld[1].GetString();
-					std::string antwort = feld[2].GetString();
                     
                     if(ergebnis){ 
-						player->GetGUID();
 						player->GetSession()->SendNotification("Antwort wurde gefunden");
                         Belohnung(player->GetSession()->GetPlayer(), nr);
-						ChatHandler(player->GetSession()).PSendSysMessage(antwort,
-							player->GetName());
                         return true;
                     }
                     
