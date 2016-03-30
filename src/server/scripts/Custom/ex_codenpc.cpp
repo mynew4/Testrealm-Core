@@ -39,7 +39,18 @@ public:
     
     void Belohnung(Player* player, uint32 nr){
         
-        
+		PreparedStatement* itemquery = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
+		itemquery->setInt32(0, nr);
+		PreparedQueryResult result = CharacterDatabase.Query(itemquery);
+		if (result){
+			player->GetSession()->SendNotification("Frage wurde gefunden");
+		}
+		
+		else {
+			player->GetSession()->SendNotification("Ein Fehler ist aufgetreten. Setze dich bitte mit den Administratoren in Verbindung.");
+		}
+
+		/*
         PreparedStatement * account = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
 		account->setInt32(0, player->GetSession()->GetAccountId());
         account->setInt32(1, nr);
@@ -73,7 +84,7 @@ public:
             player->GetSession()->SendNotification("Du hast dieses Raetsel schon beantwortet und kannst es daher nicht mehr beantworten.");
             return;
         }
-    
+		*/
        
     }
     
