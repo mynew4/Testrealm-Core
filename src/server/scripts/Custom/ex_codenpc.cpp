@@ -48,11 +48,10 @@ public:
 		}
 
 		Field* felder = ergebnis->Fetch();
+		uint32 belohnung = felder[0].GetUInt32();
+		uint32 anzahl = felder[1].GetUInt32();
 
-		uint32 charresultint = felder[0].GetUInt32();
 
-		uint32 belohnung = 38186;
-		uint32 anzahl = 1;
 		if (ergebnis){
 			Item* item = Item::CreateItem(belohnung, anzahl);
 			player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
