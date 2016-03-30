@@ -48,9 +48,11 @@ public:
 		}
 
 		Field* felder = ergebnis->Fetch();
-		uint32 belohnung = felder.GetInt32();
-		uint32 anzahl = felder.GetInt32();
 
+		uint32 charresultint = felder[0].GetUInt32();
+
+		uint32 belohnung = 38186;
+		uint32 anzahl = 1;
 		if (ergebnis){
 			Item* item = Item::CreateItem(belohnung, anzahl);
 			player->GetSession()->SendNotification("Dein Code wurde generiert und die Belohnung zugesendet!");
@@ -59,7 +61,8 @@ public:
 			MailDraft("Dein Gutscheincode", "Dein Code wurde erfolgreich eingeloest. Wir wuenschen dir weiterhin viel Spass auf MMOwning. Dein MMOwning-Team").AddItem(item)
 				.SendMailTo(trans, MailReceiver(player, player->GetGUID()), MailSender(MAIL_NORMAL, 0, MAIL_STATIONERY_GM));
 			CharacterDatabase.CommitTransaction(trans);
-			player->GetSession()->SendNotification("Deine Antwort war korrekt. Deine Belohnung wurde zugesandt.");
+			player->GetSession()->SendNotification("Deine Antwort war korrekt. Deine Belohnung wurde zugesandt."); 
+			return true;
 		}
 
     }
