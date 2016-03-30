@@ -45,6 +45,7 @@ public:
 		
 		if (!ergebnis){
 			player->GetSession()->SendNotification("Deine Antwort ist nicht korrekt!");
+			return;
 		}
 
 		Field* felder = ergebnis->Fetch();
