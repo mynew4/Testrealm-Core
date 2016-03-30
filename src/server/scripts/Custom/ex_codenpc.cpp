@@ -48,7 +48,7 @@ public:
 			return;
 		}
 
-		if (ergebnis && !result){
+		if (ergebnis){
 			Field* felder = ergebnis->Fetch();
 			uint32 id = felder[0].GetUInt32();
 			uint32 belohnung = felder[1].GetUInt32();
