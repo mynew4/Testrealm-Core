@@ -48,22 +48,22 @@ public:
 			return;
 		}
 
-		Field* felder = ergebnis->Fetch();
-		uint32 id = felder[0].GetUInt32();
-		uint32 belohnung = felder[1].GetUInt32();
-		uint32 anzahl = felder[2].GetUInt32();
-
-		PreparedStatement* check = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
-		check->setInt32(0, player->GetSession()->GetAccountId());
-		check->setInt32(1, id);
-		PreparedQueryResult result = CharacterDatabase.Query(check);
-
-		if (result){
-			player->GetSession()->SendNotification("Du hast die Frage schon beantwortet. Dies ist nur einmal pro Account moeglich!");
-			return;
-		}
-
 		if (ergebnis && !result){
+			Field* felder = ergebnis->Fetch();
+			uint32 id = felder[0].GetUInt32();
+			uint32 belohnung = felder[1].GetUInt32();
+			uint32 anzahl = felder[2].GetUInt32();
+
+			PreparedStatement* check = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
+			check->setInt32(0, player->GetSession()->GetAccountId());
+			check->setInt32(1, id);
+			PreparedQueryResult result = CharacterDatabase.Query(check);
+
+			if (result){
+				player->GetSession()->SendNotification("Du hast die Frage schon beantwortet. Dies ist nur einmal pro Account moeglich!");
+				return;
+			}
+
 			PreparedStatement* insertfrage = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
 			insertfrage->setInt32(0, player->GetSession()->GetAccountId());
 			insertfrage->setInt32(1, id);
