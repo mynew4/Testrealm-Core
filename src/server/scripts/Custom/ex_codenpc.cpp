@@ -129,7 +129,8 @@ public:
                     
                     Field* feld = ergebnis->Fetch();
                     uint32 nr = feld[0].GetInt32();
-                    
+					std::string frage = feld[1].GetString();
+					std::string antwort = feld[2].GetString();
                     
                     if(ergebnis){ 
 						player->GetSession()->SendNotification("Antwort wurde gefunden");
