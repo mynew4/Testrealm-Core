@@ -52,70 +52,15 @@ public:
 			pPlayer->PlayerTalkClass->SendCloseGossip();
 			return true;
 		}break;
-                
 
-        case 0:
-        {
-        pruefung:
-            PreparedStatement * count = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_COUNT);
-            PreparedQueryResult ergebnis = CharacterDatabase.Query(count);
-            
-            if(!ergebnis){
-                pPlayer->GetSession()->SendNotification("Es gab kein Ergebnis");
-                return true;
-            }
-            
-            Field* fetch = ergebnis->Fetch();
-            uint32 anzahl = fetch[0].GetInt32();
-            
-            uint32 nr = 1 + (std::rand() % (anzahl - 1 + 1));
-            
-            PreparedStatement* fragen_nach_nr = CharacterDatabase.GetPreparedStatement(CHAR_SEL_FRAGEN_NACH_NR);
-            fragen_nach_nr->setInt32(0, nr);
-            PreparedQueryResult result = CharacterDatabase.Query(fragen_nach_nr);
-            
-            
-            
-            if(!result){
-                pPlayer->GetSession()->SendNotification("Es wurden keine Fragen gefunden");
-                return true;
-            }
-            
-            Field* fragen = result->Fetch();
-            std::string frage = fragen[1].GetString();
-            
-            PreparedStatement * sel_beantwortet = CharacterDatabase.GetPreparedStatement(CHAR_SEL_BEANTWORTET);
-            sel_beantwortet->setInt32(0, pPlayer->GetSession()->GetAccountId());
-            sel_beantwortet->setInt32(1, nr);
-            PreparedQueryResult existent = CharacterDatabase.Query(sel_beantwortet);
-            
-            if(!existent){
-                PreparedStatement * insert = CharacterDatabase.GetPreparedStatement(CHAR_INS_BEANTWORTET);
-                insert->setInt32(0, pPlayer->GetSession()->GetAccountId());
-                insert->setInt32(1, nr);
-                std::ostringstream ss;
-                ss << "Deine Frage lautet: " << frage;
-                pPlayer->GetSession()->SendNotification("Dir wurde ein Raetsel gestellt");
-                ChatHandler(pPlayer->GetSession()).PSendSysMessage(ss.str().c_str(), pPlayer->GetName());
-                pPlayer->PlayerTalkClass->SendCloseGossip();
-                return true;
 
-            }
-            
-            if(existent){
-                goto pruefung;
-            }
-                
-            else{
-                pPlayer->GetSession()->SendNotification("Fehler festgestellt. Bitte Administrator kontaktieren");
-                return true;
-            }
+		case 0:
+		{
+			return true;
+		}break;
 
-        }
-                
-                return true;
-		}
 		return true;
+		}
 	};
 
 	

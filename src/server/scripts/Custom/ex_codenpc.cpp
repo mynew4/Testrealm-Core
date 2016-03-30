@@ -90,24 +90,7 @@ public:
                     }
                     
 					Belohnung(player->GetSession()->GetPlayer(), codes);
-
-                    
-                    
-                    if(!ergebnis){
-                        player->GetSession()->SendNotification("Falsch");
-                        return false;
-                    }
-                    
-                    
-                    Field* feld = ergebnis->Fetch();
-                    uint32 nr = feld[0].GetInt32();
-                    
-                    if(ergebnis){ 
-						player->GetSession()->SendNotification("Antwort wurde gefunden");
-                        Belohnung(player->GetSession()->GetPlayer(), nr);
-                        return true;
-                    }
-                    
+                  
                     
                 
                 }break;
