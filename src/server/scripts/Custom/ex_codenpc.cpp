@@ -48,7 +48,6 @@ public:
 
 		if (!result){
 			player->GetSession()->SendNotification("Es gab keinen Treffer");
-		}
 		
 		else {
 			player->GetSession()->SendNotification("Ein Fehler ist aufgetreten. Setze dich bitte mit den Administratoren in Verbindung.");
@@ -134,6 +133,7 @@ public:
                     if(ergebnis){ 
 						player->GetSession()->SendNotification("Antwort wurde gefunden");
                         Belohnung(player->GetSession()->GetPlayer(), nr);
+						player->GetSession()->SendNotification(nr);
                         return true;
                     }
                     
