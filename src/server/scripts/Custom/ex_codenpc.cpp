@@ -48,7 +48,8 @@ public:
 
 		if (!result){
 			player->GetSession()->SendNotification("Es gab keinen Treffer");
-		
+		}
+
 		else {
 			player->GetSession()->SendNotification("Ein Fehler ist aufgetreten. Setze dich bitte mit den Administratoren in Verbindung.");
 		}
