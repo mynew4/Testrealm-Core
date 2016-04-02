@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -52,13 +52,6 @@ bool Weather::Update(uint32 diff)
     if (m_timer.Passed())
     {
         m_timer.Reset();
-        // If Fake WHO List system is on then update level of fake player with every weather change interval
-		if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST_LEVELUP))
-        {
-            CharacterDatabase.Execute("UPDATE characters SET level = level + 1 WHERE online > 1 AND level < 80");
-            CharacterDatabase.Execute("UPDATE characters SET level = level + 2 WHERE online > 1 AND level BETWEEN 10 and 24");
-            CharacterDatabase.Execute("UPDATE characters SET level = level + 1 WHERE online > 1 AND level BETWEEN 25 and 45");
-        }			
         // update only if Regenerate has changed the weather
         if (ReGenerate())
         {
@@ -159,7 +152,7 @@ bool Weather::ReGenerate()
     uint32 chance2 = chance1+ m_weatherChances->data[season].snowChance;
     uint32 chance3 = chance2+ m_weatherChances->data[season].stormChance;
 
-    uint32 rnd = urand(0, 99);
+    uint32 rnd = urand(1, 100);
     if (rnd <= chance1)
         m_type = WEATHER_TYPE_RAIN;
     else if (rnd <= chance2)

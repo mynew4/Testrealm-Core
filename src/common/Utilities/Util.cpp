@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -20,71 +20,14 @@
 #include "Common.h"
 #include "CompilerDefs.h"
 #include "utf8.h"
-#include "SFMT.h"
 #include "Errors.h" // for ASSERT
 #include <stdarg.h>
-#include <boost/thread/tss.hpp>
 
 #if COMPILER == COMPILER_GNU
   #include <sys/socket.h>
   #include <netinet/in.h>
   #include <arpa/inet.h>
 #endif
-
-static boost::thread_specific_ptr<SFMTRand> sfmtRand;
-
-static SFMTRand* GetRng()
-{
-    SFMTRand* rand = sfmtRand.get();
-
-    if (!rand)
-    {
-        rand = new SFMTRand();
-        sfmtRand.reset(rand);
-    }
-
-    return rand;
-}
-
-int32 irand(int32 min, int32 max)
-{
-    ASSERT(max >= min);
-    return int32(GetRng()->IRandom(min, max));
-}
-
-uint32 urand(uint32 min, uint32 max)
-{
-    ASSERT(max >= min);
-    return GetRng()->URandom(min, max);
-}
-
-uint32 urandms(uint32 min, uint32 max)
-{
-    ASSERT(max >= min);
-    ASSERT(INT_MAX/IN_MILLISECONDS >= max);
-    return GetRng()->URandom(min * IN_MILLISECONDS, max * IN_MILLISECONDS);
-}
-
-float frand(float min, float max)
-{
-    ASSERT(max >= min);
-    return float(GetRng()->Random() * (max - min) + min);
-}
-
-uint32 rand32()
-{
-    return GetRng()->BRandom();
-}
-
-double rand_norm()
-{
-    return GetRng()->Random();
-}
-
-double rand_chance()
-{
-    return GetRng()->Random() * 100.0;
-}
 
 Tokenizer::Tokenizer(const std::string &src, const char sep, uint32 vectorReserve)
 {
@@ -275,22 +218,29 @@ bool IsIPAddress(char const* ipaddress)
 }
 
 /// create PID file
-uint32 CreatePIDFile(const std::string& filename)
+uint32 CreatePIDFile(std::string const& filename)
 {
-    FILE* pid_file = fopen (filename.c_str(), "w" );
+    FILE* pid_file = fopen(filename.c_str(), "w");
     if (pid_file == NULL)
         return 0;
 
+    uint32 pid = GetPID();
+
+    fprintf(pid_file, "%u", pid);
+    fclose(pid_file);
+
+    return pid;
+}
+
+uint32 GetPID()
+{
 #ifdef _WIN32
     DWORD pid = GetCurrentProcessId();
 #else
     pid_t pid = getpid();
 #endif
 
-    fprintf(pid_file, "%u", pid );
-    fclose(pid_file);
-
-    return (uint32)pid;
+    return uint32(pid);
 }
 
 size_t utf8length(std::string& utf8str)
@@ -542,6 +492,17 @@ void vutf8printf(FILE* out, const char *str, va_list* ap)
 #else
     vfprintf(out, str, *ap);
 #endif
+}
+
+bool Utf8ToUpperOnlyLatin(std::string& utf8String)
+{
+    std::wstring wstr;
+    if (!Utf8toWStr(utf8String, wstr))
+        return false;
+
+    std::transform(wstr.begin(), wstr.end(), wstr.begin(), wcharToUpperOnlyLatin);
+
+    return WStrToUtf8(wstr, utf8String);
 }
 
 std::string ByteArrayToHexStr(uint8 const* bytes, uint32 arrayLen, bool reverse /* = false */)

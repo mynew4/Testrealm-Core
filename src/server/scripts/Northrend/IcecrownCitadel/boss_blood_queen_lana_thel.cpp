@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -173,7 +173,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
             {
                 if (!instance->CheckRequiredBosses(DATA_BLOOD_QUEEN_LANA_THEL, who->ToPlayer()))
                 {
-                    EnterEvadeMode();
+                    EnterEvadeMode(EVADE_REASON_OTHER);
                     instance->DoCastSpellOnPlayers(LIGHT_S_HAMMER_TELEPORT);
                     return;
                 }
@@ -244,9 +244,11 @@ class boss_blood_queen_lana_thel : public CreatureScript
                 }
             }
 
-            void EnterEvadeMode() override
+            void EnterEvadeMode(EvadeReason why) override
             {
-                _EnterEvadeMode();
+                if (!_EnterEvadeMode(why))
+                    return;
+
                 CleanAuras();
                 if (_killMinchar)
                 {
@@ -257,6 +259,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
                 }
                 else
                 {
+                    me->AddUnitState(UNIT_STATE_EVADE);
                     me->GetMotionMaster()->MoveTargetedHome();
                     Reset();
                 }
@@ -333,7 +336,7 @@ class boss_blood_queen_lana_thel : public CreatureScript
 
             void UpdateAI(uint32 diff) override
             {
-                if (!UpdateVictim() || !CheckInRoom())
+                if (!UpdateVictim())
                     return;
 
                 events.Update(diff);

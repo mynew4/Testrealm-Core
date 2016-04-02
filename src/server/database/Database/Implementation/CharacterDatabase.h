@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
@@ -28,27 +28,6 @@ enum CharacterDatabaseStatements
         When updating more than one field, consider looking at the calling function
         name for a suiting suffix.
     */
-    
-    /* Exi Custom */
-	CHAR_SEL_ANTWORTEN_NACH_ANTWORT,
-    CHAR_SEL_FRAGEN_COUNT,
-    CHAR_SEL_BEANTWORTET,
-    CHAR_INS_BEANTWORTET,
-    CHAR_SEL_LOB,
-    CHAR_INS_LOB,
-    CHAR_INS_FIRSTLOG,
-    CHAR_INS_EVENTLOG,
-    CHAR_INS_ITEMCODE,
-    CHAR_INS_NOPLAYERITEMCODE,
-    CHAR_SEL_ITEMCODEGES,
-    CHAR_INS_ITEMCODEACCOUNT,
-    CHAR_INS_SPIELERANTWORTEN,
-    CHAR_SEL_SPIELERANTWORTEN,
-    CHAR_INS_BONUS_EP,
-    CHAR_SEL_BONUS_EP,
-    CHAR_UPD_BONUS_EP,
-    CHAR_INS_FRAGEN,
-    /*CUSTOM ENDE */
 
     CHAR_DEL_QUEST_POOL_SAVE,
     CHAR_INS_QUEST_POOL_SAVE,
@@ -355,7 +334,7 @@ enum CharacterDatabaseStatements
     CHAR_DEL_CHAR_INSTANCE_BY_INSTANCE_GUID,
     CHAR_UPD_CHAR_INSTANCE,
     CHAR_INS_CHAR_INSTANCE,
-    CHAR_UPD_GENDER_PLAYERBYTES,
+    CHAR_UPD_GENDER_AND_APPEARANCE,
     CHAR_DEL_CHARACTER_SKILL,
     CHAR_UPD_ADD_CHARACTER_SOCIAL_FLAGS,
     CHAR_UPD_REM_CHARACTER_SOCIAL_FLAGS,
@@ -386,12 +365,12 @@ enum CharacterDatabaseStatements
     CHAR_SEL_CHAR_CLASS_LVL_AT_LOGIN,
     CHAR_SEL_CHAR_AT_LOGIN_TITLES,
     CHAR_SEL_INSTANCE,
+    CHAR_SEL_PERM_BIND_BY_INSTANCE,
     CHAR_SEL_CHAR_COD_ITEM_MAIL,
     CHAR_SEL_CHAR_SOCIAL,
     CHAR_SEL_CHAR_OLD_CHARS,
     CHAR_SEL_ARENA_TEAM_ID_BY_PLAYER_GUID,
     CHAR_SEL_MAIL,
-    CHAR_SEL_CHAR_PLAYERBYTES2,
     CHAR_SEL_CHAR_GUID_BY_NAME,
     CHAR_DEL_CHAR_AURA_FROZEN,
     CHAR_SEL_CHAR_INVENTORY_COUNT_ITEM,
@@ -417,9 +396,10 @@ enum CharacterDatabaseStatements
     CHAR_INS_CHAR_GIFT,
     CHAR_DEL_INSTANCE_BY_INSTANCE,
     CHAR_DEL_CHAR_INSTANCE_BY_INSTANCE,
-    CHAR_DEL_CHAR_INSTANCE_BY_MAP_DIFF,
+    CHAR_DEL_EXPIRED_CHAR_INSTANCE_BY_MAP_DIFF,
     CHAR_DEL_GROUP_INSTANCE_BY_MAP_DIFF,
-    CHAR_DEL_INSTANCE_BY_MAP_DIFF,
+    CHAR_DEL_EXPIRED_INSTANCE_BY_MAP_DIFF,
+    CHAR_UPD_EXPIRE_CHAR_INSTANCE_BY_MAP_DIFF,
     CHAR_DEL_MAIL_ITEM_BY_ID,
     CHAR_INS_PETITION,
     CHAR_DEL_PETITION_BY_GUID,
@@ -515,8 +495,6 @@ enum CharacterDatabaseStatements
     CHAR_DEL_CHAR_PET_BY_OWNER,
     CHAR_DEL_CHAR_PET_DECLINEDNAME_BY_OWNER,
     CHAR_SEL_CHAR_PET_BY_ENTRY_AND_SLOT,
-    CHAR_GET_EXTERNAL_MAIL,
-    CHAR_DEL_EXTERNAL_MAIL,		
     CHAR_SEL_PET_SLOTS,
     CHAR_SEL_PET_SLOTS_DETAIL,
     CHAR_SEL_PET_ENTRY,
@@ -557,13 +535,9 @@ enum CharacterDatabaseStatements
     CHAR_INS_DESERTER_TRACK,
 
     MAX_CHARACTERDATABASE_STATEMENTS
-    
-    
-    
-    
 };
 
-class CharacterDatabaseConnection : public MySQLConnection
+class TC_DATABASE_API CharacterDatabaseConnection : public MySQLConnection
 {
 public:
     typedef CharacterDatabaseStatements Statements;

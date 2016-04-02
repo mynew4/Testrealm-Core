@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2015 TrinityCore <http://www.trinitycore.org/>
+ * Copyright (C) 2008-2016 TrinityCore <http://www.trinitycore.org/>
  * Copyright (C) 2005-2009 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify it
@@ -69,16 +69,6 @@ void WorldSession::HandleGroupInviteOpcode(WorldPacket& recvData)
     // cheating
     if (!normalizePlayerName(membername))
     {
-        // If Fake WHO List system is on and the invited is fake, we return that he's already in a group
-        if (sWorld->getBoolConfig(CONFIG_FAKE_WHO_LIST))
-        {
-            QueryResult result = CharacterDatabase.PQuery("SELECT guid FROM characters WHERE name = '%s' AND online > 1", membername.c_str());
-            if (result)
-            {
-                SendPartyResult(PARTY_OP_INVITE, membername, ERR_ALREADY_IN_GROUP_S);
-                return;
-            }
-        }			
         SendPartyResult(PARTY_OP_INVITE, membername, ERR_BAD_PLAYER_NAME_S);
         return;
     }
